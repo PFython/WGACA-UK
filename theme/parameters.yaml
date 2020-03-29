@@ -1,0 +1,7 @@
+roles:
+- name: title
+  components: [Label]
+- name: card
+  components: [ColumnPanel]
+  display_in_toolbox: true
+  title: Card
