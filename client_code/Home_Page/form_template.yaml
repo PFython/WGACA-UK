@@ -121,7 +121,7 @@ components:
       event_bindings: {}
     - type: TextArea
       properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
-        placeholder: 'Enter any additional notes you think might be helpful here.  For
+        placeholder: 'Add any additional notes you think might be helpful here.  For
           example is this suitable for carrying by hand or is a vehicle recommended
           because of its size or bulk?  Are the items fragile, perishable, or difficult
           to handle?', border: '', enabled: true, foreground: '', visible: true, text: '',
