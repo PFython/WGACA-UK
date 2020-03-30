@@ -1,6 +1,6 @@
 services: []
 package_name: WGACA
-allow_embedding: false
+allow_embedding: true
 name: WGACA
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
