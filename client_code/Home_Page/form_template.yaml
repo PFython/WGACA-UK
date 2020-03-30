@@ -139,11 +139,12 @@ components:
     properties:
       role: null
       columns:
-      - {width: 198, title: User, id: MMETID, data_key: user, expand: false}
-      - {width: 274, title: Product Key, id: HQUPKJ, data_key: product_key, expand: false}
-      - {width: 93, title: Units, id: LILUPW, data_key: units, expand: false}
-      - {width: 156, title: Date Posted, id: FOJVUM, data_key: date_posted, expand: false}
+      - {width: 227, title: User, id: MMETID, data_key: user, expand: false}
+      - {width: 359, title: Product Key, id: HQUPKJ, data_key: product_key, expand: false}
+      - {width: 77, title: Units, id: LILUPW, data_key: units, expand: false}
+      - {width: 117, title: Posted, id: FOJVUM, data_key: date_posted, expand: false}
       - {width: 89, title: Status, id: PXYAAA, data_key: status, expand: false}
+      - {width: 45, title: '', id: GMBNWP, data_key: show_notes, expand: false}
       - {width: 31, title: '', id: HYKROV, data_key: delete_row, expand: false}
       auto_header: true
       tooltip: ''
@@ -156,7 +157,7 @@ components:
       spacing_below: small
       background: ''
     name: data_grid_1
-    layout_properties: {grid_position: 'HRSFVY,IXBJVA'}
+    layout_properties: {grid_position: 'HRSFVY,ZAPVSQ'}
     components:
     - type: RepeatingPanel
       properties: {spacing_above: none, spacing_below: none, item_template: Home_Page.RowTemplate1}

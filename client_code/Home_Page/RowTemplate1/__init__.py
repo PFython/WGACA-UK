@@ -16,3 +16,8 @@ class RowTemplate1(RowTemplate1Template):
     self.item.delete()
     self.remove_from_parent()
 
+  def show_notes_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    pass
+
+
