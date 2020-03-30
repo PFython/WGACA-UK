@@ -116,6 +116,35 @@ components:
       name: offer_list
       layout_properties: {grid_position: 'YVYJFK,AAKQTK'}
       event_bindings: {show: offered_item_list_show}
+  - type: DataGrid
+    properties:
+      role: null
+      columns:
+      - {width: 198, title: User, id: MMETID, data_key: user, expand: false}
+      - {width: 359, title: Product Key, id: HQUPKJ, data_key: product_key, expand: false}
+      - {width: 86, title: Units, id: LILUPW, data_key: units, expand: false}
+      - {width: 178, title: Date Posted, id: FOJVUM, data_key: date_posted, expand: false}
+      - {width: 111, title: Status, id: PXYAAA, data_key: status, expand: false}
+      auto_header: true
+      tooltip: ''
+      border: ''
+      foreground: ''
+      rows_per_page: 40
+      visible: true
+      show_page_controls: true
+      spacing_above: small
+      spacing_below: small
+      background: ''
+    name: data_grid_1
+    layout_properties: {grid_position: 'HRSFVY,IXBJVA'}
+    components:
+    - type: RepeatingPanel
+      properties: {spacing_above: none, spacing_below: none, item_template: Home_Page.RowTemplate1}
+      name: repeating_panel_1
+      layout_properties: {}
+      data_bindings: []
+      event_bindings: {}
+    event_bindings: {}
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
       wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '',
@@ -128,10 +157,6 @@ components:
     name: delivery
     layout_properties: {grid_position: 'LJMCTJ,CLFVSS'}
     event_bindings: {}
-  - type: FlowPanel
-    properties: {}
-    name: flow_panel_1
-    layout_properties: {grid_position: 'EYFZCF,GTFJFT'}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Debug Console, font_size: null, font: '', spacing_above: small,

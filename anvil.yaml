@@ -1,7 +1,7 @@
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
-  server_config: {auto_create_missing_columns: false}
+  server_config: {auto_create_missing_columns: true}
 package_name: WGACA
 allow_embedding: true
 name: WGACA
