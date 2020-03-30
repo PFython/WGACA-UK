@@ -34,12 +34,11 @@ components:
           role: null
           align: full
           tooltip: ''
-          placeholder: Food | Vegetables | Tomatoes
+          placeholder: Please choose a product...
           border: ''
           enabled: true
           foreground: ''
-          items: [Food | Vegetables | Tomatoes, Food | Vegetables | Potatoes, Food | Vegetables | Carrots,
-            Medical | Tablets | Ibuprofen, Medical | Tablets | Paracetamol]
+          items: ['']
           visible: true
           font_size: null
           font: ''
@@ -54,7 +53,7 @@ components:
         layout_properties: {grid_position: 'COBDSK,FCCQIP'}
         event_bindings: {change: drop_down_1_change}
         data_bindings:
-        - {property: selected_value, code: 'self.item[''choices'']', writeback: true}
+        - {property: items, code: self.item_choices}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: Number of Units, font_size: null, font: '', spacing_above: small,
@@ -88,9 +87,7 @@ components:
         border: ''
         enabled: true
         foreground: ''
-        items: [grammes, kilogrammes, centilitres, litres, cans (regular), cans (large),
-          bottles (regular), bottles (large), packets, items (small), items (medium),
-          items (large), '']
+        items: ['', '']
         visible: true
         font_size: null
         font: ''
@@ -103,7 +100,9 @@ components:
         include_placeholder: true
       name: unit_of_measure
       layout_properties: {grid_position: 'NNUMNG,KISAZI WIGTFG,ZNAMRQ ELHOLB,FUXIRR'}
-      event_bindings: {}
+      event_bindings: {change: unit_of_measure_change}
+      data_bindings:
+      - {property: items, code: self.units_of_measure}
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
         foreground: '', visible: true, text: ' Add Item', font_size: null, font: '',
@@ -111,10 +110,10 @@ components:
         background: '', bold: false, underline: false, icon: 'fa:plus-square'}
       name: add_item
       layout_properties: {grid_position: 'TAEAXC,VYYYRH'}
-      event_bindings: {}
+      event_bindings: {click: add_item_click}
     - type: DataRowPanel
       properties: {}
-      name: offered_item_list
+      name: offer_list
       layout_properties: {grid_position: 'YVYJFK,AAKQTK'}
       event_bindings: {show: offered_item_list_show}
   - type: ColumnPanel
@@ -133,11 +132,26 @@ components:
     properties: {}
     name: flow_panel_1
     layout_properties: {grid_position: 'EYFZCF,GTFJFT'}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Debug Console, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: label_2
+    layout_properties: {grid_position: 'HBDTBW,KIBYSV'}
+    event_bindings: {}
+  - type: TextArea
+    properties: {role: null, align: left, height: '', tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 12,
+      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
+    name: debug_console
+    layout_properties: {grid_position: 'NSSBTZ,IASLSZ'}
 - type: Label
   properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
     visible: true, text: WGACA (what goes around comes around), font_size: null, font: '',
     spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '',
-    bold: false, underline: false, icon: 'fa:gift'}
+    bold: false, underline: false, icon: 'fa:ambulance'}
   name: label_1
   layout_properties: {slot: title}
   event_bindings: {}

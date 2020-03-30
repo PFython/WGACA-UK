@@ -1,8 +1,10 @@
-allow_embedding: false
+services: []
 package_name: WGACA
+allow_embedding: false
 name: WGACA
-startup_form: Form1
-renamed: true
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
-services: []
+startup_form: Home_Page
+dependency_order: []
+dependency_code: {}
+renamed: true
