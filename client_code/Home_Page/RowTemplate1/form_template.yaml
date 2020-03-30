@@ -3,5 +3,16 @@ container:
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', auto_display_data: true,
     visible: true, font_size: 14, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}
-components: []
+  event_bindings: {}
+  data_bindings: []
+components:
+- type: Link
+  properties: {role: null, url: '', align: left, tooltip: WARNING!  Permanently removes offer from list.,
+    border: '', foreground: '#ff0000', visible: true, text: '', font_size: 24, wrap_on: mobile,
+    font: '', col_spacing: medium, spacing_above: small, icon_align: top, col_widths: '',
+    spacing_below: small, italic: false, background: '', bold: false, underline: false,
+    icon: 'fa:times-circle'}
+  name: link_1
+  layout_properties: {column: HYKROV}
+  event_bindings: {click: link_1_click}
 is_package: true

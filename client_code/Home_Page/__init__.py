@@ -62,3 +62,8 @@ class Home_Page(Home_PageTemplate):
       else:
           self.add_to_my_offer_list(product_key, units)
 
+    def text_area_1_change(self, **event_args):
+      """This method is called when the text in this text area is edited"""
+      pass
+
+

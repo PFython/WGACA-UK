@@ -10,3 +10,9 @@ class RowTemplate1(RowTemplate1Template):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
+
+  def link_1_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    self.item.delete()
+    self.remove_from_parent()
+
