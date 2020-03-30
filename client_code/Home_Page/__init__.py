@@ -1,9 +1,9 @@
 from ._anvil_designer import Home_PageTemplate
 from anvil import *
+import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import datetime
 
 USER = 'peter_5_Pullman_Gardens'
 
@@ -28,7 +28,7 @@ class Home_Page(Home_PageTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.repeating_panel_1.items = app_tables.offers.search()
+        self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))
       
     
     def add_to_my_offer_list(self,product_key, units):
@@ -39,7 +39,8 @@ class Home_Page(Home_PageTemplate):
             existing_units = None
         if not existing_units:
             MY_OFFER_LIST[product_key] = units
-            self.save_to_database(product_key, units)
+            anvil.server.call("save_to_database", product_key, units, USER)
+            self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))
         else:
             units += existing_units
             MY_OFFER_LIST[product_key] = units
@@ -47,10 +48,7 @@ class Home_Page(Home_PageTemplate):
         output += "\n\n" + str(MY_OFFER_LIST)
         self.debug_console.text = output
         
-    def save_to_database(self, product_key, units):
-      product_key = " … ".join(product_key)
-      app_tables.offers.add_row(status='New',product_key=product_key, units=units, user=USER, date_posted=datetime.datetime.today().date())
-      self.repeating_panel_1.items = app_tables.offers.search()
+
 
     def add_item_click(self, **event_args):
       """This method is called when the button is clicked"""

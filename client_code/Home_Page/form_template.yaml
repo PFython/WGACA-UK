@@ -10,76 +10,52 @@ components:
   layout_properties: {slot: default}
   components:
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"WXDFLH":40,"KISAZI":20}'}
+    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":5,"PPQIMO":10,"HHGBDH":15,"CAZBRM":11,"HUMPCR":4}'}
     name: offer
     layout_properties: {grid_position: 'UMQYJE,HLIQKD'}
     event_bindings: {show: offer_show}
     data_bindings: []
     components:
-    - type: ColumnPanel
-      properties: {col_widths: '{}'}
-      name: column_panel_1
-      layout_properties: {grid_position: 'NNUMNG,WXDFLH QAVCXB,IQBYFT'}
-      components:
-      - type: Label
-        properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-          visible: true, text: Item Description, font_size: null, font: '', spacing_above: small,
-          icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-          underline: false, icon: ''}
-        name: input_description_1
-        layout_properties: {grid_position: 'TOUNWH,QDRUJA'}
-        event_bindings: {}
-      - type: DropDown
-        properties:
-          role: null
-          align: full
-          tooltip: ''
-          placeholder: Please choose a product...
-          border: ''
-          enabled: true
-          foreground: ''
-          items: ['']
-          visible: true
-          font_size: null
-          font: ''
-          spacing_above: small
-          spacing_below: small
-          italic: false
-          background: ''
-          bold: false
-          underline: false
-          include_placeholder: true
-        name: product_description
-        layout_properties: {grid_position: 'COBDSK,FCCQIP'}
-        event_bindings: {change: drop_down_1_change}
-        data_bindings:
-        - {property: items, code: self.item_choices}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Notes, font_size: null, font: '', spacing_above: small,
+        visible: true, text: Item Description, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: ''}
-      name: notes_label
-      layout_properties: {grid_position: 'NNUMNG,WXDFLH CCKGEB,TEQYPH'}
+      name: input_description_1
+      layout_properties: {grid_position: 'SDNDFK,NUGDQO'}
       event_bindings: {}
-    - type: TextArea
-      properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
-        placeholder: 'Enter any additional notes you think might be helpful here.  For
-          example is this suitable for carrying by hand or is a vehicle recommended
-          because of its size or bulk?  Are the items fragile, perishable, or difficult
-          to handle?', border: '', enabled: true, foreground: '', visible: true, text: '',
-        font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
-        italic: false, background: '', bold: false, underline: false}
-      name: text_area_1
-      layout_properties: {grid_position: 'NNUMNG,WXDFLH FPSLVM,AGRRXY'}
-      event_bindings: {change: text_area_1_change}
+    - type: DropDown
+      properties:
+        role: null
+        align: full
+        tooltip: ''
+        placeholder: Please choose a product...
+        border: ''
+        enabled: true
+        foreground: ''
+        items: ['']
+        visible: true
+        font_size: null
+        font: ''
+        spacing_above: small
+        spacing_below: small
+        italic: false
+        background: ''
+        bold: false
+        underline: false
+        include_placeholder: true
+      name: product_description
+      layout_properties: {grid_position: 'YAIWNZ,PLLZVU'}
+      event_bindings: {change: drop_down_1_change}
+      data_bindings:
+      - {property: items, code: self.item_choices}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: Number of Units, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: ''}
       name: input_description_2
-      layout_properties: {grid_position: 'NNUMNG,KISAZI IYQCWL,RGKRWS'}
+      layout_properties: {grid_position: 'HCSQBP,TDRYZE'}
       event_bindings: {}
     - type: TextBox
       properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '1',
@@ -87,15 +63,15 @@ components:
         font: '', spacing_above: small, type: number, spacing_below: small, italic: false,
         background: '', bold: false, underline: false}
       name: number_of_units
-      layout_properties: {grid_position: 'NNUMNG,KISAZI IXDOFC,OWBDPV'}
+      layout_properties: {grid_position: 'HCSQBP,OUSAJW'}
       event_bindings: {}
     - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
         visible: true, text: Unit of Measure, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: ''}
       name: input_description_3
-      layout_properties: {grid_position: 'NNUMNG,KISAZI JNZQNB,ZQJCRU'}
+      layout_properties: {grid_position: 'HCSQBP,PPQIMO'}
       event_bindings: {}
     - type: DropDown
       properties:
@@ -118,10 +94,42 @@ components:
         underline: false
         include_placeholder: true
       name: unit_of_measure
-      layout_properties: {grid_position: 'NNUMNG,KISAZI PUABVX,LYFELQ'}
+      layout_properties: {grid_position: 'HCSQBP,HHGBDH'}
       event_bindings: {change: unit_of_measure_change}
       data_bindings:
       - {property: items, code: self.units_of_measure}
+    - type: Label
+      properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
+        visible: true, text: Expiry, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+        underline: false, icon: ''}
+      name: expiry_date_label
+      layout_properties: {grid_position: 'HCSQBP,HUMPCR'}
+      event_bindings: {}
+    - type: DatePicker
+      properties: {}
+      name: expiry_date
+      layout_properties: {grid_position: 'HCSQBP,CAZBRM'}
+      event_bindings: {}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: Notes, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+        underline: false, icon: ''}
+      name: notes_label
+      layout_properties: {grid_position: 'CCKGEB,TEQYPH'}
+      event_bindings: {}
+    - type: TextArea
+      properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
+        placeholder: 'Enter any additional notes you think might be helpful here.  For
+          example is this suitable for carrying by hand or is a vehicle recommended
+          because of its size or bulk?  Are the items fragile, perishable, or difficult
+          to handle?', border: '', enabled: true, foreground: '', visible: true, text: '',
+        font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
+        italic: false, background: '', bold: false, underline: false}
+      name: text_area_1
+      layout_properties: {grid_position: 'FPSLVM,AGRRXY'}
+      event_bindings: {change: text_area_1_change}
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
         foreground: '', visible: true, text: ' Add Item', font_size: null, font: '',
@@ -142,7 +150,7 @@ components:
       - {width: 227, title: User, id: MMETID, data_key: user, expand: false}
       - {width: 359, title: Product Key, id: HQUPKJ, data_key: product_key, expand: false}
       - {width: 77, title: Units, id: LILUPW, data_key: units, expand: false}
-      - {width: 117, title: Posted, id: FOJVUM, data_key: date_posted, expand: false}
+      - {width: 117, title: Expiry, id: FOJVUM, data_key: expiry_date, expand: false}
       - {width: 89, title: Status, id: PXYAAA, data_key: status, expand: false}
       - {width: 45, title: '', id: GMBNWP, data_key: show_notes, expand: false}
       - {width: 31, title: '', id: HYKROV, data_key: delete_row, expand: false}
