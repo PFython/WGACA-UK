@@ -10,7 +10,7 @@ components:
   layout_properties: {slot: default}
   components:
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":7,"PPQIMO":8,"HHGBDH":19,"CAZBRM":10,"HUMPCR":6}'}
+    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":7,"PPQIMO":8,"HHGBDH":15,"CAZBRM":10,"HUMPCR":10}'}
     name: offer
     layout_properties: {grid_position: 'UMQYJE,HLIQKD'}
     event_bindings: {show: offer_show}
@@ -19,11 +19,10 @@ components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: 'Do you have any surplus food, house-hold goods or over-the-counter
-          medicine you can offer to a neighbour in need?
-
-          If so, please make an offer using the simple form below:', font_size: null,
-        font: '', spacing_above: small, icon_align: top, spacing_below: small, italic: false,
-        background: '', bold: true, underline: false, icon: 'fa:ambulance'}
+          medicine you can offer to a neighbour in need?  If so, please make an offer
+          using the simple form below:', font_size: null, font: '', spacing_above: small,
+        icon_align: top, spacing_below: small, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:ambulance'}
       name: input_description_1
       layout_properties: {grid_position: 'SDNDFK,NUGDQO'}
       event_bindings: {}
@@ -110,7 +109,11 @@ components:
       layout_properties: {grid_position: 'HCSQBP,HUMPCR'}
       event_bindings: {}
     - type: DatePicker
-      properties: {}
+      properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: 'If
+          you don''t pick a date, this will automatically be set to 7 days from now.',
+        placeholder: '', border: '', enabled: true, foreground: '', visible: true,
+        font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
+        date: '', min_date: '', background: '', bold: false, underline: false, format: ''}
       name: expiry_date
       layout_properties: {grid_position: 'HCSQBP,CAZBRM'}
       event_bindings: {}
