@@ -19,7 +19,7 @@ services:
 package_name: WGACA
 allow_embedding: true
 name: WGACA
-runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
+runtime_options: {version: 2, client_version: '3', server_version: python3-full}
 metadata: {logo_img: 'asset:Emoji Mask.jpg', title: What Goes Around Comes Around,
   description: 'This app is intended to link good neighbours who might have provisions
     or medicine they can spare, with people who may be more in need and close enough

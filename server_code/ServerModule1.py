@@ -26,9 +26,15 @@ def save_to_database(product_key, units, expiry_date, notes):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
     user = anvil.users.get_user()
+    if user is None:
+        return
     existing_entry = app_tables.offers.get(product_key=product_key, expiry_date=expiry_date, user = user)
     if existing_entry:
         return "Duplicate"    
     app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date())
-    
 
+@anvil.server.callable
+def get_my_offers():
+    user = anvil.users.get_user()
+    if user is not None:
+        return app_tables.offers.search(tables.order_by("product_key"), user = user) 

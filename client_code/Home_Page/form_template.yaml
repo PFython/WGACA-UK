@@ -10,7 +10,7 @@ components:
   layout_properties: {slot: default}
   components:
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":5,"PPQIMO":10,"HHGBDH":15,"CAZBRM":11,"HUMPCR":4,"VYYYRH":10}'}
+    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":7,"PPQIMO":8,"HHGBDH":19,"CAZBRM":10,"HUMPCR":6}'}
     name: offer
     layout_properties: {grid_position: 'UMQYJE,HLIQKD'}
     event_bindings: {show: offer_show}
@@ -18,9 +18,12 @@ components:
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Item Description, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: ''}
+        visible: true, text: 'Do you have any surplus food, house-hold goods or over-the-counter
+          medicine you can offer to a neighbour in need?
+
+          If so, please make an offer using the simple form below:', font_size: null,
+        font: '', spacing_above: small, icon_align: top, spacing_below: small, italic: false,
+        background: '', bold: true, underline: false, icon: 'fa:ambulance'}
       name: input_description_1
       layout_properties: {grid_position: 'SDNDFK,NUGDQO'}
       event_bindings: {}
@@ -51,9 +54,9 @@ components:
       - {property: items, code: self.item_choices}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Number of Units, font_size: null, font: '', spacing_above: small,
+        visible: true, text: Quantity, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: ''}
+        underline: false, icon: 'fa:cart-plus'}
       name: input_description_2
       layout_properties: {grid_position: 'HCSQBP,TDRYZE'}
       event_bindings: {}
@@ -67,9 +70,9 @@ components:
       event_bindings: {}
     - type: Label
       properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
-        visible: true, text: Unit of Measure, font_size: null, font: '', spacing_above: small,
+        visible: true, text: Units, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: ''}
+        underline: false, icon: 'fa:balance-scale'}
       name: input_description_3
       layout_properties: {grid_position: 'HCSQBP,PPQIMO'}
       event_bindings: {}
@@ -102,7 +105,7 @@ components:
       properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
         visible: true, text: Expiry, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: ''}
+        underline: false, icon: 'fa:hourglass-end'}
       name: expiry_date_label
       layout_properties: {grid_position: 'HCSQBP,HUMPCR'}
       event_bindings: {}
@@ -115,7 +118,7 @@ components:
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: Notes, font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: ''}
+        underline: false, icon: 'fa:file-text-o'}
       name: notes_label
       layout_properties: {grid_position: 'CCKGEB,TEQYPH'}
       event_bindings: {}
@@ -123,10 +126,10 @@ components:
       properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
         placeholder: 'Add any additional notes you think might be helpful here.  For
           example is this suitable for carrying by hand or is a vehicle recommended
-          because of its size or bulk?  Are the items fragile, perishable, or difficult
-          to handle?', border: '', enabled: true, foreground: '', visible: true, text: '',
-        font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
-        italic: false, background: '', bold: false, underline: false}
+          because of its size or bulk?  Are the items fragile, perishable, opened,
+          or difficult to handle?', border: '', enabled: true, foreground: '', visible: true,
+        text: '', font_size: null, auto_expand: false, font: '', spacing_above: small,
+        spacing_below: small, italic: false, background: '', bold: false, underline: false}
       name: notes
       layout_properties: {grid_position: 'FPSLVM,AGRRXY'}
       event_bindings: {change: text_area_1_change}
@@ -149,11 +152,11 @@ components:
     properties:
       role: null
       columns:
-      - {width: 226, title: User, id: MMETID, data_key: user, expand: false}
-      - {width: 359, title: Product Key, id: HQUPKJ, data_key: product_key, expand: false}
+      - {width: 149, title: User, id: MMETID, data_key: user, expand: false}
+      - {width: 298, title: Product & Unit of Measure, id: HQUPKJ, data_key: product_key,
+        expand: false}
       - {width: 77, title: Units, id: LILUPW, data_key: units, expand: false}
       - {width: 117, title: Expiry, id: FOJVUM, data_key: expiry_date, expand: false}
-      - {width: 89, title: Status, id: PXYAAA, data_key: status, expand: false}
       - {width: 45, title: '', id: GMBNWP, data_key: show_notes, expand: false}
       - {width: 31, title: '', id: HYKROV, data_key: delete_row, expand: false}
       auto_header: true
@@ -179,8 +182,8 @@ components:
 - type: Label
   properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
     visible: true, text: WGACA (what goes around comes around), font_size: null, font: '',
-    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '',
-    bold: false, underline: false, icon: 'fa:ambulance'}
+    spacing_above: small, icon_align: right, spacing_below: small, italic: false,
+    background: '', bold: false, underline: false, icon: 'fa:heartbeat'}
   name: label_1
   layout_properties: {slot: title}
   event_bindings: {}
