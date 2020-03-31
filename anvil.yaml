@@ -2,6 +2,20 @@ services:
 - source: /runtime/services/tables.yml
   client_config: {}
   server_config: {auto_create_missing_columns: true}
+- source: /runtime/services/anvil/users.yml
+  client_config: {use_microsoft: false, use_email: true, allow_remember_me: true,
+    allow_signup: true, enable_automatically: true, confirm_email: true, remember_me_days: 7,
+    use_google: false, use_facebook: false}
+  server_config: {user_table: 48470}
+- source: /runtime/services/facebook.yml
+  client_config: {}
+  server_config: {}
+- source: /runtime/services/google.yml
+  client_config: {}
+  server_config: {}
+- source: /runtime/services/anvil/microsoft.yml
+  client_config: {}
+  server_config: {}
 package_name: WGACA
 allow_embedding: true
 name: WGACA
@@ -14,6 +28,7 @@ metadata: {logo_img: 'asset:Emoji Mask.jpg', title: What Goes Around Comes Aroun
     other 3rd sector/governement support groups to help move items around to where
     they''ve most needed.'}
 startup_form: Home_Page
+native_deps: {head_html: ''}
 dependency_order: []
 dependency_code: {}
 renamed: true

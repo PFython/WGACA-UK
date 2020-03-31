@@ -1,5 +1,10 @@
 from ._anvil_designer import RowTemplate1Template
 from anvil import *
+import anvil.microsoft.auth
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.facebook.auth
+import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -15,7 +20,6 @@ class RowTemplate1(RowTemplate1Template):
     """This method is called when the link is clicked"""
     self.item.delete()
     self.remove_from_parent()
-    self.debug_console.text
 
   def show_notes_click(self, **event_args):
     """This method is called when the link is clicked"""

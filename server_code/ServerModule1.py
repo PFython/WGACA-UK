@@ -1,3 +1,8 @@
+import anvil.microsoft.auth
+import anvil.google.auth, anvil.google.drive, anvil.google.mail
+from anvil.google.drive import app_files
+import anvil.facebook.auth
+import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
@@ -17,12 +22,13 @@ import datetime
 #   return 42
 #
 @anvil.server.callable
-def save_to_database(product_key, units, expiry_date, notes, USER):
+def save_to_database(product_key, units, expiry_date, notes):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
-    existing_entry = app_tables.offers.get(product_key=product_key, expiry_date=expiry_date)
+    user = anvil.users.get_user()
+    existing_entry = app_tables.offers.get(product_key=product_key, expiry_date=expiry_date, user = user)
     if existing_entry:
-        return "Duplicate"
-    app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=USER, date_posted=datetime.datetime.today().date())
+        return "Duplicate"    
+    app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date())
     
 

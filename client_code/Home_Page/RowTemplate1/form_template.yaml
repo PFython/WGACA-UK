@@ -14,7 +14,7 @@ components:
     icon: 'fa:times-circle'}
   name: delete_row
   layout_properties: {column: HYKROV}
-  event_bindings: {click: link_1_click}
+  event_bindings: {click: delete_row_click}
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#008000',
     visible: true, text: '', font_size: 24, wrap_on: mobile, font: '', col_spacing: medium,
@@ -25,4 +25,12 @@ components:
   event_bindings: {click: show_notes_click}
   data_bindings:
   - {property: tooltip, code: 'self.item[''notes'']'}
+- type: Link
+  properties: {}
+  name: user_link
+  layout_properties: {column: MMETID}
+  event_bindings: {}
+  data_bindings:
+  - {property: text, code: 'self.item[''user''][''email''].split("@")[0].upper()+":
+      "+self.item[''user''][''street'']'}
 is_package: true

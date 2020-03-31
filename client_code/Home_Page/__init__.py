@@ -1,12 +1,17 @@
 from ._anvil_designer import Home_PageTemplate
 from anvil import *
+import anvil.microsoft.auth
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.facebook.auth
+import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-USER = 'peter_5_Pullman_Gardens'
+
 
 ITEM_HEIRARCHY = ('Food | Vegetables | Tomatoes',
               'Food | Vegetables | Potatoes',
@@ -23,13 +28,15 @@ class Home_Page(Home_PageTemplate):
     units_of_measure = UNITS_OF_MEASURE
 
     def __init__(self, **properties):
+        anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))      
     
     def add_to_my_offer_list(self,product_key, units, expiry_date, notes):
-        result = anvil.server.call("save_to_database", product_key, units, expiry_date, notes, USER)
+        user = anvil.users.get_user()['email']
+        result = anvil.server.call("save_to_database", product_key, units, expiry_date, notes)
         if result == "Duplicate":
               self.debug_console.text = "ⓘ Unable to create new entry because this combination of Product, Unit of Measure, and Expiry Date already exists.  Please consider deleting old entry and creating a new one?"
         else:
