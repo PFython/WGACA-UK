@@ -17,11 +17,12 @@ import datetime
 #   return 42
 #
 @anvil.server.callable
-def save_to_database(product_key, units, USER):
+def save_to_database(product_key, units, expiry_date, notes, USER):
+    """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
-    existing_entry = app_tables.offers.get(product_key=product_key)
+    existing_entry = app_tables.offers.get(product_key=product_key, expiry_date=expiry_date)
     if existing_entry:
-        product_key = "++ " + product_key
-    app_tables.offers.add_row(status='New',product_key=product_key, units=units, user=USER, date_posted=datetime.datetime.today().date())
+        return "Duplicate"
+    app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=USER, date_posted=datetime.datetime.today().date())
     
 

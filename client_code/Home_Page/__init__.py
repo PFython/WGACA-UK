@@ -4,6 +4,7 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import datetime
 
 USER = 'peter_5_Pullman_Gardens'
 
@@ -16,9 +17,6 @@ ITEM_HEIRARCHY = ('Food | Vegetables | Tomatoes',
 UNITS_OF_MEASURE = ('grammes', 'kilogrammes', 'centilitres', 'litres', 'cans (regular)', 'cans (large)',
                     'bottles (regular)', 'bottles (large)', 'packets', 'items (small)', 'items (medium)', 'items (large)')
 
-MY_OFFER_LIST = {}
-# key: (product description, unit of measure)
-# value: units
 
 class Home_Page(Home_PageTemplate):
     item_choices = ITEM_HEIRARCHY
@@ -28,37 +26,28 @@ class Home_Page(Home_PageTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))
-      
+        self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))      
     
-    def add_to_my_offer_list(self,product_key, units):
-        output = "Added: " + str((product_key, units))
-        try:
-            existing_units = MY_OFFER_LIST[product_key]
-        except KeyError: 
-            existing_units = None
-        if not existing_units:
-            MY_OFFER_LIST[product_key] = units
-            anvil.server.call("save_to_database", product_key, units, USER)
-            self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))
+    def add_to_my_offer_list(self,product_key, units, expiry_date, notes):
+        result = anvil.server.call("save_to_database", product_key, units, expiry_date, notes, USER)
+        if result == "Duplicate":
+              self.debug_console.text = "ⓘ Unable to create new entry because this combination of Product, Unit of Measure, and Expiry Date already exists.  Please consider deleting old entry and creating a new one?"
         else:
-            units += existing_units
-            MY_OFFER_LIST[product_key] = units
-        # save to database        
-        output += "\n\n" + str(MY_OFFER_LIST)
-        self.debug_console.text = output
-        
-
+              self.debug_console.text = "✓ Item added."   
+        self.repeating_panel_1.items = app_tables.offers.search(tables.order_by("product_key"))
+    
 
     def add_item_click(self, **event_args):
       """This method is called when the button is clicked"""
       unit_of_measure = self.unit_of_measure.selected_value or self.unit_of_measure.placeholder
       product_key = (self.product_description.selected_value, unit_of_measure)
       units = int(self.number_of_units.text or self.number_of_units.placeholder)
+      expiry_date = self.expiry_date.date or datetime.datetime.today().date()
+      notes = self.notes.text or "(No notes attached)"
       if not product_key[0] and product_key[1]:
           self.debug_console.text = "⚠ Please select a product and/or unit of measure."
       else:
-          self.add_to_my_offer_list(product_key, units)
+          self.add_to_my_offer_list(product_key, units, expiry_date, notes)
 
     def text_area_1_change(self, **event_args):
       """This method is called when the text in this text area is edited"""

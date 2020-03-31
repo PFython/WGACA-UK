@@ -10,7 +10,7 @@ components:
   layout_properties: {slot: default}
   components:
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":5,"PPQIMO":10,"HHGBDH":15,"CAZBRM":11,"HUMPCR":4}'}
+    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":5,"PPQIMO":10,"HHGBDH":15,"CAZBRM":11,"HUMPCR":4,"VYYYRH":10}'}
     name: offer
     layout_properties: {grid_position: 'UMQYJE,HLIQKD'}
     event_bindings: {show: offer_show}
@@ -127,22 +127,24 @@ components:
           to handle?', border: '', enabled: true, foreground: '', visible: true, text: '',
         font_size: null, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
         italic: false, background: '', bold: false, underline: false}
-      name: text_area_1
+      name: notes
       layout_properties: {grid_position: 'FPSLVM,AGRRXY'}
       event_bindings: {change: text_area_1_change}
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: ' Add Item', font_size: null, font: '',
-        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:plus-square'}
+        foreground: '#000000', visible: true, text: ' Add Item', font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#d9d9d9', bold: false, underline: false, icon: 'fa:plus-square'}
       name: add_item
-      layout_properties: {grid_position: 'TAEAXC,VYYYRH'}
+      layout_properties: {grid_position: 'WCLKOD,KWBLCI'}
       event_bindings: {click: add_item_click}
-    - type: DataRowPanel
-      properties: {}
-      name: offer_list
-      layout_properties: {grid_position: 'YVYJFK,AAKQTK'}
-      event_bindings: {show: offered_item_list_show}
+    - type: TextArea
+      properties: {role: null, align: left, height: 56.99623260644529, tooltip: '',
+        placeholder: '', border: '', enabled: true, foreground: '', visible: true,
+        text: '', font_size: 12, auto_expand: false, font: '', spacing_above: small,
+        spacing_below: small, italic: false, background: '#ebebeb', bold: false, underline: false}
+      name: debug_console
+      layout_properties: {grid_position: 'WCIAGL,QAQSZA'}
   - type: DataGrid
     properties:
       role: null
@@ -174,33 +176,14 @@ components:
       data_bindings: []
       event_bindings: {}
     event_bindings: {}
-  - type: ColumnPanel
-    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '',
-      spacing_below: small, background: ''}
-    name: request
-    layout_properties: {grid_position: 'HXJKJK,DUFSUG'}
-    event_bindings: {}
-  - type: ColumnPanel
-    properties: {role: card}
-    name: delivery
-    layout_properties: {grid_position: 'LJMCTJ,CLFVSS'}
-    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Debug Console, font_size: null, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
       underline: false, icon: ''}
     name: label_2
-    layout_properties: {grid_position: 'HBDTBW,KIBYSV'}
+    layout_properties: {grid_position: 'HBDTBW,WWCHWL'}
     event_bindings: {}
-  - type: TextArea
-    properties: {role: null, align: left, height: '', tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 12,
-      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: debug_console
-    layout_properties: {grid_position: 'NSSBTZ,IASLSZ'}
 - type: Label
   properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
     visible: true, text: WGACA (what goes around comes around), font_size: null, font: '',

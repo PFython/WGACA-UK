@@ -12,7 +12,7 @@ components:
     font: '', col_spacing: medium, spacing_above: small, icon_align: top, col_widths: '',
     spacing_below: small, italic: false, background: '', bold: false, underline: false,
     icon: 'fa:times-circle'}
-  name: link_1
+  name: delete_row
   layout_properties: {column: HYKROV}
   event_bindings: {click: link_1_click}
 - type: Link
