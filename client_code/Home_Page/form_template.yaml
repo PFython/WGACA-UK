@@ -149,7 +149,7 @@ components:
     properties:
       role: null
       columns:
-      - {width: 227, title: User, id: MMETID, data_key: user, expand: false}
+      - {width: 226, title: User, id: MMETID, data_key: user, expand: false}
       - {width: 359, title: Product Key, id: HQUPKJ, data_key: product_key, expand: false}
       - {width: 77, title: Units, id: LILUPW, data_key: units, expand: false}
       - {width: 117, title: Expiry, id: FOJVUM, data_key: expiry_date, expand: false}
@@ -175,14 +175,6 @@ components:
       layout_properties: {}
       data_bindings: []
       event_bindings: {}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Debug Console, font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: ''}
-    name: label_2
-    layout_properties: {grid_position: 'HBDTBW,WWCHWL'}
     event_bindings: {}
 - type: Label
   properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
