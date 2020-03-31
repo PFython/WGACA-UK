@@ -1,0 +1,17 @@
+container:
+  type: ColumnPanel
+  properties: {col_widths: '{"TNETJB":15,"QFARZY":45}'}
+components:
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: House Number, font_size: null, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: false, underline: false,
+    icon: ''}
+  name: label_1
+  layout_properties: {grid_position: 'AWGOQA,TNETJB'}
+- type: TextBox
+  properties: {}
+  name: text_box_1
+  layout_properties: {grid_position: 'AWGOQA,QFARZY'}
+is_package: true
+item_type: {table_id: null}

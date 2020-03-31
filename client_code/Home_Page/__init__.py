@@ -43,6 +43,7 @@ class Home_Page(Home_PageTemplate):
               self.debug_console.text = "✓ Item added."   
         self.repeating_panel_1.items = anvil.server.call("get_my_offers") 
     
+    
 
     def add_item_click(self, **event_args):
         """This method is called when the button is clicked"""

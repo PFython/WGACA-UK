@@ -8,29 +8,23 @@ container:
 components:
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: WARNING!  Permanently removes offer from list.,
-    border: '', foreground: '#ff0000', visible: true, text: '', font_size: 24, wrap_on: mobile,
-    font: '', col_spacing: medium, spacing_above: small, icon_align: top, col_widths: '',
+    border: '', foreground: '#ff0000', visible: true, text: '', font_size: 20, wrap_on: mobile,
+    font: '', col_spacing: medium, spacing_above: small, icon_align: top, col_widths: '{}',
     spacing_below: small, italic: false, background: '', bold: false, underline: false,
-    icon: 'fa:times-circle'}
+    icon: 'fa:trash'}
   name: delete_row
   layout_properties: {column: HYKROV}
   event_bindings: {click: delete_row_click}
+  components: []
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#008000',
-    visible: true, text: '', font_size: 24, wrap_on: mobile, font: '', col_spacing: medium,
-    spacing_above: small, icon_align: top, col_widths: '', spacing_below: small, italic: false,
-    background: '', bold: false, underline: false, icon: 'fa:info-circle'}
+    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+    spacing_above: small, icon_align: top, col_widths: '{}', spacing_below: small,
+    italic: false, background: '', bold: false, underline: false, icon: 'fa:info'}
   name: show_notes
   layout_properties: {column: GMBNWP}
   event_bindings: {click: show_notes_click}
   data_bindings:
   - {property: tooltip, code: 'self.item[''notes'']'}
-- type: Link
-  properties: {}
-  name: user_link
-  layout_properties: {column: MMETID}
-  event_bindings: {}
-  data_bindings:
-  - {property: text, code: 'self.item[''user''][''email''].split("@")[0].upper()+":
-      "+self.item[''user''][''street'']'}
+  components: []
 is_package: true

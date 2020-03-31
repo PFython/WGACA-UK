@@ -151,37 +151,53 @@ components:
         spacing_below: small, italic: false, background: '#ebebeb', bold: false, underline: false}
       name: debug_console
       layout_properties: {grid_position: 'WCIAGL,QAQSZA'}
-  - type: DataGrid
-    properties:
-      role: null
-      columns:
-      - {width: 149, title: User, id: MMETID, data_key: user, expand: false}
-      - {width: 298, title: Product & Unit of Measure, id: HQUPKJ, data_key: product_key,
-        expand: false}
-      - {width: 77, title: Units, id: LILUPW, data_key: units, expand: false}
-      - {width: 117, title: Expiry, id: FOJVUM, data_key: expiry_date, expand: false}
-      - {width: 45, title: '', id: GMBNWP, data_key: show_notes, expand: false}
-      - {width: 31, title: '', id: HYKROV, data_key: delete_row, expand: false}
-      auto_header: true
-      tooltip: ''
-      border: ''
-      foreground: ''
-      rows_per_page: 40
-      visible: true
-      show_page_controls: true
-      spacing_above: small
-      spacing_below: small
-      background: ''
-    name: data_grid_1
-    layout_properties: {grid_position: 'HRSFVY,ZAPVSQ'}
-    components:
-    - type: RepeatingPanel
-      properties: {spacing_above: none, spacing_below: none, item_template: Home_Page.RowTemplate1}
-      name: repeating_panel_1
-      layout_properties: {}
-      data_bindings: []
-      event_bindings: {}
-    event_bindings: {}
+    - type: ColumnPanel
+      properties: {role: card, col_widths: '{}'}
+      name: card_1
+      layout_properties: {grid_position: 'FIWXSG,EBRBMU'}
+      components:
+      - type: Label
+        properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+          visible: true, text: My Offers, font_size: null, font: '', spacing_above: small,
+          icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+          underline: false, icon: 'fa:gift'}
+        name: label_2
+        layout_properties: {grid_position: 'BIDORM,VHULEL'}
+        event_bindings: {}
+      - type: DataGrid
+        properties:
+          role: null
+          columns:
+          - {width: 355, title: Product & Unit of Measure, id: HQUPKJ, data_key: product_key,
+            expand: false}
+          - {width: 77, title: Units, id: LILUPW, data_key: units, expand: false}
+          - {width: 117, title: Expiry, id: FOJVUM, data_key: expiry_date, expand: false}
+          - {width: 45, title: '', id: GMBNWP, data_key: show_notes, expand: false}
+          - {width: 46, title: '', id: HYKROV, data_key: delete_row, expand: false}
+          auto_header: true
+          tooltip: ''
+          border: ''
+          foreground: ''
+          rows_per_page: 20
+          visible: true
+          show_page_controls: true
+          spacing_above: small
+          spacing_below: small
+          background: ''
+        name: data_grid_1
+        layout_properties: {grid_position: 'GYIREJ,TDEHID'}
+        components:
+        - type: RepeatingPanel
+          properties: {spacing_above: none, spacing_below: none, item_template: Home_Page.RowTemplate1}
+          name: repeating_panel_1
+          layout_properties: {}
+          data_bindings: []
+          event_bindings: {}
+        event_bindings: {}
+  - type: form:Home_Page.User_Profile
+    properties: {}
+    name: custom_1
+    layout_properties: {grid_position: 'BVSFNX,KJQPTU'}
 - type: Label
   properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
     visible: true, text: WGACA (what goes around comes around), font_size: null, font: '',
