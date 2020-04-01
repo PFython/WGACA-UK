@@ -194,5 +194,6 @@ components:
           data_bindings: []
           event_bindings: {}
         event_bindings: {}
+        data_bindings: []
       event_bindings: {}
 is_package: true

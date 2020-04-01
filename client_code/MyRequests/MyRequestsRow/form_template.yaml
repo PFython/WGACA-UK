@@ -12,4 +12,11 @@ components:
   layout_properties: {column: KTZWSC}
   components: []
   event_bindings: {click: delete_row_click}
+- type: Label
+  properties: {}
+  name: date_posted_formatted
+  layout_properties: {column: KHAQPE}
+  event_bindings: {}
+  data_bindings:
+  - {property: text, code: 'self.item[''date_posted''].strftime(''%d %b %Y'')'}
 is_package: true

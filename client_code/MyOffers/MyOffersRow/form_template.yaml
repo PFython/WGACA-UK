@@ -16,4 +16,11 @@ components:
   layout_properties: {column: HYKROV}
   event_bindings: {click: delete_row_click}
   components: []
+- type: Label
+  properties: {}
+  name: expiry_date_formatted
+  layout_properties: {column: FOJVUM}
+  data_bindings:
+  - {property: text, code: 'self.item[''expiry_date''].strftime(''%d %b %Y'')'}
+  event_bindings: {}
 is_package: true
