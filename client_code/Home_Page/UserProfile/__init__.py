@@ -1,4 +1,4 @@
-from ._anvil_designer import User_ProfileTemplate
+from ._anvil_designer import UserProfileTemplate
 from anvil import *
 import anvil.server
 import anvil.microsoft.auth
@@ -10,7 +10,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class User_Profile(User_ProfileTemplate):
+class UserProfile(UserProfileTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
