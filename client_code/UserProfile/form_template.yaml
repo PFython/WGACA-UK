@@ -7,7 +7,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":40,"KAAVMF":20,"LVROFR":20,"HQVZIJ":40,"LPMSLH":20,"ZGIYRQ":40,"GYSESX":20,"SABBOR":40,"FVTKUS":45,"YHDLGZ":20,"ZREDXM":20,"OMMSDO":40,"URHHWS":20,"KWSJQF":40}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":40,"KAAVMF":20,"LVROFR":20,"HQVZIJ":40,"LPMSLH":20,"ZGIYRQ":40,"GYSESX":20,"SABBOR":40,"FVTKUS":15,"YHDLGZ":20,"ZREDXM":20,"OMMSDO":40,"URHHWS":20,"KWSJQF":40,"KDESOA":50,"XJYIEG":20,"DYXDPH":40}',
     spacing_below: small, background: ''}
   name: my_details
   layout_properties: {slot: default}
@@ -30,9 +30,9 @@ components:
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
+      background: '', bold: true, underline: false}
     name: display_name
     layout_properties: {grid_position: 'LAGDLB,HYGEDW LVIDYJ,HQVZIJ'}
     event_bindings: {show: display_name_show}
@@ -49,17 +49,34 @@ components:
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
+      background: '', bold: true, underline: false}
     name: street
     layout_properties: {grid_position: 'LAGDLB,HYGEDW FGTAVD,ZGIYRQ'}
     event_bindings: {show: street_show}
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
+      underline: false, icon: 'fa:eye-slash'}
+    name: label3
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW IVXNLA,XJYIEG'}
+    event_bindings: {}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
+      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
+    name: telephone
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW IVXNLA,DYXDPH'}
+    data_bindings: []
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
       underline: false, icon: 'fa:eye-slash'}
-    name: label3_copy
+    name: label4
     layout_properties: {grid_position: 'LAGDLB,HYGEDW UDEWSH,GYSESX'}
     event_bindings: {}
   - type: TextBox
@@ -83,7 +100,7 @@ components:
         visible: true, text: 'House Number:', font_size: 14, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
         underline: false, icon: 'fa:eye-slash'}
-      name: label4
+      name: label5
       layout_properties: {grid_position: 'ZCFHMA,HMRFYE'}
       event_bindings: {}
     - type: TextBox
@@ -100,7 +117,7 @@ components:
       visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
       underline: false, icon: 'fa:eye-slash'}
-    name: label5
+    name: label6
     layout_properties: {grid_position: 'LAGDLB,HYGEDW TPHCXQ,ZREDXM'}
     event_bindings: {}
   - type: TextBox
@@ -116,7 +133,7 @@ components:
       visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
       underline: false, icon: 'fa:eye-slash'}
-    name: label6
+    name: label7
     layout_properties: {grid_position: 'LAGDLB,HYGEDW QDGYSN,URHHWS'}
     event_bindings: {}
   - type: TextBox
@@ -140,7 +157,7 @@ components:
         visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
         underline: false, icon: 'fa:eye-slash'}
-      name: label7
+      name: label8
       layout_properties: {grid_position: 'ZCFHMA,HMRFYE'}
       event_bindings: {}
     - type: TextBox
@@ -172,4 +189,74 @@ components:
     name: delete_account
     layout_properties: {grid_position: 'MYQXNL,FVTKUS'}
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: Change Password, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#0080c0', bold: false, underline: false, icon: 'fa:trash'}
+    name: change_password
+    layout_properties: {grid_position: 'MYQXNL,KDESOA'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Privacy Notice, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: label_1
+    layout_properties: {grid_position: 'UBQKDB,AJIUXB'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'The personal information you''ve provided to use this
+        app will ONLY be used for the intended purpose of the app itself i.e. making
+        and matching requests and offers for goods and deliveries during these unprecedented
+        times of "lock-down" due to the Corona Virus pandemic.  Other registered users
+        of the app will only be able to see your Display Name and Street by default
+        (e.g. Big John, Armoury Way).  Your Full Address will obviously need to be
+        shared with any registered volunteers you accept to pick-up or deliver goods
+        from/to your address, but it''s up to you whether you share your Email or
+        Telephone Number as well.  Hopefully you''ll be able to have a quick chat
+        (at a safe social distance) when the volunteer comes to your house, and you
+        can always share your contact information in person once you''re more comfortable
+        and know there''s a real person behind the profile name...
+
+
+        Please note that some registered users will actually be organisations approved
+        by us such as Food Banks and other charities or community groups who are doing
+        their bit to help out in the local area.  In these cases your generous offers
+        may end up going into a ''pool'' of donations managed by them, rather than
+        a close neighbour directly, but you''ll be able to choose whether you accept
+        such requests or not.
+
+
+        As well as holding your contact details (above) and any active Offers or Requests,
+        we will also keep a history of your transactions.  The idea there is to build
+        up a kind of "reputation"  score so that we can all see who the ''good eggs''
+        are (typically offering more than they ask for) or if there are any scammers
+        or plain selfish neighbours trying to take advantage (e.g. requesting more
+        of a particular item than they could reasonably need for their own use, or
+        offering to make deliveries but keeping the items to themselves).  You can
+        view your Transaction history in full, and also in the more general form that
+        other registered users will see it by clicking on the green button above.  You
+        can also delete your account and all data by hitting the red button above,
+        but we will probably prevent you from re-joining in order to prevent "hit
+        and run" scammers.
+
+
+        Finally in terms of IT security, we''re using out-of-the-box toolkits provided
+        by Anvil.works and all data is hosted on their servers, including encrypted
+        password ''hashes''.  The developers of this app are not IT security experts
+        but felt comfortable and reassured when researching Anvil''s architecture
+        and security framework.  If you have any concerns about security you change
+        your password at any time (button above), read up on Anvil itself, and as
+        a last resort, delete your account here entirely - though we hope it won''t
+        come to that!
+
+
+        Thanks for sharing your details in order to make this app work for the benefit
+        of all.  What goes around, comes around!', font_size: null, font: '', spacing_above: none,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: label_2
+    layout_properties: {grid_position: 'KFWZUG,AHGNGL'}
   event_bindings: {show: show_my_details}

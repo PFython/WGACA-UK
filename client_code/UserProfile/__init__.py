@@ -20,6 +20,7 @@ class UserProfile(UserProfileTemplate):
     def show_my_details(self, **event_args):
         """This method is called when the TextBox is shown on the screen"""
         self.email.text = anvil.users.get_user()['email']
+        self.telephone.text = anvil.users.get_user()['telephone']
         self.display_name.text = anvil.users.get_user()['display_name']
         self.house_number.text = anvil.users.get_user()['house_number']
         self.street.text = anvil.users.get_user()['street']

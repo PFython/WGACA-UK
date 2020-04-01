@@ -1,4 +1,4 @@
-from ._anvil_designer import Home_PageTemplate
+from ._anvil_designer import MyOffersTemplate
 from anvil import *
 import anvil.microsoft.auth
 import anvil.google.auth, anvil.google.drive
@@ -11,19 +11,10 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
+ITEM_HEIRARCHY = anvil.server.call("get_product_heirarchy").split("\n")
+UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure").split("\n")
 
-
-ITEM_HEIRARCHY = ('Food | Vegetables | Tomatoes',
-              'Food | Vegetables | Potatoes',
-              'Food | Vegetables | Carrots',
-              'Medical | Tablets | Ibuprofen',
-              'Medical | Tablets | Paracetamol')
-
-UNITS_OF_MEASURE = ('grammes', 'kilogrammes', 'centilitres', 'litres', 'cans (regular)', 'cans (large)',
-                    'bottles (regular)', 'bottles (large)', 'packets', 'items (small)', 'items (medium)', 'items (large)')
-
-
-class Home_Page(Home_PageTemplate):
+class MyOffers(MyOffersTemplate):
     item_choices = ITEM_HEIRARCHY
     units_of_measure = UNITS_OF_MEASURE
 
@@ -41,9 +32,7 @@ class Home_Page(Home_PageTemplate):
               self.debug_console.text = "ⓘ Unable to create new entry because this combination of Product, Unit of Measure, and Expiry Date already exists.  Please consider deleting old entry and creating a new one?"
         else:
               self.debug_console.text = "✓ Item added."   
-        self.repeating_panel_1.items = anvil.server.call("get_my_offers") 
-    
-    
+        self.repeating_panel_1.items = anvil.server.call("get_my_offers")    
 
     def add_item_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -56,9 +45,4 @@ class Home_Page(Home_PageTemplate):
             self.debug_console.text = "⚠ Please select a product and/or unit of measure."
         else:
             self.add_to_my_offer_list(product_key, units, expiry_date, notes)
-
-    def text_area_1_change(self, **event_args):
-        """This method is called when the text in this text area is edited"""
-        pass
-
 
