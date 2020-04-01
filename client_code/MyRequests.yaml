@@ -1,0 +1,151 @@
+components:
+- type: ColumnPanel
+  properties: {col_widths: '{}'}
+  name: content_panel
+  layout_properties:
+    col_widths: {}
+    grid_position: ZNYJZU,DARPKJ
+  components:
+  - type: ColumnPanel
+    properties: {role: card, col_widths: '{}'}
+    name: card_2
+    layout_properties: {grid_position: 'IWGSSA,BNUBRK'}
+    components:
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Do you need food, house-hold goods or over-the-counter
+          medicine?  If so, please log your request below and if we find someone who
+          can spare the item(s) you need we''ll try to assign a volunteer to make
+          the delivery...', font_size: null, font: '', spacing_above: small, icon_align: top,
+        spacing_below: small, italic: false, background: '', bold: true, underline: false,
+        icon: 'fa:bullhorn'}
+      name: input_description_1
+      layout_properties: {grid_position: 'NPEONI,MWORRS'}
+      event_bindings: {}
+    - type: RadioButton
+      properties: {role: null, selected: true, align: left, tooltip: '', border: '',
+        enabled: true, foreground: '', value: URGENT, visible: true, text: 'URGENT:  I''m
+          desperate - anything in the category will do', font_size: null, font: '',
+        spacing_above: small, spacing_below: none, italic: false, background: '',
+        bold: false, group_name: radioGroup1, underline: false}
+      name: urgent
+      layout_properties: {grid_position: 'VOFSXN,IGYRLU'}
+      event_bindings: {}
+    - type: RadioButton
+      properties: {role: null, selected: false, align: left, tooltip: '', border: '',
+        enabled: false, foreground: '', value: NICE, visible: true, text: 'NICE TO
+          HAVE: A specific item would be appreciated (Not yet implemented)', font_size: null,
+        font: '', spacing_above: none, spacing_below: small, italic: false, background: '',
+        bold: false, group_name: radioGroup1, underline: false}
+      name: nice
+      layout_properties: {grid_position: 'JBUWSF,CPFBUN'}
+      event_bindings: {}
+    - type: DropDown
+      properties:
+        role: null
+        align: full
+        tooltip: ''
+        placeholder: Please choose a category...
+        border: ''
+        enabled: true
+        foreground: ''
+        items: ['']
+        visible: true
+        font_size: null
+        font: ''
+        spacing_above: small
+        spacing_below: small
+        italic: false
+        background: ''
+        bold: false
+        underline: false
+        include_placeholder: true
+      name: product_category
+      layout_properties: {grid_position: 'TJDTSP,MNMBLJ'}
+      event_bindings: {change: drop_down_1_change}
+      data_bindings:
+      - {property: items, code: 'list(set([" | ".join(x.split(" | ")[:2]) for x in
+          self.item_choices]))'}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: Notes, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:file-text-o'}
+      name: notes_label
+      layout_properties: {grid_position: 'JGCSDR,BNHZYA'}
+      event_bindings: {}
+    - type: TextArea
+      properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
+        placeholder: 'Add any additional notes you think might be helpful here.  For
+          example possible alternatives that would meet your need, further details
+          about why you need help, the urgency, whether you''re ill/alone, or other
+          people in the house who depend on you etc.', border: '', enabled: true,
+        foreground: '', visible: true, text: '', font_size: null, auto_expand: false,
+        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+        bold: false, underline: false}
+      name: notes
+      layout_properties: {grid_position: 'LFFFLL,YJWVON'}
+      event_bindings: {change: text_area_1_change}
+    - type: Button
+      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+        foreground: '#000000', visible: true, text: ' Add Request', font_size: null,
+        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#d9d9d9', bold: false, underline: false, icon: 'fa:plus-square'}
+      name: add_request
+      layout_properties: {grid_position: 'YHEAQZ,EZXBWF'}
+      event_bindings: {click: add_request_click}
+    - type: TextArea
+      properties: {role: null, align: left, height: 56.99623260644529, tooltip: '',
+        placeholder: '', border: '', enabled: true, foreground: '', visible: true,
+        text: '', font_size: 12, auto_expand: false, font: '', spacing_above: small,
+        spacing_below: small, italic: false, background: '#ebebeb', bold: false, underline: false}
+      name: debug_console
+      layout_properties: {grid_position: 'WFZZXD,XRBWYK'}
+- type: ColumnPanel
+  properties: {role: card, col_widths: '{}'}
+  name: card_1
+  layout_properties: {grid_position: 'DDIZGT,NIOJLL'}
+  components:
+  - type: Label
+    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: My Requests, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: 'fa:gift'}
+    name: label_2
+    layout_properties: {grid_position: 'BIDORM,VHULEL'}
+    event_bindings: {}
+  - type: DataGrid
+    properties:
+      role: null
+      columns:
+      - {width: 109, title: Date Posted, id: IXHYUR, data_key: date_posted, expand: false}
+      - {width: 70, title: Urgent, id: CLHWMI, data_key: urgent, expand: false}
+      - {width: 165, title: Product Category, id: AGYDMA, data_key: product_category,
+        expand: false}
+      - {width: 464, title: Notes, id: BGFBIK, data_key: notes, expand: false}
+      - {width: 46, title: '', id: HYKROV, data_key: delete_row, expand: false}
+      auto_header: true
+      tooltip: ''
+      border: ''
+      foreground: ''
+      rows_per_page: 20
+      visible: true
+      show_page_controls: true
+      spacing_above: small
+      spacing_below: small
+      background: ''
+    name: data_grid_1
+    layout_properties: {grid_position: 'GYIREJ,FPOPRW'}
+    components:
+    - type: RepeatingPanel
+      properties: {spacing_above: none, spacing_below: none, item_template: MyOffers.MyOffersRow}
+      name: repeating_panel_1
+      layout_properties: {}
+      data_bindings: []
+      event_bindings: {}
+    event_bindings: {}
+  event_bindings: {}
+container:
+  type: ColumnPanel
+  event_bindings: {}
+  properties: {col_widths: '{}'}

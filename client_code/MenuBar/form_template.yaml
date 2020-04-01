@@ -33,7 +33,7 @@ components:
         icon: 'fa:bullhorn'}
       name: menu_my_requests
       layout_properties: {slot: nav-right, grid_position: 'SEIMCZ,KVNPPV'}
-      event_bindings: {}
+      event_bindings: {click: menu_my_requests_click}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: Overview, font_size: 14, wrap_on: mobile, font: '', col_spacing: medium,

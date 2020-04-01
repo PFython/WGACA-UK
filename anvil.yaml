@@ -16,7 +16,7 @@ services:
 - source: /runtime/services/anvil/microsoft.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: MenuBar}
+startup: {type: form, module: MyRequests}
 package_name: WGACA
 allow_embedding: true
 name: WGACA

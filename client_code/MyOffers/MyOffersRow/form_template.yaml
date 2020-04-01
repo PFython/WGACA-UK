@@ -16,15 +16,4 @@ components:
   layout_properties: {column: HYKROV}
   event_bindings: {click: delete_row_click}
   components: []
-- type: Link
-  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#008000',
-    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-    spacing_above: small, icon_align: top, col_widths: '{}', spacing_below: small,
-    italic: false, background: '', bold: false, underline: false, icon: 'fa:info'}
-  name: show_notes
-  layout_properties: {column: GMBNWP}
-  event_bindings: {click: show_notes_click}
-  data_bindings:
-  - {property: tooltip, code: 'self.item[''notes'']'}
-  components: []
 is_package: true

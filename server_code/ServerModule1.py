@@ -22,7 +22,7 @@ import datetime
 #   return 42
 #
 @anvil.server.callable
-def save_to_database(product_key, units, expiry_date, notes):
+def save_to_offers_database(product_key, units, expiry_date, notes):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
     user = anvil.users.get_user()
@@ -34,10 +34,27 @@ def save_to_database(product_key, units, expiry_date, notes):
     app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date())
 
 @anvil.server.callable
+def save_to_requests_database(product_category, urgent, notes):
+    """ Returns 'Duplicate' if product_category request already exists"""
+    user = anvil.users.get_user()
+    if user is None:
+        return
+    existing_entry = app_tables.requests.get(product_category=product_category, user = user)
+    if existing_entry:
+        return "Duplicate"    
+    app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date())    
+    
+@anvil.server.callable
 def get_my_offers():
     user = anvil.users.get_user()
     if user is not None:
         return app_tables.offers.search(tables.order_by("product_key"), user = user)
+      
+@anvil.server.callable
+def get_my_requests():
+    user = anvil.users.get_user()
+    if user is not None:
+        return app_tables.requests.search(tables.order_by("product_category"), user = user)
 
 @anvil.server.callable
 def get_units_of_measure():
@@ -93,8 +110,10 @@ Food | Vegetables | Celery
 Food | Vegetables | Courgette
 Food | Vegetables | Cucumbers
 Food | Vegetables | Lettuce / Greens
+Food | Vegetables | Mixed Veg
 Food | Vegetables | Mushrooms
 Food | Vegetables | Onions
+Food | Vegetables | Peas
 Food | Vegetables | Peppers
 Food | Vegetables | Plantain
 Food | Vegetables | Potatoes
@@ -121,18 +140,11 @@ Food | Fruits | Raspberries
 Food | Fruits | Strawberries
 Food | Dairy | Butter
 Food | Dairy | Margarine
-Food | Dairy | Milk - Skimmed
-Food | Dairy | Milk - Semi Skimmed
-Food | Dairy | Milk - Full Fat
-Food | Dairy | Milk - Almond
-Food | Dairy | Milk - Coconut
-Food | Dairy | Milk - Oat
-Food | Dairy | Milk - Soya
-Food | Dairy | Single Cream
-Food | Dairy | Double Cream
+Food | Dairy | Single/Double Cream
 Food | Dairy | Sour Cream
 Food | Dairy | Whipped Cream
-Food | Dairy | Yogurt
+Food | Dairy | Yogurt (plain)
+Food | Dairy | Yogurt (flavoured)
 Food | Cheese | Soft e.g. Brie, Camembert
 Food | Cheese | Hard e.g. Cheddar, Red Leicester
 Food | Cheese | Spreadable e.g. Cottage Cheese, Cream Cheese
@@ -172,13 +184,6 @@ Food | Seafood | Trout
 Food | Seafood | Tuna - Steak
 Food | Seafood | Tuna - Tinned
 Food | Frozen | Ice-Cream
-Food | Frozen | Peas
-Food | Frozen | Carrots
-Food | Frozen | Sweetcorn
-Food | Frozen | Mushrooms
-Food | Frozen | Cauliflower
-Food | Frozen | Broccoli
-Food | Frozen | Mixed Veg
 Food | Frozen | Pizza
 Food | Bread | White Sliced
 Food | Bread | Brown Sliced
@@ -229,16 +234,16 @@ Food | Pantry | Vegetable Oil
 Food | Pantry | Vinegar
 Food | Pantry | Tinned Corn Beef
 Food | Pantry | Tinned Pies
-Food | Pantry | Sauces - Tomato
-Food | Pantry | Sauces - Mayonaise
-Food | Pantry | Sauces - Mustard
-Food | Pantry | Sauces - Hot Sauce
-Food | Pantry | Sauces - Soy
-Food | Pantry | Sauces - Pasta
-Food | Pantry | Sauces - Pesto
-Food | Pantry | Sauces Worcestershire
-Food | Pantry | Sauces - Salsa
-Food | Pantry | Sauces - Curry
+Food | Sauces | Tomato
+Food | Sauces | Mayonaise
+Food | Sauces | Mustard
+Food | Sauces | Hot Sauce
+Food | Sauces | Soy
+Food | Sauces | Pasta
+Food | Sauces | Pesto
+Food | Sauces | Worcestershire
+Food | Sauces | Salsa
+Food | Sauces | Curry
 Food | Pantry | Self- Raising Flour
 Food | Pantry | Plain Flour
 Food | Pantry | Corn Flour
@@ -248,29 +253,18 @@ Food | Pantry | Baking Powder
 Food | Pantry | Bicarbonate Of Soda
 Food | Pantry | Sugar - Castor
 Food | Pantry | Sugar - Granulated
-Food | Pantry | Sugar - Golden
-Food | Pantry | Sugar - Dark Muscovado
 Food | Pantry | Crisps
-Food | Pantry | Basil
-Food | Pantry | Black Pepper
-Food | Pantry | Cinnamon
-Food | Pantry | Garlic
-Food | Pantry | Ginger
-Food | Pantry | Mint
-Food | Pantry | Mixed Spice
-Food | Pantry | Oregano
-Food | Pantry | Paprika
-Food | Pantry | Parsley
-Food | Pantry | Turmeric
+Food | Pantry | Spices (miscellaneous)
+Food | Pantry | Herbs (miscellaneous)
 Food | Pantry | Salt
 Food | Pantry | Vanilla Extract
-Food | Pantry | Aluminum Foil
-Food | Pantry | Napkins
-Food | Pantry | Non-Stick Spray
-Food | Pantry | Paper Towels
-Food | Pantry | Plastic Wrap
-Food | Pantry | Sandwich / Freezer Bags
-Food | Pantry | Wax Paper
+Household | Kitchenware | Aluminum Foil
+Household | Kitchenware | Napkins
+Household | Kitchenware | Non-Stick Spray
+Household | Kitchenware | Paper Towels
+Household | Kitchenware | Plastic Wrap
+Household | Kitchenware | Sandwich / Freezer Bags
+Household | Kitchenware | Wax Paper
 Pets | Store | Cat Food / Treats
 Pets | Store | Cat Litter
 Pets | Store | Dog Food / Treats
@@ -317,13 +311,15 @@ Household | Cleaning Products | Toilet Cleaner
 Household | Cleaning Products | Washing - Powder
 Household | Cleaning Products | Washing  - Liquid
 Household | Cleaning Products | Fabric Softner
-Medicine | Allergy
-Medicine | Antidiarrheal
-Medicine | Antiseptic Cream
-Medicine | Aspirin
-Medicine | Antacid
-Medicine | Cold / Flu / Sinus
-Medicine | Ibuprofen
-Medicine | Paracetamol
-Medicine | Paracetamol - Soluble
-Medicine | Plasters"""
+Medical | Allergy
+Medical | Antidiarrhea
+Medical | Indigestion/Antacid
+Medical | Antiseptic Cream/Spray
+Medical | Aspirin
+Medical | Cold / Flu / Sinus
+Medical | Ibuprofen
+Medical | Paracetamol
+Medical | Paracetamol - Soluble
+Medical | Plasters
+Medical | Facemask
+Medical | Latex Gloves"""

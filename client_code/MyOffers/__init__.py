@@ -25,9 +25,9 @@ class MyOffers(MyOffersTemplate):
         # Any code you write here will run when the form opens.
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")     
     
-    def add_to_my_offer_list(self,product_key, units, expiry_date, notes):
+    def add_to_my_offers(self,product_key, units, expiry_date, notes):
         user = anvil.users.get_user()['email']
-        result = anvil.server.call("save_to_database", product_key, units, expiry_date, notes)
+        result = anvil.server.call("save_to_offers_database", product_key, units, expiry_date, notes)
         if result == "Duplicate":
               self.debug_console.text = "ⓘ Unable to create new entry because this combination of Product, Unit of Measure, and Expiry Date already exists.  Please consider deleting old entry and creating a new one?"
         else:
@@ -44,5 +44,5 @@ class MyOffers(MyOffersTemplate):
         if not product_key[0] and product_key[1]:
             self.debug_console.text = "⚠ Please select a product and/or unit of measure."
         else:
-            self.add_to_my_offer_list(product_key, units, expiry_date, notes)
+            self.add_to_my_offers(product_key, units, expiry_date, notes)
 

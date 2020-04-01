@@ -11,6 +11,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..MyOffers import MyOffers
 from ..UserProfile import UserProfile
+from ..MyRequests import MyRequests
 
 class MenuBar(MenuBarTemplate):
     def __init__(self, **properties):
@@ -47,5 +48,13 @@ class MenuBar(MenuBarTemplate):
         # Add Page1 to the content panel
         self.column_panel_1.add_component(UserProfile())
         self.highlight_selected_menu(self.menu_my_profile)
+
+    def menu_my_requests_click(self, **event_args):
+        """This method is called when the link is clicked"""
+        self.column_panel_1.clear()
+        # Add Page1 to the content panel
+        self.column_panel_1.add_component(MyRequests())
+        self.highlight_selected_menu(self.menu_my_requests)
+
 
 
