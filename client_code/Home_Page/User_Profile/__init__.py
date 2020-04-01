@@ -23,6 +23,8 @@ class User_Profile(User_ProfileTemplate):
         self.display_name.text = anvil.users.get_user()['display_name']
         self.house_number.text = anvil.users.get_user()['house_number']
         self.street.text = anvil.users.get_user()['street']
+        self.town.text = anvil.users.get_user()['town']
+        self.county.text = anvil.users.get_user()['county']
         self.postcode.text = anvil.users.get_user()['postcode']
 
 

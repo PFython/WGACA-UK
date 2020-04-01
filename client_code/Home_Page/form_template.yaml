@@ -10,11 +10,9 @@ components:
   layout_properties: {slot: default}
   components:
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"TDRYZE":10,"OUSAJW":7,"PPQIMO":8,"HHGBDH":15,"CAZBRM":10,"HUMPCR":10}'}
-    name: offer
-    layout_properties: {grid_position: 'UMQYJE,HLIQKD'}
-    event_bindings: {show: offer_show}
-    data_bindings: []
+    properties: {role: card, col_widths: '{}'}
+    name: card_2
+    layout_properties: {grid_position: 'IWGSSA,BNUBRK'}
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -24,7 +22,7 @@ components:
         icon_align: top, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:ambulance'}
       name: input_description_1
-      layout_properties: {grid_position: 'SDNDFK,NUGDQO'}
+      layout_properties: {grid_position: 'NPEONI,MWORRS'}
       event_bindings: {}
     - type: DropDown
       properties:
@@ -47,7 +45,7 @@ components:
         underline: false
         include_placeholder: true
       name: product_description
-      layout_properties: {grid_position: 'YAIWNZ,PLLZVU'}
+      layout_properties: {grid_position: 'TJDTSP,MNMBLJ'}
       event_bindings: {change: drop_down_1_change}
       data_bindings:
       - {property: items, code: self.item_choices}
@@ -57,7 +55,7 @@ components:
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:cart-plus'}
       name: input_description_2
-      layout_properties: {grid_position: 'HCSQBP,TDRYZE'}
+      layout_properties: {grid_position: 'GWFNTN,BXLQYQ'}
       event_bindings: {}
     - type: TextBox
       properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '1',
@@ -65,7 +63,7 @@ components:
         font: '', spacing_above: small, type: number, spacing_below: small, italic: false,
         background: '', bold: false, underline: false}
       name: number_of_units
-      layout_properties: {grid_position: 'HCSQBP,OUSAJW'}
+      layout_properties: {grid_position: 'GWFNTN,RRYUZT'}
       event_bindings: {}
     - type: Label
       properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
@@ -73,7 +71,7 @@ components:
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:balance-scale'}
       name: input_description_3
-      layout_properties: {grid_position: 'HCSQBP,PPQIMO'}
+      layout_properties: {grid_position: 'GWFNTN,YBZOCF'}
       event_bindings: {}
     - type: DropDown
       properties:
@@ -96,7 +94,7 @@ components:
         underline: false
         include_placeholder: true
       name: unit_of_measure
-      layout_properties: {grid_position: 'HCSQBP,HHGBDH'}
+      layout_properties: {grid_position: 'GWFNTN,PANIDI'}
       event_bindings: {change: unit_of_measure_change}
       data_bindings:
       - {property: items, code: self.units_of_measure}
@@ -106,7 +104,7 @@ components:
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:hourglass-end'}
       name: expiry_date_label
-      layout_properties: {grid_position: 'HCSQBP,HUMPCR'}
+      layout_properties: {grid_position: 'GWFNTN,CBUEIQ'}
       event_bindings: {}
     - type: DatePicker
       properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: 'If
@@ -115,7 +113,7 @@ components:
         font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
         date: '', min_date: '', background: '', bold: false, underline: false, format: ''}
       name: expiry_date
-      layout_properties: {grid_position: 'HCSQBP,CAZBRM'}
+      layout_properties: {grid_position: 'GWFNTN,KKXJVW'}
       event_bindings: {}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -123,7 +121,7 @@ components:
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:file-text-o'}
       name: notes_label
-      layout_properties: {grid_position: 'CCKGEB,TEQYPH'}
+      layout_properties: {grid_position: 'JGCSDR,BNHZYA'}
       event_bindings: {}
     - type: TextArea
       properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
@@ -134,7 +132,7 @@ components:
         text: '', font_size: null, auto_expand: false, font: '', spacing_above: small,
         spacing_below: small, italic: false, background: '', bold: false, underline: false}
       name: notes
-      layout_properties: {grid_position: 'FPSLVM,AGRRXY'}
+      layout_properties: {grid_position: 'LFFFLL,YJWVON'}
       event_bindings: {change: text_area_1_change}
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -142,7 +140,7 @@ components:
         font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
         background: '#d9d9d9', bold: false, underline: false, icon: 'fa:plus-square'}
       name: add_item
-      layout_properties: {grid_position: 'WCLKOD,KWBLCI'}
+      layout_properties: {grid_position: 'YHEAQZ,EZXBWF'}
       event_bindings: {click: add_item_click}
     - type: TextArea
       properties: {role: null, align: left, height: 56.99623260644529, tooltip: '',
@@ -150,7 +148,14 @@ components:
         text: '', font_size: 12, auto_expand: false, font: '', spacing_above: small,
         spacing_below: small, italic: false, background: '#ebebeb', bold: false, underline: false}
       name: debug_console
-      layout_properties: {grid_position: 'WCIAGL,QAQSZA'}
+      layout_properties: {grid_position: 'WFZZXD,XRBWYK'}
+  - type: ColumnPanel
+    properties: {role: card, col_widths: '{}'}
+    name: offer
+    layout_properties: {grid_position: 'UMQYJE,HLIQKD'}
+    event_bindings: {show: offer_show}
+    data_bindings: []
+    components:
     - type: ColumnPanel
       properties: {role: card, col_widths: '{}'}
       name: card_1
