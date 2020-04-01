@@ -16,7 +16,7 @@ services:
 - source: /runtime/services/anvil/microsoft.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: MyRequests}
+startup: {type: form, module: MenuBar}
 package_name: WGACA
 allow_embedding: true
 name: WGACA
@@ -28,7 +28,6 @@ metadata: {logo_img: 'asset:Emoji Mask.jpg', title: What Goes Around Comes Aroun
     attempt to auto-match offers and requests and assign to delivery volunteers and
     other 3rd sector/governement support groups to help move items around to where
     they''ve most needed.'}
-startup_form: MyOffers.MyOffersRow
 native_deps: {head_html: ''}
 dependency_order: []
 dependency_code: {}

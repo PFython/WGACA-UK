@@ -1,0 +1,15 @@
+container:
+  type: DataRowPanel
+  event_bindings: {}
+components:
+- type: Link
+  properties: {role: null, url: '', align: left, tooltip: WARNING!  Permanently removes offer from list.,
+    border: '', foreground: '#ff0000', visible: true, text: '', font_size: 20, wrap_on: mobile,
+    font: '', col_spacing: medium, spacing_above: small, icon_align: top, col_widths: '{}',
+    spacing_below: small, italic: false, background: '', bold: false, underline: false,
+    icon: 'fa:trash'}
+  name: delete_row
+  layout_properties: {column: KTZWSC}
+  components: []
+  event_bindings: {click: delete_row_click}
+is_package: true

@@ -39,7 +39,6 @@ class MyRequests(MyRequestsTemplate):
         product_category = (self.product_category.selected_value)
         urgent = self.urgent.selected
         notes = self.notes.text or "(No notes attached)"
-        alert(product_category +str(urgent) +str(notes))
         if not product_category:
             self.debug_console.text = "⚠ Please select a product category."
         else:
