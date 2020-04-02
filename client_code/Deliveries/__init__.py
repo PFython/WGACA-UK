@@ -1,9 +1,5 @@
 from ._anvil_designer import DeliveriesTemplate
 from anvil import *
-import anvil.microsoft.auth
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.facebook.auth
 import anvil.users
 import anvil.server
 import anvil.tables as tables
@@ -25,4 +21,3 @@ class Deliveries(DeliveriesTemplate):
         # Any code you write here will run when the form opens.
         self.repeating_panel_1.items = anvil.server.call("get_my_deliveries")     
     
-

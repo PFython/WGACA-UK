@@ -18,14 +18,12 @@ components:
     properties:
       role: null
       columns:
-      - {title: Offer, id: RTJNNJ, data_key: offer}
-      - {title: Runner, id: BSTNFJ, data_key: runner}
-      - {title: Accepted, id: PXDWOD, data_key: accepted}
-      - {title: Offer Collected, id: IWHRZK, data_key: offer_collected}
-      - {title: Offer Delivered, id: ZLLYLZ, data_key: offer_delivered}
-      - {title: Feedback From_requester, id: MEWGFN, data_key: feedback_from_requester}
-      - {title: Feedback From_giver, id: AJQFLZ, data_key: feedback_from_giver}
-      - {title: Feedback From_runner, id: YXHOIV, data_key: feedback_from_runner}
+      - {width: 99, title: Runner, id: BSTNFJ, data_key: runner, expand: false}
+      - {width: 238, title: Offer, id: RTJNNJ, data_key: offer, expand: false}
+      - {title: Request, id: ZLLYLZ, data_key: request}
+      - {title: Pick-up, id: PXDWOD, data_key: pickup}
+      - {title: Drop-off, id: IWHRZK, data_key: dropoff}
+      - {title: Status, id: MEWGFN, data_key: status}
       auto_header: false
       tooltip: ''
       border: ''

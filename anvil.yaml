@@ -7,15 +7,6 @@ services:
     allow_signup: true, enable_automatically: true, confirm_email: false, remember_me_days: 7,
     use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
-- source: /runtime/services/facebook.yml
-  client_config: {}
-  server_config: {}
-- source: /runtime/services/google.yml
-  client_config: {}
-  server_config: {}
-- source: /runtime/services/anvil/microsoft.yml
-  client_config: {}
-  server_config: {}
 startup: {type: form, module: HomePage}
 package_name: WGACA
 allow_embedding: true

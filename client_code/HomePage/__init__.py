@@ -1,10 +1,6 @@
 from ._anvil_designer import HomePageTemplate
 from anvil import *
 import anvil.server
-import anvil.microsoft.auth
-import anvil.google.auth, anvil.google.drive
-from anvil.google.drive import app_files
-import anvil.facebook.auth
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
