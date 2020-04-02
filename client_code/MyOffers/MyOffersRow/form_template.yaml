@@ -8,12 +8,12 @@ container:
 components:
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: WARNING!  Permanently removes offer from list.,
-    border: '', foreground: '#ff0000', visible: true, text: '', font_size: 20, wrap_on: mobile,
+    border: '', foreground: '#ff8080', visible: true, text: '', font_size: 20, wrap_on: mobile,
     font: '', col_spacing: medium, spacing_above: small, icon_align: top, col_widths: '{}',
     spacing_below: small, italic: false, background: '', bold: false, underline: false,
     icon: 'fa:trash'}
   name: delete_row
-  layout_properties: {column: HYKROV}
+  layout_properties: {column: HYKROV, grid_position: 'WWQKTP,XAUDTZ'}
   event_bindings: {click: delete_row_click}
   components: []
 - type: Label
@@ -23,4 +23,15 @@ components:
   data_bindings:
   - {property: text, code: 'self.item[''expiry_date''].strftime(''%d %b %Y'')'}
   event_bindings: {}
+- type: Link
+  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+    spacing_above: small, icon_align: right, col_widths: '{}', spacing_below: small,
+    italic: false, background: '', bold: false, underline: false, icon: 'fa:info'}
+  name: link_1
+  layout_properties: {column: GMBNWP}
+  components: []
+  event_bindings: {click: show_notes_click}
+  data_bindings:
+  - {property: visible, code: 'self.item[''notes''] != "(No notes attached)"'}
 is_package: true

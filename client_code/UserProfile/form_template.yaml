@@ -8,7 +8,7 @@ components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":40,"KAAVMF":20,"LVROFR":20,"HQVZIJ":40,"LPMSLH":20,"ZGIYRQ":40,"GYSESX":20,"SABBOR":40,"FVTKUS":20,"YHDLGZ":25,"ZREDXM":20,"OMMSDO":40,"URHHWS":20,"KWSJQF":40,"KDESOA":40,"XJYIEG":20,"DYXDPH":40}',
-    spacing_below: small, background: ''}
+    spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
   components:
@@ -177,10 +177,10 @@ components:
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#59db59', bold: false, underline: false, icon: 'fa:list'}
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
     name: view_history
     layout_properties: {grid_position: 'MYQXNL,YHDLGZ'}
-    event_bindings: {}
+    event_bindings: {click: view_history_click}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Delete account', font_size: null,
@@ -188,22 +188,30 @@ components:
       background: '#ff8080', bold: false, underline: false, icon: 'fa:trash'}
     name: delete_account
     layout_properties: {grid_position: 'MYQXNL,FVTKUS'}
-    event_bindings: {}
+    event_bindings: {click: delete_account_click}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: Change Password, font_size: null,
+      foreground: '#ffffff', visible: true, text: ' Change Password', font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#0080c0', bold: false, underline: false, icon: 'fa:trash'}
+      background: '#0080c0', bold: false, underline: false, icon: 'fa:user-md'}
     name: change_password
     layout_properties: {grid_position: 'MYQXNL,KDESOA'}
-    event_bindings: {}
+    event_bindings: {click: change_password_click}
+  event_bindings: {show: show_my_details}
+- type: ColumnPanel
+  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: medium, col_widths: '{}',
+    spacing_below: small, background: '#cae4ff'}
+  name: card_1
+  layout_properties: {grid_position: 'NYDRYC,OEKJTH', slot: default}
+  components:
   - type: Label
     properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Privacy Notice, font_size: null, font: '', spacing_above: small,
       icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
       underline: false, icon: ''}
     name: label_1
-    layout_properties: {grid_position: 'UBQKDB,AJIUXB'}
+    layout_properties: {grid_position: 'EDJWFJ,MNIQGF'}
     event_bindings: {}
   - type: TextArea
     properties: {role: null, align: left, height: 517.9961523818359, tooltip: '',
@@ -277,6 +285,6 @@ components:
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, underline: false}
     name: privacy_notice
-    layout_properties: {grid_position: 'ZYCVPO,PXVEPM'}
+    layout_properties: {grid_position: 'TTSMWD,KPUMTO'}
     event_bindings: {}
-  event_bindings: {show: show_my_details}
+  event_bindings: {}

@@ -28,5 +28,20 @@ class UserProfile(UserProfileTemplate):
         self.county.text = anvil.users.get_user()['county']
         self.postcode.text = anvil.users.get_user()['postcode']
 
+    def view_history_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        alert("This feature is still being worked on...\nPlease check back later.")
+
+    def delete_account_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        alert("This feature is still being worked on...\nPlease check back later.")
+
+    def change_password_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        alert("This feature is still being worked on...\nPlease check back later.")
+
+
+
+
 
 

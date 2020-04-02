@@ -1,79 +1,79 @@
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
-  name: content_panel
-  layout_properties:
-    col_widths: {}
-    grid_position: ZNYJZU,DARPKJ
+  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: '#cae4ff'}
+  name: card_2
+  layout_properties: {grid_position: 'JJJRVK,HNEKEW'}
   components:
-  - type: ColumnPanel
-    properties: {role: card, col_widths: '{}'}
-    name: card_2
-    layout_properties: {grid_position: 'IWGSSA,BNUBRK'}
-    components:
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'The table below shows a summary of possible matches
-          between Offers and Requests in your immediate area.  If you''re able to
-          volunteer as a ''runner'' to pick up an offer (perhaps your own offer) and
-          deliver it to someone in need, you''ll be creating awesome Karma in the
-          community, thank you.', font_size: null, font: '', spacing_above: small,
-        icon_align: top, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: 'fa:indent'}
-      name: input_description_1
-      layout_properties: {grid_position: 'NPEONI,MWORRS'}
-      event_bindings: {}
-    - type: DataGrid
-      properties:
-        role: null
-        columns:
-        - {width: 250, title: '', id: QGBXWV, data_key: request, expand: false}
-        - {width: 226, title: '', id: UHJYDW, data_key: offer, expand: false}
-        - {width: 163, title: '', id: CWDGEK, data_key: pickup, expand: false}
-        - {title: '', id: VVBHYF, data_key: dropoff}
-        - {title: '', id: BPRMEL, data_key: runner}
-        auto_header: true
-        tooltip: ''
-        border: ''
-        foreground: ''
-        rows_per_page: 20
-        visible: true
-        show_page_controls: true
-        spacing_above: small
-        spacing_below: small
-        background: ''
-      name: data_grid_1
-      layout_properties: {grid_position: 'FYJSEP,IRNTPZ'}
-      components:
-      - type: RepeatingPanel
-        properties: {role: null, tooltip: '', border: '', foreground: '', items: null,
-          visible: true, spacing_above: none, spacing_below: none, item_template: Matches.MatchesRow,
-          background: ''}
-        name: repeating_panel_1
-        layout_properties: {}
-      event_bindings: {}
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'If you''re a charity, government agency, or community
-          support group with the means to collect and deliver in a wider catchment
-          area, you can apply to access a broader set of data by clicking on the green
-          button below.', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '', bold: false, underline: false,
-        icon: ''}
-      name: label_1
-      layout_properties: {grid_position: 'WVQPKL,REDDTX'}
-    - type: Button
-      properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: ' Request Data Access', font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#59db59', bold: false, underline: false, icon: 'fa:database'}
-      name: request_data_access
-      layout_properties:
-        col_widths: {}
-        grid_position: QMXPTM,TONKBN
-      event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'This table shows some possible matches between Offers
+        and Requests in your immediate area.  If you''re able to volunteer as a ''Runner''
+        to pick up some items (perhaps your own Offers?) and deliver them to someone
+        in need, you''ll be creating awesome Karma in the community, thank you.',
+      font_size: null, font: '', spacing_above: small, icon_align: top, spacing_below: small,
+      italic: false, background: '', bold: true, underline: false, icon: 'fa:indent'}
+    name: input_description_1
+    layout_properties: {grid_position: 'DTQLRZ,KHKBIM'}
+    event_bindings: {}
+  - type: RepeatingPanel
+    properties: {role: null, tooltip: '', border: '', foreground: '', items: null,
+      visible: true, spacing_above: none, spacing_below: none, item_template: Matches.MatchesRow,
+      background: ''}
+    name: repeating_panel_1
+    layout_properties: {grid_position: 'ICDVXL,STCLXS', full_width_row: false}
+    event_bindings: {}
+  - type: DataGrid
+    properties:
+      role: null
+      columns: []
+      auto_header: false
+      tooltip: ''
+      border: ''
+      foreground: ''
+      rows_per_page: 20
+      visible: true
+      show_page_controls: true
+      spacing_above: small
+      spacing_below: small
+      background: '#eaf4ff'
+    name: data_grid_1
+    layout_properties: {grid_position: 'TLDSGO,OQSGRG'}
+    components: []
+    event_bindings: {}
+- type: ColumnPanel
+  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: '#cae4ff'}
+  name: card_1
+  layout_properties: {grid_position: 'LTSOLE,EBVWAX'}
+  components:
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'If you''re a charity, government agency, or community
+        support group with the means to collect and deliver in a wider catchment area,
+        you can apply to access a broader set of data by clicking on the green button
+        below.', font_size: null, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: label_1
+    layout_properties: {grid_position: 'YQJJYU,XTJLCP'}
+    event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Request Data Access', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:database'}
+    name: request_data_access
+    layout_properties:
+      col_widths: {}
+      grid_position: QADXHJ,APGAKR
+    event_bindings: {click: request_data_access_click}
 container:
   type: ColumnPanel
   event_bindings: {}
-  properties: {col_widths: '{}'}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
+    background: ''}
 is_package: true

@@ -1,0 +1,54 @@
+components:
+- type: ColumnPanel
+  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: '#cae4ff'}
+  name: card_2
+  layout_properties: {grid_position: 'JJJRVK,HNEKEW'}
+  components:
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'This table shows your current deliveries and status:',
+      font_size: null, font: '', spacing_above: small, icon_align: top, spacing_below: small,
+      italic: false, background: '', bold: true, underline: false, icon: 'fa:ambulance'}
+    name: input_description_1
+    layout_properties: {grid_position: 'DTQLRZ,KHKBIM'}
+    event_bindings: {}
+  - type: DataGrid
+    properties:
+      role: null
+      columns:
+      - {title: Offer, id: RTJNNJ, data_key: offer}
+      - {title: Runner, id: BSTNFJ, data_key: runner}
+      - {title: Accepted, id: PXDWOD, data_key: accepted}
+      - {title: Offer Collected, id: IWHRZK, data_key: offer_collected}
+      - {title: Offer Delivered, id: ZLLYLZ, data_key: offer_delivered}
+      - {title: Feedback From_requester, id: MEWGFN, data_key: feedback_from_requester}
+      - {title: Feedback From_giver, id: AJQFLZ, data_key: feedback_from_giver}
+      - {title: Feedback From_runner, id: YXHOIV, data_key: feedback_from_runner}
+      auto_header: false
+      tooltip: ''
+      border: ''
+      foreground: ''
+      rows_per_page: 20
+      visible: true
+      show_page_controls: true
+      spacing_above: small
+      spacing_below: small
+      background: ''
+    name: data_grid_1
+    layout_properties: {grid_position: 'TLSMFB,UVCPOO'}
+    components:
+    - type: RepeatingPanel
+      properties: {spacing_above: none, spacing_below: none, item_template: Deliveries.DeliveriesRow}
+      name: repeating_panel_1
+      layout_properties: {}
+    event_bindings: {}
+container:
+  type: ColumnPanel
+  event_bindings: {}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
+    background: ''}
+is_package: true
+item_type: {table_id: 48778}

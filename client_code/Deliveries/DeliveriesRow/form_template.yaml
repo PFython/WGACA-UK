@@ -1,0 +1,175 @@
+container:
+  type: DataRowPanel
+  event_bindings: {}
+  data_bindings: []
+components:
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Offer, font_size: 14, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:heartbeat'}
+  name: label_2
+  layout_properties: {grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU TBRFDX,MIRSAR ZRUYZC,DYMPLH',
+    column: RTJNNJ}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: false, background: '', bold: false, underline: false, icon: ''}
+  name: offer
+  layout_properties: {column: RTJNNJ, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU
+      TBRFDX,MIRSAR DTZWPS,SXQXOA'}
+  data_bindings:
+  - {property: text, code: 'self.item[''offer''][''product_key'']+" … "+str(self.item[''offer''][''units''])'}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: 12, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: true, background: '', bold: false, underline: false, icon: 'fa:info-circle'}
+  name: offer_notes
+  layout_properties: {column: RTJNNJ, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU
+      TBRFDX,MIRSAR'}
+  data_bindings:
+  - {property: text, code: 'self.item[''offer''][''notes'']'}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Runner, font_size: 14, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:ambulance'}
+  name: label_5
+  layout_properties: {grid_position: 'EFIYOE,REJEJL LMKCQA,ZANCTK', column: BSTNFJ}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: false, background: '', bold: false, underline: false, icon: ''}
+  name: runner
+  layout_properties: {column: BSTNFJ, grid_position: 'EFIYOE,REJEJL ZYGGXL,RGOXRW'}
+  data_bindings:
+  - {property: visible, code: 'self.item[''runner''][''display_name''] != "Noone"'}
+  - {property: text, code: 'self.item[''runner''][''display_name'']'}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Pick-up, font_size: 14, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:upload'}
+  name: label_3
+  layout_properties: {grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU PDAPBI,ZNCFTJ',
+    column: PXDWOD}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: false, background: '', bold: false, underline: false, icon: ''}
+  name: pickup
+  layout_properties: {column: PXDWOD, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU'}
+  data_bindings:
+  - {property: text, code: 'str(self.item[''offer''][''user''][''house_number''])+"
+      "+self.item[''offer''][''user''][''street'']+"\n"+self.item[''offer''][''user''][''town'']+"\n"+self.item[''offer''][''user''][''county'']+"\n"+self.item[''offer''][''user''][''postcode'']'}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Drop-off, font_size: 14, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:download'}
+  name: label_4
+  layout_properties: {grid_position: 'EFIYOE,NSGFGQ YAEKJD,IDZOQT', column: IWHRZK}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: false, background: '', bold: false, underline: false, icon: ''}
+  name: dropoff
+  layout_properties: {column: IWHRZK, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU'}
+  data_bindings:
+  - {property: text, code: 'str(self.item[''request''][''user''][''house_number''])+"
+      "+self.item[''request''][''user''][''street'']+"\n"+self.item[''request''][''user''][''town'']+"\n"+self.item[''request''][''user''][''county'']+"\n"+self.item[''request''][''user''][''postcode'']'}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Request, font_size: 14, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:bullhorn'}
+  name: label_1
+  layout_properties: {grid_position: 'ARIQYB,RNDHFG', column: ZLLYLZ}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: false, background: '', bold: false, underline: false, icon: ''}
+  name: request
+  layout_properties: {column: ZLLYLZ, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU
+      TBRFDX,MIRSAR DTZWPS,SXQXOA'}
+  data_bindings:
+  - {property: text, code: 'self.item[''request''][''product_category'']'}
+  event_bindings: {}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: 12, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+    italic: true, background: '', bold: false, underline: false, icon: 'fa:info-circle'}
+  name: request_notes
+  layout_properties: {column: ZLLYLZ, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU
+      TBRFDX,MIRSAR'}
+  data_bindings:
+  - {property: text, code: 'self.item[''request''][''notes'']'}
+  event_bindings: {}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Accepted, font_size: null, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:check-square-o'}
+  name: label_6
+  layout_properties: {column: MEWGFN}
+  data_bindings: []
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: '', visible: true, text: '', font_size: 20, font: '', spacing_above: small,
+    spacing_below: small, italic: false, background: '', bold: false, checked: false,
+    underline: false}
+  name: check_box_1
+  layout_properties: {column: MEWGFN}
+  event_bindings: {}
+  data_bindings:
+  - {property: checked, code: 'self.item[''accepted'']', writeback: true}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Collected, font_size: null, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:truck'}
+  name: label_6_copy
+  layout_properties: {column: AJQFLZ}
+  data_bindings: []
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Delivered, font_size: null, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: true, underline: true,
+    icon: 'fa:home'}
+  name: label_6_copy_2
+  layout_properties: {column: YXHOIV}
+  data_bindings: []
+  event_bindings: {}
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: '', visible: true, text: '', font_size: 20, font: '', spacing_above: small,
+    spacing_below: small, italic: false, background: '', bold: false, checked: false,
+    underline: false}
+  name: check_box_1_copy
+  layout_properties: {column: AJQFLZ}
+  data_bindings:
+  - {property: checked, code: 'self.item[''offer_collected'']', writeback: true}
+  event_bindings: {}
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: '', visible: true, text: '', font_size: 20, font: '', spacing_above: small,
+    spacing_below: small, italic: false, background: '', bold: false, checked: false,
+    underline: false}
+  name: check_box_1_copy_2
+  layout_properties: {column: YXHOIV}
+  data_bindings:
+  - {property: checked, code: 'self.item[''offer_delivered'']', writeback: true}
+  event_bindings: {}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: 12, font: '', spacing_above: none, icon_align: top, spacing_below: none,
+    italic: true, background: '', bold: false, underline: false, icon: 'fa:hourglass-end'}
+  name: offer_expiry
+  layout_properties: {column: RTJNNJ, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU
+      TBRFDX,MIRSAR'}
+  data_bindings:
+  - {property: text, code: 'self.item[''offer''][''expiry_date''].strftime(''%d %b
+      %Y'')'}
+  event_bindings: {}
+is_package: true
+item_type: {table_id: 48778}

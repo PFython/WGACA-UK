@@ -51,6 +51,12 @@ def get_my_matches():
         return app_tables.matches.search(tables.order_by("accepted"))
       
 @anvil.server.callable
+def get_my_deliveries():
+    user = anvil.users.get_user()
+    if user is not None:
+        return app_tables.matches.search(tables.order_by("accepted"))
+      
+@anvil.server.callable
 def get_my_offers():
     user = anvil.users.get_user()
     if user is not None:

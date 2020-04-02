@@ -44,3 +44,8 @@ class Matches(MatchesTemplate):
         else:
             self.add_to_my_requests(product_category, urgent, notes)
 
+    def request_data_access_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      alert("This feature is still being worked on...\nPlease check back later.")
+
+
