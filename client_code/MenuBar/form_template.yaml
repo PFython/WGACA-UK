@@ -36,14 +36,14 @@ components:
       event_bindings: {click: menu_my_requests_click}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Overview, font_size: 14, wrap_on: mobile, font: '', col_spacing: medium,
+        visible: true, text: Matches, font_size: 14, wrap_on: mobile, font: '', col_spacing: medium,
         spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
         italic: false, background: '', bold: true, underline: false, icon: 'fa:indent'}
-      name: menu_overview
+      name: menu_matches
       layout_properties:
         col_widths: {}
         grid_position: SEIMCZ,LJVZUV
-      event_bindings: {}
+      event_bindings: {click: menu_matches_click}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: My Deliveries, font_size: 14, wrap_on: mobile, font: '',
@@ -55,13 +55,12 @@ components:
       event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: My Profile, font_size: 14, wrap_on: mobile, font: '',
-        col_spacing: medium, spacing_above: small, icon_align: left, col_widths: '',
-        spacing_below: small, italic: false, background: '', bold: true, underline: false,
-        icon: 'fa:user'}
-      name: menu_my_profile
+        visible: true, text: My Data, font_size: 14, wrap_on: mobile, font: '', col_spacing: medium,
+        spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
+        italic: false, background: '', bold: true, underline: false, icon: 'fa:user'}
+      name: menu_my_data
       layout_properties: {slot: nav-right, grid_position: 'SEIMCZ,FDBWGX'}
-      event_bindings: {click: menu_my_profile_click}
+      event_bindings: {click: menu_my_data_click}
 - type: ColumnPanel
   properties: {}
   name: column_panel_1

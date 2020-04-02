@@ -45,6 +45,12 @@ def save_to_requests_database(product_category, urgent, notes):
     app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date())    
     
 @anvil.server.callable
+def get_my_matches():
+    user = anvil.users.get_user()
+    if user is not None:
+        return app_tables.matches.search(tables.order_by("accepted"))
+      
+@anvil.server.callable
 def get_my_offers():
     user = anvil.users.get_user()
     if user is not None:

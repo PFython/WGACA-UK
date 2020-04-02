@@ -79,10 +79,11 @@ components:
         placeholder: 'Add any additional notes you think might be helpful here.  For
           example possible alternatives that would meet your need, further details
           about why you need help, the urgency, whether you''re ill/alone, or other
-          people in the house who depend on you etc.', border: '', enabled: true,
-        foreground: '', visible: true, text: '', font_size: null, auto_expand: false,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-        bold: false, underline: false}
+          people in the house who depend on you etc.  These Notes will be publicly
+          viewable, so please ONLY include personal information you''re comfortable
+          sharing with ALL USERS here.', border: '', enabled: true, foreground: '',
+        visible: true, text: '', font_size: null, auto_expand: false, font: '', spacing_above: small,
+        spacing_below: small, italic: false, background: '', bold: false, underline: false}
       name: notes
       layout_properties: {grid_position: 'LFFFLL,YJWVON'}
       event_bindings: {change: text_area_1_change}
@@ -105,13 +106,12 @@ components:
   properties:
     role: null
     columns:
-    - {width: 110, title: Date Posted, id: KHAQPE, data_key: date_posted, expand: false}
-    - {width: 67, title: Urgent, id: TUJLMD, data_key: urgent, expand: false}
-    - {width: 168, title: Product Category, id: FQJNEU, data_key: product_category,
+    - {width: 93, title: Date Posted, id: KHAQPE, data_key: date_posted, expand: false}
+    - {width: 59, title: Urgent, id: TUJLMD, data_key: urgent, expand: false}
+    - {width: 170, title: Product Category, id: FQJNEU, data_key: product_category,
       expand: false}
-    - {width: 442, title: Notes, id: PPCIVS, data_key: notes, expand: false}
-    - {title: Status, id: PKKZDJ, data_key: status}
-    - {title: '', id: KTZWSC, data_key: delete_row}
+    - {width: 337, title: Notes, id: PPCIVS, data_key: notes, expand: false}
+    - {width: 43, title: '', id: KTZWSC, data_key: delete_row, expand: false}
     auto_header: true
     tooltip: ''
     border: ''
