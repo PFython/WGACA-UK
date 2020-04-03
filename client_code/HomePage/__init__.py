@@ -13,6 +13,7 @@ from ..Deliveries import Deliveries
 
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
+        anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
         self.fcolour = '#0080c0' # Foreground colour and active menu button background
         self.bcolour = '#cae4ff' # Background colour

@@ -34,8 +34,9 @@ class UserProfile(UserProfileTemplate):
 
     def change_password_click(self, **event_args):
         """This method is called when the button is clicked"""
-        alert("This feature is still being worked on...\nPlease check back later.")
-
+        alert("To change your password we first need to log you out, then log you back in again.\nPlease select the 'Forgot your password?' options from the next window.")
+        anvil.users.logout()
+        anvil.users.login_with_form()
 
 
 
