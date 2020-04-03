@@ -21,9 +21,18 @@ class HomePage(HomePageTemplate):
         self.ycolour = '#00a3f0' # Inactive menu button background
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.column_panel_1.add_component(MyOffers())
-        self.highlight_selected_menu(self.menu_my_offers)
-
+        self.check_details_complete()
+        
+    def check_details_complete(self):
+        """ 2nd step of registration process to force completion of required contact data"""
+        user = anvil.users.get_user()
+        if user['details_complete']:
+            self.column_panel_1.add_component(MyOffers())
+            self.highlight_selected_menu(self.menu_my_offers)
+            return
+        else:
+            self.column_panel_1.add_component(UserProfile())
+            self.highlight_selected_menu(self.menu_my_data)
 
     def highlight_selected_menu(self, selected):        
         self.menu_my_offers.background = self.fcolour

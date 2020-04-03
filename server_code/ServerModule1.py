@@ -17,6 +17,7 @@ import datetime
 #   print("Hello, " + name + "!")
 #   return 42
 #
+
 @anvil.server.callable
 def save_to_offers_database(product_key, units, expiry_date, notes):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""

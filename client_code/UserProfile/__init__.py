@@ -8,9 +8,9 @@ from anvil.tables import app_tables
 
 class UserProfile(UserProfileTemplate):
     def __init__(self, **properties):
+        anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-
         # Any code you write here will run when the form opens.
   
     def show_my_details(self, **event_args):
