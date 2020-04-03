@@ -217,75 +217,19 @@ components:
   - type: TextArea
     properties: {role: null, align: left, height: 517.9961523818359, tooltip: '',
       placeholder: '', border: '', enabled: false, foreground: '', visible: true,
-      text: '1) The personal information you''ve provided to use this app will ONLY
-        be used for the intended purpose of the app itself i.e. making and matching
-        requests and offers for goods and deliveries during these unprecedented times
-        of "lock-down" due to the Corona Virus pandemic.
-
-
-        2) Other registered users of the app will only be able to see your Display
-        Name and Street by default (e.g. Big John, Armoury Way).  Your Full Address
-        will obviously need to be shared with any registered volunteers you accept
-        to pick-up or deliver goods from/to your address, but it''s up to you whether
-        you share your Email or Telephone Number as well.  Hopefully you''ll be able
-        to have a quick chat (at a safe social distance) when the volunteer comes
-        to your house, and you can always share your contact information in person
-        once you''re more comfortable and know there''s a real person behind the profile
-        name...
-
-
-        3) Some registered users will actually be organisations approved by us such
-        as Food Banks and other charities or community groups who are doing their
-        bit to help out in the local area.  In these cases your generous offers may
-        end up going into a ''pool'' of donations managed by them, rather than a close
-        neighbour directly, but you''ll be able to choose whether you accept such
-        requests or not.
-
-
-        4) We need your email address firstly for password confirmation and resets,
-        but also to  notify you automatically when the system is waiting for you to
-        log in and take action (e.g. approve a delivery).  Until we can implement
-        an in-app messaging system, email is also our only way to keep you up to date
-        with news and announcements about the app itself.
-
-
-        5) As well as holding your contact details (above) and any active Offers or
-        Requests, we will also keep a history of your transactions.  The idea there
-        is to build up a kind of "reputation"  score so that we can all see who the
-        ''good eggs'' are (typically offering more than they ask for) or if there
-        are any scammers or plain selfish neighbours trying to take advantage (e.g.
-        requesting more of a particular item than they could reasonably need for their
-        own use, or offering to make deliveries but keeping the items to themselves).  You
-        can view your Transaction history in full, and also in the more general form
-        that other registered users will see it by clicking on the green button above.  You
-        can also delete your account and all data by hitting the red button above,
-        but we will probably prevent you from re-joining in order to prevent "hit
-        and run" scammers.
-
-
-        6) Please note that whatever you write in the Notes part of an Offer or Request,
-        and also any Feedback you give on particular Users/Transactions will be publicly
-        viewable, so please DO NOT include any personal information about other registered
-        users AT ALL other than Display Name and Street (the default public information)
-        and only include details about yourself that you are comfortable sharing with
-        all users.
-
-
-        7) Finally in terms of IT security, we''re using out-of-the-box toolkits provided
-        by Anvil.works and all data is hosted on their servers, including encrypted
-        password ''hashes''.  The developers of this app are not IT security experts
-        but felt comfortable and reassured when researching Anvil''s architecture
-        and security framework.  If you have any concerns about security you change
-        your password at any time (button above), read up on Anvil itself, and as
-        a last resort, delete your account here entirely - though we hope it won''t
-        come to that!
-
-
-        Thanks for sharing your details in order to make this app work for the benefit
-        of all.  What goes around, comes around!', font_size: null, auto_expand: false,
-      font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-      bold: false, underline: false}
+      text: '', font_size: null, auto_expand: false, font: '', spacing_above: small,
+      spacing_below: small, italic: false, background: '', bold: false, underline: false}
     name: privacy_notice
     layout_properties: {grid_position: 'TTSMWD,KPUMTO'}
     event_bindings: {}
+    data_bindings: []
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: 10, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '', bold: false, underline: false,
+      icon: 'fa:check-square-o'}
+    name: terms_accepted
+    layout_properties: {grid_position: 'MOSOKG,QJIBQU'}
+    event_bindings: {}
+    data_bindings: []
   event_bindings: {}

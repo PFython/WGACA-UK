@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..TermsOfUse import TermsOfUse
 
 class UserProfile(UserProfileTemplate):
     def __init__(self, **properties):
@@ -12,6 +13,9 @@ class UserProfile(UserProfileTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.privacy_notice.text = TermsOfUse().privacy_notice.text       
+        self.terms_accepted.text = "You accepted the above Privacy Statement & Terms of Use on "
+        self.terms_accepted.text += anvil.users.get_user()['terms_accepted'].strftime('%d %b %Y')
   
     def show_my_details(self, **event_args):
         """This method is called when the TextBox is shown on the screen"""

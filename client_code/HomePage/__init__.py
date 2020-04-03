@@ -46,6 +46,8 @@ class HomePage(HomePageTemplate):
         if anvil.users.get_user()['display_name'] == "Will Gaca":
             anvil.server.call('details_complete', False)
             anvil.server.call('terms_accepted', False)
+        while not anvil.users.get_user()['terms_accepted']:
+            alert(content=TermsOfUse(), title = "Step 2: Please read and accept the following Privacy Statement & Terms of Use", large=True,)
         while not anvil.users.get_user()['details_complete']:
             alert(content=UserSetup(), title = "Step 1: Please confirm your address", large=True,)
             if self.check_required_fields():
