@@ -64,6 +64,16 @@ def get_my_requests():
     user = anvil.users.get_user()
     if user is not None:
         return app_tables.requests.search(tables.order_by("product_category"), user = user)
+      
+@anvil.server.callable
+def details_complete(boolean_value):
+    user = anvil.users.get_user()
+    user['details_complete'] = boolean_value
+    
+@anvil.server.callable
+def terms_accepted(boolean_value):
+    user = anvil.users.get_user()
+    user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
 def get_units_of_measure():

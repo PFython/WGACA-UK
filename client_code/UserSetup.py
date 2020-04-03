@@ -1,4 +1,4 @@
-from ._anvil_designer import UserProfileTemplate
+from ._anvil_designer import UserSetupTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class UserProfile(UserProfileTemplate):
+class UserSetup(UserSetupTemplate):
     def __init__(self, **properties):
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
@@ -24,19 +24,8 @@ class UserProfile(UserProfileTemplate):
         self.county.text = anvil.users.get_user()['county']
         self.postcode.text = anvil.users.get_user()['postcode']
 
-    def view_history_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        alert("This feature is still being worked on...\nPlease check back later.")
 
-    def delete_account_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        alert("This feature is still being worked on...\nPlease check back later.")
 
-    def change_password_click(self, **event_args):
-        """This method is called when the button is clicked"""
-        alert("To change your password we first need to log you out, then log you back in again.\n\nPlease select the 'Forgot your password?' options from the next window.")
-        anvil.users.logout()
-        anvil.users.login_with_form()
 
 
 

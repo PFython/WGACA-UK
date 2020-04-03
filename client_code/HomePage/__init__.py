@@ -10,6 +10,8 @@ from ..UserProfile import UserProfile
 from ..MyRequests import MyRequests
 from ..Matches import Matches
 from ..Deliveries import Deliveries
+from ..UserSetup import UserSetup
+from ..TermsOfUse import TermsOfUse
 
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
@@ -21,19 +23,47 @@ class HomePage(HomePageTemplate):
         self.ycolour = '#00a3f0' # Inactive menu button background
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.check_details_complete()
-        
-    def check_details_complete(self):
-        """ 2nd step of registration process to force completion of required contact data"""
-        user = anvil.users.get_user()
-        if user['details_complete']:
-            self.column_panel_1.add_component(MyOffers())
-            self.highlight_selected_menu(self.menu_my_offers)
-            return
-        else:
-            self.column_panel_1.add_component(UserProfile())
-            self.highlight_selected_menu(self.menu_my_data)
+#         self.enable_menu_buttons(False)
+        # 2nd step of registration process to force completion of required contact data        
+        self.force_user_setup()
+    
+    def check_required_fields(self):
+        """
+        Very cursory checks that all fields are completed
+        TODO: Validate by data type and permitted values
+        """
+        checks = [anvil.users.get_user()['house_number']]
+        checks += [anvil.users.get_user()['street']]
+        checks += [anvil.users.get_user()['town']]
+        checks += [anvil.users.get_user()['county']]
+        checks += [anvil.users.get_user()['postcode']]
+        checks += [anvil.users.get_user()['display_name']]
+        checks += [anvil.users.get_user()['telephone']]
+        return all(checks)
+    
+    def force_user_setup(self):
+        # Test convenience - resets Will Gaca each time...
+        if anvil.users.get_user()['display_name'] == "Will Gaca":
+            anvil.server.call('details_complete', False)
+            anvil.server.call('terms_accepted', False)
+        while not anvil.users.get_user()['details_complete']:
+            alert(content=UserSetup(), title = "Step 1: Please confirm your address", large=True,)
+            if self.check_required_fields():
+                anvil.server.call("details_complete", True)
+        self.column_panel_1.add_component(MyOffers())
+        self.highlight_selected_menu(self.menu_my_offers)
+#         self.enable_menu_buttons(True)
+#             self.column_panel_1.add_component(UserSetup())
+#             self.highlight_selected_menu(self.menu_my_data)
 
+#     def enable_menu_buttons(self, boolean_value):
+#         """ Enables / disables all menu buttons"""
+#         self.menu_my_offers.enabled = boolean_value
+#         self.menu_my_requests.enabled = boolean_value
+#         self.menu_my_matches.enabled = boolean_value
+#         self.menu_my_deliveries.enabled = boolean_value
+#         self.menu_my_data.enabled = boolean_value     
+            
     def highlight_selected_menu(self, selected):        
         self.menu_my_offers.background = self.fcolour
         self.menu_my_requests.background = self.fcolour
@@ -59,6 +89,16 @@ class HomePage(HomePageTemplate):
         selected.foreground = "#ffffff"
         selected.bold = True
         selected.font_size = 12
+        # Hide all images
+        images = {self.menu_my_offers: self.image_1,
+                  self.menu_my_requests: self.image_2,
+                  self.menu_my_matches: self.image_3,
+                  self.menu_my_deliveries: self.image_4,
+                  self.menu_my_data: self.image_5}        
+        for image in images.values():
+            setattr(image, "visible", False)
+        # Unhide selected image
+        setattr(images[selected], "visible", True)
         
     def menu_my_offers_click(self, **event_args):
         """This method is called when the link is clicked"""
