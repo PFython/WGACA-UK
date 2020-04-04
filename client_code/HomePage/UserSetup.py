@@ -16,7 +16,6 @@ class UserSetup(UserSetupTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         user = anvil.users.get_user()
-        user['country'] = LOCALE
         self.display_name.text = user['display_name']
         self.email.text = user['email']
         self.house_number.text = user['house_number']
@@ -28,7 +27,10 @@ class UserSetup(UserSetupTemplate):
         if user['county']:
             self.county.selected_value = user['county']
         else:
-            self.county.sorted(list(self.addresses.keys()))[-1]
+            self.county.selected_value = sorted(list(self.addresses.keys()))[0]
+            self.county_change()
+        if not user['country']:
+            anvil.server.call("save_user_setup", 'country', LOCALE)
         self.country.text = user['country']
         self.telephone.text = user['telephone'] 
   
