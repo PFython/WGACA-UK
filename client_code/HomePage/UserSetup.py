@@ -38,9 +38,7 @@ class UserSetup(UserSetupTemplate):
         self.town.items = towns
         if user['town']:
            self.town.selected_value = user['town']
-        if not user['country']:
-            anvil.server.call("save_user_setup", 'country', LOCALE)
-        self.country.text = user['country']
+        self.country.text = LOCALE
         self.postcode.text = user['postcode']
         self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
@@ -101,6 +99,12 @@ class UserSetup(UserSetupTemplate):
                 event_args['sender'].background = '#ffe6e6'
         else:
             event_args['sender'].background = '#ffffff'
+
+    def show_help_tag(self, **event_args):
+      """This method is called when the link is clicked"""
+      self.help_text.visible = True
+      self.help_text.text = event_args['sender'].tag
+
 
 
 
