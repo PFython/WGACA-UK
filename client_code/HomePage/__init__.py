@@ -36,9 +36,9 @@ class HomePage(HomePageTemplate):
         checks += [anvil.users.get_user()['street']]
         checks += [anvil.users.get_user()['town']]
         checks += [anvil.users.get_user()['county']]
-        checks += [anvil.users.get_user()['postcode']]
         checks += [anvil.users.get_user()['display_name']]
-        checks += [anvil.users.get_user()['telephone']]
+#         checks += [anvil.users.get_user()['postcode']]        
+#         checks += [anvil.users.get_user()['telephone']]
         return all(checks)
     
     def force_user_setup(self):

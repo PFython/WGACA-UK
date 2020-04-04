@@ -32,6 +32,10 @@ class UserSetup(UserSetupTemplate):
             self.street.selected_value = user['street']
         else:
             self.street_change()
+        # Create list of valid towns
+        towns = list(self.get_towns_from_county().keys())
+        print(towns)
+        self.town.items = towns
         if user['town']:
            self.town.selected_value = user['town']
         if not user['country']:
@@ -45,8 +49,11 @@ class UserSetup(UserSetupTemplate):
         for town in towns:
             streets.extend(UserSetup.addresses[self.county.selected_value][town])
         streets.sort()
-        print(streets)
         return streets
+    
+    def get_towns_from_county(self):
+        """ Returns a dictionary of towns (key) and a list of streets (value)"""
+        return UserSetup.addresses[self.county.selected_value]
   
     def county_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -57,7 +64,7 @@ class UserSetup(UserSetupTemplate):
 
     def street_change(self, **event_args):
         """This method is called when an item is selected"""
-        towns = UserSetup.addresses[self.county.selected_value]
+        towns = self.get_towns_from_county()
         for town, street_list in towns.items():
             if self.street.selected_value in street_list:
                 break
