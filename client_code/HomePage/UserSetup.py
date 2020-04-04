@@ -18,7 +18,10 @@ class UserSetup(UserSetupTemplate):
         user = anvil.users.get_user()
         self.display_name.text = user['display_name']
         self.email.text = user['email']
-        self.house_number.text = user['house_number']
+        if user['house_number']:
+            self.house_number.text = user['house_number']
+        else:
+            self.house_number.background = '#ffd0d0'
         # Create list of valid counties
         self.county.items = sorted(self.addresses.keys())
         if user['county']:
@@ -89,6 +92,16 @@ class UserSetup(UserSetupTemplate):
       for field, _values in input_fields.items():
           component, attribute = _values
           anvil.server.call("save_user_setup", field, getattr(component, attribute))
+
+    def field_change(self, **event_args):
+      """This method is called when the text in this text box is edited"""
+      print(even_args)
+
+    def form_show(self, **event_args):
+      """This method is called when the HTML panel is shown on the screen"""
+      pass
+
+
 
 
 
