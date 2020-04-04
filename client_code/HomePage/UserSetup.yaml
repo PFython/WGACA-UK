@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":12,"GYSESX":20,"EGSHUA":20,"NTECZM":26,"AVVYSL":50,"HMOVYT":50,"QBFXEF":50,"CQLTZE":50,"ZRBZWE":50,"ODMHLZ":50,"FFCYDK":50,"OAIRKK":54,"WLEVOJ":44,"AUPHUD":26,"XZQYEO":32}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30,"AVVYSL":65,"HMOVYT":65,"QBFXEF":65,"CQLTZE":65,"ZRBZWE":65,"ODMHLZ":65,"DMDSRN":15,"FEAWOM":15,"TLFBOL":15,"RKELUO":15,"YAGEWD":15,"JARCBI":15}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
@@ -118,8 +118,9 @@ components:
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM CVGZZF,FEAWOM'}
     data_bindings:
     - {property: tag, code: '"""Your email is kept private unless you explicitly choose
-        to share it with other users.  We''ll use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+        to share it with other users.  When you accepted our Terms of Use you agreed
+        we could use it for sending system messages, updates and news about the app,
+        and for password resets etc."""'}
     event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
@@ -139,7 +140,7 @@ components:
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM AEIWYG,TLFBOL'}
     data_bindings:
     - {property: tag, code: '"""A unique house name (e.g. ''Rose Cottage'') or number
-        (e.g. ''221B'') within the Street"""'}
+        (e.g. ''221B'') within your Street."""'}
     event_bindings: {click: show_help_tag}
   - type: DropDown
     properties: {}
@@ -154,8 +155,8 @@ components:
     name: help4
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM LEIFMA,RKELUO'}
     data_bindings:
-    - {property: tag, code: '"""The list of know street names is generated automatically
-        based on the County/Borough selected."""'}
+    - {property: tag, code: '"""This list of Street names is generated automatically
+        based on the County/Borough you''ve selected."""'}
     event_bindings: {click: show_help_tag}
   - type: DropDown
     properties:
@@ -212,73 +213,36 @@ components:
       underline: false
       include_placeholder: false
     name: county
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,ODMHLZ'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,ODMHLZ XNTLTO,NJJEYO'}
     event_bindings: {change: county_change}
     data_bindings: []
-  - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help6
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM DNVCAT,JARCBI'}
-    data_bindings:
-    - {property: tag, code: '"""Select your County/Borough from this list and the
-        list of known Streets will update automatically."""'}
-    event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: country
-    layout_properties: {grid_position: 'LAGDLB,NTECZM BVCIJS,WLEVOJ'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,ODMHLZ MLAONG,KUNORC',
+      slot: default}
     data_bindings: []
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help7
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM BVCIJS,AUPHUD'}
-    data_bindings:
-    - {property: tag, code: '"""Your Country is set automatically by the server.  We''ll
-        probably have at least one version of the app running locally on a server
-        for every country its published in.  You don''t have to worry about changing
-        this."""'}
-    event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: postcode
-    layout_properties: {grid_position: 'LAGDLB,NTECZM VOTYWJ,OAIRKK'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,ODMHLZ CZWOJI,ADTVXC',
+      slot: default}
     event_bindings: {show: field_change, change: field_change}
     data_bindings: []
-  - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help8
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM VOTYWJ,XZQYEO'}
-    data_bindings:
-    - {property: tag, code: '"""Your Postcode is optional as the app doesn''t strictly
-        need to know it to work.  If you choose to set your Postcode now however,
-        you''ll have the option later on to explicitly share it with Runners you approve
-        to pick up or drop off deliveries - they''ll probably find it useful for SatNav
-        but since we''re trying to keep everything really LOCAL on this app, you might
-        prefer not to share it."""'}
-    event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: telephone
-    layout_properties: {grid_position: 'LAGDLB,NTECZM ELKANY,FFCYDK'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,ODMHLZ TCNYSN,FGQRVT'}
     data_bindings:
     - {property: text, code: 'self.item[''text'']', writeback: true}
     event_bindings: {change: field_change, show: field_change}
@@ -287,15 +251,11 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help9
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM ELKANY,WWRNAE'}
+    name: help6
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM DNVCAT,JARCBI'}
     data_bindings:
-    - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
-        strictly need to know it to work.  If you choose to add your Telephone number
-        now however, you''ll have the option later on to explicitly share it with
-        Runners you approve to pick up or drop off deliveries.  But then again you
-        might prefer to wait until you''ve met them once in person, and then swap
-        numbers directly."""'}
+    - {property: tag, code: '"""Select your County/Borough from this list, and the
+        list of known Streets will update automatically."""'}
     event_bindings: {click: show_help_tag}
   event_bindings: {hide: save_input}
 - type: ColumnPanel
@@ -319,6 +279,51 @@ components:
     data_bindings:
     - {property: text, code: self.help1.tag, writeback: true}
   event_bindings: {}
+- type: Link
+  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+    spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+    italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
+  name: help9
+  layout_properties: {slot: default, grid_position: 'WSREMY,EFTANJ'}
+  data_bindings:
+  - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
+      need it.  If you choose to add your Telephone number now however, you''ll have
+      the option to explicitly share it with Runners you approve to pick up or drop
+      off deliveries.  But then again you might prefer to wait until you''ve met them
+      once in person, and then swap numbers directly."""'}
+  event_bindings: {click: show_help_tag}
+  components:
+  - type: Link
+    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
+    name: help8
+    layout_properties: {slot: default, grid_position: 'MVFZZP,KMEQXG'}
+    data_bindings:
+    - {property: tag, code: '"""Your Postcode is optional as the app doesn''t need
+        it to work.  If you choose to add your Postcode now however, you''ll have
+        the option to explicitly share it with Runners you approve to pick up or drop
+        off deliveries - they''ll probably find it useful for SatNav but since we''re
+        trying to encourage local people to help each other out, you might take the
+        view that genuine neighbours should be able to find you easily enough without
+        this."""'}
+    event_bindings: {click: show_help_tag}
+    components: []
+- type: Link
+  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+    spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+    italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
+  name: help7
+  layout_properties: {slot: default, grid_position: 'MVFZZP,XIBQFB'}
+  data_bindings:
+  - {property: tag, code: '"""Your Country is set automatically by the server.  We''ll
+      probably have at least one server running the app locally for every country
+      it''s published in.  You don''t have to worry about changing this."""'}
+  event_bindings: {click: show_help_tag}
+  components: []
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
