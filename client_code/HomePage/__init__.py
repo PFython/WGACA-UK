@@ -43,9 +43,6 @@ class HomePage(HomePageTemplate):
     
     def force_user_setup(self):
         # Test convenience - resets Will Gaca each time...
-        if anvil.users.get_user()['display_name'] == "Will Gaca":
-            anvil.server.call('details_complete', False)
-            anvil.server.call('terms_accepted', False)
         while not anvil.users.get_user()['terms_accepted']:
             alert(content=TermsOfUse(), title = "Please read and accept the following Privacy Statement & Terms of Use:", large=True,)
         while not anvil.users.get_user()['details_complete']:
