@@ -13,8 +13,6 @@ class UserSetup(UserSetupTemplate):
     locale = LOCALE
     addresses = ADDRESSES
     def __init__(self, **properties):
-        alert(UserSetup.addresses)
-        anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
@@ -22,13 +20,30 @@ class UserSetup(UserSetupTemplate):
     def show_my_details(self, **event_args):
         """This method is called when the TextBox is shown on the screen"""
         self.email.text = anvil.users.get_user()['email']
-        self.telephone.text = anvil.users.get_user()['telephone']
-        self.display_name.text = anvil.users.get_user()['display_name']
-        self.house_number.text = anvil.users.get_user()['house_number']
-        self.street.text = anvil.users.get_user()['street']
-        self.town.text = anvil.users.get_user()['town']
-        self.county.text = anvil.users.get_user()['county']
-        self.postcode.text = anvil.users.get_user()['postcode']
+        self.telephone.text = anvil.users.get_user()['telephone'] 
+       
+    def county_change(self, **event_args):
+        """This method is called when an item is selected"""
+        towns = UserSetup.addresses[self.county.selected_value]
+        streets = []
+        for town in towns:
+            streets.extend(UserSetup.addresses[self.county.selected_value][town])
+        streets.sort()
+        self.street.items = streets
+        self.street.selected_value = streets[0]
+        self.street_change()
+
+    def street_change(self, **event_args):
+        """This method is called when an item is selected"""
+        towns = UserSetup.addresses[self.county.selected_value]
+        for town, street_list in towns.items():
+            if self.street.selected_value in street_list:
+                break
+        self.town.items = [town]
+        self.town.selected_value = town
+
+
+
 
 
 

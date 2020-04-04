@@ -1,26 +1,82 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":40,"KAAVMF":20,"LVROFR":20,"HQVZIJ":40,"GYSESX":20,"SABBOR":40,"ZXAJAN":20,"LPYSJH":40,"JOHTYQ":20,"GCGUSS":40,"LGHCST":20,"DSNZSK":40,"EGSHUA":20,"KRLYQF":40,"LMRAGZ":20,"BYZUXA":40,"WZOSKR":20,"VTDAGB":40,"UEBCBD":20,"SOSHAK":40}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":20,"KAAVMF":15,"GYSESX":20,"EGSHUA":20,"NTECZM":45,"AVVYSL":50,"DXFORQ":10,"HMOVYT":50,"CZZVEE":10,"QBFXEF":50,"JFNIMK":10,"CQLTZE":50,"AYCCSY":10,"ZRBZWE":50,"SXKACC":10,"ODMHLZ":50,"EWGBDX":10,"LSBXXM":50,"YKWKKZ":10,"FFCYDK":50,"ALAFQI":10,"OAIRKK":56}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
   components:
   - type: Label
     properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: My Data, font_size: null, font: '', spacing_above: small,
+      visible: true, text: 'Display Name:', font_size: 14, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
       underline: false, icon: 'fa:user'}
-    name: label0
-    layout_properties: {slot: title, grid_position: 'MQMUDY,WVLYTQ'}
+    name: label_display_name
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW LVIDYJ,KCEVXA'}
     event_bindings: {}
   - type: Label
-    properties: {role: title, align: left, tooltip: This field will be publicly viewable.,
-      border: '', foreground: '', visible: true, text: 'Display Name:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: 'fa:eye'}
-    name: label_display_name
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW LVIDYJ,LVROFR'}
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:envelope'}
+    name: label_email
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW UDEWSH,GYSESX'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:home'}
+    name: label_house_number
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW VFRYKY,MKRYCT'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: 'fa:map-signs'}
+    name: label_street
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW VFSRLT,XFCMFC', slot: default}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:map-marker'}
+    name: label_town
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW BVETVD,SZEXEV'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:map'}
+    name: label_county
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,EGSHUA'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:globe'}
+    name: label_country
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW VDFOZD,LNLRHN'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
+      underline: false, icon: 'fa:envelope-o'}
+    name: label_post_code
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW PEBTFK,JYEKEO'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
+      underline: false, icon: 'fa:phone'}
+    name: label_telephone
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW ZEUPUP,AWGPLP'}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
@@ -28,16 +84,16 @@ components:
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: true, underline: false}
     name: display_name
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW LVIDYJ,HQVZIJ'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM GJFPBN,AVVYSL'}
     event_bindings: {show: display_name_show}
     data_bindings: []
   - type: Label
-    properties: {role: null, align: left, tooltip: This field will be private unless you explicitly choose to share it with other users.,
-      border: '', foreground: '', visible: true, text: 'Email:', font_size: 14, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_email
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UDEWSH,GYSESX'}
+    properties: {role: null, align: left, tooltip: Everyone will be able to see this field - keep it clean please!,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1
+    layout_properties: {grid_position: 'LAGDLB,NTECZM GJFPBN,DXFORQ'}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
@@ -45,51 +101,77 @@ components:
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: email
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UDEWSH,SABBOR'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM CVGZZF,HMOVYT'}
     data_bindings: []
     event_bindings: {}
   - type: Label
-    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
-      border: '', foreground: '', visible: true, text: 'Country:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_country
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UKZJJB,WZOSKR'}
-    event_bindings: {}
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: country
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UKZJJB,VTDAGB'}
-    data_bindings:
-    - {property: text, code: self.locale, writeback: true}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
-      border: '', foreground: '', visible: true, text: 'Postcode:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_post_code
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VZIHTH,LMRAGZ'}
+    properties: {role: null, align: left, tooltip: This field will be private unless you explicitly choose to share it.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy
+    layout_properties: {grid_position: 'LAGDLB,NTECZM CVGZZF,CZZVEE'}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
-    name: postcode
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VZIHTH,BYZUXA'}
-    event_bindings: {show: postcode_show}
+    name: house_number
+    layout_properties: {grid_position: 'LAGDLB,NTECZM AEIWYG,QBFXEF'}
+    event_bindings: {show: house_number_show}
     data_bindings: []
   - type: Label
-    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
-      border: '', foreground: '', visible: true, text: 'County/Borough:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_county
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,EGSHUA'}
+    properties: {role: null, align: left, tooltip: This field will only be shared with Runners you approve to pick-up/drop-off deliveries.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy_2
+    layout_properties: {grid_position: 'LAGDLB,NTECZM AEIWYG,JFNIMK'}
+    event_bindings: {}
+  - type: DropDown
+    properties: {}
+    name: street
+    layout_properties: {grid_position: 'LAGDLB,NTECZM LEIFMA,CQLTZE', slot: default}
+    event_bindings: {change: street_change, show: county_change}
+  - type: Label
+    properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy_3
+    layout_properties: {grid_position: 'LAGDLB,NTECZM LEIFMA,AYCCSY'}
+    event_bindings: {}
+  - type: DropDown
+    properties:
+      role: null
+      align: full
+      tooltip: ''
+      placeholder: ''
+      border: ''
+      enabled: false
+      foreground: ''
+      items: []
+      visible: true
+      font_size: null
+      font: ''
+      spacing_above: small
+      spacing_below: small
+      italic: false
+      background: ''
+      bold: false
+      underline: false
+      include_placeholder: false
+    name: town
+    layout_properties: {grid_position: 'LAGDLB,NTECZM KZPSXQ,ZRBZWE', slot: default}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy_4
+    layout_properties: {grid_position: 'LAGDLB,NTECZM KZPSXQ,SXKACC'}
     event_bindings: {}
   - type: DropDown
     properties:
@@ -110,70 +192,57 @@ components:
       background: ''
       bold: false
       underline: false
-      include_placeholder: true
+      include_placeholder: false
     name: county
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,KRLYQF'}
-    event_bindings: {}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,ODMHLZ'}
+    event_bindings: {change: county_change}
     data_bindings:
     - {property: items, code: sorted(self.addresses.keys())}
-    - {property: selected_value, code: 'sorted(list(self.addresses.keys()))[0]', writeback: true}
+    - {property: selected_value, code: 'sorted(list(self.addresses.keys()))[-1]',
+      writeback: true}
   - type: Label
-    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
-      border: '', foreground: '', visible: true, text: 'Town/City:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_town
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UHGUYV,LGHCST'}
-    event_bindings: {}
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: town
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UHGUYV,DSNZSK'}
-    data_bindings: []
-  - type: Label
-    properties: {role: title, align: left, tooltip: This field will be publicly viewable.,
-      border: '', foreground: '', visible: true, text: 'Street:', font_size: 14, font: '',
+    properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: 'fa:eye'}
-    name: label_street
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW YVPQCR,UEBCBD'}
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy_5
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DNVCAT,EWGBDX'}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: true, underline: false}
-    name: street
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW YVPQCR,SOSHAK'}
-    event_bindings: {show: street_show}
-    data_bindings: []
-  - type: Label
-    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
-      border: '', foreground: '', visible: true, text: 'House Number:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_house_number
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJPNFQ,JOHTYQ'}
+      background: '', bold: false, underline: false}
+    name: country
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,LSBXXM BVCIJS,WLEVOJ'}
+    data_bindings:
+    - {property: text, code: self.locale, writeback: true}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
-    name: house_number
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJPNFQ,GCGUSS'}
-    event_bindings: {show: house_number_show}
+    name: postcode
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,LSBXXM VOTYWJ,OAIRKK'}
+    event_bindings: {show: postcode_show}
     data_bindings: []
   - type: Label
-    properties: {role: null, align: left, tooltip: This field will be private unless you explicitly choose to share it with other users.,
-      border: '', foreground: '', visible: true, text: 'Telephone:', font_size: 14,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
-      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
-    name: label_telephone
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UTDGGW,ZXAJAN'}
+    properties: {role: null, align: left, tooltip: 'OPTIONAL: This field will be shared
+        with Runners you approve to pick-up/drop-off deliveries.', border: '', foreground: '#0080c0',
+      visible: true, text: '', font_size: 20, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '', bold: false, underline: false,
+      icon: 'fa:info'}
+    name: label_1_copy_6
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,YKWKKZ TLYYSG,UOCDFW'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy_7
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,YKWKKZ YXCAZV,GMLMUO'}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
@@ -181,14 +250,25 @@ components:
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: telephone
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UTDGGW,LPYSJH'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM ELKANY,FFCYDK'}
     data_bindings:
     - {property: text, code: 'self.item[''text'']', writeback: true}
     event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: 'OPTIONAL: This field will be private
+        unless you explicitly choose to share it with other users.', border: '', foreground: '#0080c0',
+      visible: true, text: '', font_size: 20, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '', bold: false, underline: false,
+      icon: 'fa:info'}
+    name: label_1_copy_8
+    layout_properties: {grid_position: 'LAGDLB,NTECZM ELKANY,ALAFQI'}
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {}
+    properties: {col_widths: '{}'}
     name: column_panel_1
     layout_properties: {grid_position: 'LAGDLB,KAAVMF'}
+    event_bindings: {}
+    components: []
   event_bindings: {show: show_my_details}
 container:
   type: HtmlTemplate

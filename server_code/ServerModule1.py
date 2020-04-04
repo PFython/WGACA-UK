@@ -42,6 +42,11 @@ def save_to_requests_database(product_category, urgent, notes):
     app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date())    
     
 @anvil.server.callable
+def save_user_setup(field, value):
+    user = anvil.users.get_user()
+    user[field] = value    
+
+@anvil.server.callable
 def get_my_matches():
     user = anvil.users.get_user()
     if user is not None:
@@ -85,7 +90,15 @@ def get_address_hierarchy(country="United Kingdom"):
                             "Pullman Gardens",
                             "Putney Hill",
                             "Telegraph Road",
-                            "Westleigh Avenue",]},
+                            "Westleigh Avenue",],
+                       "Wandsworth":
+                           ["East Hill",
+                            "Wandsworth High Street",
+                            "St Ann's Hill",],
+                       "Battersea":
+                           ["York Road",
+                            "Falcon Road",
+                            "Latchmere Road",]},                        
                     "Kingston-upon-Thames, London":
                        {"":
                            ["Kingston Hill",
@@ -95,29 +108,29 @@ def get_address_hierarchy(country="United Kingdom"):
                            ["Coombe Road",
                             "Salisbury Road",]},
                     "Merton, London":
-                       {"":
-                           ["Kingston Hill",
-                            "Richmond Road",
-                            "London Road",],
-                        "New Malden":
-                           ["Coombe Road",
-                            "Salisbury Road",]},
+                       {"Morden":
+                           ["London Road",
+                            "Central Road",
+                            "St Helier Avenue",],
+                        "Mitcham":
+                           ["Madeira Road",
+                            "Croydon Road",]},
                     "Hammersmith & Fulham, London":
-                       {"":
-                           ["Kingston Hill",
-                            "Richmond Road",
-                            "London Road",],
-                        "New Malden":
-                           ["Coombe Road",
-                            "Salisbury Road",]},
+                       {"Fulham":
+                           ["Fulham Palace Road",
+                            "Munster Road",
+                            "New King's Road",],
+                        "Hammersmith":
+                           ["Talgarth Road",
+                            "Hammersmith Road",]},
                     "Lambeth, London":
-                       {"":
-                           ["Kingston Hill",
-                            "Richmond Road",
-                            "London Road",],
-                        "New Malden":
-                           ["Coombe Road",
-                            "Salisbury Road",]},
+                       {"Clapham Town":
+                           ["Clapham High Street",
+                            "The Pavement",
+                            "Venn Street",],
+                        "Brixton":
+                           ["Town Hall Parade",
+                            "Acre Lane",]},
                    }}
     return hierarchy[country]    
     
