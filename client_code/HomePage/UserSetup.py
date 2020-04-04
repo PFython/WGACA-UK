@@ -32,6 +32,7 @@ class UserSetup(UserSetupTemplate):
         self.street.items = streets
         self.street.selected_value = streets[0]
         self.street_change()
+        self.save_input()
 
     def street_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -41,6 +42,7 @@ class UserSetup(UserSetupTemplate):
                 break
         self.town.items = [town]
         self.town.selected_value = town
+        self.save_input()
 
     def save_input(self, **event_args):
       """This method is called when the text in this text box is edited"""
