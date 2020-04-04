@@ -41,7 +41,10 @@ class UserSetup(UserSetupTemplate):
         if not user['country']:
             anvil.server.call("save_user_setup", 'country', LOCALE)
         self.country.text = user['country']
+        self.postcode.text = user['postcode']
+        self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
+        self.telephone.tag = "Optional"
         
     def get_streets_from_county(self):
         towns = UserSetup.addresses[self.county.selected_value]
@@ -91,9 +94,8 @@ class UserSetup(UserSetupTemplate):
 
     def field_change(self, **event_args):
         """ Highlights empty input boxes"""
-        print(list(event_args['sender'].__dict__.items()))
         if event_args['sender'].text == "":
-            if "OPTIONAL" in event_args['sender'].tooltip:
+            if event_args['sender'].tag == "Optional":
                 event_args['sender'].background = '#fefdc7'
             else:
                 event_args['sender'].background = '#ffe6e6'
