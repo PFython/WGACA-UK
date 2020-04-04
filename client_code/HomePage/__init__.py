@@ -27,28 +27,28 @@ class HomePage(HomePageTemplate):
         # 2nd step of registration process to force completion of required contact data        
         self.force_user_setup()
     
-    def check_required_fields(self):
+    def required_fields_are_populated(self):
         """
         Very cursory checks that all fields are completed
         TODO: Validate by data type and permitted values
         """
-        checks = [anvil.users.get_user()['house_number']]
-        checks += [anvil.users.get_user()['street']]
-        checks += [anvil.users.get_user()['town']]
-        checks += [anvil.users.get_user()['county']]
-        checks += [anvil.users.get_user()['display_name']]
-#         checks += [anvil.users.get_user()['postcode']]        
-#         checks += [anvil.users.get_user()['telephone']]
+        user = anvil.users.get_user()
+        checks = [user['house_number']]
+        checks += [user['street']]
+        checks += [user['town']]
+        checks += [user['county']]
+        checks += [user['display_name']]
+#         checks += [user['postcode']]        
+#         checks += [user['telephone']]
+        print(f"Checks {all(checks)}")
         return all(checks)
     
     def force_user_setup(self):
         # Test convenience - resets Will Gaca each time...
         while not anvil.users.get_user()['terms_accepted']:
             alert(content=TermsOfUse(), title = "Please read and accept the following Privacy Statement & Terms of Use:", large=True,)
-        while not anvil.users.get_user()['details_complete']:
+        while not self.required_fields_are_populated():
             alert(content=UserSetup(), title = "Please confirm your personal details:", large=True,)
-            if self.check_required_fields():
-                anvil.server.call("details_complete", True)
         self.column_panel_1.add_component(MyOffers())
         self.highlight_selected_menu(self.menu_my_offers)
 #         self.enable_menu_buttons(True)

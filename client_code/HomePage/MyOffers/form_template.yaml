@@ -104,6 +104,7 @@ components:
       event_bindings: {change: unit_of_measure_change}
       data_bindings:
       - {property: selected_value, code: 'self.units_of_measure[0]', writeback: true}
+      - {property: items, code: self.units_of_measure}
     - type: Label
       properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
         visible: true, text: Expiry, font_size: null, font: '', spacing_above: small,
