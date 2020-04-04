@@ -225,22 +225,22 @@ components:
       background: '', bold: false, underline: false}
     name: postcode
     layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,LSBXXM VOTYWJ,OAIRKK'}
-    event_bindings: {show: postcode_show}
+    event_bindings: {show: postcode_show, change: save_input}
     data_bindings: []
+  - type: Label
+    properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
+      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: 'fa:info'}
+    name: label_1_copy_6
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,YKWKKZ TLYYSG,UOCDFW'}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: 'OPTIONAL: This field will be shared
         with Runners you approve to pick-up/drop-off deliveries.', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, font: '', spacing_above: small, icon_align: left,
       spacing_below: small, italic: false, background: '', bold: false, underline: false,
       icon: 'fa:info'}
-    name: label_1_copy_6
-    layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,YKWKKZ TLYYSG,UOCDFW'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
-      border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false, icon: 'fa:info'}
     name: label_1_copy_7
     layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,YKWKKZ YXCAZV,GMLMUO'}
     event_bindings: {}
