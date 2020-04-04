@@ -16,12 +16,11 @@ class UserSetup(UserSetupTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        user = anvil.users.get_user()
+        self.display_name.text = user['display_name']
+        self.email.text = user['email']
+        self.telephone.text = user['telephone'] 
   
-    def show_my_details(self, **event_args):
-        """This method is called when the TextBox is shown on the screen"""
-        self.email.text = anvil.users.get_user()['email']
-        self.telephone.text = anvil.users.get_user()['telephone'] 
-       
     def county_change(self, **event_args):
         """This method is called when an item is selected"""
         towns = UserSetup.addresses[self.county.selected_value]

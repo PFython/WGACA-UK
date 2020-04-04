@@ -85,7 +85,7 @@ components:
       background: '', bold: true, underline: false}
     name: display_name
     layout_properties: {grid_position: 'LAGDLB,NTECZM GJFPBN,AVVYSL'}
-    event_bindings: {show: display_name_show, change: save_input}
+    event_bindings: {pressed_enter: save_input}
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: Everyone will be able to see this field - keep it clean please!,
@@ -270,7 +270,7 @@ components:
     layout_properties: {grid_position: 'LAGDLB,KAAVMF'}
     event_bindings: {}
     components: []
-  event_bindings: {show: show_my_details}
+  event_bindings: {hide: save_input}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
