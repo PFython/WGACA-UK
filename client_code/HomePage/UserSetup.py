@@ -16,19 +16,20 @@ class UserSetup(UserSetupTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        user = anvil.users.get_user()
-        input_fields = self.get_input_fields()
+        user = anvil.users.get_user()       
         
-        for field, _values in input_fields.items():
-            component, attribute = _values
-            component = user[field]
-            print(f"f:{field} c:{component} a:{attribute}")
-            setattr(component, attribute, user[field])
-            
-#         setattr(self.display_name, "text", user['display_name'])
-#         self.email.text = user['email']
-#         self.house_number.text = user['house_number']
-#         self.telephone.text = user['telephone'] 
+        self.display_name.text = user['display_name']
+        self.email.text = user['email']
+        self.house_number.text = user['house_number']
+        if user['street'] and user['county']:
+            print(street, county)
+            self.street.selected_value = user['street']
+            self.county.selected_value = user['county']
+            self.street_change()
+        else:
+            self.county_change()
+        self.country.text = user['country']
+        self.telephone.text = user['telephone'] 
   
     def county_change(self, **event_args):
         """This method is called when an item is selected"""
@@ -55,9 +56,9 @@ class UserSetup(UserSetupTemplate):
     def get_input_fields(self):
         return {'display_name' : (self.display_name, 'text'),
                'house_number' : (self.house_number, 'text'),
-               'street' : (self.street, 'select_value'),
-               'town' : (self.town, 'select_value'),
-               'county' : (self.county, 'select_value'),
+               'street' : (self.street, 'selected_value'),
+               'town' : (self.town, 'selected_value'),
+               'county' : (self.county, 'selected_value'),
                'country' : (self.country, 'text'),
                'postcode' : (self.postcode, 'text'),
                'telephone' : (self.telephone, 'text'),}
