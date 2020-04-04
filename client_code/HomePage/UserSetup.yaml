@@ -85,7 +85,7 @@ components:
       background: '', bold: true, underline: false}
     name: display_name
     layout_properties: {grid_position: 'LAGDLB,NTECZM GJFPBN,AVVYSL'}
-    event_bindings: {pressed_enter: save_input}
+    event_bindings: {}
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: Everyone will be able to see this field - keep it clean please!,
@@ -103,7 +103,7 @@ components:
     name: email
     layout_properties: {grid_position: 'LAGDLB,NTECZM CVGZZF,HMOVYT'}
     data_bindings: []
-    event_bindings: {change: save_input}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: This field will be private unless you explicitly choose to share it.,
       border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
@@ -119,8 +119,7 @@ components:
       background: '', bold: false, underline: false}
     name: house_number
     layout_properties: {grid_position: 'LAGDLB,NTECZM AEIWYG,QBFXEF'}
-    event_bindings: {show: house_number_show, change: save_input, lost_focus: save_input,
-      pressed_enter: save_input}
+    event_bindings: {}
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: This field will only be shared with Runners you approve to pick-up/drop-off deliveries.,
@@ -134,7 +133,7 @@ components:
     properties: {}
     name: street
     layout_properties: {grid_position: 'LAGDLB,NTECZM LEIFMA,CQLTZE', slot: default}
-    event_bindings: {change: street_change, show: county_change}
+    event_bindings: {change: street_change}
   - type: Label
     properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
       border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
@@ -165,7 +164,7 @@ components:
       include_placeholder: false
     name: town
     layout_properties: {grid_position: 'LAGDLB,NTECZM KZPSXQ,ZRBZWE', slot: default}
-    event_bindings: {change: save_input}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
       border: '', foreground: '#0080c0', visible: true, text: '', font_size: 20, font: '',
@@ -218,7 +217,7 @@ components:
     layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,LSBXXM BVCIJS,WLEVOJ'}
     data_bindings:
     - {property: text, code: self.locale, writeback: true}
-    event_bindings: {change: save_input}
+    event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -226,7 +225,7 @@ components:
       background: '', bold: false, underline: false}
     name: postcode
     layout_properties: {grid_position: 'LAGDLB,NTECZM JFUNKF,LSBXXM VOTYWJ,OAIRKK'}
-    event_bindings: {show: postcode_show, change: save_input}
+    event_bindings: {show: postcode_show}
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: Everyone will be able to see this field.,
@@ -254,7 +253,7 @@ components:
     layout_properties: {grid_position: 'LAGDLB,NTECZM ELKANY,FFCYDK'}
     data_bindings:
     - {property: text, code: 'self.item[''text'']', writeback: true}
-    event_bindings: {change: save_input}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: 'OPTIONAL: This field will be private
         unless you explicitly choose to share it with other users.', border: '', foreground: '#0080c0',

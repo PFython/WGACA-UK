@@ -19,6 +19,7 @@ class UserSetup(UserSetupTemplate):
         user = anvil.users.get_user()
         self.display_name.text = user['display_name']
         self.email.text = user['email']
+        self.house_number.text = user['house_number']
         self.telephone.text = user['telephone'] 
   
     def county_change(self, **event_args):
@@ -42,10 +43,9 @@ class UserSetup(UserSetupTemplate):
         self.town.items = [town]
         self.town.selected_value = town
         self.save_input()
-
-    def save_input(self, **event_args):
-      """This method is called when the text in this text box is edited"""
-      fields = {'display_name' : self.display_name.text,
+        
+    def get_input_fields(self):
+        return {'display_name' : self.display_name.text,
                'house_number' : self.house_number.text,
                'street' : self.street.selected_value,
                'town' : self.town.selected_value,
@@ -53,7 +53,11 @@ class UserSetup(UserSetupTemplate):
                'country' : self.country.text,
                'postcode' : self.postcode.text,
                'telephone' : self.telephone.text,}
-      for field, value in fields.items():
+      
+    def save_input(self, **event_args):
+      """This method is called when the text in this text box is edited"""
+      input_fields = self.get_input_fields()
+      for field, value in input_fields.items():
           anvil.server.call("save_user_setup", field, value)
 
 
