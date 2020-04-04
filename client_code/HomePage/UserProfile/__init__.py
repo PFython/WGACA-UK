@@ -7,7 +7,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..TermsOfUse import TermsOfUse
 
+LOCALE = "United Kingdom"
+ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
+
 class UserProfile(UserProfileTemplate):
+    addresses = ADDRESSES
     def __init__(self, **properties):
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
@@ -16,17 +20,19 @@ class UserProfile(UserProfileTemplate):
         self.privacy_notice.text = TermsOfUse().privacy_notice.text       
         self.terms_accepted.text = "You accepted the above Privacy Statement & Terms of Use on "
         self.terms_accepted.text += anvil.users.get_user()['terms_accepted'].strftime('%d %b %Y')
-  
+        self.show_my_details()
+        
     def show_my_details(self, **event_args):
-        """This method is called when the TextBox is shown on the screen"""
-        self.email.text = anvil.users.get_user()['email']
-        self.telephone.text = anvil.users.get_user()['telephone']
-        self.display_name.text = anvil.users.get_user()['display_name']
-        self.house_number.text = anvil.users.get_user()['house_number']
-        self.street.text = anvil.users.get_user()['street']
-        self.town.text = anvil.users.get_user()['town']
-        self.county.text = anvil.users.get_user()['county']
-        self.postcode.text = anvil.users.get_user()['postcode']
+        user = anvil.users.get_user()
+        self.display_name.text = user['display_name']
+        self.email.text = user['email']
+        self.house_number.text = user['house_number']
+        self.street.text = user['street']
+        self.town.text = user['town']
+        self.county.text = user['county']
+        self.country.text = user['country']
+        self.postcode.text = user['postcode']
+        self.telephone.text = user['telephone']
 
     def view_history_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -48,6 +54,28 @@ class UserProfile(UserProfileTemplate):
             alert("Telephone successfully updated.")
         else:
             alert("Something went wrong while updating phone number.")
+            
+    def field_change(self, **event_args):
+        """ Highlights empty input boxes"""
+        if event_args['sender'].text == "":
+            if event_args['sender'].tag == "Optional":
+                event_args['sender'].background = '#fefdc7'
+            else:
+                event_args['sender'].background = '#ffe6e6'
+        else:
+            event_args['sender'].background = '#ffffff'
+
+    def show_help_tag(self, **event_args):
+        """This method is called when the link is clicked"""
+        self.help_text.text = event_args['sender'].tag
+        # Set all icons to unselected
+        components = [self.help1, self.help2, self.help3,
+                      self.help4, self.help5, self.help6,
+                      self.help7, self.help8, self.help9]
+        for component in components:
+            setattr(component, 'icon', 'fa:question')
+        # Set clicked icon to selected
+        event_args['sender'].icon = 'fa:question-circle'            
 
 
 
