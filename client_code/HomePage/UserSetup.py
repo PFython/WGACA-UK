@@ -48,7 +48,8 @@ class UserSetup(UserSetupTemplate):
                'house_number' : self.house_number.text,
                'street' : self.street.selected_value,
                'town' : self.town.selected_value,
-               'county' : self.
+               'county' : self.county.selected_value,
+               'country' 
       anvil.server.call("save_user_setup", field, value)
 
 
