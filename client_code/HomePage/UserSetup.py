@@ -44,7 +44,12 @@ class UserSetup(UserSetupTemplate):
 
     def save_input(self, **event_args):
       """This method is called when the text in this text box is edited"""
-      anvil.server.call(())
+      field = {'display_name' : self.display_name.text,
+               'house_number' : self.house_number.text,
+               'street' : self.street.selected_value,
+               'town' : self.town.selected_value,
+               'county' : self.
+      anvil.server.call("save_user_setup", field, value)
 
 
 
