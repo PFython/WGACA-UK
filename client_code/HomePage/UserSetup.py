@@ -6,11 +6,14 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-COUNTIES = anvil.server.call("get_counties")
+LOCALE = "United Kingdom"
+ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 
 class UserSetup(UserSetupTemplate):
-    counties = COUNTIES
+    locale = LOCALE
+    addresses = ADDRESSES
     def __init__(self, **properties):
+        alert(UserSetup.addresses)
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
         self.init_components(**properties)

@@ -76,7 +76,7 @@ def terms_accepted(boolean_value):
     user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
-def get_address_hierarchy():
+def get_address_hierarchy(country="United Kingdom"):
     hierarchy = {"United Kingdom":
                    {"Wandsworth, London":
                        {"Putney":
@@ -85,22 +85,41 @@ def get_address_hierarchy():
                             "Pullman Gardens",
                             "Putney Hill",
                             "Telegraph Road",
-                            "Westleigh Avenue",]}},
-                   {"Kingston-upon-Thames, London":
+                            "Westleigh Avenue",]},
+                    "Kingston-upon-Thames, London":
                        {"":
                            ["Kingston Hill",
                             "Richmond Road",
                             "London Road",],
                         "New Malden":
                            ["Coombe Road",
-                            "Salisbury Road",]}}}
-    counties = """Wandsworth, London
-Merton, London
-Hammersmith & Fulham, London
-Lambeth, London
-Richmond-upon-Thames, London
-Croydon, London"""
-    return sorted(counties.split("\n"))
+                            "Salisbury Road",]},
+                    "Merton, London":
+                       {"":
+                           ["Kingston Hill",
+                            "Richmond Road",
+                            "London Road",],
+                        "New Malden":
+                           ["Coombe Road",
+                            "Salisbury Road",]},
+                    "Hammersmith & Fulham, London":
+                       {"":
+                           ["Kingston Hill",
+                            "Richmond Road",
+                            "London Road",],
+                        "New Malden":
+                           ["Coombe Road",
+                            "Salisbury Road",]},
+                    "Lambeth, London":
+                       {"":
+                           ["Kingston Hill",
+                            "Richmond Road",
+                            "London Road",],
+                        "New Malden":
+                           ["Coombe Road",
+                            "Salisbury Road",]},
+                   }}
+    return hierarchy[country]    
     
 @anvil.server.callable
 def get_units_of_measure():

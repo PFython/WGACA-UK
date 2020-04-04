@@ -41,7 +41,7 @@ components:
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: email
@@ -58,12 +58,14 @@ components:
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
-    name: house_number_copy
+    name: country
     layout_properties: {grid_position: 'LAGDLB,HYGEDW UKZJJB,VTDAGB'}
-    data_bindings: []
+    data_bindings:
+    - {property: text, code: self.locale, writeback: true}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
       border: '', foreground: '', visible: true, text: 'Postcode:', font_size: 14,
@@ -113,8 +115,8 @@ components:
     layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,KRLYQF'}
     event_bindings: {}
     data_bindings:
-    - {property: selected_value, code: 'self.counties[0]', writeback: true}
-    - {property: items, code: self.counties}
+    - {property: items, code: sorted(self.addresses.keys())}
+    - {property: selected_value, code: 'sorted(list(self.addresses.keys()))[0]', writeback: true}
   - type: Label
     properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
       border: '', foreground: '', visible: true, text: 'Town/City:', font_size: 14,
