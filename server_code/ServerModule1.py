@@ -76,9 +76,25 @@ def terms_accepted(boolean_value):
     user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
-def get_counties():
-    counties = """Kingston-upon-Thames, London
-Wandsworth, London
+def get_address_hierarchy():
+    hierarchy = {"United Kingdom":
+                   {"Wandsworth, London":
+                       {"Putney":
+                           ["Chartfield Avenue",
+                            "Carlsake Road",
+                            "Pullman Gardens",
+                            "Putney Hill",
+                            "Telegraph Road",
+                            "Westleigh Avenue",]}},
+                   {"Kingston-upon-Thames, London":
+                       {"":
+                           ["Kingston Hill",
+                            "Richmond Road",
+                            "London Road",],
+                        "New Malden":
+                           ["Coombe Road",
+                            "Salisbury Road",]}}}
+    counties = """Wandsworth, London
 Merton, London
 Hammersmith & Fulham, London
 Lambeth, London

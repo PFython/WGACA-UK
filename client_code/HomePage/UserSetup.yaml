@@ -49,7 +49,7 @@ components:
     data_bindings: []
     event_bindings: {}
   - type: Label
-    properties: {role: null, align: left, tooltip: 'This field will be shared with ',
+    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
       border: '', foreground: '', visible: true, text: 'Country:', font_size: 14,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
       background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
@@ -65,10 +65,10 @@ components:
     layout_properties: {grid_position: 'LAGDLB,HYGEDW UKZJJB,VTDAGB'}
     data_bindings: []
   - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
-      underline: false, icon: 'fa:eye-slash'}
+    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
+      border: '', foreground: '', visible: true, text: 'Postcode:', font_size: 14,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
+      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
     name: label_post_code
     layout_properties: {grid_position: 'LAGDLB,HYGEDW VZIHTH,LMRAGZ'}
     event_bindings: {}
@@ -82,10 +82,10 @@ components:
     event_bindings: {show: postcode_show}
     data_bindings: []
   - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
-      underline: false, icon: 'fa:eye-slash'}
+    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
+      border: '', foreground: '', visible: true, text: 'County/Borough:', font_size: 14,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
+      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
     name: label_county
     layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,EGSHUA'}
     event_bindings: {}
@@ -116,10 +116,10 @@ components:
     - {property: selected_value, code: 'self.counties[0]', writeback: true}
     - {property: items, code: self.counties}
   - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
-      underline: false, icon: 'fa:eye-slash'}
+    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
+      border: '', foreground: '', visible: true, text: 'Town/City:', font_size: 14,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
+      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
     name: label_town
     layout_properties: {grid_position: 'LAGDLB,HYGEDW UHGUYV,LGHCST'}
     event_bindings: {}
@@ -149,10 +149,10 @@ components:
     event_bindings: {show: street_show}
     data_bindings: []
   - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'House Number:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: false,
-      underline: false, icon: 'fa:eye-slash'}
+    properties: {role: null, align: left, tooltip: This field will be shared with Runners you approve to pick-up/drop-off deliveries.,
+      border: '', foreground: '', visible: true, text: 'House Number:', font_size: 14,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: true,
+      background: '', bold: false, underline: false, icon: 'fa:eye-slash'}
     name: label_house_number
     layout_properties: {grid_position: 'LAGDLB,HYGEDW CJPNFQ,JOHTYQ'}
     event_bindings: {}
