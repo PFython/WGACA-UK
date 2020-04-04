@@ -20,8 +20,6 @@ class UserSetup(UserSetupTemplate):
         self.email.text = user['email']
         if user['house_number']:
             self.house_number.text = user['house_number']
-        else:
-            self.house_number.background = '#ffd0d0'
         # Create list of valid counties
         self.county.items = sorted(self.addresses.keys())
         if user['county']:
@@ -37,13 +35,11 @@ class UserSetup(UserSetupTemplate):
             self.street_change()
         # Create list of valid towns
         towns = list(self.get_towns_from_county().keys())
-        print(towns)
         self.town.items = towns
         if user['town']:
            self.town.selected_value = user['town']
         if not user['country']:
             anvil.server.call("save_user_setup", 'country', LOCALE)
-        print(f"country: {user['country']}")
         self.country.text = user['country']
         self.telephone.text = user['telephone']
         
@@ -94,12 +90,13 @@ class UserSetup(UserSetupTemplate):
           anvil.server.call("save_user_setup", field, getattr(component, attribute))
 
     def field_change(self, **event_args):
-      """This method is called when the text in this text box is edited"""
-      print(even_args)
+        """This method is called when the text in this text box is edited"""
+        if event_args['sender'].text == "":
+            event_args['sender'].background = '#ffc8c8'
+        else:
+            event_args['sender'].background = '#ffffff'
 
-    def form_show(self, **event_args):
-      """This method is called when the HTML panel is shown on the screen"""
-      pass
+
 
 
 
