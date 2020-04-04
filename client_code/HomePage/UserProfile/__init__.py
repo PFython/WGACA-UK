@@ -42,6 +42,12 @@ class UserProfile(UserProfileTemplate):
         anvil.users.logout()
         anvil.users.login_with_form()
 
+    def telephone_lostfocus(self, **event_args):
+        """This method is called when the field loses focus"""
+        if anvil.server.call("update_telephone", self.telephone.text):
+            alert("Telephone successfully updated.")
+        else:
+            alert("Something went wrong while updating phone number.")
 
 
 
