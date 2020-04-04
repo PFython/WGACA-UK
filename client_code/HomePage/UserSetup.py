@@ -6,7 +6,10 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+COUNTIES = anvil.server.call("get_counties")
+
 class UserSetup(UserSetupTemplate):
+    counties = COUNTIES
     def __init__(self, **properties):
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.

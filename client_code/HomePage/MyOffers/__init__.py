@@ -7,8 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-ITEM_HEIRARCHY = anvil.server.call("get_product_heirarchy").split("\n")
-UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure").split("\n")
+ITEM_HEIRARCHY = anvil.server.call("get_product_heirarchy")
+UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
 
 class MyOffers(MyOffersTemplate):
     item_choices = ITEM_HEIRARCHY

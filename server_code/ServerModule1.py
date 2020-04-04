@@ -76,8 +76,19 @@ def terms_accepted(boolean_value):
     user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
+def get_counties():
+    counties = """Kingston-upon-Thames, London
+Wandsworth, London
+Merton, London
+Hammersmith & Fulham, London
+Lambeth, London
+Richmond-upon-Thames, London
+Croydon, London"""
+    return sorted(counties.split("\n"))
+    
+@anvil.server.callable
 def get_units_of_measure():
-    return """grammes
+    units =  """grammes
 kilogrammes
 millilitres
 centilitres
@@ -102,11 +113,12 @@ packets (medium)
 packets (large)
 tins (small)
 tins (medium)
-tins (large)"""     
+tins (large)"""
+    return units.split("\n")
       
 @anvil.server.callable
 def get_product_heirarchy():
-    return """Drink | Water | Mineral Water (sparkling)
+    products =  """Drink | Water | Mineral Water (sparkling)
 Drink | Water | Mineral Water (still)
 Drink | Fruit Juice | Apple Juice
 Drink | Fruit Juice | Orange Juice
@@ -342,3 +354,4 @@ Medical | Paracetamol - Soluble
 Medical | Plasters
 Medical | Facemask
 Medical | Latex Gloves"""
+    return sorted(products.split("\n"))
