@@ -90,9 +90,13 @@ class UserSetup(UserSetupTemplate):
           anvil.server.call("save_user_setup", field, getattr(component, attribute))
 
     def field_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
+        """ Highlights empty input boxes"""
+        print(list(event_args['sender'].__dict__.items()))
         if event_args['sender'].text == "":
-            event_args['sender'].background = '#ffc8c8'
+            if "OPTIONAL" in event_args['sender'].tooltip:
+                event_args['sender'].background = '#fefdc7'
+            else:
+                event_args['sender'].background = '#ffe6e6'
         else:
             event_args['sender'].background = '#ffffff'
 
