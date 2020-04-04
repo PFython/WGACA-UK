@@ -102,8 +102,15 @@ class UserSetup(UserSetupTemplate):
 
     def show_help_tag(self, **event_args):
       """This method is called when the link is clicked"""
-      self.help_text.visible = True
       self.help_text.text = event_args['sender'].tag
+      # Set all icons to unselected
+      components = [self.help1, self.help2, self.help3,
+                    self.help4, self.help5, self.help6,
+                    self.help7, self.help8, self.help9]
+      for component in components:
+          setattr(component, 'icon', 'fa:question')
+      # Set clicked icon to selected
+      event_args['sender'].icon = 'fa:question-circle'
 
 
 

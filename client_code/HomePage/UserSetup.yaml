@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":12,"GYSESX":20,"EGSHUA":20,"NTECZM":26,"AVVYSL":50,"HMOVYT":50,"QBFXEF":50,"CQLTZE":50,"ZRBZWE":50,"ODMHLZ":50,"FFCYDK":50,"OAIRKK":56,"WLEVOJ":40}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":12,"GYSESX":20,"EGSHUA":20,"NTECZM":26,"AVVYSL":50,"HMOVYT":50,"QBFXEF":50,"CQLTZE":50,"ZRBZWE":50,"ODMHLZ":50,"FFCYDK":50,"OAIRKK":54,"WLEVOJ":44,"AUPHUD":26,"XZQYEO":32}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
@@ -114,11 +114,11 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy
+    name: help2
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM CVGZZF,FEAWOM'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
+    - {property: tag, code: '"""Your email is kept private unless you explicitly choose
+        to share it with other users.  We''ll use it for system messages, updates
         and news about the app, and password resets etc."""'}
     event_bindings: {click: show_help_tag}
   - type: TextBox
@@ -135,12 +135,12 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy_2
+    name: help3
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM AEIWYG,TLFBOL'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+    - {property: tag, code: '"""A unique house name (e.g. ''Rose Cottage'') or number
+        (e.g. ''221B'') within the Street"""'}
+    event_bindings: {click: show_help_tag}
   - type: DropDown
     properties: {}
     name: street
@@ -151,12 +151,12 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy_3
+    name: help4
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM LEIFMA,RKELUO'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+    - {property: tag, code: '"""The list of know street names is generated automatically
+        based on the County/Borough selected."""'}
+    event_bindings: {click: show_help_tag}
   - type: DropDown
     properties:
       role: null
@@ -185,12 +185,12 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy_4
+    name: help5
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM KZPSXQ,YAGEWD'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+    - {property: tag, code: '"""The Town/City name is generated automatically based
+        on your selection of Street and County/Borough.  Less typing for you - yay!"""'}
+    event_bindings: {click: show_help_tag}
   - type: DropDown
     properties:
       role: null
@@ -220,12 +220,12 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy_5
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM DNVCAT,IFYXPL'}
+    name: help6
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM DNVCAT,JARCBI'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+    - {property: tag, code: '"""Select your County/Borough from this list and the
+        list of known Streets will update automatically."""'}
+    event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
@@ -235,6 +235,19 @@ components:
     layout_properties: {grid_position: 'LAGDLB,NTECZM BVCIJS,WLEVOJ'}
     data_bindings: []
     event_bindings: {}
+  - type: Link
+    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
+      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
+    name: help7
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM BVCIJS,AUPHUD'}
+    data_bindings:
+    - {property: tag, code: '"""Your Country is set automatically by the server.  We''ll
+        probably have at least one version of the app running locally on a server
+        for every country its published in.  You don''t have to worry about changing
+        this."""'}
+    event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -249,12 +262,16 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy_6
+    name: help8
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM VOTYWJ,XZQYEO'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+    - {property: tag, code: '"""Your Postcode is optional as the app doesn''t strictly
+        need to know it to work.  If you choose to set your Postcode now however,
+        you''ll have the option later on to explicitly share it with Runners you approve
+        to pick up or drop off deliveries - they''ll probably find it useful for SatNav
+        but since we''re trying to keep everything really LOCAL on this app, you might
+        prefer not to share it."""'}
+    event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -270,12 +287,16 @@ components:
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: link_1_copy_8
+    name: help9
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM ELKANY,WWRNAE'}
     data_bindings:
-    - {property: tag, code: '""" Your email is kept private unless you explicitly
-        choose to share it with other users.  We use it for system messages, updates
-        and news about the app, and password resets etc."""'}
+    - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
+        strictly need to know it to work.  If you choose to add your Telephone number
+        now however, you''ll have the option later on to explicitly share it with
+        Runners you approve to pick up or drop off deliveries.  But then again you
+        might prefer to wait until you''ve met them once in person, and then swap
+        numbers directly."""'}
+    event_bindings: {click: show_help_tag}
   event_bindings: {hide: save_input}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
@@ -298,17 +319,6 @@ components:
     data_bindings:
     - {property: text, code: self.help1.tag, writeback: true}
   event_bindings: {}
-- type: Link
-  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-    spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
-    italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-  name: link_1_copy_7
-  layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM CVGZZF,TVOKSZ'}
-  data_bindings:
-  - {property: tag, code: '""" Your email is kept private unless you explicitly choose
-      to share it with other users.  We use it for system messages, updates and news
-      about the app, and password resets etc."""'}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
