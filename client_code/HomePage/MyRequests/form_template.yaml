@@ -136,7 +136,7 @@ components:
     layout_properties: {grid_position: 'MHPYCG,LUXTJD'}
     components:
     - type: RepeatingPanel
-      properties: {spacing_above: none, spacing_below: none, item_template: MyRequests.MyRequestsRow}
+      properties: {spacing_above: none, spacing_below: none, item_template: HomePage.MyRequests.MyRequestsRow}
       name: repeating_panel_1
       layout_properties: {}
       event_bindings: {}

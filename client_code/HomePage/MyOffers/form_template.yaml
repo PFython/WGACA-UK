@@ -190,7 +190,7 @@ components:
     layout_properties: {grid_position: 'GYIREJ,TDEHID'}
     components:
     - type: RepeatingPanel
-      properties: {spacing_above: none, spacing_below: none, item_template: MyOffers.MyOffersRow}
+      properties: {spacing_above: none, spacing_below: none, item_template: HomePage.MyOffers.MyOffersRow}
       name: repeating_panel_1
       layout_properties: {}
       data_bindings: []

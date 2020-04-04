@@ -19,7 +19,7 @@ components:
     event_bindings: {}
   - type: RepeatingPanel
     properties: {role: null, tooltip: '', border: '', foreground: '', items: null,
-      visible: true, spacing_above: none, spacing_below: none, item_template: Matches.MatchesRow,
+      visible: true, spacing_above: none, spacing_below: none, item_template: HomePage.Matches.MatchesRow,
       background: ''}
     name: repeating_panel_1
     layout_properties: {grid_position: 'ICDVXL,STCLXS', full_width_row: false}

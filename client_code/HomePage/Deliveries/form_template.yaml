@@ -38,7 +38,7 @@ components:
     layout_properties: {grid_position: 'TLSMFB,UVCPOO'}
     components:
     - type: RepeatingPanel
-      properties: {spacing_above: none, spacing_below: none, item_template: Deliveries.DeliveriesRow}
+      properties: {spacing_above: none, spacing_below: none, item_template: HomePage.Deliveries.DeliveriesRow}
       name: repeating_panel_1
       layout_properties: {}
     event_bindings: {}
