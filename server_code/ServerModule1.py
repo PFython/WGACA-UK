@@ -403,3 +403,13 @@ Medical | Plasters
 Medical | Facemask
 Medical | Latex Gloves"""
     return sorted(products.split("\n"))
+
+@anvil.server.callable
+def update_telephone(telephone):
+    user_row = anvil.users.get_user()
+    try:
+        user_row.update(Telephone = telephone)
+        result = True
+    except:
+        result = False
+    return result
