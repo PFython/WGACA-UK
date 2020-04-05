@@ -14,34 +14,10 @@ components:
     name: input_description_1
     layout_properties: {grid_position: 'DTQLRZ,KHKBIM'}
     event_bindings: {}
-  - type: DataGrid
-    properties:
-      role: null
-      columns:
-      - {width: 99, title: Runner, id: BSTNFJ, data_key: runner, expand: false}
-      - {width: 238, title: Offer, id: RTJNNJ, data_key: offer, expand: false}
-      - {title: Request, id: ZLLYLZ, data_key: request}
-      - {title: Pick-up, id: PXDWOD, data_key: pickup}
-      - {title: Drop-off, id: IWHRZK, data_key: dropoff}
-      - {title: Status, id: MEWGFN, data_key: status}
-      auto_header: false
-      tooltip: ''
-      border: ''
-      foreground: ''
-      rows_per_page: 20
-      visible: true
-      show_page_controls: true
-      spacing_above: small
-      spacing_below: small
-      background: ''
-    name: data_grid_1
-    layout_properties: {grid_position: 'TLSMFB,UVCPOO'}
-    components:
-    - type: RepeatingPanel
-      properties: {spacing_above: none, spacing_below: none, item_template: HomePage.Deliveries.DeliveriesRow}
-      name: repeating_panel_1
-      layout_properties: {}
-    event_bindings: {}
+  - type: RepeatingPanel
+    properties: {spacing_above: none, spacing_below: none, item_template: HomePage.Deliveries.DeliveriesRow}
+    name: repeating_panel_1
+    layout_properties: {grid_position: 'LTVKHI,HMENPM', slot: footer}
 container:
   type: ColumnPanel
   event_bindings: {}
