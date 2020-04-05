@@ -6,7 +6,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..TermsOfUse import TermsOfUse
-from .home
 
 LOCALE = "United Kingdom"
 ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
@@ -19,12 +18,8 @@ class UserProfile(UserProfileTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.privacy_notice.text = TermsOfUse().privacy_notice.text
-        accepted = anvil.users.get_user()['terms_accepted']
-        if accepted:
-            self.terms_accepted.text = "You accepted this Privacy Notice & Terms of Use on "
-            self.terms_accepted.text += accepted.strftime('%d %b %Y')
-        else:
-            self.terms_accepted.visible = False
+        self.terms_accepted.text = "You accepted this Privacy Notice & Terms of Use on "
+        self.terms_accepted.text += anvil.users.get_user()['terms_accepted'].strftime('%d %b %Y')
         self.show_my_details()
         
     def show_my_details(self, **event_args):
@@ -53,7 +48,8 @@ class UserProfile(UserProfileTemplate):
         """This method is called when the button is clicked"""
         anvil.users.logout()
         anvil.users.login_with_form()
-        self.__init__()
+        self.parent.parent.__init__()
+        self.parent.parent.menu_my_data_click()
 
     def telephone_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""
