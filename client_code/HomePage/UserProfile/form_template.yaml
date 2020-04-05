@@ -219,10 +219,10 @@ components:
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help5
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM RYARAV,YVCFBV'}
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM RYARAV,HOJTGP'}
     data_bindings:
-    - {property: tag, code: '"""You Town or City was automatically selected when you
-        chose a Street and County/Borough during registration."""'}
+    - {property: tag, code: '"""This Town or City was automatically selected when
+        you chose a Street and County/Borough during registration."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox

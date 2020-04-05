@@ -84,6 +84,11 @@ def get_address_hierarchy(country = "United Kingdom"):
     """ Returns an address hierarchy for the given Country """
     global hierarchy
     return hierarchy[country]    
+
+@anvil.server.callable
+def check_for_display_name(display_name):
+    """ Returns boolean check for whether display name already exists in Users database"""
+    return True if app_tables.users.get(display_name = display_name) else False
   
 @anvil.server.callable
 def get_units_of_measure():

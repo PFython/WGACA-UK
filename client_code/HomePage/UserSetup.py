@@ -93,8 +93,19 @@ class UserSetup(UserSetupTemplate):
             component, attribute = _values
             anvil.server.call("save_user_setup", field, getattr(component, attribute))
 
+    def check_for_existing_display_name(self):
+        user = anvil.users.get_user()
+        if self.display_name.text != user['display_name']:
+            existing_name = anvil.server.call("check_for_display_name", self.display_name.text)
+            if existing_name:
+                self.help_text.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken."
+                self.display_name.text = ""
+                self.deselect_all_icons()
+            
     def field_change(self, **event_args):
-        """ Highlights empty input boxes"""
+        """ Highlights empty input boxes and checks for unique Display Name"""
+        if event_args['sender'] is self.display_name:
+            self.check_for_existing_display_name()
         if event_args['sender'].text == "":
             if event_args['sender'].tag == "Optional":
                 event_args['sender'].background = '#fefdc7'
@@ -103,17 +114,21 @@ class UserSetup(UserSetupTemplate):
         else:
             event_args['sender'].background = '#ffffff'
 
-    def show_help_tag(self, **event_args):
-        """This method is called when a Help icon is clicked"""
-        self.help_text.text = event_args['sender'].tag
-        # Set all icons to unselected
+                
+    def deselect_all_icons(self):
+        """ Set all icons to unselected """
         components = [self.help0, self.help1, self.help2, self.help3,
                       self.help4, self.help5, self.help6,
                       self.help7, self.help8, self.help9]
         for component in components:
             setattr(component, 'icon', 'fa:question')
+            
+    def show_help_tag(self, **event_args):
+        """This method is called when the link is clicked"""
+        self.help_text.text = event_args['sender'].tag
+        self.deselect_all_icons()
         # Set clicked icon to selected
-        event_args['sender'].icon = 'fa:question-circle'
+        event_args['sender'].icon = 'fa:question-circle'        
 
 
 
