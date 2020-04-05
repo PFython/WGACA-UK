@@ -121,6 +121,6 @@ def generate_matches():
                     matches += 1
                     # check if new or existing match
                     # zaphod_row = (app_tables.people.get(name="Zaphod Beeblebrox") or app_tables.people.add_row(name="Zaphod Beeblebrox", age=42))
-                    app_tables.matches.add_row(request=request['user'], offer=offer['user'], runner = None, status="New")
+#                     app_tables.matches.add_row(request=request['user'], offer=offer['user'], runner = None, status="New")
     print(f"{len(matches)} new matches found.")
     # Assign Offer to earliest Requests first
