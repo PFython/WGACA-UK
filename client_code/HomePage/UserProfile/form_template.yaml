@@ -161,7 +161,7 @@ components:
     - {property: tag, code: '"""Your email is kept private unless you explicitly choose
         to share it with other users.  When you accepted our Terms of Use you agreed
         we could use it for sending system messages, updates and news about the app,
-        and for password resets etc."""'}
+        and for password resets etc. and that''s what we''ll do - nothing more."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox
@@ -181,8 +181,7 @@ components:
     name: help3
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM VXWTZT,MLVBCJ'}
     data_bindings:
-    - {property: tag, code: '"""A unique house name (e.g. ''Rose Cottage'') or number
-        (e.g. ''221B'') within your Street."""'}
+    - {property: tag, code: '"""The house name or number you specified during registration."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox
@@ -202,8 +201,7 @@ components:
     name: help4
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM FCEHAE,OBDVUZ'}
     data_bindings:
-    - {property: tag, code: '"""This list of Street names is generated automatically
-        based on the County/Borough you''ve selected."""'}
+    - {property: tag, code: '"""The Street name you chose when you registered."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox
@@ -223,8 +221,8 @@ components:
     name: help5
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM RYARAV,YVCFBV'}
     data_bindings:
-    - {property: tag, code: '"""The Town/City name is generated automatically based
-        on your selection of Street and County/Borough.  Less typing for you - yay!"""'}
+    - {property: tag, code: '"""You Town or City was automatically selected when you
+        chose a Street and County/Borough during registration."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox
@@ -244,8 +242,7 @@ components:
     name: help6
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM VRUYZC,KVGZDA'}
     data_bindings:
-    - {property: tag, code: '"""Select your County/Borough from this list, and the
-        list of known Streets will update automatically."""'}
+    - {property: tag, code: '"""The County or Borough you selected when you registered."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox
@@ -265,9 +262,8 @@ components:
     name: help7
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM WCBICS,NSHURS'}
     data_bindings:
-    - {property: tag, code: '"""Your Country is set automatically by the server.  We''ll
-        probably have at least one server running the app locally for every country
-        it''s published in.  You don''t have to worry about changing this."""'}
+    - {property: tag, code: '"""Your Country was set automatically by the server when
+        you registered."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox

@@ -152,7 +152,7 @@ components:
     - {property: tag, code: '"""Your email is kept private unless you explicitly choose
         to share it with other users.  When you accepted our Terms of Use you agreed
         we could use it for sending system messages, updates and news about the app,
-        and for password resets etc."""'}
+        and for password resets etc. and that''s what we''ll do - nothing more."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: TextBox
@@ -258,7 +258,7 @@ components:
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help6
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM AJTWAF,RHAROM'}
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM AJTWAF,XYDQGW'}
     data_bindings:
     - {property: tag, code: '"""Select your County/Borough from this list, and the
         list of known Streets will update automatically."""'}
