@@ -63,6 +63,7 @@ components:
   data_bindings:
   - {property: text, code: 'str(self.item[''offer''][''user''][''house_number''])+"
       "+self.item[''offer''][''user''][''street'']+"\n"+self.item[''offer''][''user''][''town'']+"\n"+self.item[''offer''][''user''][''county'']+"\n"+self.item[''offer''][''user''][''postcode'']'}
+  event_bindings: {}
 - type: Label
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
     text: Drop-off, font_size: 14, font: '', spacing_above: small, icon_align: left,
@@ -79,6 +80,7 @@ components:
   data_bindings:
   - {property: text, code: 'str(self.item[''request''][''user''][''house_number''])+"
       "+self.item[''request''][''user''][''street'']+"\n"+self.item[''request''][''user''][''town'']+"\n"+self.item[''request''][''user''][''county'']+"\n"+self.item[''request''][''user''][''postcode'']'}
+  event_bindings: {}
 - type: Label
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
     text: Request, font_size: 14, font: '', spacing_above: small, icon_align: left,

@@ -16,7 +16,7 @@ from .TermsOfUse import TermsOfUse
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
         # 1st step of registration process requires email and password
-        anvil.users.login_with_form(allow_remembered=False)
+        anvil.users.login_with_form(allow_remembered=True)
         self.fcolour = '#0080c0' # Foreground colour and active menu button background
         self.bcolour = '#cae4ff' # Background colour
         self.xcolour = '#eaf4ff' # Deselected text box
