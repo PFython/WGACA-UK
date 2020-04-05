@@ -4,9 +4,10 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
 import datetime
-from .Product_Data import products
-from .Unit_Data import units
-# Change import for other countries' address data:
+
+# Change imports for other countries' data:
+from .Product_Data_UK import products
+from .Unit_Data_UK import units
 from .Address_Data_UK import hierarchy
 
 # This is a server module. It runs on the Anvil server,
