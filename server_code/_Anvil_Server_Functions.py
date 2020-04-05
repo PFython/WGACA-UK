@@ -106,6 +106,13 @@ def generate_matches():
     """
     requests = app_tables.requests.search(tables.order_by("product_category"), status = "New")
     offers = app_tables.offers.search(tables.order_by("product_key"), status = "New")
+    matches = 0
     for request in requests:
-        print(f"Request: {request['product_category']}")
+        for offer in offers:
+            if request['product_category'] in offer['product_key']:
+                if request['user']['display_name'] != offer['user']['display_name']:
+                    print(f"Request by {request['user']['display_name']}:\n{request['product_category']} \nOffer from {offer['user']['display_name']}:\n{offer['product_key']}\n")
+                    matches += 1
+                    app_tables.matches.add_row(request=request['user'], offer=offer['user'], runner = None, status="New")
+    print(f"{len(matches)} new matches found.")
     # Assign Offer to earliest Requests first
