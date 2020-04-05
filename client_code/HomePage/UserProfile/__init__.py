@@ -44,11 +44,11 @@ class UserProfile(UserProfileTemplate):
         """This method is called when the button is clicked"""
         alert("This feature is still being worked on...\nPlease check back later.")
 
-    def change_password_click(self, **event_args):
+    def log_off(self, **event_args):
         """This method is called when the button is clicked"""
-        alert("To change your password we first need to log you out, then log you back in again.\n\nPlease select the 'Forgot your password?' options from the next window.")
         anvil.users.logout()
         anvil.users.login_with_form()
+        self.__init__()
 
     def telephone_lost_focus(self, **event_args):
         """This method is called when the TextBox loses focus"""

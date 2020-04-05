@@ -7,7 +7,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30,"OULGJY":15,"LRWOUJ":15,"OEPZXW":30}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30,"OULGJY":20,"LRWOUJ":15,"OEPZXW":15}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties: {slot: default}
@@ -309,13 +309,13 @@ components:
     layout_properties: {grid_position: 'UIPMPM,LRWOUJ'}
     event_bindings: {click: delete_account_click}
   - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Change Password', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#0080c0', bold: false, underline: false, icon: 'fa:user-md'}
+    properties: {role: null, align: left, tooltip: 'Also: Reset Password, Switch User',
+      border: '', enabled: true, foreground: '#ffffff', visible: true, text: ' Log
+        Out', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+      italic: false, background: '#0080c0', bold: false, underline: false, icon: 'fa:power-off'}
     name: change_password
     layout_properties: {grid_position: 'UIPMPM,OEPZXW'}
-    event_bindings: {click: change_password_click}
+    event_bindings: {click: log_off}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
