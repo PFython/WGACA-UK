@@ -18,7 +18,7 @@ class UserProfile(UserProfileTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.privacy_notice.text = TermsOfUse().privacy_notice.text       
-        self.terms_accepted.text = "You accepted the above Privacy Statement & Terms of Use on "
+        self.terms_accepted.text = "You accepted this Privacy Notice & Terms of Use on "
         self.terms_accepted.text += anvil.users.get_user()['terms_accepted'].strftime('%d %b %Y')
         self.show_my_details()
         
@@ -32,7 +32,9 @@ class UserProfile(UserProfileTemplate):
         self.county.text = user['county']
         self.country.text = user['country']
         self.postcode.text = user['postcode']
+        self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
+        self.telephone.tag = "Optional"
 
     def view_history_click(self, **event_args):
         """This method is called when the button is clicked"""
@@ -65,17 +67,27 @@ class UserProfile(UserProfileTemplate):
         else:
             event_args['sender'].background = '#ffffff'
 
-    def show_help_tag(self, **event_args):
-        """This method is called when the link is clicked"""
-        self.help_text.text = event_args['sender'].tag
-        # Set all icons to unselected
+    def deselect_all_icons(self):
+        """ Set all icons to unselected """
         components = [self.help1, self.help2, self.help3,
                       self.help4, self.help5, self.help6,
                       self.help7, self.help8, self.help9]
         for component in components:
             setattr(component, 'icon', 'fa:question')
+            
+    def show_help_tag(self, **event_args):
+        """This method is called when the link is clicked"""
+        self.help_text.text = event_args['sender'].tag
+        self.deselect_all_icons()
         # Set clicked icon to selected
         event_args['sender'].icon = 'fa:question-circle'            
+
+    def save_optional_field(self, **event_args):
+      """This method is called when the user presses Enter in this text box"""
+      self.deselect_all_icons()
+      text = f"Saved {event_args['sender'].name} with new value:\n"
+      text += event_args['sender'].text
+      self.help_text.text = text
 
 
 

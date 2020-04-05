@@ -91,7 +91,7 @@ components:
       background: '#cae4ff', bold: true, underline: false}
     name: display_name
     layout_properties: {grid_position: 'LAGDLB,NTECZM QLTXKD,OKANIS'}
-    event_bindings: {change: field_change, show: field_change}
+    event_bindings: {change: field_change}
     data_bindings: []
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -137,7 +137,7 @@ components:
       background: '#cae4ff', bold: false, underline: false}
     name: house_number
     layout_properties: {grid_position: 'LAGDLB,NTECZM VXWTZT,YICVBI'}
-    event_bindings: {change: field_change, show: field_change}
+    event_bindings: {change: field_change}
     data_bindings: []
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -243,7 +243,8 @@ components:
       background: '', bold: false, underline: false}
     name: postcode
     layout_properties: {grid_position: 'LAGDLB,NTECZM PGOUCQ,MFDNMS', slot: default}
-    event_bindings: {show: field_change, change: field_change}
+    event_bindings: {show: field_change, change: field_change, pressed_enter: save_optional_field,
+      lost_focus: save_optional_field}
     data_bindings: []
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -271,7 +272,8 @@ components:
     layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI'}
     data_bindings:
     - {property: text, code: 'self.item[''text'']', writeback: true}
-    event_bindings: {change: field_change, show: field_change}
+    event_bindings: {change: field_change, show: field_change, pressed_enter: save_optional_field,
+      lost_focus: save_optional_field}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
@@ -345,8 +347,17 @@ components:
       spacing_above: small, icon_align: left, spacing_below: none, italic: false,
       background: '', bold: false, underline: false, icon: ''}
     name: label_1
-    layout_properties: {grid_position: 'EDJWFJ,MNIQGF'}
+    layout_properties: {grid_position: 'EJWUVK,SONUMJ'}
     event_bindings: {}
+  - type: Label
+    properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: 12, font: '', spacing_above: small, icon_align: left,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: 'fa:check-square-o'}
+    name: terms_accepted
+    layout_properties: {grid_position: 'EJWUVK,UTHHMA'}
+    event_bindings: {}
+    data_bindings: []
   - type: TextArea
     properties: {role: null, align: left, height: 517.9961523818359, tooltip: '',
       placeholder: '', border: '', enabled: false, foreground: '', visible: true,
@@ -354,14 +365,5 @@ components:
       spacing_below: small, italic: false, background: '', bold: false, underline: false}
     name: privacy_notice
     layout_properties: {grid_position: 'TTSMWD,KPUMTO'}
-    event_bindings: {}
-    data_bindings: []
-  - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: 10, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '', bold: false, underline: false,
-      icon: 'fa:check-square-o'}
-    name: terms_accepted
-    layout_properties: {grid_position: 'MOSOKG,QJIBQU'}
     event_bindings: {}
     data_bindings: []
