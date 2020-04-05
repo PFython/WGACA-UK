@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..TermsOfUse import TermsOfUse
+from .home
 
 LOCALE = "United Kingdom"
 ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
@@ -17,9 +18,13 @@ class UserProfile(UserProfileTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.privacy_notice.text = TermsOfUse().privacy_notice.text       
-        self.terms_accepted.text = "You accepted this Privacy Notice & Terms of Use on "
-        self.terms_accepted.text += anvil.users.get_user()['terms_accepted'].strftime('%d %b %Y')
+        self.privacy_notice.text = TermsOfUse().privacy_notice.text
+        accepted = anvil.users.get_user()['terms_accepted']
+        if accepted:
+            self.terms_accepted.text = "You accepted this Privacy Notice & Terms of Use on "
+            self.terms_accepted.text += accepted.strftime('%d %b %Y')
+        else:
+            self.terms_accepted.visible = False
         self.show_my_details()
         
     def show_my_details(self, **event_args):
