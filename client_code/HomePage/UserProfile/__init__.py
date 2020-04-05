@@ -85,9 +85,10 @@ class UserProfile(UserProfileTemplate):
     def save_optional_field(self, **event_args):
       """This method is called when the user presses Enter in this text box"""
       self.deselect_all_icons()
-      text = f"Saved {event_args['sender'].name} with new value:\n"
-      text += event_args['sender'].text
-      self.help_text.text = text
+      value = event_args['sender'].text
+      field = {self.postcode: "postcode", self.telephone: 'telephone'}[event_args['sender']]
+      anvil.server.call("save_user_setup", field, value)
+      self.help_text.text = f"Your new {field.title()} details are: {value or '<empty>'}"
 
 
 
