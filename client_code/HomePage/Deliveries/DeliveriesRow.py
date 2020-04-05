@@ -14,6 +14,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
     # Any code you write here will run when the form opens.
 
   def volunteer_button_click(self, **event_args):
-    """This method is called when the button is clicked"""
+    """This method is called when the Volunteer button is clicked"""
     alert("Wow, what a Karma Star you are!\nThanks so much for volunteering...\nThis function is still being worked on.")
 

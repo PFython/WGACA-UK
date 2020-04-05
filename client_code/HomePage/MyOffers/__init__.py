@@ -22,6 +22,7 @@ class MyOffers(MyOffersTemplate):
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")     
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
+        """ Add item to Offers database """
         user = anvil.users.get_user()['email']
         result = anvil.server.call("save_to_offers_database", product_key, units, expiry_date, notes)
         if result == "Duplicate":
@@ -31,7 +32,7 @@ class MyOffers(MyOffersTemplate):
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")    
 
     def add_item_click(self, **event_args):
-        """This method is called when the button is clicked"""
+        """This method is called when the Add Item button is clicked"""
         unit_of_measure = self.unit_of_measure.selected_value or self.unit_of_measure.placeholder
         product_key = (self.product_description.selected_value, unit_of_measure)
         units = int(self.number_of_units.text or self.number_of_units.placeholder)

@@ -23,6 +23,7 @@ class UserProfile(UserProfileTemplate):
         self.show_my_details()
         
     def show_my_details(self, **event_args):
+        """ Populates User Profile page from User database """
         user = anvil.users.get_user()
         self.display_name.text = user['display_name']
         self.email.text = user['email']
@@ -37,27 +38,20 @@ class UserProfile(UserProfileTemplate):
         self.telephone.tag = "Optional"
 
     def view_history_click(self, **event_args):
-        """This method is called when the button is clicked"""
+        """This method is called when the View Transaction History button is clicked"""
         alert("This feature is still being worked on...\nPlease check back later.")
 
     def delete_account_click(self, **event_args):
-        """This method is called when the button is clicked"""
+        """This method is called when the Delete Account button is clicked"""
         alert("This feature is still being worked on...\nPlease check back later.")
 
-    def log_off(self, **event_args):
-        """This method is called when the button is clicked"""
+    def log_out(self, **event_args):
+        """This method is called when the Log Out button is clicked"""
         anvil.users.logout()
         anvil.users.login_with_form()
         self.parent.parent.__init__()
         self.parent.parent.menu_my_data_click()
-
-    def telephone_lost_focus(self, **event_args):
-        """This method is called when the TextBox loses focus"""
-        if anvil.server.call("update_telephone", self.telephone.text):
-            alert("Telephone successfully updated.")
-        else:
-            alert("Something went wrong while updating phone number.")
-            
+         
     def field_change(self, **event_args):
         """ Highlights empty input boxes"""
         if event_args['sender'].text == "":
@@ -84,12 +78,12 @@ class UserProfile(UserProfileTemplate):
         event_args['sender'].icon = 'fa:question-circle'            
 
     def save_optional_field(self, **event_args):
-      """This method is called when the user presses Enter in this text box"""
-      self.deselect_all_icons()
-      value = event_args['sender'].text
-      field = {self.postcode: "postcode", self.telephone: 'telephone'}[event_args['sender']]
-      anvil.server.call("save_user_setup", field, value)
-      self.help_text.text = f"Your new {field.title()} details are: {value or '<empty>'}"
+        """This method is called when the user presses Enter in this text box"""
+        self.deselect_all_icons()
+        value = event_args['sender'].text
+        field = {self.postcode: "postcode", self.telephone: 'telephone'}[event_args['sender']]
+        anvil.server.call("save_user_setup", field, value)
+        self.help_text.text = f"Your new {field.title()} details are: {value or '<empty>'}"
 
 
 

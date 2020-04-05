@@ -45,6 +45,7 @@ class UserSetup(UserSetupTemplate):
         self.telephone.tag = "Optional"
         
     def get_streets_from_county(self):
+        """ Returns a list of streets derived from County selection """
         towns = UserSetup.addresses[self.county.selected_value]
         streets = []
         for town in towns:
@@ -57,14 +58,14 @@ class UserSetup(UserSetupTemplate):
         return UserSetup.addresses[self.county.selected_value]
   
     def county_change(self, **event_args):
-        """This method is called when an item is selected"""
+        """This method is called when the County drop-down is changed """
         streets = self.get_streets_from_county()
         self.street.items = streets
         self.street.selected_value = streets[0]
         self.street_change()
 
     def street_change(self, **event_args):
-        """This method is called when an item is selected"""
+        """This method is called when the Street drop-down is changed"""
         towns = self.get_towns_from_county()
         for town, street_list in towns.items():
             if self.street.selected_value in street_list:
@@ -74,6 +75,7 @@ class UserSetup(UserSetupTemplate):
         self.town.selected_value = town
         
     def get_input_fields(self):
+        """ Returns a dictionary of database column headings and corresponding components/attributes """
         return {'display_name' : (self.display_name, 'text'),
                'house_number' : (self.house_number, 'text'),
                'street' : (self.street, 'selected_value'),
@@ -84,11 +86,11 @@ class UserSetup(UserSetupTemplate):
                'telephone' : (self.telephone, 'text'),}
       
     def save_input(self, **event_args):
-      """This method is called when the text in this text box is edited"""
-      input_fields = self.get_input_fields()
-      for field, _values in input_fields.items():
-          component, attribute = _values
-          anvil.server.call("save_user_setup", field, getattr(component, attribute))
+        """This method is called when the .my_details container is finally closed (after clicking OK) """
+        input_fields = self.get_input_fields()
+        for field, _values in input_fields.items():
+            component, attribute = _values
+            anvil.server.call("save_user_setup", field, getattr(component, attribute))
 
     def field_change(self, **event_args):
         """ Highlights empty input boxes"""
@@ -101,7 +103,7 @@ class UserSetup(UserSetupTemplate):
             event_args['sender'].background = '#ffffff'
 
     def show_help_tag(self, **event_args):
-        """This method is called when the link is clicked"""
+        """This method is called when a Help icon is clicked"""
         self.help_text.text = event_args['sender'].tag
         # Set all icons to unselected
         components = [self.help1, self.help2, self.help3,
