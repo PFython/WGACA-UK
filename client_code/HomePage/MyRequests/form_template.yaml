@@ -121,7 +121,8 @@ components:
       - {width: 59, title: Urgent, id: TUJLMD, data_key: urgent, expand: false}
       - {width: 170, title: Product Category, id: FQJNEU, data_key: product_category,
         expand: false}
-      - {width: 337, title: Notes, id: PPCIVS, data_key: notes, expand: false}
+      - {width: 229, title: Notes, id: PPCIVS, data_key: notes, expand: false}
+      - {title: Match Found, id: RECBJX, data_key: match_found, width: 103, expand: false}
       - {width: 43, title: '', id: KTZWSC, data_key: delete_row, expand: false}
       auto_header: true
       tooltip: ''

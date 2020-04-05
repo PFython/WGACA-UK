@@ -19,5 +19,5 @@ class Matches(MatchesTemplate):
     def request_data_access_click(self, **event_args):
         """This method is called when the Request Data Access button is clicked"""
         alert("This feature is still being worked on...\nPlease check back later.")
-
+        
 

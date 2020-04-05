@@ -121,6 +121,32 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(UserProfile())
         self.highlight_selected_menu(self.menu_my_data)
 
+    def show_about(self, **event_args):
+      """This method is called when the button is clicked"""
+      alert("""This app was developed by the Peter Fison (UK) and Aldo Ercolani (Italy)
+      in response to the Corona Virus 'Lockdowns' in their respective countries in
+      March/April 2020.
+      
+      It’s called What Goes Around Comes Around (WGACA) and it’s a tool for sharing
+      and swapping food and drink, household goods, and over-the-counter medicines
+      with those in need.
+      
+      * You can post a Request to let people know you need urgent help;
+      * You can post Offers of surplus items you’re able to share;
+      * You can volunteer as a Runner to pick up nearby Offers and deliver them
+        where they’re most needed locally.
+        
+      It’s early days and we’re already working on a load of improvements to the app
+      (mainly to protect against scammers and selfish misuse), but we wanted to start
+      sharing it ASAP so that trusted people in the area can start helping each other.
+      
+      If it proves popular, our intention is to make the app and the data available to
+      other charities (e.g. food banks), community groups, emergency services and
+      other agencies who are better placed to manage logistics/distribution using the tool.
+      
+      You can find the source code at: https://github.com/PFython/WGACA-UK""", title="About this app")
+
+
 
 
 
