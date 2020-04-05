@@ -81,25 +81,18 @@ def terms_accepted(boolean_value):
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):
+    """ Returns an address hierarchy for the given Country """
     global hierarchy
     return hierarchy[country]    
   
 @anvil.server.callable
 def get_units_of_measure():
+    """ Returns a list of valid units of measure """
     global units
     return units.split("\n")
       
 @anvil.server.callable
-def get_product_heirarchy():
+def get_product_hierarchy():
+    """ Returns a product hierarchy """
     global products
     return sorted(products.split("\n"))
-
-@anvil.server.callable
-def update_telephone(telephone):
-    user_row = anvil.users.get_user()
-    try:
-        user_row.update(Telephone = telephone)
-        result = True
-    except:
-        result = False
-    return result
