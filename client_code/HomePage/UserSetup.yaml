@@ -96,10 +96,10 @@ components:
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM XYVLQM,IOWFPG'}
     event_bindings: {click: show_help_tag}
     data_bindings:
-    - {property: tag, code: '"""This is the nickname other users will know you by.  Once
-        you submit this form, you won''t be able to change it again and your reputation
-        ''score'' and transaction history will be linked to it.  So please choose
-        carefully, and keep it clean and inoffensive!"""'}
+    - {property: tag, code: '"""This is the public Display Name (or ''nickname'')
+        other users will know you by.  Once you submit this form, you won''t be able
+        to change it again and your reputation ''score'' and transaction history will
+        be linked to it.  So please choose carefully, and keep it clean and inoffensive!"""'}
     components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',

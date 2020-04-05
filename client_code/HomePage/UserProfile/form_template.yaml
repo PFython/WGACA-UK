@@ -102,10 +102,13 @@ components:
     layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM QLTXKD,GCWISA'}
     event_bindings: {click: show_help_tag}
     data_bindings:
-    - {property: tag, code: '"""This is the nickname other users will know you by.  Once
-        you submit this form, you won''t be able to change it again and your reputation
-        ''score'' and transaction history will be linked to it.  So please choose
-        carefully, and keep it clean and inoffensive!"""'}
+    - {property: tag, code: '"""This is the public Display Name (or ''nickname'')
+        other users will know you by.  Your reputation ''score'' and transaction history
+        are linked to it and other users will hopefully be getting to know you and
+        trust you through this identity already, which is why we don''t allow you
+        to change it unless you have a really REALLY good reason for doing so.  If
+        that''s the case, please get in touch with your local server administrator...
+        something we''re deliberately not making easy or obvious."""'}
     components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
