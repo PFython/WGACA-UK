@@ -28,8 +28,9 @@ class MyOffers(MyOffersTemplate):
         if result == "Duplicate":
               self.debug_console.text = "ⓘ Unable to create new entry because this combination of Product, Unit of Measure, and Expiry Date already exists.  Please consider deleting old entry and creating a new one?"
         else:
-              self.debug_console.text = "✓ Item added."   
-        self.repeating_panel_1.items = anvil.server.call("get_my_offers")    
+              self.debug_console.text = "✓ Item added."
+              anvil.server.call('generate_matches')
+        self.repeating_panel_1.items = anvil.server.call("get_my_offers")    # or refresh_data_bindings() ?
 
     def add_item_click(self, **event_args):
         """This method is called when the Add Item button is clicked"""
@@ -42,4 +43,9 @@ class MyOffers(MyOffersTemplate):
             self.debug_console.text = "⚠ Please select a product and/or unit of measure."
         else:
             self.add_to_my_offers(product_key, units, expiry_date, notes)
+
+    def drop_down_change(self, **event_args):
+        """Clears old Notes when a Drop Down list is selected"""
+        self.notes.text = ""
+
 

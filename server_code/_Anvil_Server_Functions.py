@@ -96,3 +96,16 @@ def get_product_hierarchy():
     """ Returns a product hierarchy """
     global products
     return sorted(products.split("\n"))
+
+@anvil.server.callable
+def generate_matches():
+    """
+    Compares Offers and Requests and saves matches (by product and area) to Matches database.
+    Current version matches by Town.  TODO: Match by actual distance,
+    as for some addresses the other side of the road is a different Town!
+    """
+    requests = app_tables.requests.search(tables.order_by("product_category"), status = "New")
+    offers = app_tables.offers.search(tables.order_by("product_key"), status = "New")
+    for request in requests:
+        print(f"Request: {request['product_category']}")
+    # Assign Offer to earliest Requests first

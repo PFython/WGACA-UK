@@ -64,7 +64,7 @@ components:
         include_placeholder: true
       name: product_category
       layout_properties: {grid_position: 'TJDTSP,MNMBLJ'}
-      event_bindings: {change: drop_down_1_change}
+      event_bindings: {change: drop_down_change}
       data_bindings:
       - {property: items, code: 'list(set([" | ".join(x.split(" | ")[:2]) for x in
           self.item_choices]))'}
@@ -88,7 +88,7 @@ components:
         spacing_below: small, italic: false, background: '', bold: false, underline: false}
       name: notes
       layout_properties: {grid_position: 'LFFFLL,YJWVON'}
-      event_bindings: {change: text_area_1_change}
+      event_bindings: {}
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: ' Add Request', font_size: null,
@@ -104,6 +104,7 @@ components:
         spacing_below: small, italic: false, background: '#eaf4ff', bold: false, underline: false}
       name: debug_console
       layout_properties: {grid_position: 'WFZZXD,XRBWYK'}
+      event_bindings: {}
     event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,

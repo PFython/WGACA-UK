@@ -27,7 +27,8 @@ class MyRequests(MyRequestsTemplate):
         if result == "Duplicate":
               self.debug_console.text = "ⓘ Unable to create new entry because a request for this category already exists."
         else:
-              self.debug_console.text = "✓ Request added."   
+              self.debug_console.text = "✓ Request added."
+              anvil.server.call('generate_matches')
         self.repeating_panel_1.items = anvil.server.call('get_my_requests')    
 
     def add_request_click(self, **event_args):
@@ -39,4 +40,9 @@ class MyRequests(MyRequestsTemplate):
             self.debug_console.text = "⚠ Please select a product category."
         else:
             self.add_to_my_requests(product_category, urgent, notes)
+
+    def drop_down_change(self, **event_args):
+        """Clears old Notes when a Drop Down list is selected"""
+        self.notes.text = ""
+
 
