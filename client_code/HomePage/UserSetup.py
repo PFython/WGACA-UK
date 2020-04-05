@@ -16,6 +16,7 @@ class UserSetup(UserSetupTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         user = anvil.users.get_user()
+        self.id.text = user.get_id()
         self.display_name.text = user['display_name']
         self.email.text = user['email']
         if user['house_number']:
@@ -106,7 +107,7 @@ class UserSetup(UserSetupTemplate):
         """This method is called when a Help icon is clicked"""
         self.help_text.text = event_args['sender'].tag
         # Set all icons to unselected
-        components = [self.help1, self.help2, self.help3,
+        components = [self.help0, self.help1, self.help2, self.help3,
                       self.help4, self.help5, self.help6,
                       self.help7, self.help8, self.help9]
         for component in components:
