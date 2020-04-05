@@ -10,6 +10,7 @@ class MatchesRow(MatchesRowTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.user = anvil.users.get_user()
 
     # Any code you write here will run when the form opens.
 

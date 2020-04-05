@@ -50,7 +50,7 @@ def get_my_matches():
     """ Returns rows from the Matches database """
     user = anvil.users.get_user()
     if user is not None:
-        return app_tables.matches.search(tables.order_by("accepted"))
+        return app_tables.matches.search(tables.order_by("status"))
         # TODO: Filter results by proximity
       
 @anvil.server.callable
@@ -58,7 +58,7 @@ def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
     user = anvil.users.get_user()
     if user is not None:
-        return app_tables.matches.search(tables.order_by("accepted"), runner = user)
+        return app_tables.matches.search(tables.order_by("status"), runner = user)
       
 @anvil.server.callable
 def get_my_offers():
@@ -120,7 +120,6 @@ def generate_matches():
                     print(f"Request by {request['user']['display_name']}:\n{request['product_category']} \nOffer from {offer['user']['display_name']}:\n{offer['product_key']}\n")
                     matches += 1
                     # check if new or existing match
-                    # zaphod_row = (app_tables.people.get(name="Zaphod Beeblebrox") or app_tables.people.add_row(name="Zaphod Beeblebrox", age=42))
-#                     app_tables.matches.add_row(request=request['user'], offer=offer['user'], runner = None, status="New")
-    print(f"{len(matches)} new matches found.")
+                    new_match = app_tables.matches.add_row(request=request, offer=offer) or app_tables.matches.add_row(request=request, offer=offer, available_runners = [], status="New")
+    print(f"{matches} new matches found.")
     # Assign Offer to earliest Requests first
