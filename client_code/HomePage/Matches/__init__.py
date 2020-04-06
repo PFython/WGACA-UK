@@ -14,6 +14,7 @@ class Matches(MatchesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        anvil.server.call('generate_matches')
         self.repeating_panel_1.items = anvil.server.call("get_my_matches")     
     
     def request_data_access_click(self, **event_args):

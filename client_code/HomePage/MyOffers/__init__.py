@@ -19,6 +19,7 @@ class MyOffers(MyOffersTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.check_offer_status()
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")     
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
@@ -30,8 +31,24 @@ class MyOffers(MyOffersTemplate):
         else:
               self.debug_console.text = "✓ Item added."
               anvil.server.call('generate_matches')
+        self.check_offer_status()
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")    # or refresh_data_bindings() ?
 
+    def check_offer_status(self):
+        offers = anvil.server.call('get_my_offers')
+        print(len(offers),"offers")
+        matches = anvil.server.call('get_my_matches')
+        print(len(matches),"matches")
+        match_count = 0
+        for offer in offers:
+            for match in matches:
+                if match['offer'] == offer:
+                    match_count += 1
+                    print(offer['product_key'], offer['status'])
+        if match_count > 0:
+            offer['status'] = f"Matched with {match_count} requests"
+        self.refresh_data_bindings()        
+        
     def add_item_click(self, **event_args):
         """This method is called when the Add Item button is clicked"""
         unit_of_measure = self.unit_of_measure.selected_value or self.unit_of_measure.placeholder

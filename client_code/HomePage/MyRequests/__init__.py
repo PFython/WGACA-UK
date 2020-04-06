@@ -19,7 +19,8 @@ class MyRequests(MyRequestsTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.repeating_panel_1.items = anvil.server.call("get_my_requests")     
+        self.check_request_status()
+        self.repeating_panel_1.items = anvil.server.call("get_my_requests")  
     
     def add_to_my_requests(self,product_category, urgent, notes):
         """ Add request item to Requests database """          
@@ -33,7 +34,19 @@ class MyRequests(MyRequestsTemplate):
         self.repeating_panel_1.items = anvil.server.call('get_my_requests')    
 
     def check_request_status(self):
-        requests = anvil.server.call('get_my_requests')  
+        requests = anvil.server.call('get_my_requests')
+        print(len(requests),"requests")
+        matches = anvil.server.call('get_my_matches')
+        print(len(matches),"matches")
+        match_count = 0
+        for request in requests:
+            for match in matches:
+                if match['request'] == request:
+                    match_count += 1
+                    print(request['product_category'], request['status'])
+        if match_count > 0:
+            request['status'] = f"Matched with {match_count} offers"
+        self.refresh_data_bindings()
         
     def add_request_click(self, **event_args):
         """This method is called when the Add Request button is clicked"""
