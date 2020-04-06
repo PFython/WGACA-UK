@@ -70,7 +70,7 @@ components:
           self.item_choices]))'}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Notes, font_size: null, font: '', spacing_above: small,
+        visible: true, text: 'Notes:', font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:file-text-o'}
       name: notes_label

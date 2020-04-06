@@ -355,7 +355,7 @@ components:
     slot: default
   components:
   - type: TextArea
-    properties: {role: null, align: left, height: 72.905336, tooltip: '', placeholder: '',
+    properties: {role: null, align: left, height: 81.905336, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 12,
       auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}

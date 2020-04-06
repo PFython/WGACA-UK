@@ -14,9 +14,10 @@ class MyOffersRow(MyOffersRowTemplate):
 
     def delete_row_click(self, **event_args):
         """This method is called when a Delete Row icon is clicked"""
+        anvil.server.call("remove_orphan_matches", self.item)
         self.item.delete()
         self.remove_from_parent()
-
+        
     def show_notes_click(self, **event_args):
         """This method is called when a Show Notes icon is clicked"""
         text = "\nNOTES:\n\n" + self.item['notes']

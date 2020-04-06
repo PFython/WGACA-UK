@@ -46,6 +46,20 @@ def save_user_setup(field, value):
     user[field] = value    
 
 @anvil.server.callable
+def remove_orphan_matches(request_or_offer):
+    """ Deletes a Match where the child Request or Offer has just been deleted """
+    try:
+        for match in app_tables.matches.search(request=request_or_offer):
+            match.delete()
+    except anvil.tables.TableError:
+        pass
+    try:
+        for match in app_tables.matches.search(offer=request_or_offer):
+            match.delete()
+    except anvil.tables.TableError:
+        pass
+    
+@anvil.server.callable
 def get_my_matches():
     """ Returns rows from the Matches database """
     user = anvil.users.get_user()
@@ -131,7 +145,7 @@ def generate_matches():
                     print(f"Request by {request['user']['display_name']}:\n{request['product_category']} \nOffer from {offer['user']['display_name']}:\n{offer['product_key']}\n")
                     matches += 1
                     # check if new or existing match
-                    new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(request=request, offer=offer, status="New")
+                    new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(request=request, available_runners = [], offer=offer, status="New")
                     
     print(f"{matches} new matches found.")
     # Assign Offer to earliest Requests first

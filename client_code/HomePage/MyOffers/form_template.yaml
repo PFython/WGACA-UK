@@ -14,7 +14,7 @@ components:
   components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BXLQYQ":10,"RRYUZT":10,"YBZOCF":10,"PANIDI":10,"KKXJVW":10,"ABTLSL":10}',
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"MNMBLJ":35,"CRDUMD":10,"OKUAII":15,"GNLEMC":15,"MNBGTP":45,"RFUYBE":15,"LNWZVA":45,"QRRNFL":55,"TKIVSV":55,"XRBWYK":55}',
       spacing_below: small, background: '#cae4ff'}
     name: card_2
     layout_properties: {grid_position: 'IWGSSA,BNUBRK'}
@@ -30,6 +30,15 @@ components:
       name: input_description_1
       layout_properties: {grid_position: 'NPEONI,MWORRS'}
       event_bindings: {}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Product:', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:archive'}
+      name: label_product
+      layout_properties:
+        col_widths: {}
+        grid_position: TJDTSP,MNMBLJ OVKLAI,GNLEMC
     - type: DropDown
       properties:
         role: null
@@ -51,40 +60,32 @@ components:
         underline: false
         include_placeholder: true
       name: product_description
-      layout_properties: {grid_position: 'TJDTSP,MNMBLJ'}
+      layout_properties: {grid_position: 'TJDTSP,MNMBLJ OVKLAI,MNBGTP'}
       event_bindings: {change: drop_down_change}
       data_bindings:
       - {property: items, code: self.item_choices}
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Quantity, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: 'fa:cart-plus'}
-      name: input_description_2
-      layout_properties: {grid_position: 'GWFNTN,BXLQYQ'}
-      event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '1',
-        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-        font: '', spacing_above: small, type: number, spacing_below: small, italic: false,
-        background: '', bold: false, underline: false}
-      name: number_of_units
-      layout_properties: {grid_position: 'GWFNTN,RRYUZT'}
-      event_bindings: {}
-    - type: Label
-      properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
-        visible: true, text: Units, font_size: null, font: '', spacing_above: small,
+        visible: true, text: 'Units:', font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:balance-scale'}
-      name: input_description_3
-      layout_properties: {grid_position: 'GWFNTN,YBZOCF'}
+      name: label_units
+      layout_properties: {grid_position: 'TJDTSP,MNMBLJ NJPIOS,RFUYBE VKPVFH,XYEMGN'}
+      event_bindings: {}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: 'Notes:', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:file-text-o'}
+      name: notes_label
+      layout_properties: {grid_position: 'TJDTSP,MNMBLJ NJPIOS,RFUYBE LGPSMY,YOCYEJ'}
       event_bindings: {}
     - type: DropDown
       properties:
         role: null
         align: full
         tooltip: ''
-        placeholder: items (small)
+        placeholder: Please choose a unit of measure...
         border: ''
         enabled: true
         foreground: ''
@@ -98,20 +99,36 @@ components:
         background: ''
         bold: false
         underline: false
-        include_placeholder: false
+        include_placeholder: true
       name: unit_of_measure
-      layout_properties: {grid_position: 'GWFNTN,PANIDI'}
+      layout_properties: {grid_position: 'TJDTSP,MNMBLJ NJPIOS,LNWZVA'}
       event_bindings: {change: unit_of_measure_change}
       data_bindings:
-      - {property: selected_value, code: 'self.units_of_measure[0]', writeback: true}
       - {property: items, code: self.units_of_measure}
     - type: Label
       properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
-        visible: true, text: Expiry, font_size: null, font: '', spacing_above: small,
+        visible: true, text: 'Quantity:', font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:cart-plus'}
+      name: label_quantity
+      layout_properties: {grid_position: 'TJDTSP,CRDUMD GSVAXL,OPZXFC'}
+      event_bindings: {}
+    - type: Label
+      properties: {role: null, align: right, tooltip: 'If you don''t pick a date,
+          this will automatically be set to 7 days from now.', border: '', foreground: '',
+        visible: true, text: 'Expiry:', font_size: null, font: '', spacing_above: small,
         icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:hourglass-end'}
-      name: expiry_date_label
-      layout_properties: {grid_position: 'GWFNTN,ABTLSL'}
+      name: label_expiry
+      layout_properties: {grid_position: 'TJDTSP,CRDUMD ELTPXN,WQETBM'}
+      event_bindings: {}
+    - type: TextBox
+      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '1',
+        border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
+        font: '', spacing_above: small, type: number, spacing_below: small, italic: false,
+        background: '', bold: false, underline: false}
+      name: number_of_units
+      layout_properties: {grid_position: 'TJDTSP,OKUAII BQNVBA,FUQAEQ'}
       event_bindings: {}
     - type: DatePicker
       properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: 'If
@@ -120,15 +137,7 @@ components:
         font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
         date: '', min_date: '', background: '', bold: false, underline: false, format: ''}
       name: expiry_date
-      layout_properties: {grid_position: 'GWFNTN,KKXJVW'}
-      event_bindings: {}
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: Notes, font_size: null, font: '', spacing_above: small,
-        icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-        underline: false, icon: 'fa:file-text-o'}
-      name: notes_label
-      layout_properties: {grid_position: 'JGCSDR,BNHZYA'}
+      layout_properties: {grid_position: 'TJDTSP,OKUAII DXZBJJ,AFGBDX'}
       event_bindings: {}
     - type: TextArea
       properties: {role: null, align: left, height: 69.87495372766114, tooltip: '',
@@ -141,7 +150,7 @@ components:
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, underline: false}
       name: notes
-      layout_properties: {grid_position: 'LFFFLL,YJWVON'}
+      layout_properties: {grid_position: 'YWFKEL,QRRNFL'}
       event_bindings: {change: text_area_1_change}
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
