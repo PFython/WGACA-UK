@@ -1,17 +1,173 @@
-products =  """Drink | Water | Mineral Water (sparkling)
-Drink | Water | Mineral Water (still)
-Drink | Fruit Juice | Apple Juice
-Drink | Fruit Juice | Orange Juice
-Drink | Fruit Juice | Other...
-Drink | Carbonated | Coca Cola, Pepsi etc.
-Drink | Carbonated | Tango, Fanta etc.
-Drink | Carbonated | Ginger Beer
-Drink | Carbonated | Red Bull, Monster etc.
-Drink | Milk | Skimmed / Semi-skimmed
-Drink | Milk | Half-fat / Full-fat
-Drink | Milk | Flavoured Milk
-Drink | Milk | Coconut / Soya etc.
-Drink | Milk | Iced Coffee
+products =  """Children's Items | Board Games / Puzzles
+Children's Items | Exercise Books
+Children's Items | Paper, lined
+Children's Items | Paper, plain
+Children's Items | Pencils
+Children's Items | Pens
+Children's Items | Story Books
+Children's Items | Study Guides / Revision Aids /  Flash Cards
+Children's Items | Toys
+Drinks | Carbonated | Citrus Flavours
+Drinks | Carbonated | Coca Cola / Pepsi
+Drinks | Carbonated | Energy / Sports
+Drinks | Carbonated | Ginger Beer / Ale
+Drinks | Coffee | Coffee Beans
+Drinks | Coffee | Filter Coffee
+Drinks | Coffee | Instant Coffee
+Drinks | Fruit Juice | Apple Juice
+Drinks | Fruit Juice | Orange Juice
+Drinks | Fruit Juice | Other Flavours
+Drinks | Milk | Coconut / Soya etc.
+Drinks | Milk | Flavoured Milk
+Drinks | Tea | Herbal / Fruit Tea
+Drinks | Tea | Tea Bags
+Drinks | Water | Mineral Water (sparkling)
+Drinks | Water | Mineral Water (still)
+Essentials | Antidiarrhea
+Essentials | Antihistamine
+Essentials | Antiseptic Cream / Spray
+Essentials | Aspirin
+Essentials | Batteries
+Essentials | Bread
+Essentials | Butter / Margarine
+Essentials | Candles
+Essentials | Cold / Flu / Sinus Remedies
+Essentials | Facemask
+Essentials | Hand Sanitiser
+Essentials | Ibuprofen
+Essentials | Matches
+Essentials | Milk
+Essentials | Paracetamol
+Essentials | Thermometer
+Essentials | Throat Lozenges
+Essentials | Toilet Paper
+Food | Baby Food & Drink | Baby Food, 10 months and over
+Food | Baby Food & Drink | Baby Food, 12 months and over
+Food | Baby Food & Drink | Baby Food, 4 months and over
+Food | Baby Food & Drink | Baby Food, 7 Months and over
+Food | Baby Food & Drink | Baby Food, Desserts
+Food | Baby Food & Drink | Baby Formula – Growing up
+Food | Baby Food & Drink | Baby Formula, First milk
+Food | Baby Food & Drink | Baby Formula, Follow on
+Food | Baking | Baking Powder
+Food | Baking | Bicarbonate Of Soda
+Food | Baking | Corn Flour
+Food | Baking | Lemon / Lime Juice
+Food | Baking | Plain Flour
+Food | Baking | Self-raising Flour
+Food | Baking | Strong Bread Flour
+Food | Baking | Sugar
+Food | Baking | Yeast
+Food | Condiments | Brown Sauce
+Food | Condiments | Hot Sauce
+Food | Condiments | Ketchup
+Food | Condiments | Mayonnaise
+Food | Condiments | Mustard
+Food | Condiments | Soy Sauce
+Food | Condiments | Vinegar
+Food | Cooking Sauces | Bolognese
+Food | Cooking Sauces | Chilli Con Carne
+Food | Cooking Sauces | Curry
+Food | Cooking Sauces | Pesto
+Food | Cooking Sauces | Sweet and Sour
+Food | Dairy | Cheese, Other
+Food | Dairy | Cheese, Slices
+Food | Dairy | Cream
+Food | Dairy | Hard Cheese e.g. Cheddar
+Food | Dairy | Ice-Cream
+Food | Dairy | Soft Cheese
+Food | Dairy | Yogurt (Flavoured)
+Food | Dairy | Yogurt (Plain)
+Food | Fruits | Apples
+Food | Fruits | Avocados
+Food | Fruits | Bananas
+Food | Fruits | Blueberries
+Food | Fruits | Cherries
+Food | Fruits | Grapefruits
+Food | Fruits | Grapes
+Food | Fruits | Kiwis
+Food | Fruits | Lemon/Limes
+Food | Fruits | Melons
+Food | Fruits | Nectarines
+Food | Fruits | Oranges
+Food | Fruits | Peaches
+Food | Fruits | Pears
+Food | Fruits | Plums
+Food | Fruits | Raspberries
+Food | Fruits | Strawberries
+Food | Meats | Bacon
+Food | Meats | Beef, Diced
+Food | Meats | Beef, Halal
+Food | Meats | Beef, Joint
+Food | Meats | Beef, Kosher
+Food | Meats | Beef, Minced
+Food | Meats | Beef, Steak
+Food | Meats | Chicken, Breast
+Food | Meats | Chicken, Diced
+Food | Meats | Chicken, Halal
+Food | Meats | Chicken, Kosher
+Food | Meats | Chicken, Thighs
+Food | Meats | Chicken, Wings
+Food | Meats | Frankfurter Sausages
+Food | Meats | Ham
+Food | Meats | Lamb, Chops
+Food | Meats | Lamb, Diced
+Food | Meats | Lamb, Halal
+Food | Meats | Lamb, Joint
+Food | Meats | Lamb, Kosher
+Food | Meats | Lamb, Minced
+Food | Meats | Pork Sausages
+Food | Meats | Pork, Chops
+Food | Meats | Pork, Diced
+Food | Meats | Pork, Joint
+Food | Ready Meals | Chinese
+Food | Ready Meals | Chinese, Vegetarian 
+Food | Ready Meals | Indian
+Food | Ready Meals | Indian, Vegetarian
+Food | Ready Meals | Meat / Fish and Pasta e.g. Spaghetti Bolognese
+Food | Ready Meals | Meat / Fish and Rice e.g. Chilli Con Carne
+Food | Ready Meals | Meat / Fish Soup
+Food | Ready Meals | Meat Pizza
+Food | Ready Meals | Rice and Vegetables
+Food | Ready Meals | Thai
+Food | Ready Meals | Thai, Vegetarian
+Food | Ready Meals | Vegetable Soup
+Food | Ready Meals | Vegetarian Pasta
+Food | Ready Meals | Vegetarian Pizza
+Food | Sandwich Spreads | Chocolate / Hazlenut Spread
+Food | Sandwich Spreads | Jam / Marmalade
+Food | Sandwich Spreads | Marmite / Vegemite
+Food | Sandwich Spreads | Peanut Butter
+Food | Seafood | Cod
+Food | Seafood | Fish Fingers / Fish Cakes
+Food | Seafood | Haddock
+Food | Seafood | Mackerel
+Food | Seafood | Plaice
+Food | Seafood | Seabass
+Food | Seafood | Shrimp / Prawns
+Food | Seafood | Tuna
+Food | Snacks | Biscuits
+Food | Snacks | Cakes
+Food | Snacks | Cereal / Energy Bars
+Food | Snacks | Chocolate / Confectionery
+Food | Snacks | Crisps, Meat Flavoured
+Food | Snacks | Crisps, Vegetarian Flavoured
+Food | Snacks | Fruit / Nuts
+Food | Staples | Bagels
+Food | Staples | Baked Beans
+Food | Staples | Breakfast Cereal
+Food | Staples | Gluten Free Bread
+Food | Staples | Gravy/Stock/Bouillon
+Food | Staples | Herbs
+Food | Staples | Oats
+Food | Staples | Olive/Sunflower/Vegetable Oil
+Food | Staples | Pasta
+Food | Staples | Pepper
+Food | Staples | Pitta Bread
+Food | Staples | Rice
+Food | Staples | Salt
+Food | Staples | Spices
+Food | Staples | Tortilla Wraps
 Food | Vegetables | Asparagus
 Food | Vegetables | Aubergine
 Food | Vegetables | Broccoli
@@ -26,211 +182,61 @@ Food | Vegetables | Mushrooms
 Food | Vegetables | Onions
 Food | Vegetables | Peas
 Food | Vegetables | Peppers
-Food | Vegetables | Plantain
 Food | Vegetables | Potatoes
 Food | Vegetables | Spinach
 Food | Vegetables | Squash
 Food | Vegetables | Sweetcorn
 Food | Vegetables | Tomatoes
-Food | Fruits | Apples
-Food | Fruits | Avocados
-Food | Fruits | Bananas
-Food | Fruits | Blueberries
-Food | Fruits | Cherries
-Food | Fruits | Grapefruit
-Food | Fruits | Grapes
-Food | Fruits | Kiwis
-Food | Fruits | Lemons / Limes
-Food | Fruits | Melon
-Food | Fruits | Nectarines
-Food | Fruits | Oranges
-Food | Fruits | Peaches
-Food | Fruits | Pears
-Food | Fruits | Plums
-Food | Fruits | Raspberries
-Food | Fruits | Strawberries
-Food | Dairy | Butter
-Food | Dairy | Margarine
-Food | Dairy | Single/Double Cream
-Food | Dairy | Sour Cream
-Food | Dairy | Whipped Cream
-Food | Dairy | Yogurt (plain)
-Food | Dairy | Yogurt (flavoured)
-Food | Cheese | Soft e.g. Brie, Camembert
-Food | Cheese | Hard e.g. Cheddar, Red Leicester
-Food | Cheese | Spreadable e.g. Cottage Cheese, Cream Cheese
-Food | Cheese | Goat
-Food | Cheese | Sandwich Slices
-Food | Cheese | Veined e.g. Stilton
-Food | Cheese | Other
-Food | Meat | Bacon
-Food | Meat | Beef - Minced
-Food | Meat | Beef - Diced
-Food | Meat | Beef - Joint
-Food | Meat | Beef - Steak
-Food | Meat | Chicken - Breast
-Food | Meat | Chicken - Thighs
-Food | Meat | Chicken - Wings
-Food | Meat | Chicken - Diced
-Food | Meat | Ham - Sliced
-Food | Meat | Ham - Gammon Joint
-Food | Meat | Lamb - Minced
-Food | Meat | Lamb - Diced
-Food | Meat | Lamb - Chops
-Food | Meat | Lamb - Joint
-Food | Meat | Pork - Diced
-Food | Meat | Pork - Chops
-Food | Meat | Pork - Joint
-Food | Meat | Sausages
-Food | Meat | Hot Dogs
-Food | Seafood | Crab
-Food | Seafood | Lobster
-Food | Seafood | Mackerel
-Food | Seafood | Mussels
-Food | Seafood | Oysters
-Food | Seafood | Salmon
-Food | Seafood | Seabass
-Food | Seafood | Shrimp/Prawns
-Food | Seafood | Trout
-Food | Seafood | Tuna - Steak
-Food | Seafood | Tuna - Tinned
-Food | Frozen | Ice-Cream
-Food | Frozen | Pizza
-Food | Bread | White Sliced
-Food | Bread | Brown Sliced
-Food | Bread | Seeded Sliced
-Food | Bread | Granary Sliced
-Food | Bread | Wholemeal Sliced
-Food | Bread | White 
-Food | Bread | Wholemeal
-Food | Bread | Granary
-Food | Bread | Seeded  
-Food | Bread | Brown  
-Food | Bread | Tiger Loaf
-Food | Bread | Giraffe Loaf
-Food | Bread | Bagels
-Food | Bread | Crumpets
-Food | Bread | English Muffins
-Food | Bread | Pastries
-Food | Bread | Cake
-Food | Bread | Pitta Bread
-Food | Bread | Tortilla Wraps
-Food | Bread | Hot Cross Buns
-Food | Bread | Malt Loaf
-Food | Bread | Waffles
-Food | Bread | Rolls
-Food | Pantry | Tinned Tomatoes
-Food | Pantry | Tinned Sweetcorn
-Food | Pantry | Tinned Carrots
-Food | Pantry | Tinned Potatoes
-Food | Pantry | Tinned Kidney Beans
-Food | Pantry | Baked Beans
-Food | Pantry | Soup
-Food | Pantry | Bouillon Cubes
-Food | Pantry | Cereal
-Food | Pantry | Coffee / Filters
-Food | Pantry | Instant Potatoes
-Food | Pantry | Lemon / Lime Juice
-Food | Pantry | Gravy Granules
-Food | Pantry | Olive Oil
-Food | Pantry | Pasta
-Food | Pantry | Peanut Butter
-Food | Pantry | Jam
-Food | Pantry | Marmalade
-Food | Pantry | Marmite
-Food | Pantry | Pickle
-Food | Pantry | Rice
-Food | Pantry | Tea
-Food | Pantry | Vegetable Oil
-Food | Pantry | Vinegar
-Food | Pantry | Tinned Corn Beef
-Food | Pantry | Tinned Pies
-Food | Sauces | Tomato
-Food | Sauces | Mayonaise
-Food | Sauces | Mustard
-Food | Sauces | Hot Sauce
-Food | Sauces | Soy
-Food | Sauces | Pasta
-Food | Sauces | Pesto
-Food | Sauces | Worcestershire
-Food | Sauces | Salsa
-Food | Sauces | Curry
-Food | Pantry | Self- Raising Flour
-Food | Pantry | Plain Flour
-Food | Pantry | Corn Flour
-Food | Pantry | Yeast
-Food | Pantry | Strong Bread Flour
-Food | Pantry | Baking Powder
-Food | Pantry | Bicarbonate Of Soda
-Food | Pantry | Sugar - Castor
-Food | Pantry | Sugar - Granulated
-Food | Pantry | Crisps
-Food | Pantry | Spices (miscellaneous)
-Food | Pantry | Herbs (miscellaneous)
-Food | Pantry | Salt
-Food | Pantry | Vanilla Extract
-Household | Kitchenware | Aluminum Foil
-Household | Kitchenware | Napkins
-Household | Kitchenware | Non-Stick Spray
-Household | Kitchenware | Paper Towels
-Household | Kitchenware | Plastic Wrap
-Household | Kitchenware | Sandwich / Freezer Bags
-Household | Kitchenware | Wax Paper
-Pets | Store | Cat Food / Treats
-Pets | Store | Cat Litter
-Pets | Store | Dog Food / Treats
-Pets | Store | Flea Treatment
-Household | Personal Care | Antiperspirant / Deodorant
-Household | Personal Care | Bath Soap / Hand Soap
-Household | Personal Care | Condoms / Other B.C.
-Household | Personal Care | Cosmetics
-Household | Personal Care | Cotton Swabs / Balls
-Household | Personal Care | Facial Cleanser
-Household | Personal Care | Facial Tissue
-Household | Personal Care | Feminine Products
-Household | Personal Care | Floss
-Household | Personal Care | Hair Gel / Spray
-Household | Personal Care | Lip Balm
-Household | Personal Care | Moisturizing Lotion
-Household | Personal Care | Mouthwash
-Household | Personal Care | Razors / Shaving Cream
-Household | Personal Care | Shampoo / Conditioner
-Household | Personal Care | Sunblock
-Household | Personal Care | Toilet Paper
-Household | Personal Care | Toothpaste
-Household | Personal Care | Vitamins / Supplements
-Household | Baby | Nappies
-Household | Baby | Nappy Bags
-Household | Baby | Formula
-Household | Baby | Baby Lotion
-Household | Baby | Baby Wipes
-Household | Baby | Baby Oil
-Household | Baby | Shampoo  
-Household | Baby | Cotton Wool
-Household | Baby | Cotton Buds
-Household | Cleaning Products | Air Freshener
-Household | Cleaning Products | Bathroom Cleaner
-Household | Cleaning Products | Bleach / Detergent
-Household | Cleaning Products | Dettol
-Household | Cleaning Products | Dish / Dishwasher Soap
-Household | Cleaning Products | Garbage Bags
-Household | Cleaning Products | Glass Cleaner
-Household | Cleaning Products | Kitchen Cleaner
-Household | Cleaning Products | Mop Head / Vacuum Bags
-Household | Cleaning Products | Sponges / Scrubbers
-Household | Cleaning Products | Toilet Cleaner
-Household | Cleaning Products | Washing - Powder
-Household | Cleaning Products | Washing  - Liquid
-Household | Cleaning Products | Fabric Softner
-Medical | Allergy
-Medical | Antidiarrhea
-Medical | Indigestion/Antacid
-Medical | Antiseptic Cream/Spray
-Medical | Aspirin
-Medical | Cold / Flu / Sinus
-Medical | Ibuprofen
-Medical | Paracetamol
-Medical | Paracetamol - Soluble
-Medical | Plasters
-Medical | Facemask
-Medical | Latex Gloves"""
+Healthcare | Antiperspirant / Deodorant
+Healthcare | Baby Lotion / Oil
+Healthcare | Baby Pull-ups
+Healthcare | Baby Wipes
+Healthcare | Bandages / Dressings
+Healthcare | Cotton Buds
+Healthcare | Cotton Wool
+Healthcare | Dental Floss
+Healthcare | Indigestion / Antacid
+Healthcare | Latex Gloves
+Healthcare | Lip Balm
+Healthcare | Moisturiser
+Healthcare | Mouthwash
+Healthcare | Nappies / 11kg to 22kg
+Healthcare | Nappies / 13+ kg
+Healthcare | Nappies / 2kg to 5kg
+Healthcare | Nappies / 4kg to 9kg
+Healthcare | Nappies / 7kg to 16kg
+Healthcare | Nappy Bags
+Healthcare | Plasters
+Healthcare | Razor Blades
+Healthcare | Shampoo / Conditioner
+Healthcare | Shaving Foam / Gel
+Healthcare | Soap / Shower Gel
+Healthcare | Tampons / Sanitary Towels
+Healthcare | Toothpaste
+Healthcare | Vitamins / Supplements
+Household Items | Air Freshener
+Household Items | Aluminium Foil
+Household Items | Baking Paper
+Household Items | Bathroom Cleaner
+Household Items | Bleach
+Household Items | Dishwasher Soap / tablets
+Household Items | Disinfectant
+Household Items | Fabric Softner
+Household Items | Garbage Bags
+Household Items | Glass Cleaner
+Household Items | Kitchen Cleaner
+Household Items | Mop Heads / Vacuum Bags
+Household Items | Napkins
+Household Items | Paper Towels
+Household Items | Plastic Wrap
+Household Items | Sandwich / Freezer Bags
+Household Items | Sponges / Scrubbers
+Household Items | Toilet Cleaner
+Household Items | Washing Powder / Liquid
+Household Items | Washing Up liquid
+Pet Care | Cat Food 
+Pet Care | Cat Litter
+Pet Care | Cat Treats
+Pet Care | Dog Food
+Pet Care | Dog Poo Bags
+Pet Care | Dog Treats"""
