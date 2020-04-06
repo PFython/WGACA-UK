@@ -64,8 +64,9 @@ components:
       col_widths: {}
       grid_position: LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,ATRDPM WCIEML,TAWYIL WJEPQX,CVPLFD
     data_bindings:
-    - {property: text, code: 'str(self.item[''offer''][''user''][''house_number''])+"
+    - {property: text, code: 'self.item[''offer''][''user''][''display_name'']+"\n"+str(self.item[''offer''][''user''][''house_number''])+"
         "+self.item[''offer''][''user''][''street'']+"\n"+self.item[''offer''][''user''][''town'']+"\n"+self.item[''offer''][''user''][''county'']+"\n"+self.item[''offer''][''user''][''postcode'']'}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
@@ -85,8 +86,9 @@ components:
       col_widths: {}
       grid_position: LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,POOLUL QEFALZ,SYMPYG
     data_bindings:
-    - {property: text, code: 'str(self.item[''request''][''user''][''house_number''])+"
+    - {property: text, code: 'self.item[''request''][''user''][''display_name'']+"\n"+str(self.item[''request''][''user''][''house_number''])+"
         "+self.item[''request''][''user''][''street'']+"\n"+self.item[''request''][''user''][''town'']+"\n"+self.item[''request''][''user''][''county'']+"\n"+self.item[''request''][''user''][''postcode'']'}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
@@ -107,6 +109,7 @@ components:
       grid_position: LQZTGU,WYMIYQ BMVFCW,NQKKRA ENKKNI,GJBULY
     data_bindings:
     - {property: text, code: 'self.item[''request''][''product_category'']'}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
@@ -118,6 +121,7 @@ components:
       grid_position: LQZTGU,WYMIYQ BMVFCW,NQKKRA UFRJFE,MZFEXP
     data_bindings:
     - {property: text, code: 'self.item[''request''][''notes'']'}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Status, font_size: null, font: '', spacing_above: small,
@@ -136,22 +140,10 @@ components:
     name: runner
     layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY NZYOZQ,BCSGZB'}
     data_bindings:
-    - {property: visible, code: 'self.item[''runner''][''display_name''] != "Noone"'}
-    - {property: text, code: '"Runner: "+self.item[''runner''][''display_name'']'}
+    - {property: text, code: '"Approved Runner: "+self.item[''approved_runner''][''display_name'']'}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Runner Accepted, font_size: null, font: '',
-      spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
-      checked: false, underline: false}
-    name: check_box_1
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY XRZGKK,ZNGOWF
-    data_bindings:
-    - {property: checked, code: 'self.item[''accepted'']', writeback: true}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Items Collected, font_size: null, font: '',
+      foreground: '', visible: true, text: Items Picked Up, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: check_box_1_copy
@@ -162,7 +154,7 @@ components:
     - {property: checked, code: 'self.item[''offer_collected'']', writeback: true}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Items Received, font_size: null, font: '',
+      foreground: '', visible: true, text: Items Dropped Off, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: check_box_1_copy_2
@@ -171,6 +163,7 @@ components:
       grid_position: LQZTGU,SOVMIY LSFXVD,LPRBRE
     data_bindings:
     - {property: checked, code: 'self.item[''offer_delivered'']', writeback: true}
+    event_bindings: {}
   event_bindings: {}
 container:
   type: DataRowPanel

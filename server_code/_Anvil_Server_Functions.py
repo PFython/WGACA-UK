@@ -51,7 +51,7 @@ def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
     user = anvil.users.get_user()
     if user is not None:
-        return app_tables.matches.search(tables.order_by("status"), runner = user)
+        return app_tables.matches.search(tables.order_by("status"), approved_runner = user)
 
 @anvil.server.callable
 def get_my_matches():

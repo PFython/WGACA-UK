@@ -185,6 +185,7 @@ components:
         expand: false}
       - {width: 61, title: Quantity, id: LILUPW, data_key: units, expand: false}
       - {width: 116, title: Expiry Date, id: FOJVUM, data_key: expiry_date, expand: false}
+      - {title: Status, id: ITGWVO, data_key: status}
       - {width: 44, title: '', id: HYKROV, data_key: delete_row, expand: false}
       auto_header: true
       tooltip: ''

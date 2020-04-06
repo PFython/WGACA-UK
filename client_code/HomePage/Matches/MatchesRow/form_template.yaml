@@ -92,7 +92,7 @@ components:
         TBRFDX,IQBUEB XIQMDW,OQKWYE'}
     event_bindings: {}
     data_bindings:
-    - {property: text, code: 'self.item[''offer''][''user''][''street'']'}
+    - {property: text, code: 'self.item[''offer''][''user''][''street'']+"\n"+self.item[''offer''][''user''][''town'']'}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
@@ -109,7 +109,7 @@ components:
     name: dropoff
     layout_properties: {column: VVBHYF, grid_position: 'EFIYOE,NSGFGQ PGNIOP,RKWSSZ'}
     data_bindings:
-    - {property: text, code: 'self.item[''request''][''user''][''street'']'}
+    - {property: text, code: 'self.item[''request''][''user''][''street'']+"\n"+self.item[''request''][''user''][''town'']'}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
