@@ -31,7 +31,7 @@ def generate_matches():
     requests = app_tables.requests.search(tables.order_by("product_category"))
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
-    print("Generating Matches...")
+#     print("Generating Matches...")
     statuses = "Awaiting Pickup, Pickup Failed, Awaiting Delivery, Delivery Failed, Delivery Complete".split(", ")
     for request in (x for x in requests if x['status'] not in statuses):
         for offer in (x for x in offers if x['status'] not in statuses):
