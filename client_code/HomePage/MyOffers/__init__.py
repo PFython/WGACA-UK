@@ -34,7 +34,7 @@ class MyOffers(MyOffersTemplate):
         self.check_offer_status()
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")    # or refresh_data_bindings() ?
 
-    def check_offer_status(self):
+    def check_offer_status(self, **properties):
         offers = anvil.server.call('get_my_offers')
         matches = anvil.server.call('get_my_matches')
         for offer in offers:

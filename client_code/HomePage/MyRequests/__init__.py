@@ -33,7 +33,7 @@ class MyRequests(MyRequestsTemplate):
         self.check_request_status()
         self.repeating_panel_1.items = anvil.server.call('get_my_requests')    
 
-    def check_request_status(self):
+    def check_request_status(self, **properties):
         requests = anvil.server.call('get_my_requests')
         matches = anvil.server.call('get_my_matches')
         for request in requests:
