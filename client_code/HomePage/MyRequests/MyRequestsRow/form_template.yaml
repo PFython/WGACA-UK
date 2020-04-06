@@ -26,4 +26,6 @@ components:
   event_bindings: {}
   data_bindings:
   - {property: text, code: 'self.item[''status'']'}
+  - {property: foreground, code: '''#0080c0'' if self.item[''status''].startswith("New")
+      else ''#5eb348'''}
 is_package: true

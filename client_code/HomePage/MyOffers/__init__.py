@@ -42,7 +42,6 @@ class MyOffers(MyOffersTemplate):
             for match in matches:
                 if match['offer'] == offer:
                     match_count += 1
-                    print(offer['product_key'], offer['status'])
             if match_count > 0:
                 offer['status'] = f"Matched with {match_count} requests"
         self.refresh_data_bindings()        
