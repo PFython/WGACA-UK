@@ -12,12 +12,13 @@ package_name: WGACA
 allow_embedding: true
 name: WGACA
 runtime_options: {version: 2, client_version: '3', server_version: python3-full}
-metadata: {logo_img: '', title: What Goes Around Comes Around, description: 'This
-    app is intended to link good neighbours who might have provisions or medicine
-    they can spare, with people who may be more in need and close enough that delivering
-    by hand or vehicle is an easy option.  When complete, it will attempt to auto-match
-    offers and requests and assign to delivery volunteers and other 3rd sector/governement
-    support groups to help move items around to where they''ve most needed.'}
+metadata: {logo_img: 'asset:WGACA Logo transparent.png', title: What Goes Around Comes Around,
+  description: 'This app is intended to link good neighbours who might have provisions
+    or medicine they can spare, with people who may be more in need and close enough
+    that delivering by hand or vehicle is an easy option.  When complete, it will
+    attempt to auto-match offers and requests and assign to delivery volunteers and
+    other 3rd sector/governement support groups to help move items around to where
+    they''ve most needed.'}
 startup_form: HomePage
 native_deps: {head_html: ''}
 dependency_order: []
