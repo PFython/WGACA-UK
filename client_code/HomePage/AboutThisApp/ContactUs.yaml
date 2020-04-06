@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30,"IWXZFZ":40,"NYMABV":20}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"NTECZM":30}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
@@ -12,79 +12,7 @@ components:
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
       underline: false, icon: 'fa:user'}
     name: label_id
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW OICDQH,NSXQZZ'}
-  - type: Label
-    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Display Name:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:user'}
-    name: label_display_name
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW LVIDYJ,KCEVXA'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:envelope'}
-    name: label_email
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UDEWSH,GYSESX'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:home'}
-    name: label_house_number
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VFRYKY,MKRYCT'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:map-signs'}
-    name: label_street
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VFSRLT,XFCMFC', slot: default}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:map-marker'}
-    name: label_town
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW BVETVD,SZEXEV'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:map'}
-    name: label_county
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,EGSHUA'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:globe'}
-    name: label_country
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VDFOZD,LNLRHN'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
-      underline: false, icon: 'fa:envelope-o'}
-    name: label_post_code
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW PEBTFK,AOVWIQ'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
-      underline: false, icon: 'fa:phone'}
-    name: label_telephone
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW ZEUPUP,AWGPLP'}
-    event_bindings: {}
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW'}
   - type: DropDown
     properties:
       role: null
@@ -108,8 +36,7 @@ components:
       underline: false
       include_placeholder: true
     name: category
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DDTAWN,IWXZFZ DBLOHI,WTYOLN',
-      slot: default}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM DBLOHI,WTYOLN', slot: default}
     event_bindings: {}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Title or Subject,
@@ -117,7 +44,7 @@ components:
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: true, underline: false}
     name: title
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DDTAWN,IWXZFZ KIKAKC,PEOLKC'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM KIKAKC,PEOLKC'}
     event_bindings: {change: field_change, show: field_change}
     data_bindings: []
   - type: TextArea
@@ -130,7 +57,7 @@ components:
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, underline: false}
     name: description
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DDTAWN,IWXZFZ SCBIXT,FXXWTX'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM SCBIXT,FXXWTX'}
     event_bindings: {}
     data_bindings:
     - {property: text, code: self.help0.tag, writeback: true}
@@ -140,7 +67,7 @@ components:
         further?', font_size: null, font: '', spacing_above: none, spacing_below: none,
       italic: false, background: '', bold: false, checked: false, underline: false}
     name: check_box_1
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DDTAWN,IWXZFZ JNTRBT,AZDZCM'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JNTRBT,AZDZCM SQJYYC,KMTUUB'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -148,57 +75,13 @@ components:
         further?', font_size: null, font: '', spacing_above: none, spacing_below: none,
       italic: false, background: '', bold: false, checked: false, underline: false}
     name: email_ok
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DDTAWN,IWXZFZ YWDKGT,AHHUKC'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JNTRBT,AZDZCM JHLDIR,NFLCSS'}
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question-circle'}
-    name: help0
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM DDTAWN,NYMABV'}
-    data_bindings:
-    - {property: tag, code: '"""This is a unique ID used by our app to identify you.  You
-        won''t need to remember it, but here it is anyway."""'}
-    components: []
-    event_bindings: {click: show_help_tag}
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: telephone
-    layout_properties: {grid_position: 'LAGDLB,NTECZM KAJWFB,BVBGWX'}
-    data_bindings:
-    - {property: text, code: 'self.item[''text'']', writeback: true}
-    event_bindings: {change: field_change, show: field_change}
-  - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help9
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM KAJWFB,XWLZHD'}
-    data_bindings:
-    - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
-        need it.  If you choose to add your Telephone number now however, you''ll
-        have the option to explicitly share it with Runners you approve to pick up
-        or drop off deliveries.  But then again you might prefer to wait until you''ve
-        met them once in person, and then swap numbers directly."""'}
-    event_bindings: {click: show_help_tag}
-    components: []
+  - type: ColumnPanel
+    properties: {}
+    name: column_panel_1
+    layout_properties: {grid_position: 'LAGDLB,NTECZM JNTRBT,HFQIXJ'}
   event_bindings: {hide: save_input}
-- type: ColumnPanel
-  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
-    spacing_below: small, background: '#cae4ff'}
-  name: my_details_copy
-  layout_properties:
-    col_widths: {}
-    grid_position: MQEQGC,ACEIOO
-    slot: default
-  components: []
-  event_bindings: {}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
