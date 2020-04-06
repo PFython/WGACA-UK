@@ -19,14 +19,11 @@ components:
   event_bindings: {}
   data_bindings:
   - {property: text, code: 'self.item[''date_posted''].strftime(''%d %b %Y'')'}
-- type: Link
-  properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '',
-    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-    spacing_above: small, icon_align: left, col_widths: '', spacing_below: small,
-    italic: false, background: '', bold: false, underline: false, icon: 'fa:exchange'}
-  name: match_found
+- type: Label
+  properties: {}
+  name: status
   layout_properties: {column: RECBJX}
-  event_bindings: {show: match_found_status}
+  event_bindings: {}
   data_bindings:
-  - {property: text, code: self.item}
+  - {property: text, code: 'self.item[''status'']'}
 is_package: true

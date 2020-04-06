@@ -29,8 +29,12 @@ class MyRequests(MyRequestsTemplate):
         else:
               self.debug_console.text = "✓ Request added."
               anvil.server.call('generate_matches')
+        self.check_request_status()
         self.repeating_panel_1.items = anvil.server.call('get_my_requests')    
 
+    def check_request_status(self):
+        requests = anvil.server.call('get_my_requests')  
+        
     def add_request_click(self, **event_args):
         """This method is called when the Add Request button is clicked"""
         product_category = (self.product_category.selected_value)
