@@ -36,13 +36,13 @@ class MyRequests(MyRequestsTemplate):
     def check_request_status(self):
         requests = anvil.server.call('get_my_requests')
         matches = anvil.server.call('get_my_matches')
-        match_count = 0
         for request in requests:
+            match_count = 0
             for match in matches:
                 if match['request'] == request:
                     match_count += 1
-        if match_count > 0:
-            request['status'] = f"Matched with {match_count} offers"
+            if match_count > 0:
+                request['status'] = f"Matched with {match_count} offers"
         self.refresh_data_bindings()
         
     def add_request_click(self, **event_args):

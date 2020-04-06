@@ -37,14 +37,14 @@ class MyOffers(MyOffersTemplate):
     def check_offer_status(self):
         offers = anvil.server.call('get_my_offers')
         matches = anvil.server.call('get_my_matches')
-        match_count = 0
         for offer in offers:
+            match_count = 0
             for match in matches:
                 if match['offer'] == offer:
                     match_count += 1
                     print(offer['product_key'], offer['status'])
-        if match_count > 0:
-            offer['status'] = f"Matched with {match_count} requests"
+            if match_count > 0:
+                offer['status'] = f"Matched with {match_count} requests"
         self.refresh_data_bindings()        
         
     def add_item_click(self, **event_args):
