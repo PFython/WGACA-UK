@@ -70,15 +70,15 @@ class HomePage(HomePageTemplate):
         self.menu_my_matches.bold = False
         self.menu_my_deliveries.bold = False
         self.menu_my_data.bold = False
-        self.menu_my_offers.font_size = 12
-        self.menu_my_requests.font_size = 12
-        self.menu_my_matches.font_size = 12
-        self.menu_my_deliveries.font_size = 12
-        self.menu_my_data.font_size = 12
+        self.menu_my_offers.font_size = 16
+        self.menu_my_requests.font_size = 16
+        self.menu_my_matches.font_size = 16
+        self.menu_my_deliveries.font_size = 16
+        self.menu_my_data.font_size = 16
         selected.background = self.ycolour
         selected.foreground = "#ffffff"
         selected.bold = True
-        selected.font_size = 12
+        selected.font_size = 16
         # Hide all images
         images = {self.menu_about: self.image_0,
                   self.menu_my_offers: self.image_1,

@@ -7,7 +7,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30,"AELAEO":15,"WWCPOC":35,"KYUTMY":15,"VCKQPR":10}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties: {slot: default}
@@ -299,35 +299,18 @@ components:
       font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: telephone
-    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI LHPCSW,YHHOVV'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI'}
     data_bindings:
     - {property: text, code: 'self.item[''text'']', writeback: true}
     event_bindings: {change: field_change, show: field_change, pressed_enter: save_optional_field,
       lost_focus: save_optional_field}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
-    name: view_history
-    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI NIWKUD,MBISVL'}
-    event_bindings: {click: view_history_click}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Delete account', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#ff8080', bold: false, underline: false, icon: 'fa:trash'}
-    name: delete_account
-    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI NIWKUD,SOLBGG'}
-    event_bindings: {click: delete_account_click}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help9
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM SYUTMD,DVPTNJ
-        LOGWWL,LRRUCR'}
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM SYUTMD,DVPTNJ'}
     data_bindings:
     - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
         need it.  If you choose to add your Telephone number now however, you''ll
@@ -337,14 +320,40 @@ components:
     event_bindings: {click: show_help_tag}
     components: []
   - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Transaction
+
+        History', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '#5eb348', bold: false, underline: false,
+      icon: 'fa:list'}
+    name: view_history
+    layout_properties: {grid_position: 'QHLEHR,AELAEO'}
+    event_bindings: {click: view_history_click}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Delete
+
+        Account', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '#ff8080', bold: false, underline: false,
+      icon: 'fa:trash'}
+    name: delete_account
+    layout_properties: {grid_position: 'QHLEHR,KYUTMY'}
+    event_bindings: {click: delete_account_click}
+  - type: Button
     properties: {role: null, align: left, tooltip: 'Also: Reset Password, Switch User',
       border: '', enabled: true, foreground: '#ffffff', visible: true, text: ' Log
-        Out, Change Password', font_size: null, font: '', spacing_above: small, icon_align: left,
+        Out,
+
+        Change Password', font_size: null, font: '', spacing_above: small, icon_align: left,
       spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
       icon: 'fa:power-off'}
     name: change_password
-    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,DVPTNJ NCEPAR,PCQEZQ'}
+    layout_properties: {grid_position: 'QHLEHR,WWCPOC'}
     event_bindings: {click: log_out}
+  - type: ColumnPanel
+    properties: {}
+    name: column_panel_1
+    layout_properties: {grid_position: 'QHLEHR,VCKQPR'}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,

@@ -181,11 +181,11 @@ components:
       role: null
       columns:
       - {width: 37, title: '', id: GMBNWP, data_key: show_notes, expand: false}
-      - {width: 247, title: Products & Unit Type, id: HQUPKJ, data_key: product_key,
+      - {width: 453, title: Products & Unit Type, id: HQUPKJ, data_key: product_key,
         expand: false}
       - {width: 61, title: Quantity, id: LILUPW, data_key: units, expand: false}
       - {width: 116, title: Expiry Date, id: FOJVUM, data_key: expiry_date, expand: false}
-      - {width: 277, title: Status, id: ITGWVO, data_key: status, expand: false}
+      - {width: 195, title: Status, id: ITGWVO, data_key: status, expand: false}
       - {width: 44, title: '', id: HYKROV, data_key: delete_row, expand: false}
       auto_header: true
       tooltip: ''
