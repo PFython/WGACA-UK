@@ -36,6 +36,27 @@ class ConfirmMatch(ConfirmMatchTemplate):
       self.clear()
       self.parent.visible = False
 
+    def confirm_match_button_click(self, **event_args):
+      """This method is called when the Confirm Match button is clicked"""
+      writeback_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
+                    'email_shared_with': self.email_to_requester.checked,
+                    'postcode_shared_with': self.postcode_to_requester.checked,
+                   }
+      for field, checked in writeback_dict.items():
+          user = anvil.users.get_user()
+          users = list(set((user[field] or []) + [self.requester]))
+          if not checked:
+              users = users.remove(self.requester)
+          anvil.server.call('save_user_setup', field, users)
+      self.clear()
+      # Clean up each Table as required and refresh Matches view
+
+
+
+
+
+
+
 
 
 

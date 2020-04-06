@@ -71,7 +71,7 @@ components:
     event_bindings: {}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
-      foreground: '#ffff', visible: true, text: CANCEL, font_size: null, font: '',
+      foreground: '#ffff', visible: true, text: Cancel, font_size: null, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '#ff8080', bold: false, underline: false, icon: 'fa:times'}
     name: cancel
@@ -79,9 +79,9 @@ components:
     event_bindings: {click: cancel_button_click}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
-      foreground: '#ffff', visible: true, text: ' SEND', font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#0080c0', bold: false, underline: false, icon: 'fa:chevron-right'}
+      foreground: '#ffff', visible: true, text: Send, font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '#0080c0',
+      bold: false, underline: false, icon: 'fa:chevron-right'}
     name: button_1
     layout_properties: {grid_position: 'JNTRBT,HJWGMJ XARGRS,YFVDGM'}
     event_bindings: {click: send_message}

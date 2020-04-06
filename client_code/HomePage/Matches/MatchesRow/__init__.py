@@ -23,7 +23,7 @@ class MatchesRow(MatchesRowTemplate):
       else:
           event_args['sender'].checked = False
           event_args['sender'].text = "Tick to volunteer"
-      self.volunteers.foreground = '#ff8080' if self.volunteers.text.startswith("0 ") else '#5eb348'
+      self.volunteers.foreground = '#ff8080' if self.volunteers.text.startswith("0 ") else '#0080c0'
 
   def volunteer_toggle_change(self, **event_args):
     """This method is called when this Volunteer Toggle checkbox is checked or unchecked"""
@@ -38,23 +38,28 @@ class MatchesRow(MatchesRowTemplate):
   def show_myself(self, **event_args):
     """This method is called when the data row panel is shown on the screen"""
     user = anvil.users.get_user()
+    # Green: #5eb348
+    # Blue: #0080c0
+    # Red: #ff8080
     if self.item['request']['user'] == user:
         self.label_1.text  = "My Request"
-        self.label_1.foreground = '#0080c0'
-        self.label_4.foreground = '#0080c0'
-        self.dropoff.foreground = '#0080c0'
+        self.label_1.foreground = '#5eb348'
+        self.label_4.foreground = '#5eb348'
+        self.dropoff.foreground = '#5eb348'
         self.dropoff.icon = 'fa:home'
-        self.request.foreground = '#0080c0'
-        self.request_notes.foreground = '#0080c0'
+        self.request.foreground = '#5eb348'
+        self.request_notes.foreground = '#5eb348'
+        
 
     if self.item['offer']['user'] == user:
+        self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
         self.label_2.text  = "My Offer"
-        self.label_2.foreground = '#0080c0'
-        self.label_3.foreground = '#0080c0'        
-        self.pickup.foreground = '#0080c0'
+        self.label_2.foreground = '#5eb348'
+        self.label_3.foreground = '#5eb348'        
+        self.pickup.foreground = '#5eb348'
         self.pickup.icon = 'fa:home'
-        self.offer.foreground = '#0080c0'
-        self.offer_notes.foreground = '#0080c0'
+        self.offer.foreground = '#5eb348'
+        self.offer_notes.foreground = '#5eb348'
         self.confirm_match.visible = True
         self.volunteer_toggle.visible = False
 
@@ -62,7 +67,17 @@ class MatchesRow(MatchesRowTemplate):
       """This method is called when the Select Volunteer button is clicked"""
       self.confirm_match.visible = False
 #       self.confirm_match_container.visible = True
-      self.card_1.add_component(ConfirmMatch())
+      new_form = ConfirmMatch()
+      self.card_1.add_component(new_form)
+      user = anvil.users.get_user()
+      requester = self.item['request']['user']
+      new_form.requester = requester
+      new_form.telephone_to_requester.checked = requester in (user['telephone_shared_with'] or [])
+      new_form.telephone_to_requester.text = requester['display_name'] + " (Requester)"
+      new_form.email_to_requester.checked = requester in (user['email_shared_with'] or [])
+      new_form.email_to_requester.text = requester['display_name'] + " (Requester)"
+      new_form.postcode_to_requester.checked = requester in (user['postcode_shared_with'] or [])
+      new_form.postcode_to_requester.text = requester['display_name'] + " (Requester)"
 
 
 

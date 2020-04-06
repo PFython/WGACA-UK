@@ -1,9 +1,9 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"TWGZZI":20,"YVMZJZ":40,"KJANWE":20,"TEHNEG":40,"MXOFYD":20,"LKCVES":40,"BTDGGF":40,"WYIQKS":8,"QQSQWY":20,"FMUNRE":40,"MMWOBQ":20,"ASQNQX":40,"NEXMGH":20,"HBGYDG":40}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"TWGZZI":20,"YVMZJZ":40,"KJANWE":20,"TEHNEG":40,"MXOFYD":20,"LKCVES":40,"BTDGGF":40,"WYIQKS":12,"QQSQWY":20,"FMUNRE":40,"MMWOBQ":20,"ASQNQX":40,"NEXMGH":20,"HBGYDG":40}',
     spacing_below: small, background: '#cae4ff'}
-  name: my_details
+  name: confirm_match_column_panel
   layout_properties: {slot: default}
   components:
   - type: Label
@@ -14,7 +14,7 @@ components:
         Runners to assign to this delivery (including yourself if you wish).', font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '', bold: false, underline: false, icon: 'fa:heartbeat'}
-    name: label_1
+    name: label_introduction
     layout_properties: {grid_position: 'WGYKOJ,MHCSRH'}
     event_bindings: {}
   - type: DropDown
@@ -37,7 +37,7 @@ components:
       bold: false
       underline: false
       include_placeholder: true
-    name: category
+    name: runner_dropdown
     layout_properties: {grid_position: 'RYMEKO,RHBZWB', slot: default}
     event_bindings: {}
   - type: TextArea
@@ -133,7 +133,7 @@ components:
     event_bindings: {}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
-      foreground: '#ffff', visible: true, text: CANCEL, font_size: null, font: '',
+      foreground: '#ffff', visible: true, text: Cancel, font_size: null, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '#ff8080', bold: false, underline: false, icon: 'fa:times'}
     name: cancel
@@ -148,10 +148,10 @@ components:
     layout_properties:
       col_widths: {}
       grid_position: QPHLQJ,WYIQKS
-    event_bindings: {}
-  event_bindings: {hide: save_input}
+    event_bindings: {click: confirm_match_button_click}
+  event_bindings: {}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
     role: null, html: ''}
-  event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
+  event_bindings: {show: form_show}

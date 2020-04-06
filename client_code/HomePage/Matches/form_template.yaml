@@ -65,7 +65,7 @@ components:
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Request Data Access', font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:database'}
+      background: '#0080c0', bold: false, underline: false, icon: 'fa:database'}
     name: request_data_access
     layout_properties:
       col_widths: {}

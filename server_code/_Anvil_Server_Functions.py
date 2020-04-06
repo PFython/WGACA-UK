@@ -39,8 +39,12 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status="New")
-                    offer['matches'] += [new_match]
-                    request['matches'] += [new_match]
+                    if new_match not in offer['matches']:
+                        offer['matches'] += [new_match]
+#                     offer['matches'] = list(set(offer['matches']))
+                    if new_match not in request['matches']:
+                        request['matches'] += [new_match]
+#                     request['matches'] = list(set(request['matches']))
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):
@@ -132,7 +136,7 @@ def save_to_requests_database(product_category, urgent, notes):
 def save_user_setup(field, value):
     """ General purpose save to the User database """
     user = anvil.users.get_user()
-    user[field] = value    
+    user[field] = value
   
 @anvil.server.callable
 def terms_accepted(boolean_value):
