@@ -41,7 +41,6 @@ class MyRequests(MyRequestsTemplate):
             for match in matches:
                 if match['request'] == request:
                     match_count += 1
-                    print(request['product_category'], request['status'])
         if match_count > 0:
             request['status'] = f"Matched with {match_count} offers"
         self.refresh_data_bindings()

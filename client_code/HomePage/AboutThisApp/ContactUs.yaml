@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BPNDNO":45,"YFVDGM":15}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
@@ -32,7 +32,7 @@ components:
     layout_properties: {grid_position: 'DBLOHI,WTYOLN', slot: default}
     event_bindings: {}
   - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Title or Subject,
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: Title / Summary / Headline,
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: true, underline: false}
@@ -71,11 +71,19 @@ components:
     event_bindings: {}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
+      foreground: '#ffff', visible: true, text: CANCEL, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#ff8080', bold: false, underline: false, icon: 'fa:times'}
+    name: cancel
+    layout_properties: {grid_position: 'JNTRBT,HJWGMJ XARGRS,BPNDNO'}
+    event_bindings: {click: cancel_button_click}
+  - type: Button
+    properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
       foreground: '#ffff', visible: true, text: ' SEND', font_size: null, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '#0080c0', bold: false, underline: false, icon: 'fa:chevron-right'}
     name: button_1
-    layout_properties: {grid_position: 'JNTRBT,HJWGMJ'}
+    layout_properties: {grid_position: 'JNTRBT,HJWGMJ XARGRS,YFVDGM'}
     event_bindings: {click: send_message}
   event_bindings: {hide: save_input}
 container:

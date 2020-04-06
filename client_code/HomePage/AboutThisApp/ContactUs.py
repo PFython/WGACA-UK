@@ -21,7 +21,7 @@ class ContactUs(ContactUsTemplate):
     def send_message(self, **event_args):
       """This method is called when the button is clicked"""
       app_tables.feedback.add_row(from_user = anvil.users.get_user(),
-                                  date = datetime.datetime.today().date(),
+                                  date_time = datetime.datetime.now(),
                                   category = self.category.selected_value,
                                   title = self.title.text,
                                   description = self.description.text,
@@ -30,6 +30,12 @@ class ContactUs(ContactUsTemplate):
       self.clear()
       self.parent.visible = False
       alert("""Message sent.  Thanks for taking the time to reach out to us!""")
+
+    def cancel_button_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.clear()
+      self.parent.visible = False
+
 
 
 
