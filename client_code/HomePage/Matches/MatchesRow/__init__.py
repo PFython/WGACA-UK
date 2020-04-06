@@ -5,7 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..ConfirmMatch import ConfirmMatch
+from .ConfirmMatch import ConfirmMatch
 
 class MatchesRow(MatchesRowTemplate):
   def __init__(self, **properties):
@@ -68,7 +68,8 @@ class MatchesRow(MatchesRowTemplate):
       self.confirm_match.visible = False
 #       self.confirm_match_container.visible = True
       new_form = ConfirmMatch()
-      self.card_1.add_component(new_form)
+      self.flow_panel_1.add_component(new_form)
+      self.flow_panel_1.visible = True
       user = anvil.users.get_user()
       requester = self.item['request']['user']
       new_form.requester = requester

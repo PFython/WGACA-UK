@@ -1,6 +1,6 @@
 container:
   type: DataRowPanel
-  event_bindings: {show: show_myself}
+  event_bindings: {show: show_myself, refreshing_data_bindings: show_myself}
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', auto_display_data: false,
     visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}
@@ -147,5 +147,11 @@ components:
     layout_properties: {grid_position: 'EFIYOE,REJEJL EFTEUO,MALBHF'}
     event_bindings: {show: volunteer_toggle_status, change: volunteer_toggle_change}
     data_bindings: []
+  - type: FlowPanel
+    properties: {role: null, spacing: medium, align: left, tooltip: '', border: '',
+      foreground: '', visible: false, spacing_above: small, spacing_below: small,
+      background: ''}
+    name: flow_panel_1
+    layout_properties: {grid_position: 'CDWMMV,BBEWWK'}
   event_bindings: {}
 is_package: true

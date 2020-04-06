@@ -31,10 +31,11 @@ class ConfirmMatch(ConfirmMatchTemplate):
       self.parent.visible = False
       alert("""Message sent.  Thanks for taking the time to reach out to us!""")
 
-    def cancel_button_click(self, **event_args):
+    def exit(self, **event_args):
       """This method is called when the button is clicked"""
+      self.parent.parent.parent.show_myself()
       self.clear()
-      self.parent.visible = False
+      self.visible = False
 
     def confirm_match_button_click(self, **event_args):
       """This method is called when the Confirm Match button is clicked"""
@@ -48,9 +49,9 @@ class ConfirmMatch(ConfirmMatchTemplate):
           if not checked:
               users = users.remove(self.requester)
           anvil.server.call('save_user_setup', field, users)
-      self.clear()
+      
       # Clean up each Table as required and refresh Matches view
-
+      self.exit()
 
 
 

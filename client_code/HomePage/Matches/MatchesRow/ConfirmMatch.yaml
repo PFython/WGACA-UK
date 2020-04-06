@@ -138,7 +138,7 @@ components:
       background: '#ff8080', bold: false, underline: false, icon: 'fa:times'}
     name: cancel
     layout_properties: {grid_position: 'QPHLQJ,BTDGGF'}
-    event_bindings: {click: cancel_button_click}
+    event_bindings: {click: exit}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Confirm Match', font_size: 14,
