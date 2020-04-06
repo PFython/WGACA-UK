@@ -45,9 +45,10 @@ components:
         \ and accept our Privacy Notice and Terms of Use, and setup your address and\
         \ Display Name for the app to use.  That should take less than a minute.\n\
         \nWe hope you find this tool useful, and wish you all the best for coping\
-        \ during these difficult times.\n      \nPS If you're interested in setting\
-        \ up a local version of this app in your own country, you can find the source\
-        \ code at:", font_size: null, font: '', spacing_above: small, icon_align: left,
+        \ during these difficult times.\n     \nPS We couldn't have done this without\
+        \ the generous support of Anvil.Works.  Thank you! \nPPS If you're interested\
+        \ in setting up a local version of this app in your own country, you can find\
+        \ the source code at:", font_size: null, font: '', spacing_above: small, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: label_1
