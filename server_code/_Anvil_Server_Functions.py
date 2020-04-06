@@ -38,7 +38,10 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(request=request, available_runners = [], offer=offer, status="New")
-    # Assign Offer to earliest Requests first  
+#                     print(offer['matches'],[new_match])
+#                     offer['matches'] += [new_match]
+#                     print(request['matches'],[new_match])
+#                     request['matches'] += [new_match]
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):

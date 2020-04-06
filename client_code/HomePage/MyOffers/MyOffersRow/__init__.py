@@ -11,6 +11,7 @@ class MyOffersRow(MyOffersRowTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        
 
     def delete_row_click(self, **event_args):
         """This method is called when a Delete Row icon is clicked"""
