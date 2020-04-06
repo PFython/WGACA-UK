@@ -35,9 +35,7 @@ class MyRequests(MyRequestsTemplate):
 
     def check_request_status(self):
         requests = anvil.server.call('get_my_requests')
-        print(len(requests),"requests")
         matches = anvil.server.call('get_my_matches')
-        print(len(matches),"matches")
         match_count = 0
         for request in requests:
             for match in matches:

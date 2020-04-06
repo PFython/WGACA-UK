@@ -36,9 +36,7 @@ class MyOffers(MyOffersTemplate):
 
     def check_offer_status(self):
         offers = anvil.server.call('get_my_offers')
-        print(len(offers),"offers")
         matches = anvil.server.call('get_my_matches')
-        print(len(matches),"matches")
         match_count = 0
         for offer in offers:
             for match in matches:

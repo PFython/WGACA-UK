@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .ContactUs import ContactUs
 
 class AboutThisApp(AboutThisAppTemplate):
   def __init__(self, **properties):
@@ -12,3 +13,10 @@ class AboutThisApp(AboutThisAppTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run when the form opens.
+
+  def contact_us_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      self.contact_us_container.visible = True
+      self.contact_us_container.add_component(ContactUs())
+
+
