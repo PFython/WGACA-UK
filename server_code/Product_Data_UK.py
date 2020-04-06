@@ -2,7 +2,7 @@ products =  """Drink | Water | Mineral Water (sparkling)
 Drink | Water | Mineral Water (still)
 Drink | Fruit Juice | Apple Juice
 Drink | Fruit Juice | Orange Juice
-Drink | Fruit Juice | Other
+Drink | Fruit Juice | Other...
 Drink | Carbonated | Coca Cola, Pepsi etc.
 Drink | Carbonated | Tango, Fanta etc.
 Drink | Carbonated | Ginger Beer
@@ -234,4 +234,3 @@ Medical | Paracetamol - Soluble
 Medical | Plasters
 Medical | Facemask
 Medical | Latex Gloves"""
-

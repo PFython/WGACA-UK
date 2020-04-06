@@ -1,7 +1,9 @@
 roles:
 - name: title
   components: [Label]
+  display_in_toolbox: false
 - name: card
   components: [ColumnPanel]
   display_in_toolbox: true
   title: Card
+- {name: green}
