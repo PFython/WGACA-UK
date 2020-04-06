@@ -34,4 +34,27 @@ class MatchesRow(MatchesRowTemplate):
     self.volunteer_toggle_status(**event_args)
         
 
+  def show_myself(self, **event_args):
+    """This method is called when the data row panel is shown on the screen"""
+    user = anvil.users.get_user()
+    if self.item['request']['user'] == user:
+        self.label_1.text  = "My Request"
+        self.label_1.foreground = '#0080c0'
+        self.label_4.foreground = '#0080c0'
+        self.dropoff.foreground = '#0080c0'
+        self.dropoff.icon = 'fa:home'
+        self.request.foreground = '#0080c0'
+        self.request_notes.foreground = '#0080c0'
+
+    if self.item['offer']['user'] == user:
+        self.label_2.text  = "My Offer"
+        self.label_2.foreground = '#0080c0'
+        self.label_3.foreground = '#0080c0'        
+        self.pickup.foreground = '#0080c0'
+        self.pickup.icon = 'fa:home'
+        self.offer.foreground = '#0080c0'
+        self.offer_notes.foreground = '#0080c0'
+
+
+
 

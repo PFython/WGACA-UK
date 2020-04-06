@@ -1,6 +1,6 @@
 container:
   type: DataRowPanel
-  event_bindings: {}
+  event_bindings: {show: show_myself}
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', auto_display_data: false,
     visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}

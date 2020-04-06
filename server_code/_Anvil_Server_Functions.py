@@ -28,20 +28,19 @@ def generate_matches():
     Current version matches by Town.  TODO: Match by actual distance,
     as for some addresses the other side of the road is a different Town!
     """
-    requests = app_tables.requests.search(tables.order_by("product_category"), status = "New")
-    offers = app_tables.offers.search(tables.order_by("product_key"), status = "New")
+    requests = app_tables.requests.search(tables.order_by("product_category"))
+    offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
-    nuluser = app_tables.users.get(display_name="Nuluser")
-    for request in requests:
-        for offer in offers:
+    print("Generating Matches...")
+    statuses = "Awaiting Pickup, Pickup Failed, Awaiting Delivery, Delivery Failed, Delivery Complete".split(", ")
+    for request in (x for x in requests if x['status'] not in statuses):
+        for offer in (x for x in offers if x['status'] not in statuses):
             if request['product_category'] in offer['product_key']:
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
-                    new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(request=request, available_runners = [], offer=offer, status="New")
-#                     print(offer['matches'],[new_match])
-#                     offer['matches'] += [new_match]
-#                     print(request['matches'],[new_match])
-#                     request['matches'] += [new_match]
+                    new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status="New")
+                    offer['matches'] += [new_match]
+                    request['matches'] += [new_match]
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):
@@ -115,7 +114,7 @@ def save_to_offers_database(product_key, units, expiry_date, notes):
     existing_entry = app_tables.offers.get(product_key=product_key, expiry_date=expiry_date, user = user)
     if existing_entry:
         return "Duplicate"    
-    app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date())
+    app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date(), matches = [])
 
  
 @anvil.server.callable
@@ -127,7 +126,7 @@ def save_to_requests_database(product_category, urgent, notes):
     existing_entry = app_tables.requests.get(product_category=product_category, user = user)
     if existing_entry:
         return "Duplicate"    
-    app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date())    
+    app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date(), matches = [])    
     
 @anvil.server.callable
 def save_user_setup(field, value):
