@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BPNDNO":45,"YFVDGM":15}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BPNDNO":40,"YFVDGM":20}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}

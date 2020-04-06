@@ -7,7 +7,7 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30,"OULGJY":20,"LRWOUJ":15,"OEPZXW":15}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties: {slot: default}
@@ -16,7 +16,7 @@ components:
     properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: 'System ID:', font_size: 14, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:user'}
+      underline: false, icon: 'fa:barcode'}
     name: label_id
     layout_properties:
       col_widths: {}
@@ -93,6 +93,14 @@ components:
     name: label_telephone
     layout_properties: {grid_position: 'LAGDLB,HYGEDW ZEUPUP,AWGPLP'}
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
+    name: view_history
+    layout_properties: {grid_position: 'LAGDLB,HYGEDW FFSHLU,ZOKXBK'}
+    event_bindings: {click: view_history_click}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
@@ -299,18 +307,27 @@ components:
       font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: telephone
-    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI LHPCSW,YHHOVV'}
     data_bindings:
     - {property: text, code: 'self.item[''text'']', writeback: true}
     event_bindings: {change: field_change, show: field_change, pressed_enter: save_optional_field,
       lost_focus: save_optional_field}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Delete account', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#ff8080', bold: false, underline: false, icon: 'fa:trash'}
+    name: delete_account
+    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI NIWKUD,SOLBGG'}
+    event_bindings: {click: delete_account_click}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help9
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM SYUTMD,DVPTNJ'}
+    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM SYUTMD,DVPTNJ
+        LOGWWL,LRRUCR'}
     data_bindings:
     - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
         need it.  If you choose to add your Telephone number now however, you''ll
@@ -320,28 +337,13 @@ components:
     event_bindings: {click: show_help_tag}
     components: []
   - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
-    name: view_history
-    layout_properties: {grid_position: 'UIPMPM,OULGJY'}
-    event_bindings: {click: view_history_click}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Delete account', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#ff8080', bold: false, underline: false, icon: 'fa:trash'}
-    name: delete_account
-    layout_properties: {grid_position: 'UIPMPM,LRWOUJ'}
-    event_bindings: {click: delete_account_click}
-  - type: Button
     properties: {role: null, align: left, tooltip: 'Also: Reset Password, Switch User',
       border: '', enabled: true, foreground: '#ffffff', visible: true, text: ' Log
-        Out', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-      italic: false, background: '#0080c0', bold: false, underline: false, icon: 'fa:power-off'}
+        Out, Change Password', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
+      icon: 'fa:power-off'}
     name: change_password
-    layout_properties: {grid_position: 'UIPMPM,OEPZXW'}
+    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,DVPTNJ NCEPAR,PCQEZQ'}
     event_bindings: {click: log_out}
   event_bindings: {}
 - type: ColumnPanel
@@ -371,14 +373,15 @@ components:
   name: card_1
   layout_properties: {grid_position: 'NYDRYC,OEKJTH', slot: default}
   components:
-  - type: Label
-    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Privacy Notice & Terms of Use, font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: none, italic: false,
-      background: '', bold: false, underline: false, icon: ''}
-    name: label_1
+  - type: Link
+    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#000000',
+      visible: true, text: Privacy Notice & Terms of Use, font_size: 16, wrap_on: mobile,
+      font: '', col_spacing: medium, spacing_above: none, icon_align: left, col_widths: '',
+      spacing_below: none, italic: false, background: '', bold: true, underline: false,
+      icon: 'fa:caret-down'}
+    name: label_privacy
     layout_properties: {grid_position: 'EJWUVK,SONUMJ'}
-    event_bindings: {}
+    event_bindings: {click: expand_privacy_notice}
   - type: Label
     properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 12, font: '', spacing_above: small, icon_align: left,
@@ -389,8 +392,8 @@ components:
     event_bindings: {}
     data_bindings: []
   - type: TextArea
-    properties: {role: null, align: left, height: 517.9961523818359, tooltip: '',
-      placeholder: '', border: '', enabled: false, foreground: '', visible: true,
+    properties: {role: null, align: left, height: 920.2991614150391, tooltip: '',
+      placeholder: '', border: '', enabled: false, foreground: '', visible: false,
       text: '', font_size: null, auto_expand: false, font: '', spacing_above: small,
       spacing_below: small, italic: false, background: '', bold: false, underline: false}
     name: privacy_notice

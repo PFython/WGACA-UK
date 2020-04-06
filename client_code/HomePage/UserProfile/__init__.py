@@ -86,6 +86,14 @@ class UserProfile(UserProfileTemplate):
         anvil.server.call("save_user_setup", field, value)
         self.help_text.text = f"Your new {field.title()} details are: {value or '<empty>'}"
 
+    def expand_privacy_notice(self, **event_args):
+      """This method is called when the link is clicked"""
+      if self.label_privacy.icon == "fa:caret-down":
+          self.privacy_notice.visible = True
+          self.label_privacy.icon = "fa:caret-up"
+      else:
+          self.privacy_notice.visible = False
+          self.label_privacy.icon = "fa:caret-down"
 
 
 
