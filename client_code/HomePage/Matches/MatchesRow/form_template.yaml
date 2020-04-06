@@ -42,6 +42,16 @@ components:
     data_bindings:
     - {property: text, code: 'self.item[''request''][''notes'']'}
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: ' Confirm Match', font_size: 12,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:exchange'}
+    name: confirm_match
+    layout_properties:
+      col_widths: {}
+      grid_position: EFIYOE,XNRYDH SMDSSW,VONYUT FVEUDH,SGKCCT
+    event_bindings: {click: confirm_match_click}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Offer, font_size: 14, font: '', spacing_above: small, icon_align: left,

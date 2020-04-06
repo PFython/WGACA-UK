@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from ..ConfirmMatch import ConfirmMatch
 
 class MatchesRow(MatchesRowTemplate):
   def __init__(self, **properties):
@@ -54,6 +55,15 @@ class MatchesRow(MatchesRowTemplate):
         self.pickup.icon = 'fa:home'
         self.offer.foreground = '#0080c0'
         self.offer_notes.foreground = '#0080c0'
+        self.confirm_match.visible = True
+        self.volunteer_toggle.visible = False
+
+  def confirm_match_click(self, **event_args):
+      """This method is called when the Select Volunteer button is clicked"""
+      self.confirm_match.visible = False
+#       self.confirm_match_container.visible = True
+      self.card_1.add_component(ConfirmMatch())
+
 
 
 

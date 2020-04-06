@@ -93,14 +93,6 @@ components:
     name: label_telephone
     layout_properties: {grid_position: 'LAGDLB,HYGEDW ZEUPUP,AWGPLP'}
     event_bindings: {}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
-    name: view_history
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW FFSHLU,ZOKXBK'}
-    event_bindings: {click: view_history_click}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
@@ -312,6 +304,14 @@ components:
     - {property: text, code: 'self.item[''text'']', writeback: true}
     event_bindings: {change: field_change, show: field_change, pressed_enter: save_optional_field,
       lost_focus: save_optional_field}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
+    name: view_history
+    layout_properties: {grid_position: 'LAGDLB,NTECZM SYUTMD,GXEKGI NIWKUD,MBISVL'}
+    event_bindings: {click: view_history_click}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Delete account', font_size: null,
