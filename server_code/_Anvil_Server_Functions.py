@@ -114,6 +114,14 @@ def remove_orphan_matches(request_or_offer):
         pass
 
 @anvil.server.callable
+def save_to_matches_database(match, runner, messages, status):
+    """ Returns 'Duplicate' if product_category request already exists"""
+    user = anvil.users.get_user()
+    if user is None:
+        return
+    match.update(approved_runner = runner, messages_dict = messages, status = status)
+    
+@anvil.server.callable
 def save_to_offers_database(product_key, units, expiry_date, notes):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
@@ -124,7 +132,6 @@ def save_to_offers_database(product_key, units, expiry_date, notes):
     if existing_entry:
         return "Duplicate"    
     app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date(), matches = [])
-
  
 @anvil.server.callable
 def save_to_requests_database(product_category, urgent, notes):
@@ -149,6 +156,20 @@ def terms_accepted(boolean_value):
     user = anvil.users.get_user()
     user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
+@anvil.server.callable
+def update_offers_status(offer, status):
+    user = anvil.users.get_user()
+    if user is None:
+        return
+    offer.update(status = status)
+    
+@anvil.server.callable
+def update_requests_status(request, status):
+    user = anvil.users.get_user()
+    if user is None:
+        return
+    request.update(status = status)
+    
 @anvil.server.callable
 def volunteer_as_runner(match, boolean_value):
     """ Volunteer/unvolunteer as available_runner in Matches"""

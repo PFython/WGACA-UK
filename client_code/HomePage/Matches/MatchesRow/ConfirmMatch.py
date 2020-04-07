@@ -62,6 +62,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
     def confirm_match_button_click(self, **event_args):
       """This method is called when the Confirm Match button is clicked"""
       user = anvil.users.get_user()
+      # Update 'shared_with' for Requester
       requester_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
                     'email_shared_with': self.email_to_requester.checked,
                     'postcode_shared_with': self.postcode_to_requester.checked,
@@ -71,22 +72,42 @@ class ConfirmMatch(ConfirmMatchTemplate):
           if not checked:
               users = users.remove(self.requester)
           anvil.server.call('save_user_setup', field, users)
-      
+      # Update 'shared_with' for Requester
       runner_dict = {'telephone_shared_with': self.telephone_to_runner.checked,
                     'email_shared_with': self.email_to_runner.checked,
                     'postcode_shared_with': self.postcode_to_runner.checked,
                    }
       runner = anvil.server.call("get_user_from_display_name", self.runner_dropdown.selected_value)
-      print(runner)
       for field, checked in runner_dict.items():
           users = list(set((user[field] or []) + [runner]))
           if not checked:
               users = users.remove(self.runner)
           anvil.server.call('save_user_setup', field, users)
-      
-      
-      # Clean up each Table as required and refresh Matches view
+      # Add messages and Telephone/Email/Postcode if granted
+      messages = {}
+      messages['offerer_to_runner'] = self.message_to_runner.text +"\n\n"
+      if self.telephone_to_runner.checked and user['telephone']:
+          messages['offerer_to_runner'] += f"\nMy telephone number is: {user['telephone']}"
+      if self.email_to_runner.checked:
+          messages['offerer_to_runner'] += f"\nMy Email is: {user['email']}"
+      if self.postcode_to_runner.checked and user['postcode']:
+                messages['offerer_to_runner'] += f"\nMy Postcode is {user['postcode']}"               
+      messages['offerer_to_requester'] = self.message_to_requester.text +"\n\n"
+      if self.telephone_to_requester.checked and user['telephone']:
+          messages['offerer_to_requester'] += f"\nMy telephone number is: {user['telephone']}"
+      if self.email_to_requester.checked:
+          messages['offerer_to_requester'] += f"\nMy Email is: {user['email']}"
+      if self.postcode_to_requester.checked and user['postcode']:
+                messages['offerer_to_requester'] += f"\nMy Postcode is {user['postcode']}"          
+      print(messages)
+      # Confirm Runner, update Matches/Offers/Requests, and refresh view
+      anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, "Awaiting Pickup")
+      anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], "Awaiting Pickup")
+      anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], "Awaiting Pickup")
+      anvil.server.call('generate_matches')
+      self.parent.parent.parent.refresh_data_bindings()      
       self.exit()
+
 
 
 
