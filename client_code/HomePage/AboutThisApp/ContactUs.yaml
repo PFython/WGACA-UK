@@ -16,7 +16,7 @@ components:
       enabled: true
       foreground: ''
       items: [Question about the app, New feature request, Bug report, Data problem,
-        Performance problem, Press enquiry, Developer enquiry, Display Name change,
+        Performance problem, Security problem, Press enquiry, Developer enquiry, Display Name change,
         Data access request, Other..., '']
       visible: true
       font_size: null
