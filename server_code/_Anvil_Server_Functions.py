@@ -93,6 +93,11 @@ def get_units_of_measure():
     """ Returns a list of valid units of measure """
     global units
     return units.split("\n")
+  
+@anvil.server.callable
+def get_user_from_display_name(display_name):
+    """ Returns a User (row) object based on display_name string """
+    return app_tables.users.get(display_name=display_name)
 
 @anvil.server.callable
 def remove_orphan_matches(request_or_offer):
