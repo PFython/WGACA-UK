@@ -40,11 +40,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
         else:
             event_args['sender'].background = '#ffffff'
             user = anvil.users.get_user()
-            if runner.replace(" (myself)","") == user['display_name']:
-                self.telephone_to_runner.visible = False
-                self.email_to_runner.visible = False
-                self.postcode_to_runner.visible = False
-            else:
+            if runner.replace(" (myself)","") != user['display_name']:
                 self.telephone_to_runner.checked = runner in [x['display_name'] for x in (user['telephone_shared_with'] or [])]
                 self.telephone_to_runner.text = runner + " (Runner)"
                 self.email_to_runner.checked = runner in [x['display_name'] for x in (user['email_shared_with'] or [])]
@@ -52,6 +48,9 @@ class ConfirmMatch(ConfirmMatchTemplate):
                 self.postcode_to_runner.checked = runner in [x['display_name'] for x in (user['postcode_shared_with'] or [])]
                 self.postcode_to_runner.text = runner + " (Runner)"
                 self.message_to_runner.visible = True
+                self.telephone_to_runner.visible = True
+                self.email_to_runner.visible = True
+                self.postcode_to_runner.visible = True                
         self.refresh_data_bindings()
 
     def exit(self, **event_args):

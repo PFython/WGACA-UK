@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"TWGZZI":20,"YVMZJZ":40,"KJANWE":20,"TEHNEG":40,"MXOFYD":20,"LKCVES":40,"BTDGGF":40,"WYIQKS":12,"QQSQWY":27,"MMWOBQ":27,"NEXMGH":27,"JTZVLL":25,"QSHMSL":25,"EFDVQR":25}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BTDGGF":40,"WYIQKS":12,"RNOLLT":20,"UCDZVT":40,"UQGSEG":20,"VPDNZX":40,"IUXPNY":20,"TAHMHE":40}',
     spacing_below: small, background: '#cae4ff'}
   name: confirm_match_column_panel
   layout_properties: {slot: default}
@@ -64,10 +64,10 @@ components:
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: 'Share your Telephone number:', font_size: null, font: '',
-      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      spacing_above: small, icon_align: left, spacing_below: none, italic: false,
       background: '', bold: true, underline: false, icon: ''}
     name: label_telephone
-    layout_properties: {grid_position: 'SXAGQC,KJANWE'}
+    layout_properties: {grid_position: 'CGELFD,ICUGXB'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -75,23 +75,23 @@ components:
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: telephone_to_requester
-    layout_properties: {grid_position: 'SXAGQC,TEHNEG XOYWBA,EFDVQR'}
+    layout_properties: {grid_position: 'SAYRKK,RNOLLT'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: with the Runner, font_size: null, font: '',
+      foreground: '', visible: false, text: with the Runner, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: telephone_to_runner
-    layout_properties: {grid_position: 'SXAGQC,TEHNEG XOYWBA,QQSQWY'}
+    layout_properties: {grid_position: 'SAYRKK,UCDZVT'}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: 'Share your Email:', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: ''}
     name: label_email
-    layout_properties: {grid_position: 'URBQMH,TWGZZI'}
+    layout_properties: {grid_position: 'HDYFKB,BVLYXD'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -99,38 +99,38 @@ components:
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: email_to_requester
-    layout_properties: {grid_position: 'URBQMH,YVMZJZ YNHAKO,QSHMSL'}
+    layout_properties: {grid_position: 'DWEAEU,UQGSEG'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: with the Runner, font_size: null, font: '',
+      foreground: '', visible: false, text: with the Runner, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: email_to_runner
-    layout_properties: {grid_position: 'URBQMH,YVMZJZ YNHAKO,MMWOBQ'}
+    layout_properties: {grid_position: 'DWEAEU,VPDNZX'}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: 'Share your Postcode:', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: ''}
     name: label_postcode
-    layout_properties: {grid_position: 'LTKGQR,MXOFYD'}
+    layout_properties: {grid_position: 'LVAFSZ,QZJRMI'}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '', visible: true, text: with the Requester, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: postcode_to_requester
-    layout_properties: {grid_position: 'LTKGQR,LKCVES FQIZYM,JTZVLL'}
+    layout_properties: {grid_position: 'HMOPGT,IUXPNY'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: with the Runner, font_size: null, font: '',
+      foreground: '', visible: false, text: with the Runner, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: postcode_to_runner
-    layout_properties: {grid_position: 'LTKGQR,LKCVES FQIZYM,NEXMGH'}
+    layout_properties: {grid_position: 'HMOPGT,TAHMHE'}
     event_bindings: {}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
