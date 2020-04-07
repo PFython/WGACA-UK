@@ -147,7 +147,7 @@ def terms_accepted(boolean_value):
 @anvil.server.callable
 def volunteer_as_runner(match, boolean_value):
     """ Volunteer/unvolunteer as available_runner in Matches"""
-    user =anvil.users.get_user()
+    user = anvil.users.get_user()
     if boolean_value:
         match['available_runners'] += [user]
     else:

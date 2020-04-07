@@ -28,7 +28,7 @@ class MatchesRow(MatchesRowTemplate):
   def volunteer_toggle_change(self, **event_args):
     """This method is called when this Volunteer Toggle checkbox is checked or unchecked"""
     if event_args['sender'].checked:
-        anvil.server.call("volunteer_as_runner", self.item,True)
+        anvil.server.call("volunteer_as_runner", self.item, True)
     else:
         anvil.server.call("volunteer_as_runner", self.item, False)
     self.refresh_data_bindings()
@@ -79,6 +79,8 @@ class MatchesRow(MatchesRowTemplate):
       new_form.email_to_requester.text = requester['display_name'] + " (Requester)"
       new_form.postcode_to_requester.checked = requester in (user['postcode_shared_with'] or [])
       new_form.postcode_to_requester.text = requester['display_name'] + " (Requester)"
+      new_form.runner_dropdown.items = [f"{user['display_name']} (myself)"] + [x['display_name'] for x in self.item['available_runners']]
+
 
 
 

@@ -134,7 +134,7 @@ components:
   - type: Label
     properties: {}
     name: volunteers
-    layout_properties: {grid_position: 'EFIYOE,REJEJL DZQVLH,NZHGAB'}
+    layout_properties: {grid_position: 'EFIYOE,REJEJL QOFGAK,BKIVMP'}
     event_bindings: {}
     data_bindings:
     - {property: text, code: 'str(len(self.item[''available_runners'']))+" volunteer(s)."'}

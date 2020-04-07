@@ -16,7 +16,8 @@ class ConfirmMatch(ConfirmMatchTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-
+        self.message_to_requester.tag = "Optional"
+        self.message_to_runner.tag = "Optional"
 
     def confirm_match(self, **event_args):
       """This method is called when the button is clicked"""
@@ -30,6 +31,28 @@ class ConfirmMatch(ConfirmMatchTemplate):
       self.clear()
       self.parent.visible = False
       alert("""Message sent.  Thanks for taking the time to reach out to us!""")
+      
+    def dropdown_change(self, **event_args):
+        """ Colour codes dropdown box """
+        runner = event_args['sender'].selected_value
+        if runner not in event_args['sender'].items:
+            event_args['sender'].background = '#ffe6e6'
+        else:
+            event_args['sender'].background = '#ffffff'
+            user = anvil.users.get_user()
+            if runner.replace(" (myself)","") == user['display_name']:
+                self.telephone_to_runner.visible = False
+                self.email_to_runner.visible = False
+                self.postcode_to_runner.visible = False
+            else:
+                self.telephone_to_runner.checked = runner in [x['display_name'] for x in (user['telephone_shared_with'] or [])]
+                self.telephone_to_runner.text = runner + " (Runner)"
+                self.email_to_runner.checked = runner in [x['display_name'] for x in (user['email_shared_with'] or [])]
+                self.email_to_runner.text = runner + " (Runner)"
+                self.postcode_to_runner.checked = runner in [x['display_name'] for x in (user['postcode_shared_with'] or [])]
+                self.postcode_to_runner.text = runner + " (Runner)"
+                self.message_to_runner.visible = True
+        self.refresh_data_bindings()
 
     def exit(self, **event_args):
       """This method is called when the button is clicked"""
@@ -52,6 +75,8 @@ class ConfirmMatch(ConfirmMatchTemplate):
       
       # Clean up each Table as required and refresh Matches view
       self.exit()
+
+
 
 
 
