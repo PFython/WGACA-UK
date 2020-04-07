@@ -8,9 +8,9 @@ services:
     use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
 startup: {type: form, module: HomePage}
-package_name: WGACA
+package_name: WGACA_UK_TEST
 allow_embedding: true
-name: WGACA
+name: WGACA-UK-TEST
 runtime_options: {version: 2, client_version: '3', server_version: python3-full}
 metadata: {logo_img: 'asset:WGACA Logo transparent.png', title: What Goes Around Comes Around,
   description: 'This app is intended to link good neighbours who might have provisions
