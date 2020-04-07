@@ -117,12 +117,12 @@ components:
     properties:
       role: null
       columns:
+      - {width: 34, title: '', id: TUJLMD, data_key: urgent, expand: false}
       - {width: 93, title: Date Posted, id: KHAQPE, data_key: date_posted, expand: false}
-      - {width: 59, title: Urgent, id: TUJLMD, data_key: urgent, expand: false}
       - {width: 170, title: Product Category, id: FQJNEU, data_key: product_category,
         expand: false}
-      - {width: 229, title: Notes, id: PPCIVS, data_key: notes, expand: false}
-      - {width: 270, title: Status, id: RECBJX, data_key: status, expand: false}
+      - {width: 166, title: Notes, id: PPCIVS, data_key: notes, expand: false}
+      - {width: 172, title: Status, id: RECBJX, data_key: status, expand: false}
       - {width: 43, title: '', id: KTZWSC, data_key: delete_row, expand: false}
       auto_header: true
       tooltip: ''

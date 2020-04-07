@@ -32,19 +32,18 @@ def generate_matches():
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
 #     print("Generating Matches...")
-    statuses = "Awaiting Pickup, Pickup Failed, Awaiting Delivery, Delivery Failed, Delivery Complete".split(", ")
+    statuses = anvil.server.call("STATUSES")
     for request in (x for x in requests if x['status'] not in statuses):
         for offer in (x for x in offers if x['status'] not in statuses):
             if request['product_category'] in offer['product_key']:
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status="New")
-                    if new_match not in offer['matches']:
-                        offer['matches'] += [new_match]
-#                     offer['matches'] = list(set(offer['matches']))
-                    if new_match not in request['matches']:
-                        request['matches'] += [new_match]
-#                     request['matches'] = list(set(request['matches']))
+                    # 'or []' added to address possible database corruption i.e. value = None rather than value = []
+                    if new_match not in (offer['matches'] or []):
+                        offer['matches'] = (offer['matches'] or []) + [new_match]
+                    if new_match not in (request['matches'] or []):
+                        request['matches'] = (request['matches'] or []) + [new_match]
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):
@@ -149,6 +148,11 @@ def save_user_setup(field, value):
     """ General purpose save to the User database """
     user = anvil.users.get_user()
     user[field] = value
+  
+@anvil.server.callable
+def STATUSES():
+    """ Returns allowable status descriptions other than 'New' or 'X matches found' """
+    return "Awaiting Pickup, Pickup Failed, Awaiting Delivery, Delivery Failed, Delivery Complete".split(", ")
   
 @anvil.server.callable
 def terms_accepted(boolean_value):

@@ -42,7 +42,7 @@ class MyOffers(MyOffersTemplate):
             for match in matches:
                 if match['offer'] == offer:
                     match_count += 1
-            if match_count > 0:
+            if match_count > 0 and offer['status'] not in anvil.server.call("STATUSES"):
                 offer['status'] = f"Matched with {match_count} requests"
         self.refresh_data_bindings()        
         

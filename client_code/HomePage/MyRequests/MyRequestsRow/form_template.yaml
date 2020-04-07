@@ -28,4 +28,13 @@ components:
   - {property: text, code: 'self.item[''status'']'}
   - {property: foreground, code: '''#0080c0'' if self.item[''status''].startswith("New")
       else ''#5eb348'''}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: '', font_size: 20, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+    italic: false, background: '', bold: false, underline: false, icon: 'fa:exclamation'}
+  name: label_1
+  layout_properties: {column: TUJLMD}
+  event_bindings: {}
+  data_bindings:
+  - {property: visible, code: 'self.item[''urgent'']'}
 is_package: true
