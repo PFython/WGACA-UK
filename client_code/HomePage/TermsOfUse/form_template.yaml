@@ -97,3 +97,4 @@ container:
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
     role: null, html: ''}
   event_bindings: {}
+is_package: true

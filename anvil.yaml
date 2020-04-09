@@ -29,7 +29,7 @@ db_schema:
     4coOYB2_xQg=:
       name: category
       type: string
-      admin_ui: {order: 2, width: 104.01136400000001}
+      admin_ui: {order: 2, width: 229}
     8udiHG9612Q=:
       name: status
       type: string
