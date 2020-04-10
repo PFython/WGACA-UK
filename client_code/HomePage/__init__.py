@@ -25,6 +25,7 @@ class HomePage(HomePageTemplate):
         # Any code you write here will run when the form opens.
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
+        self.check_permissions()
         
     def check_permissions(self):
         # 1st step of registration process requires email and password
