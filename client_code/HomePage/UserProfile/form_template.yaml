@@ -7,15 +7,15 @@ container:
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"AELAEO":15,"WWCPOC":35,"KYUTMY":15,"VCKQPR":10,"YMCIGY":55,"HKAJGA":5,"KCEVXA":55,"SHYVFR":5,"KQHXBK":55,"VMZXPQ":5,"MKRYCT":55,"RHIRVL":5,"XFCMFC":55,"SECZIL":5,"SZEXEV":55,"VQSWUX":5,"GVJSFV":55,"JZBPID":5,"LNLRHN":55,"FHAOJL":5,"AOVWIQ":55,"RSDHQS":5,"AWGPLP":55,"VXZKIQ":5}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"AELAEO":15,"WWCPOC":35,"VCKQPR":10,"YMCIGY":55,"HKAJGA":5,"KCEVXA":55,"SHYVFR":5,"KQHXBK":55,"VMZXPQ":5,"MKRYCT":55,"RHIRVL":5,"XFCMFC":55,"SECZIL":5,"SZEXEV":55,"VQSWUX":5,"GVJSFV":55,"JZBPID":5,"LNLRHN":55,"FHAOJL":5,"AOVWIQ":55,"RSDHQS":5,"AWGPLP":55,"VXZKIQ":5}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties: {slot: default}
   components:
   - type: Label
     properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'System ID:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      visible: true, text: 'System ID:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
       underline: false, icon: 'fa:barcode'}
     name: label_id
     layout_properties:
@@ -24,7 +24,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question-circle'}
     name: help0
     layout_properties:
@@ -38,15 +38,21 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: id
     layout_properties: {grid_position: 'RUUHVQ,BGMKEL'}
     data_bindings: []
+  - type: ColumnPanel
+    properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '', spacing_below: none,
+      background: ''}
+    name: column_panel_2
+    layout_properties: {grid_position: 'RUUHVQ,NDYDHO'}
   - type: Label
     properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Display Name:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      visible: true, text: 'Display Name:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
       underline: false, icon: 'fa:user'}
     name: label_display_name
     layout_properties: {grid_position: 'LVIDYJ,KCEVXA'}
@@ -54,7 +60,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help1
     layout_properties: {slot: default, grid_position: 'LVIDYJ,SHYVFR'}
@@ -71,7 +77,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: true, underline: false}
     name: display_name
     layout_properties: {grid_position: 'ESBTWA,ZGSWHE'}
@@ -79,8 +85,8 @@ components:
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:envelope'}
     name: label_email
     layout_properties: {grid_position: 'QTGFUT,KQHXBK'}
@@ -88,7 +94,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help2
     layout_properties: {slot: default, grid_position: 'QTGFUT,VMZXPQ'}
@@ -102,7 +108,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: email
     layout_properties: {grid_position: 'LQAMKH,VHXEHB'}
@@ -110,8 +116,8 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:home'}
     name: label_house_number
     layout_properties: {grid_position: 'VFRYKY,MKRYCT'}
@@ -119,7 +125,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help3
     layout_properties: {slot: default, grid_position: 'VFRYKY,RHIRVL'}
@@ -130,7 +136,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: house_number
     layout_properties: {grid_position: 'WOLGKM,EHFHUQ'}
@@ -138,8 +144,8 @@ components:
     data_bindings: []
   - type: Label
     properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
       underline: false, icon: 'fa:map-signs'}
     name: label_street
     layout_properties: {grid_position: 'VFSRLT,XFCMFC', slot: default}
@@ -147,7 +153,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help4
     layout_properties: {slot: default, grid_position: 'VFSRLT,SECZIL'}
@@ -158,7 +164,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: street
     layout_properties: {grid_position: 'TNDFIK,QCHFCO'}
@@ -166,8 +172,8 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:map-marker'}
     name: label_town
     layout_properties: {grid_position: 'BVETVD,SZEXEV'}
@@ -175,7 +181,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help5
     layout_properties: {slot: default, grid_position: 'BVETVD,VQSWUX'}
@@ -187,7 +193,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: town
     layout_properties: {grid_position: 'DOYPJV,HPQMMS'}
@@ -195,8 +201,8 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:map'}
     name: label_county
     layout_properties: {grid_position: 'WXKQPR,GVJSFV'}
@@ -204,7 +210,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help6
     layout_properties: {slot: default, grid_position: 'WXKQPR,JZBPID'}
@@ -215,7 +221,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: county
     layout_properties: {grid_position: 'DEQRDX,FOVUTS'}
@@ -223,8 +229,8 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:globe'}
     name: label_country
     layout_properties: {grid_position: 'VDFOZD,LNLRHN'}
@@ -232,7 +238,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help7
     layout_properties: {slot: default, grid_position: 'VDFOZD,FHAOJL'}
@@ -244,7 +250,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '#cae4ff', bold: false, underline: false}
     name: country
     layout_properties: {grid_position: 'ZZMHFQ,AWHSJT', slot: default}
@@ -252,8 +258,8 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
+      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: true, background: '', bold: true,
       underline: false, icon: 'fa:envelope-o'}
     name: label_post_code
     layout_properties: {grid_position: 'PEBTFK,AOVWIQ'}
@@ -261,7 +267,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help8
     layout_properties: {slot: default, grid_position: 'PEBTFK,RSDHQS'}
@@ -278,7 +284,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
       background: '', bold: false, underline: false}
     name: postcode
     layout_properties: {grid_position: 'VUQBNK,FKARLO', slot: default}
@@ -287,8 +293,8 @@ components:
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
+      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: none,
+      icon_align: left, spacing_below: none, italic: true, background: '', bold: true,
       underline: false, icon: 'fa:phone'}
     name: label_telephone
     layout_properties: {grid_position: 'ZEUPUP,AWGPLP'}
@@ -296,7 +302,7 @@ components:
   - type: Link
     properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help9
     layout_properties: {slot: default, grid_position: 'ZEUPUP,VXZKIQ'}
@@ -311,7 +317,7 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
+      font: '', spacing_above: none, type: tel, spacing_below: none, italic: false,
       background: '', bold: false, underline: false}
     name: telephone
     layout_properties: {grid_position: 'HPPNKA,QZPRNU'}
@@ -330,14 +336,14 @@ components:
     layout_properties: {grid_position: 'QHLEHR,AELAEO'}
     event_bindings: {click: view_history_click}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Delete
 
         Account', font_size: null, font: '', spacing_above: small, icon_align: left,
       spacing_below: small, italic: false, background: '#ff8080', bold: false, underline: false,
       icon: 'fa:trash'}
     name: delete_account
-    layout_properties: {grid_position: 'QHLEHR,KYUTMY'}
+    layout_properties: {grid_position: 'QHLEHR,WQTYUA'}
     event_bindings: {click: delete_account_click}
   - type: Button
     properties: {role: null, align: left, tooltip: 'Also: Reset Password, Switch User',
