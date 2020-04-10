@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"HYGEDW":10,"GYSESX":20,"EGSHUA":20,"NTECZM":30}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BBSFUW":26,"PLDYMH":3,"JDUESU":26,"LLYYXI":3,"XYNXMI":26,"GJRMJA":3,"UNJYYC":26,"PXCNMK":3,"LHVLDO":26,"GHRJKC":3,"XZPJRY":26,"DPDYXW":3,"XSAOBV":26,"AAAEAJ":3,"NZNRAY":26,"BXCHFU":3,"XBLGHX":26,"DLZZRR":3,"ZCPGXX":26,"GRCDIV":3}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
@@ -12,95 +12,14 @@ components:
       icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
       underline: false, icon: 'fa:user'}
     name: label_id
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW OICDQH,NSXQZZ'}
-  - type: Label
-    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Display Name:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:user'}
-    name: label_display_name
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW LVIDYJ,KCEVXA'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:envelope'}
-    name: label_email
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW UDEWSH,GYSESX'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:home'}
-    name: label_house_number
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VFRYKY,MKRYCT'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-      underline: false, icon: 'fa:map-signs'}
-    name: label_street
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VFSRLT,XFCMFC', slot: default}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:map-marker'}
-    name: label_town
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW BVETVD,SZEXEV'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:map'}
-    name: label_county
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW CJZBTK,EGSHUA'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: false, icon: 'fa:globe'}
-    name: label_country
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW VDFOZD,LNLRHN'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
-      underline: false, icon: 'fa:envelope-o'}
-    name: label_post_code
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW PEBTFK,AOVWIQ'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
-      underline: false, icon: 'fa:phone'}
-    name: label_telephone
-    layout_properties: {grid_position: 'LAGDLB,HYGEDW ZEUPUP,AWGPLP'}
-    event_bindings: {}
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '#cae4ff', bold: false, underline: false}
-    name: id
-    layout_properties: {grid_position: 'LAGDLB,NTECZM DDTAWN,IWXZFZ'}
-    data_bindings: []
-    event_bindings: {}
+    layout_properties: {grid_position: 'DDTAWN,BBSFUW'}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question-circle'}
     name: help0
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM DDTAWN,NYMABV'}
+    layout_properties: {slot: default, grid_position: 'DDTAWN,PLDYMH'}
     data_bindings:
     - {property: tag, code: '"""This is a unique ID used by our app to identify you.  You
         won''t need to remember it, but here it is anyway."""'}
@@ -108,20 +27,28 @@ components:
     event_bindings: {click: show_help_tag}
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: true, underline: false}
-    name: display_name
-    layout_properties: {grid_position: 'LAGDLB,NTECZM IUTIPF,GHHRYJ'}
-    event_bindings: {change: field_change, show: field_change}
+      background: '#cae4ff', bold: false, underline: false}
+    name: id
+    layout_properties: {grid_position: 'OERWZQ,FZVCUE'}
     data_bindings: []
+    event_bindings: {}
+  - type: Label
+    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Display Name:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: 'fa:user'}
+    name: label_display_name
+    layout_properties: {grid_position: 'QRUHQH,JDUESU'}
+    event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help1
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM IUTIPF,DHLKSP'}
+    layout_properties: {slot: default, grid_position: 'QRUHQH,LLYYXI'}
     event_bindings: {click: show_help_tag}
     data_bindings:
     - {property: tag, code: '"""This is the public Display Name (or ''nickname'')
@@ -134,20 +61,28 @@ components:
     components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '#cae4ff', bold: false, underline: false}
-    name: email
-    layout_properties: {grid_position: 'LAGDLB,NTECZM BYBRYQ,COKUNO'}
+      background: '', bold: true, underline: false}
+    name: display_name
+    layout_properties: {grid_position: 'RGSGXU,CKLFAY'}
+    event_bindings: {change: field_change, show: field_change}
     data_bindings: []
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Email:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:envelope'}
+    name: label_email
+    layout_properties: {grid_position: 'BYBRYQ,XYNXMI'}
     event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help2
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM BYBRYQ,UOIVHV'}
+    layout_properties: {slot: default, grid_position: 'BYBRYQ,GJRMJA'}
     data_bindings:
     - {property: tag, code: '"""Your email is kept private unless you explicitly choose
         to share it with other users.  When you accepted our Terms of Use you agreed
@@ -157,40 +92,85 @@ components:
     components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: house_number
-    layout_properties: {grid_position: 'LAGDLB,NTECZM JOPDOK,RTSGEJ'}
-    event_bindings: {change: field_change, show: field_change}
+      background: '#cae4ff', bold: false, underline: false}
+    name: email
+    layout_properties: {grid_position: 'NMIYJB,ZWYJLE'}
     data_bindings: []
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:home'}
+    name: label_house_number
+    layout_properties: {grid_position: 'JOPDOK,UNJYYC'}
+    event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help3
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM JOPDOK,PMMSNH'}
+    layout_properties: {slot: default, grid_position: 'JOPDOK,PXCNMK'}
     data_bindings:
     - {property: tag, code: '"""A unique house name (e.g. ''Rose Cottage'') or number
         (e.g. ''221B'') within your Street."""'}
     event_bindings: {click: show_help_tag}
     components: []
-  - type: DropDown
-    properties: {}
-    name: street
-    layout_properties: {grid_position: 'LAGDLB,NTECZM KBRPIK,XEXTGF', slot: default}
-    event_bindings: {change: street_change}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
+    name: house_number
+    layout_properties: {grid_position: 'TUWXYV,SEXOWD'}
+    event_bindings: {change: field_change, show: field_change}
+    data_bindings: []
+  - type: Label
+    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: 'fa:map-signs'}
+    name: label_street
+    layout_properties: {grid_position: 'KBRPIK,LHVLDO', slot: default}
+    event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help4
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM KBRPIK,GAWASU'}
+    layout_properties: {slot: default, grid_position: 'KBRPIK,GHRJKC'}
     data_bindings:
     - {property: tag, code: '"""This list of Street names is generated automatically
         based on the County/Borough you''ve selected."""'}
+    event_bindings: {click: show_help_tag}
+    components: []
+  - type: DropDown
+    properties: {}
+    name: street
+    layout_properties: {grid_position: 'XPGSCB,YSSQQV', slot: default}
+    event_bindings: {change: street_change}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:map-marker'}
+    name: label_town
+    layout_properties: {grid_position: 'BBRWSD,XZPJRY'}
+    event_bindings: {}
+  - type: Link
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
+      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
+      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
+    name: help5
+    layout_properties: {slot: default, grid_position: 'BBRWSD,DPDYXW'}
+    data_bindings:
+    - {property: tag, code: '"""The Town/City name is generated automatically based
+        on your selection of Street and County/Borough.  Less typing for you - yay!"""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: DropDown
@@ -214,18 +194,26 @@ components:
       underline: false
       include_placeholder: false
     name: town
-    layout_properties: {grid_position: 'LAGDLB,NTECZM BBRWSD,CYDHQS', slot: default}
+    layout_properties: {grid_position: 'SQFIJT,HUUXJF', slot: default}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:map'}
+    name: label_county
+    layout_properties: {grid_position: 'AJTWAF,XSAOBV'}
     event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help5
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM BBRWSD,FCFWIS'}
+    name: help6
+    layout_properties: {slot: default, grid_position: 'AJTWAF,AAAEAJ'}
     data_bindings:
-    - {property: tag, code: '"""The Town/City name is generated automatically based
-        on your selection of Street and County/Borough.  Less typing for you - yay!"""'}
+    - {property: tag, code: '"""Select your County/Borough from this list, and the
+        list of known Streets will update automatically."""'}
     event_bindings: {click: show_help_tag}
     components: []
   - type: DropDown
@@ -249,37 +237,24 @@ components:
       underline: false
       include_placeholder: false
     name: county
-    layout_properties: {grid_position: 'LAGDLB,NTECZM AJTWAF,TXKCFK'}
+    layout_properties: {grid_position: 'FCMFWS,PJXPPZ'}
     event_bindings: {change: county_change}
     data_bindings: []
-  - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help6
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM AJTWAF,XYDQGW'}
-    data_bindings:
-    - {property: tag, code: '"""Select your County/Borough from this list, and the
-        list of known Streets will update automatically."""'}
-    event_bindings: {click: show_help_tag}
-    components: []
-  - type: TextBox
-    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '#cae4ff', bold: false, underline: false}
-    name: country
-    layout_properties: {grid_position: 'LAGDLB,NTECZM FBWDSZ,KODRYQ', slot: default}
-    data_bindings: []
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: false, icon: 'fa:globe'}
+    name: label_country
+    layout_properties: {grid_position: 'FBWDSZ,NZNRAY'}
     event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help7
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM FBWDSZ,REQJAK'}
+    layout_properties: {slot: default, grid_position: 'FBWDSZ,BXCHFU'}
     data_bindings:
     - {property: tag, code: '"""Your Country is set automatically by the server.  We''ll
         probably have at least one server running the app locally for every country
@@ -288,20 +263,28 @@ components:
     components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
       font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: postcode
-    layout_properties: {grid_position: 'LAGDLB,NTECZM IJAESN,NAQNTO', slot: default}
-    event_bindings: {show: field_change, change: field_change}
+      background: '#cae4ff', bold: false, underline: false}
+    name: country
+    layout_properties: {grid_position: 'HJTDJI,ULWLGA', slot: default}
     data_bindings: []
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Postcode:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
+      underline: false, icon: 'fa:envelope-o'}
+    name: label_post_code
+    layout_properties: {grid_position: 'IJAESN,XBLGHX'}
+    event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help8
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM IJAESN,EFZOTZ'}
+    layout_properties: {slot: default, grid_position: 'IJAESN,DLZZRR'}
     data_bindings:
     - {property: tag, code: '"""Your Postcode is optional as the app doesn''t need
         it to work.  If you choose to add your Postcode now however, you''ll have
@@ -315,20 +298,27 @@ components:
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
-      font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
+      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
-    name: telephone
-    layout_properties: {grid_position: 'LAGDLB,NTECZM KAJWFB,BVBGWX'}
-    data_bindings:
-    - {property: text, code: 'self.item[''text'']', writeback: true}
-    event_bindings: {change: field_change, show: field_change}
+    name: postcode
+    layout_properties: {grid_position: 'UIVWNZ,VJVFZC', slot: default}
+    event_bindings: {show: field_change, change: field_change}
+    data_bindings: []
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Telephone:', font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: true, background: '', bold: true,
+      underline: false, icon: 'fa:phone'}
+    name: label_telephone
+    layout_properties: {grid_position: 'KAJWFB,ZCPGXX'}
+    event_bindings: {}
   - type: Link
-    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
+    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
       visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
       spacing_above: small, icon_align: left, col_widths: '{}', spacing_below: small,
       italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
     name: help9
-    layout_properties: {slot: default, grid_position: 'LAGDLB,NTECZM KAJWFB,XWLZHD'}
+    layout_properties: {slot: default, grid_position: 'KAJWFB,GRCDIV'}
     data_bindings:
     - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
         need it.  If you choose to add your Telephone number now however, you''ll
@@ -337,6 +327,16 @@ components:
         met them once in person, and then swap numbers directly."""'}
     event_bindings: {click: show_help_tag}
     components: []
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      font: '', spacing_above: small, type: tel, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
+    name: telephone
+    layout_properties: {grid_position: 'WGBRMQ,VRIOBQ'}
+    data_bindings:
+    - {property: text, code: 'self.item[''text'']', writeback: true}
+    event_bindings: {change: field_change, show: field_change}
   event_bindings: {hide: save_input}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
