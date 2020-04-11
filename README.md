@@ -1,10 +1,25 @@
+![WGACA Logo](https://github.com/PFython/WGACA-UK/blob/master/project%20management/WGACA%20Logo.png)
+
 ### Introduction
 
 Hi everyone... We hope you’re doing ok and staying safe during these difficult times…
 
 During ‘Lock-down’ the team at South West London TV created a free web app you can use on your computer or smart phone which we hope will get some community spirit going and make it easy for local people to help each other.
 
-It’s called What Goes Around Comes Around (WGACA) and it’s a tool for sharing and swapping food and drink, household goods, and over-the-counter medicines with those in need. You can post a Request to let people know you need urgent help; You can post Offers of surplus items you’re able to share; and you can volunteer as a Runner to pick up nearby Offers and deliver them where they’re most needed locally.
+It’s called What Goes Around Comes Around (WGACA) and it’s a tool for sharing and swapping food and drink, household goods, and over-the-counter medicines with those in need.
+
+
+**You can post Offers of surplus items you’re able to share:**
+![Offers](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Offers.jpg)
+
+**You can post a Request to let people know you need urgent help:**
+![Reqeusts](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Requests.jpg)
+
+**You can review Matches (which are detected automatically) and volunteer as a Runner to pick up nearby Offers:**
+![Matches](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Matches.jpg)
+
+**You can review your Deliveries and plan the best route:**
+![Deliveries](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Deliveries.jpg)
 
 It’s early days and we’re already working on a load of improvements to the app (mainly to protect against scammers and selfish misuse), but we wanted to start sharing it ASAP so that trusted people in the area can start helping each other.
 
