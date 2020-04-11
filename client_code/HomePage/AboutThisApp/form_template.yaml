@@ -61,7 +61,7 @@ components:
       col_widths: '{}', spacing_below: small, italic: false, background: '', bold: true,
       underline: false, icon: ''}
     name: link_1
-    layout_properties: {grid_position: 'MSOFBU,EZVSGO'}
+    layout_properties: {grid_position: 'MSOFBU,DQIPTL'}
     event_bindings: {}
     data_bindings:
     - {property: url, code: '"https://github.com/PFython/WGACA-UK"'}
