@@ -14,7 +14,7 @@ If it proves popular, my intention is to make the app and the data available to 
 
 • **Python 3.7** - because it’s all I know and I’m planning to have to make this happen on my own if necessary.
 
-• **[[Anvil.Works|https://anvil.works/]]** - because I don’t have time to learn and deploy a scalable web app with database, user authentication, email, and (nice to have) google maps integration and this seems like a fast route to getting something “out there” quickly.
+• **[Anvil.Works](https://anvil.works/)** - because I don’t have time to learn and deploy a scalable web app with database, user authentication, email, and (nice to have) google maps integration and this seems like a fast route to getting something “out there” quickly.
 
 That’s all - as few layers/dependencies as possible.
 
