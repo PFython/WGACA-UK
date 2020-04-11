@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"DKUGNW":35,"TAWYIL":25,"ATRDPM":40,"POOLUL":20,"DLLMWS":40,"NQKKRA":20,"WYMIYQ":40,"SOVMIY":20}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYMIYQ":40,"SOVMIY":20}',
     spacing_below: small, background: '#eaf4ff'}
   name: card_1
   layout_properties: {}
@@ -12,16 +12,16 @@ components:
       spacing_below: small, italic: false, background: '', bold: true, underline: true,
       icon: 'fa:heartbeat'}
     name: label_2
-    layout_properties: {grid_position: 'LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,ATRDPM
-        WCIEML,DKUGNW ARCRJW,IIXKLG', column: RTJNNJ}
+    layout_properties: {grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG KUGOML,FLMTLV',
+      column: RTJNNJ}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: offer
-    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ BMVFCW,DLLMWS
-        KCSUMZ,ATRDPM WCIEML,DKUGNW PFSUTQ,HZFLRT'}
+    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
+        ADFQWT,VETGBA'}
     data_bindings:
     - {property: text, code: 'self.item[''offer''][''product_key'']+" … "+str(self.item[''offer''][''units''])'}
   - type: Label
@@ -30,8 +30,8 @@ components:
       spacing_below: none, italic: true, background: '', bold: false, underline: false,
       icon: 'fa:hourglass-end'}
     name: offer_expiry
-    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ BMVFCW,DLLMWS
-        KCSUMZ,ATRDPM WCIEML,DKUGNW EEWXWF,OYXOOH'}
+    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
+        YVUXXI,QWIUBH'}
     data_bindings:
     - {property: text, code: 'self.item[''offer''][''expiry_date''].strftime(''%d
         %b %Y'')'}
@@ -41,54 +41,10 @@ components:
       spacing_below: none, italic: true, background: '', bold: false, underline: false,
       icon: 'fa:info-circle'}
     name: offer_notes
-    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ BMVFCW,DLLMWS
-        KCSUMZ,ATRDPM WCIEML,DKUGNW NDJRBN,OTSSRG'}
+    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
+        CDHDSW,TOIMCF'}
     data_bindings:
     - {property: text, code: 'self.item[''offer''][''notes'']'}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Pick-up, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:upload'}
-    name: label_3
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,ATRDPM WCIEML,TAWYIL VXZALQ,CVFTXB
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: pickup
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,ATRDPM WCIEML,TAWYIL WJEPQX,CVPLFD
-    data_bindings:
-    - {property: text, code: 'self.item[''offer''][''user''][''display_name'']+"\n"+str(self.item[''offer''][''user''][''house_number''])+"
-        "+self.item[''offer''][''user''][''street'']+"\n"+self.item[''offer''][''user''][''town'']+"\n"+self.item[''offer''][''user''][''county'']+"\n"+self.item[''offer''][''user''][''postcode'']'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:download'}
-    name: label_4
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,POOLUL SNUZXU,RENMCQ
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: dropoff
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,DLLMWS KCSUMZ,POOLUL QEFALZ,SYMPYG
-    data_bindings:
-    - {property: text, code: 'self.item[''request''][''user''][''display_name'']+"\n"+str(self.item[''request''][''user''][''house_number''])+"
-        "+self.item[''request''][''user''][''street'']+"\n"+self.item[''request''][''user''][''town'']+"\n"+self.item[''request''][''user''][''county'']+"\n"+self.item[''request''][''user''][''postcode'']'}
-    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
@@ -97,7 +53,8 @@ components:
     name: label_1
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,NQKKRA FHZVDQ,TLTQLW
+      grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY VPRKOM,QYETXH
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
@@ -106,7 +63,7 @@ components:
     name: request
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,NQKKRA ENKKNI,GJBULY
+      grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY AHBOTQ,PLMAWV
     data_bindings:
     - {property: text, code: 'self.item[''request''][''product_category'']'}
     event_bindings: {}
@@ -118,9 +75,52 @@ components:
     name: request_notes
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,WYMIYQ BMVFCW,NQKKRA UFRJFE,MZFEXP
+      grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY JPWMIR,HPQFPM
     data_bindings:
     - {property: text, code: 'self.item[''request''][''notes'']'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Pick-up, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:upload'}
+    name: label_3
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,WYMIYQ TPZRYP,ZKQOOC KGXEQR,PCJXTL
+    event_bindings: {}
+  - type: Label
+    properties: {role: green, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: pickup
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,WYMIYQ TPZRYP,ZKQOOC OZLREB,OQTHOP
+    data_bindings:
+    - {property: text, code: ''}
+    event_bindings: {show: show_deliveries_row}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:download'}
+    name: label_4
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,WYMIYQ TPZRYP,VNFVFM NQIVPI,GQUGFH
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: dropoff
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,WYMIYQ TPZRYP,VNFVFM YFYBYQ,WJSFWJ
+    data_bindings:
+    - {property: text, code: ''}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -164,7 +164,41 @@ components:
     data_bindings:
     - {property: checked, code: 'self.item[''offer_delivered'']', writeback: true}
     event_bindings: {}
-  event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '#0080c0',
+      bold: false, underline: false, icon: 'fa:caret-down'}
+    name: message1
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY UTSGFO,APBHRD'}
+    event_bindings: {click: click_show_message}
+  - type: TextArea
+    properties: {role: null, align: left, height: 88, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
+      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
+    name: message1_text
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY AVBPFE,CRJOWG'}
+    event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '#d8d8d8',
+      bold: false, underline: false, icon: 'fa:caret-down'}
+    name: message2
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY CUXNIX,OJIUMI
+    event_bindings: {click: click_show_message}
+  - type: TextArea
+    properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
+      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
+    name: message2_text
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,VUYSCI'}
+    event_bindings: {}
+  event_bindings: {show: show_deliveries_row}
 container:
   type: DataRowPanel
   event_bindings: {}
