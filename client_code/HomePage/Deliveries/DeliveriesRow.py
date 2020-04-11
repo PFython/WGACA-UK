@@ -15,29 +15,29 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
-        # Green: #5eb348
-        # Blue: #0080c0
-        # Red: #ff8080
+        my_colour = '#5eb348' # Green
+#         my_colour = '#ff8080' # Red
+#         my_colour = '#0080c0' # Blue
+        
         if self.item['request']['user'] == user:
             self.label_1.text  = "My Request"
-            self.label_1.foreground = '#5eb348'
-            self.label_4.foreground = '#5eb348'
-            self.dropoff.foreground = '#5eb348'
+            self.label_1.foreground = my_colour
+            self.label_4.foreground = my_colour
+            self.dropoff.foreground = my_colour
             self.dropoff.icon = 'fa:home'
-            self.request.foreground = '#5eb348'
-            self.request_notes.foreground = '#5eb348'
+            self.request.foreground = my_colour
+            self.request_notes.foreground = my_colour
 
         if self.item['offer']['user'] == user:
             self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
-            self.label_2.text  = "My Offer"
-            self.label_2.foreground = '#5eb348'
-            self.label_3.foreground = '#5eb348'        
-            self.pickup.foreground = '#5eb348'
+            self.label_2.text  = "My Offer"            
+            self.label_2.foreground = my_colour
+            self.label_3.foreground = my_colour        
+            self.pickup.foreground = my_colour
             self.pickup.icon = 'fa:home'
-            self.offer.foreground = '#5eb348'
-            self.offer_notes.foreground = '#5eb348'
-            self.confirm_match.visible = True
-            self.volunteer_toggle.visible = False        
+            self.offer.foreground = my_colour
+            self.offer_notes.foreground = my_colour
+            self.offer_expiry.foreground = my_colour
  
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
@@ -77,8 +77,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
             message.tag = message.tag or ""
             message.tag = message.tag.strip()
             if not message.tag:
-#                 message.visible = False # Comment in for production, comment out during Test
                 message.enabled = False
+            else:
+                print(F"'{}")
   
   
     def show_deliveries_row(self, **event_args):

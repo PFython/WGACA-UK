@@ -36,32 +36,31 @@ class MatchesRow(MatchesRowTemplate):
         
 
   def show_myself(self, **event_args):
-    """This method is called when the data row panel is shown on the screen"""
-    user = anvil.users.get_user()
-    # Green: #5eb348
-    # Blue: #0080c0
-    # Red: #ff8080
-    if self.item['request']['user'] == user:
-        self.label_1.text  = "My Request"
-        self.label_1.foreground = '#5eb348'
-        self.label_4.foreground = '#5eb348'
-        self.dropoff.foreground = '#5eb348'
-        self.dropoff.icon = 'fa:home'
-        self.request.foreground = '#5eb348'
-        self.request_notes.foreground = '#5eb348'
-        
+      """This method is called when the data row panel is shown on the screen"""
+      user = anvil.users.get_user()
+      my_colour = '#5eb348' # Green
+#       my_colour = '#ff8080' # Red
+#       my_colour = '#0080c0' # Blue
+      if self.item['request']['user'] == user:
+          self.label_1.text  = "My Request"
+          self.label_1.foreground = my_colour
+          self.label_4.foreground = my_colour
+          self.dropoff.foreground = my_colour
+          self.dropoff.icon = 'fa:home'
+          self.request.foreground = my_colour
+          self.request_notes.foreground = my_colour        
 
-    if self.item['offer']['user'] == user:
-        self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
-        self.label_2.text  = "My Offer"
-        self.label_2.foreground = '#5eb348'
-        self.label_3.foreground = '#5eb348'        
-        self.pickup.foreground = '#5eb348'
-        self.pickup.icon = 'fa:home'
-        self.offer.foreground = '#5eb348'
-        self.offer_notes.foreground = '#5eb348'
-        self.confirm_match.visible = True
-        self.volunteer_toggle.visible = False
+      if self.item['offer']['user'] == user:
+          self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
+          self.label_2.text  = "My Offer"
+          self.label_2.foreground = my_colour
+          self.label_3.foreground = my_colour        
+          self.pickup.foreground = my_colour
+          self.pickup.icon = 'fa:home'
+          self.offer.foreground = my_colour
+          self.offer_notes.foreground = my_colour
+          self.confirm_match.visible = True
+          self.volunteer_toggle.visible = False
 
   def confirm_match_click(self, **event_args):
       """This method is called when the Select Volunteer button is clicked"""

@@ -45,6 +45,7 @@ components:
         CDHDSW,TOIMCF'}
     data_bindings:
     - {property: text, code: 'self.item[''offer''][''notes'']'}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
