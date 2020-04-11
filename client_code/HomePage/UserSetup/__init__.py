@@ -99,13 +99,15 @@ class UserSetup(UserSetupTemplate):
             existing_name = anvil.server.call("check_for_display_name", self.display_name.text)
             if existing_name:
                 self.help_text.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken."
-#                 self.display_name.text = ""
                 self.deselect_all_icons()
+                return True
             
     def field_change(self, **event_args):
         """ Highlights empty input boxes and checks for unique Display Name"""
         if event_args['sender'] is self.display_name:
-            self.check_for_existing_display_name()
+            if self.check_for_existing_display_name():
+                self.display_name.background = '#ffe6e6'
+                return
         if event_args['sender'].text == "":
             if event_args['sender'].tag == "Optional":
                 event_args['sender'].background = '#fefdc7'
