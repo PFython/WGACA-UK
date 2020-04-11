@@ -6,7 +6,7 @@ Hi everyone... We hope you’re doing ok and staying safe during these difficult
 
 During ‘Lock-down’ the team at South West London TV created a free web app you can use on your computer or smart phone which we hope will get some community spirit going and make it easy for local people to help each other.
 
-It’s called What Goes Around Comes Around (WGACA) and it’s a tool for sharing and swapping food and drink, household goods, and over-the-counter medicines with those in need.
+It’s called **What Goes Around Comes Around (WGACA)** and it’s a tool for sharing and swapping food and drink, household goods, and over-the-counter medicines with those in need.
 
 
 **You can post Offers of surplus items you’re able to share:**
