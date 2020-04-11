@@ -1,6 +1,6 @@
 ![WGACA Logo](https://github.com/PFython/WGACA-UK/blob/master/project%20management/WGACA%20Logo.png)
 
-### Introduction
+### WHAT GOES AROUND COMES AROUND
 
 Hi everyone... We hope you’re doing ok and staying safe during these difficult times…
 
