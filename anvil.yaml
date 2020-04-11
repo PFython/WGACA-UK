@@ -257,7 +257,7 @@ db_schema:
     FV4yw9gzoSw=:
       name: email
       type: string
-      admin_ui: {order: 0, width: 55.011364000000015}
+      admin_ui: {order: 0, width: 254.6667}
     +yeRpzKf8BA=:
       name: details_complete
       type: bool

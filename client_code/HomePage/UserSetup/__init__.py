@@ -99,7 +99,7 @@ class UserSetup(UserSetupTemplate):
             existing_name = anvil.server.call("check_for_display_name", self.display_name.text)
             if existing_name:
                 self.help_text.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken."
-                self.display_name.text = ""
+#                 self.display_name.text = ""
                 self.deselect_all_icons()
             
     def field_change(self, **event_args):
