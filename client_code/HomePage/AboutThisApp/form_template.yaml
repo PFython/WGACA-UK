@@ -12,7 +12,7 @@ components:
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"SVIZUH":10,"GXURPI":37}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"SVIZUH":10,"GXURPI":20}',
     spacing_below: small, background: '#cae4ff'}
   name: about_this_app
   layout_properties:
@@ -52,7 +52,7 @@ components:
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: label_1
-    layout_properties: {grid_position: 'ZJCZRI,GUVHNE'}
+    layout_properties: {grid_position: 'ZJCZRI,GBGWRT'}
     event_bindings: {}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
@@ -74,12 +74,25 @@ components:
     name: image_1
     layout_properties: {grid_position: 'OMXSGE,SVIZUH'}
   - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: Contact Us, font_size: 24, font: '',
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: Contact Us, font_size: 18, font: '',
       spacing_above: large, icon_align: top, spacing_below: small, italic: false,
       background: '#5eb348', bold: false, underline: false, icon: 'fa:commenting'}
     name: contact_us
-    layout_properties: {grid_position: 'OMXSGE,GXURPI'}
+    layout_properties: {grid_position: 'OMXSGE,GXURPI CAIZBC,JCYKXZ'}
     event_bindings: {click: contact_us_click}
+  - type: Button
+    properties: {role: null, align: right, tooltip: 'Also: Reset Password, Switch
+        User', border: '', enabled: true, foreground: '#ffffff', visible: true, text: ' Log
+        Out,
+
+        Change Password', font_size: 18, font: '', spacing_above: large, icon_align: left,
+      spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
+      icon: 'fa:power-off'}
+    name: change_password
+    layout_properties:
+      col_widths: {}
+      grid_position: OMXSGE,GXURPI CAIZBC,OLVQLD
+    event_bindings: {}
   event_bindings: {}
 is_package: true

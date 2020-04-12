@@ -1,11 +1,27 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"AELAEO":15,"WWCPOC":35,"KQHXBK":43}',
+    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"KQHXBK":43}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties: {slot: default}
   components:
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Transaction History', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:list'}
+    name: view_history
+    layout_properties: {grid_position: 'WNNDRU,CWDXVM'}
+    event_bindings: {click: view_history_click}
+  - type: Button
+    properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Delete Account and Data', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#ff8080', bold: false, underline: false, icon: 'fa:trash'}
+    name: delete_account
+    layout_properties: {grid_position: 'WNNDRU,SOVZZC'}
+    event_bindings: {click: delete_account_click}
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
       wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"DCQNVS":30,"STSOPJ":10,"APIFTY":40}',
@@ -362,37 +378,6 @@ components:
       event_bindings: {click: show_help_tag}
       components: []
     event_bindings: {}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Transaction
-
-        History', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '#5eb348', bold: false, underline: false,
-      icon: 'fa:list'}
-    name: view_history
-    layout_properties: {grid_position: 'QHLEHR,AELAEO'}
-    event_bindings: {click: view_history_click}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Delete
-
-        Account', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '#ff8080', bold: false, underline: false,
-      icon: 'fa:trash'}
-    name: delete_account
-    layout_properties: {grid_position: 'QHLEHR,WQTYUA'}
-    event_bindings: {click: delete_account_click}
-  - type: Button
-    properties: {role: null, align: left, tooltip: 'Also: Reset Password, Switch User',
-      border: '', enabled: true, foreground: '#ffffff', visible: true, text: ' Log
-        Out,
-
-        Change Password', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-      icon: 'fa:power-off'}
-    name: change_password
-    layout_properties: {grid_position: 'QHLEHR,WWCPOC'}
-    event_bindings: {click: log_out}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,

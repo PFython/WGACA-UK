@@ -23,7 +23,7 @@ pale_blue = '#eaf4ff'
 bright_blue = '00a3f0'
 white = "#ffffff"
 colours = (green, grey, red, blue, light_blue, pale_blue, bright_blue, white)
-menu_font_size = 20
+menu_font_size = 18
 
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
