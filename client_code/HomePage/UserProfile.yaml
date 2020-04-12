@@ -140,7 +140,7 @@ components:
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'House Name/No.:', font_size: 14, font: '', spacing_above: none,
+        visible: true, text: 'House/Apartment:', font_size: 14, font: '', spacing_above: none,
         icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:home'}
       name: label_house_number
