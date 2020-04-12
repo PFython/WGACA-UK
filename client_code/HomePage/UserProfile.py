@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .TermsOfUse import TermsOfUse
 
-from ...Globals import pink, yellow
+from ..Globals import pink, yellow
 
 class UserProfile(UserProfileTemplate):
 
