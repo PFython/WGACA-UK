@@ -33,8 +33,7 @@ class HomePage(HomePageTemplate):
         self.background = bright_blue
         self.navigation_bar.background = blue
         self.title_bar.background = light_blue
-        self.title_bar.foreground = white
-        self.card_1.background = light_blue
+#         self.card_1.background = light_blue
         for button, tag in {self.menu_about: 'About',
                             self.menu_my_offers: 'My Offers',
                             self.menu_my_requests: 'My Requests',
