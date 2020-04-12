@@ -14,7 +14,7 @@ components:
   components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: never, col_spacing: tiny, spacing_above: none, col_widths: '{"XVMYTA":10,"HFYLGH":10,"TJTUKF":9,"ROCCDH":11,"JVVYKL":10,"FUDVDB":10,"LYVKDC":10,"RBTGMV":9,"JKAVWF":11,"RZWKFG":10,"EWNGMN":10,"JLAVIR":10}',
+      wrap_on: never, col_spacing: tiny, spacing_above: none, col_widths: '{"HFYLGH":10,"TJTUKF":9,"ROCCDH":11,"JVVYKL":10,"FUDVDB":10,"LYVKDC":10,"RBTGMV":9,"JKAVWF":11,"RZWKFG":10,"EWNGMN":10,"JLAVIR":10}',
       spacing_below: none, background: '''#00a3f0'}
     name: navigation_bar
     layout_properties: {grid_position: 'PTTQYJ,VHRBGI'}
@@ -78,11 +78,9 @@ components:
       data_bindings: []
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: '
-
-          ABOUT', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-        icon: 'fa:align-justify'}
+        foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:align-justify'}
       name: menu_about
       layout_properties:
         col_widths: {}
@@ -90,33 +88,27 @@ components:
       event_bindings: {click: menu_about_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: '  MY
-
-          OFFERS', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-        icon: 'fa:heartbeat'}
+        foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:heartbeat'}
       name: menu_my_offers
-      layout_properties: {grid_position: 'PWOBIW,XVMYTA'}
+      layout_properties: {grid_position: 'PWOBIW,HFYLGH'}
       event_bindings: {click: menu_my_offers_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: '  MY
-
-          REQUESTS', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-        icon: 'fa:bullhorn'}
+        foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:bullhorn'}
       name: menu_my_requests
       layout_properties:
         col_widths: {}
-        grid_position: PWOBIW,HFYLGH
+        grid_position: PWOBIW,TZTCZK
       event_bindings: {click: menu_my_requests_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: '  MY
-
-          MATCHES', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-        icon: 'fa:indent'}
+        foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:indent'}
       name: menu_my_matches
       layout_properties:
         col_widths: {}
@@ -124,11 +116,9 @@ components:
       event_bindings: {click: menu_my_matches_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: '  MY
-
-          DELIVERIES', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-        icon: 'fa:ambulance'}
+        foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:ambulance'}
       name: menu_my_deliveries
       layout_properties:
         col_widths: {}
@@ -136,23 +126,30 @@ components:
       event_bindings: {click: menu_my_deliveries_click}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: '  MY
-
-          DETAILS', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '#0080c0', bold: false, underline: false,
-        icon: 'fa:user'}
-      name: menu_my_data
+        foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
+        spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:user'}
+      name: menu_my_details
       layout_properties:
         col_widths: {}
         grid_position: PWOBIW,JVVYKL
-      event_bindings: {click: menu_my_data_click}
+      event_bindings: {click: menu_my_details_click}
+    - type: Label
+      properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
+        visible: true, text: '', font_size: 20, font: '', spacing_above: small, icon_align: left,
+        spacing_below: small, italic: false, background: '', bold: false, underline: false,
+        icon: ''}
+      name: title_bar
+      layout_properties: {grid_position: 'ABXRIH,XGNYDG'}
+      event_bindings: {}
     event_bindings: {}
     data_bindings: []
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '', spacing_below: none,
+    wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
     background: ''}
   name: column_panel_1
   layout_properties: {grid_position: 'EBQUAD,FRWZFM'}
   event_bindings: {}
+  components: []
 is_package: true

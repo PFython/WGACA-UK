@@ -23,7 +23,7 @@ pale_blue = '#eaf4ff'
 bright_blue = '00a3f0'
 white = "#ffffff"
 colours = (green, grey, red, blue, light_blue, pale_blue, bright_blue, white)
-menu_font_size = 14
+menu_font_size = 20
 
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
@@ -32,6 +32,15 @@ class HomePage(HomePageTemplate):
         # Any code you write here will run when the form opens.
         self.background = bright_blue
         self.navigation_bar.background = blue
+        self.title_bar.background = blue
+        self.title_bar.foreground = white
+        for button, tag in {self.menu_about: 'About',
+                            self.menu_my_offers: 'My Offers',
+                            self.menu_my_requests: 'My Requests',
+                            self.menu_my_matches: 'My Matches',
+                            self.menu_my_deliveries: 'My Deliveries',
+                            self.menu_my_details: 'My Details'}.items():
+            button.tag = tag
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
         self.check_permissions()
@@ -65,26 +74,27 @@ class HomePage(HomePageTemplate):
             
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
+        self.title_bar.text = selected.tag
         self.menu_my_offers.background = blue
         self.menu_my_requests.background = blue
         self.menu_my_matches.background = blue
         self.menu_my_deliveries.background = blue
-        self.menu_my_data.background = blue
+        self.menu_my_details.background = blue
         self.menu_my_offers.foreground = light_blue
         self.menu_my_requests.foreground = light_blue
         self.menu_my_matches.foreground = light_blue
         self.menu_my_deliveries.foreground = light_blue
-        self.menu_my_data.foreground = light_blue
+        self.menu_my_details.foreground = light_blue
         self.menu_my_offers.bold = False
         self.menu_my_requests.bold = False
         self.menu_my_matches.bold = False
         self.menu_my_deliveries.bold = False
-        self.menu_my_data.bold = False
+        self.menu_my_details.bold = False
         self.menu_my_offers.font_size = menu_font_size
         self.menu_my_requests.font_size = menu_font_size
         self.menu_my_matches.font_size = menu_font_size
         self.menu_my_deliveries.font_size = menu_font_size
-        self.menu_my_data.font_size = menu_font_size
+        self.menu_my_details.font_size = menu_font_size
         selected.background = bright_blue
         selected.foreground = white
         selected.bold = True
@@ -95,7 +105,7 @@ class HomePage(HomePageTemplate):
                   self.menu_my_requests: self.image_2,
                   self.menu_my_matches: self.image_3,
                   self.menu_my_deliveries: self.image_4,
-                  self.menu_my_data: self.image_5}        
+                  self.menu_my_details: self.image_5}        
         for image in images.values():
             setattr(image, "visible", False)
         # Unhide selected image
@@ -133,13 +143,13 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(Deliveries())
         self.highlight_selected_menu(self.menu_my_deliveries)        
         
-    def menu_my_data_click(self, **event_args):
+    def menu_my_details_click(self, **event_args):
         """This method is called when the Data menu item is clicked"""
         self.check_permissions()
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(UserProfile())
-        self.highlight_selected_menu(self.menu_my_data)
+        self.highlight_selected_menu(self.menu_my_details)
 
     def menu_about_click(self, **event_args):
         """This method is called when the About button is clicked"""
