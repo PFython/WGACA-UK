@@ -69,7 +69,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.message2.text = " Message from Runner"
             self.message2.tag = messages.get('runner_to_requester')
             self.dropoff.text += self.item['offer']['user']['postcode'] or ""
-            if user in self.item['offer']['user']['postcode_shared_with']:
+            post_code_shared = self.item['offer']['user']['postcode_shared_with'] or []
+            if user in post_code_shared:
                 self.pickup.text += self.item['offer']['user']['postcode'] or ""
             
         for message in (self.message1, self.message2):

@@ -24,6 +24,6 @@ class AboutThisApp(AboutThisAppTemplate):
       anvil.users.logout()
       anvil.users.login_with_form()
       self.parent.parent.__init__()
-      self.parent.parent.menu_my_data_click()
+      self.parent.parent.menu_my_details_click()
 
 
