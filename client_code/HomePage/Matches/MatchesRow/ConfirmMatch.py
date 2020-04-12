@@ -61,7 +61,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
         self.update_databases(runner, messages)
         self.exit()
         
-    def add_remove_sharing(self, dictionary, recipient):
+    def add_remove_sharing(self, user, dictionary, recipient):
         """ Adds or Removes a user in the shared_with column """
         for field, checked in dictionary.items():
             users = list(set((user[field] or []) + [recipient]))
@@ -75,14 +75,13 @@ class ConfirmMatch(ConfirmMatchTemplate):
         runner_dict = {'telephone_shared_with': self.telephone_to_runner.checked,
                       'email_shared_with': self.email_to_runner.checked,
                       'postcode_shared_with': self.postcode_to_runner.checked,}
-        self.add_remove_sharing(runner_dict, runner)
+        self.add_remove_sharing(user, runner_dict, runner)
         # Update 'shared_with' for Requester
         requester = self.parent.parent.parent.item['request']['user'] #['display_name']
-        print(f"Requester: {requester}")
         requester_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
                       'email_shared_with': self.email_to_requester.checked,
                       'postcode_shared_with': self.postcode_to_requester.checked,}
-        self.add_remove_sharing(requester_dict, requester)
+        self.add_remove_sharing(user, requester_dict, requester)
         
     def create_messages_dict(self, user):    
         """ Add messages and Telephone/Email/Postcode if granted"""
@@ -93,7 +92,14 @@ class ConfirmMatch(ConfirmMatchTemplate):
         if self.email_to_runner.checked:
             messages['offerer_to_runner'] += f"\nMy Email is: {user['email']}"
         if self.postcode_to_runner.checked and user['postcode']:
-                  messages['offerer_to_runner'] += f"\nMy Postcode is {user['postcode']}"               
+                  messages['offerer_to_runner'] += f"\nMy Postcode is {user['postcode']}"  
+        messages['offerer_to_requester'] = self.message_to_requester.text + "\n"    
+        if self.telephone_to_requester.checked and user['telephone']:
+            messages['offerer_to_requester'] += f"\nMy telephone number is: {user['telephone']}"
+        if self.email_to_requester.checked:
+            messages['offerer_to_requester'] += f"\nMy Email is: {user['email']}"
+        if self.postcode_to_requester.checked and user['postcode']:
+                  messages['offerer_to_requester'] += f"\nMy Postcode is {user['postcode']}"  
         return messages
       
     def update_databases(self, runner, messages):

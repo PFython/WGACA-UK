@@ -63,7 +63,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: false, text: Share Email with Requester, font_size: null,
+      foreground: '', visible: true, text: Share Email with Requester, font_size: null,
       font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: telephone_to_requester
@@ -79,7 +79,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: false, text: Share Telephone with Requester, font_size: null,
+      foreground: '', visible: true, text: Share Telephone with Requester, font_size: null,
       font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: email_to_requester
@@ -95,7 +95,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: false, text: Share your Postcode with Requester, font_size: null,
+      foreground: '', visible: true, text: Share your Postcode with Requester, font_size: null,
       font: '', spacing_above: none, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: postcode_to_requester
