@@ -5,9 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from .ConfirmMatch import ConfirmMatch
-
-from .Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from .ConfirmMatch import ConfirmMatch, green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 class MatchesRow(MatchesRowTemplate):
   def __init__(self, **properties):
