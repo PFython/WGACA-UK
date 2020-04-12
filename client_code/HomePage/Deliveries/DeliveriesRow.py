@@ -53,25 +53,26 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if user == self.item['offer']['user'] :
             self.message1.text = " Message from Runner"
             self.message1.tag = messages.get('runner_to_offerer')
-            self.message2.text = " Message from Requester"
-            self.message2.tag = messages.get('requester_to_offerer')
             self.pickup.text += self.item['offer']['user']['postcode'] or ""
+            self.message2.visible = False
 
         if user == self.item['approved_runner'] :
             self.message1.text = " Message from Offerer"
             self.message1.tag = messages.get('offerer_to_runner')
             self.message2.text = " Message from Requester"
             self.message2.tag = messages.get('requester_to_runner')
+            # Check if Runner is authorised to see Request/Offer postcodes
+            for shared, address in {self.item['offer']: self.pickup,
+                                    self.item['request']: self.dropoff}.items():
+                post_code_shared = shared['user']['postcode_shared_with'] or []
+                if user in post_code_shared:
+                    address.text += self.item['offer']['user']['postcode'] or ""
 
         if user == self.item['request']['user'] :
-            self.message1.text = " Message from Offerer"
-            self.message1.tag = messages.get('offerer_to_requester') 
             self.message2.text = " Message from Runner"
             self.message2.tag = messages.get('runner_to_requester')
             self.dropoff.text += self.item['offer']['user']['postcode'] or ""
-            post_code_shared = self.item['offer']['user']['postcode_shared_with'] or []
-            if user in post_code_shared:
-                self.pickup.text += self.item['offer']['user']['postcode'] or ""
+            self.message1.visible = False
             
         for message in (self.message1, self.message2):
             message.tag = message.tag or ""

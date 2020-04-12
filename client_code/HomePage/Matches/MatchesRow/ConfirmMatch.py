@@ -58,49 +58,41 @@ class ConfirmMatch(ConfirmMatchTemplate):
         runner = anvil.server.call("get_user_from_display_name", self.runner_dropdown.selected_value.replace(" (myself)",""))
         self.update_shared_with_fields(user, runner)
         messages = self.create_messages_dict(user)
-        print(messages)
         self.update_databases(runner, messages)
         self.exit()
         
-    def update_shared_with_fields(self, user, runner):
-        """ Update 'shared_with' for Requester """
-        requester_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
-                      'email_shared_with': self.email_to_requester.checked,
-                      'postcode_shared_with': self.postcode_to_requester.checked,
-                     }
-        for field, checked in requester_dict.items():          
-            users = list(set((user[field] or []) + [self.requester]))
+    def add_remove_sharing(self, dictionary, recipient):
+        """ Adds or Removes a user in the shared_with column """
+        for field, checked in dictionary.items():
+            users = list(set((user[field] or []) + [recipient]))
             if not checked:
-                users = users.remove(self.requester)
+                users = users.remove(recipient)
             anvil.server.call('save_user_setup', field, users)
-        # Update 'shared_with' for Requester
+            
+    def update_shared_with_fields(self, user, runner):
+        """ Update 'shared_with' for Runner """
+        # Update 'shared_with' for Runner
         runner_dict = {'telephone_shared_with': self.telephone_to_runner.checked,
                       'email_shared_with': self.email_to_runner.checked,
-                      'postcode_shared_with': self.postcode_to_runner.checked,
-                     }
-        for field, checked in runner_dict.items():
-            users = list(set((user[field] or []) + [runner]))
-            if not checked:
-                users = users.remove(runner)
-            anvil.server.call('save_user_setup', field, users)
+                      'postcode_shared_with': self.postcode_to_runner.checked,}
+        self.add_remove_sharing(runner_dict, runner)
+        # Update 'shared_with' for Requester
+        requester = self.parent.parent.parent.item['request']['user'] #['display_name']
+        requester_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
+                      'email_shared_with': self.email_to_requester.checked,
+                      'postcode_shared_with': self.postcode_to_requester.checked,}
+        self.add_remove_sharing(requester_dict, requester)
         
     def create_messages_dict(self, user):    
         """ Add messages and Telephone/Email/Postcode if granted"""
         messages = {}
-        messages['offerer_to_runner'] = self.message_to_runner.text +"\n"
+        messages['offerer_to_runner'] = self.message_to_runner.text + "\n"
         if self.telephone_to_runner.checked and user['telephone']:
             messages['offerer_to_runner'] += f"\nMy telephone number is: {user['telephone']}"
         if self.email_to_runner.checked:
             messages['offerer_to_runner'] += f"\nMy Email is: {user['email']}"
         if self.postcode_to_runner.checked and user['postcode']:
                   messages['offerer_to_runner'] += f"\nMy Postcode is {user['postcode']}"               
-        messages['offerer_to_requester'] = self.message_to_requester.text +"\n\n"
-        if self.telephone_to_requester.checked and user['telephone']:
-            messages['offerer_to_requester'] += f"\nMy telephone number is: {user['telephone']}"
-        if self.email_to_requester.checked:
-            messages['offerer_to_requester'] += f"\nMy Email is: {user['email']}"
-        if self.postcode_to_requester.checked and user['postcode']:
-                  messages['offerer_to_requester'] += f"\nMy Postcode is {user['postcode']}"          
         return messages
       
     def update_databases(self, runner, messages):
