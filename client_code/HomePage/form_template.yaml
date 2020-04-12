@@ -134,14 +134,20 @@ components:
         col_widths: {}
         grid_position: PWOBIW,JVVYKL
       event_bindings: {click: menu_my_details_click}
-    - type: Label
-      properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
-        visible: true, text: '', font_size: 20, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '', bold: false, underline: false,
-        icon: ''}
-      name: title_bar
-      layout_properties: {grid_position: 'ABXRIH,XGNYDG'}
+    - type: ColumnPanel
+      properties: {role: card, col_widths: '{}'}
+      name: card_1
+      layout_properties: {grid_position: 'SIYATA,IMMATS'}
       event_bindings: {}
+      components:
+      - type: Label
+        properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
+          visible: true, text: '', font_size: 20, font: '', spacing_above: small,
+          icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+          underline: false, icon: ''}
+        name: title_bar
+        layout_properties: {grid_position: 'VGKEPU,YQEGJV'}
+        event_bindings: {}
     event_bindings: {}
     data_bindings: []
 - type: ColumnPanel

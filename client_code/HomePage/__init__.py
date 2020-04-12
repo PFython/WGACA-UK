@@ -32,8 +32,9 @@ class HomePage(HomePageTemplate):
         # Any code you write here will run when the form opens.
         self.background = bright_blue
         self.navigation_bar.background = blue
-        self.title_bar.background = blue
+        self.title_bar.background = light_blue
         self.title_bar.foreground = white
+        self.card_1.background = light_blue
         for button, tag in {self.menu_about: 'About',
                             self.menu_my_offers: 'My Offers',
                             self.menu_my_requests: 'My Requests',
