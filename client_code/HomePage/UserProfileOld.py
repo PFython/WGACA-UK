@@ -1,16 +1,17 @@
-from ._anvil_designer import UserProfileTemplate
+from ._anvil_designer import UserProfileOldTemplate
 from anvil import *
 import anvil.server
 import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..TermsOfUse import TermsOfUse
+from .TermsOfUse import TermsOfUse
+from . import green
 
 LOCALE = "United Kingdom"
 ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 
-class UserProfile(UserProfileTemplate):
+class UserProfileOld(UserProfileOldTemplate):
     addresses = ADDRESSES
     def __init__(self, **properties):
         anvil.users.login_with_form()
@@ -61,7 +62,7 @@ class UserProfile(UserProfileTemplate):
             else:
                 event_args['sender'].background = '#ffe6e6'
         else:
-            event_args['sender'].background = '#ffffff'
+            event_args['sender'].background = white
 
     def deselect_all_icons(self):
         """ Set all icons to unselected """

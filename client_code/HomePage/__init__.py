@@ -14,15 +14,24 @@ from .UserSetup import UserSetup
 from .TermsOfUse import TermsOfUse
 from .AboutThisApp import AboutThisApp
 
+green = '#5eb348'
+grey = '#d8d8d8'
+red = '#ff8080'
+blue = '#0080c0'
+light_blue = '#cae4ff'
+pale_blue = '#eaf4ff'
+bright_blue = '00a3f0'
+white = "#ffffff"
+colours = (green, grey, red, blue, light_blue, pale_blue, bright_blue, white)
+menu_font_size = 14
+
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
-        self.fcolour = '#0080c0' # Foreground colour and active menu button background
-        self.bcolour = '#cae4ff' # Background colour
-        self.xcolour = '#eaf4ff' # Deselected text box
-        self.ycolour = '#00a3f0' # Inactive menu button background
          # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.background = bright_blue
+        self.navigation_bar.background = blue
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
         self.check_permissions()
@@ -56,30 +65,30 @@ class HomePage(HomePageTemplate):
             
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
-        self.menu_my_offers.background = self.fcolour
-        self.menu_my_requests.background = self.fcolour
-        self.menu_my_matches.background = self.fcolour
-        self.menu_my_deliveries.background = self.fcolour
-        self.menu_my_data.background = self.fcolour
-        self.menu_my_offers.foreground = self.bcolour
-        self.menu_my_requests.foreground = self.bcolour
-        self.menu_my_matches.foreground = self.bcolour
-        self.menu_my_deliveries.foreground = self.bcolour
-        self.menu_my_data.foreground = self.bcolour
+        self.menu_my_offers.background = blue
+        self.menu_my_requests.background = blue
+        self.menu_my_matches.background = blue
+        self.menu_my_deliveries.background = blue
+        self.menu_my_data.background = blue
+        self.menu_my_offers.foreground = light_blue
+        self.menu_my_requests.foreground = light_blue
+        self.menu_my_matches.foreground = light_blue
+        self.menu_my_deliveries.foreground = light_blue
+        self.menu_my_data.foreground = light_blue
         self.menu_my_offers.bold = False
         self.menu_my_requests.bold = False
         self.menu_my_matches.bold = False
         self.menu_my_deliveries.bold = False
         self.menu_my_data.bold = False
-        self.menu_my_offers.font_size = 16
-        self.menu_my_requests.font_size = 16
-        self.menu_my_matches.font_size = 16
-        self.menu_my_deliveries.font_size = 16
-        self.menu_my_data.font_size = 16
-        selected.background = self.ycolour
-        selected.foreground = "#ffffff"
+        self.menu_my_offers.font_size = menu_font_size
+        self.menu_my_requests.font_size = menu_font_size
+        self.menu_my_matches.font_size = menu_font_size
+        self.menu_my_deliveries.font_size = menu_font_size
+        self.menu_my_data.font_size = menu_font_size
+        selected.background = bright_blue
+        selected.foreground = white
         selected.bold = True
-        selected.font_size = 16
+        selected.font_size = menu_font_size
         # Hide all images
         images = {self.menu_about: self.image_0,
                   self.menu_my_offers: self.image_1,

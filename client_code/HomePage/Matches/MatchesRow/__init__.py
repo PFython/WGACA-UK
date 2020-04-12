@@ -7,6 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .ConfirmMatch import ConfirmMatch
 
+
 class MatchesRow(MatchesRowTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.

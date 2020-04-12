@@ -23,7 +23,7 @@ components:
     layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
         ADFQWT,VETGBA'}
     data_bindings:
-    - {property: text, code: 'self.item[''offer''][''product_key'']+" … "+str(self.item[''offer''][''units''])'}
+    - {property: text, code: ''}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
@@ -33,8 +33,8 @@ components:
     layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
         YVUXXI,QWIUBH'}
     data_bindings:
-    - {property: text, code: 'self.item[''offer''][''expiry_date''].strftime(''%d
-        %b %Y'')'}
+    - {property: text, code: ''}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
@@ -44,7 +44,7 @@ components:
     layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
         CDHDSW,TOIMCF'}
     data_bindings:
-    - {property: text, code: 'self.item[''offer''][''notes'']'}
+    - {property: text, code: ''}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -66,7 +66,7 @@ components:
       col_widths: {}
       grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY AHBOTQ,PLMAWV
     data_bindings:
-    - {property: text, code: 'self.item[''request''][''product_category'']'}
+    - {property: text, code: ''}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -77,8 +77,7 @@ components:
     layout_properties:
       col_widths: {}
       grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY JPWMIR,HPQFPM
-    data_bindings:
-    - {property: text, code: 'self.item[''request''][''notes'']'}
+    data_bindings: []
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -141,9 +140,10 @@ components:
     name: runner
     layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY NZYOZQ,BCSGZB'}
     data_bindings:
-    - {property: text, code: '"Approved Runner: "+self.item[''approved_runner''][''display_name'']'}
+    - {property: text, code: ''}
+    event_bindings: {}
   - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
       foreground: '', visible: true, text: Items Picked Up, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
@@ -154,7 +154,7 @@ components:
     data_bindings:
     - {property: checked, code: 'self.item[''offer_collected'']', writeback: true}
   - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
       foreground: '', visible: true, text: Items Dropped Off, font_size: null, font: '',
       spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
       checked: false, underline: false}
@@ -184,12 +184,12 @@ components:
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '#d8d8d8',
+      icon_align: left, spacing_below: small, italic: false, background: '#0080c0',
       bold: false, underline: false, icon: 'fa:caret-down'}
     name: message2
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY CUXNIX,OJIUMI
+      grid_position: LQZTGU,SOVMIY CUXNIX,ULUXGJ
     event_bindings: {click: click_show_message}
   - type: TextArea
     properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',

@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+
 LOCALE = "United Kingdom"
 ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 

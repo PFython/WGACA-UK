@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .. import green, grey, red, blue, light_blue, pale_blue, bright_blue, white
 
 class DeliveriesRow(DeliveriesRowTemplate):
     def __init__(self, **properties):
@@ -15,29 +16,26 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
-        my_colour = '#5eb348' # Green
-#         my_colour = '#ff8080' # Red
-#         my_colour = '#0080c0' # Blue
-        
+
         if self.item['request']['user'] == user:
             self.label_1.text  = "My Request"
-            self.label_1.foreground = my_colour
-            self.label_4.foreground = my_colour
-            self.dropoff.foreground = my_colour
+            self.label_1.foreground = green
+            self.label_4.foreground = green
+            self.dropoff.foreground = green
             self.dropoff.icon = 'fa:home'
-            self.request.foreground = my_colour
-            self.request_notes.foreground = my_colour
+            self.request.foreground = green
+            self.request_notes.foreground = green
 
         if self.item['offer']['user'] == user:
             self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
             self.label_2.text  = "My Offer"            
-            self.label_2.foreground = my_colour
-            self.label_3.foreground = my_colour        
-            self.pickup.foreground = my_colour
+            self.label_2.foreground = green
+            self.label_3.foreground = green        
+            self.pickup.foreground = green
             self.pickup.icon = 'fa:home'
-            self.offer.foreground = my_colour
-            self.offer_notes.foreground = my_colour
-            self.offer_expiry.foreground = my_colour
+            self.offer.foreground = green
+            self.offer_notes.foreground = green
+            self.offer_expiry.foreground = green
  
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
@@ -48,7 +46,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             address.text += self.item[table]['user']['town']+"\n"
             address.text += self.item[table]['user']['county']+"\n"
 
-    def expose_messages(self):
+    def show_messages(self):
         user = anvil.users.get_user()
         messages = self.item['messages_dict']
         if user == self.item['offer']['user'] :
@@ -75,18 +73,37 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
         for message in (self.message1, self.message2):
             message.tag = message.tag or ""
-            message.tag = message.tag.strip()
+            message.tag = str(message.tag).strip()
             if not message.tag:
                 message.enabled = False
-            else:
-                print(F"'{}")
-  
-  
+                message.background = grey
+    
+    def show_offer(self):
+        self.offer.text = self.item['offer']['product_key'] + " … "
+        self.offer.text += str(self.item['offer']['units'])
+        self.offer_expiry.text = self.item['offer']['expiry_date'].strftime('%d %b %Y')
+        self.offer_notes.text = self.item['offer']['notes']
+        
+    def show_request(self):
+        self.request.text = self.item['request']['product_category']
+        self.request_notes.text = self.item['request']['notes']
+       
+    def show_runner(self):
+        runner = self.item['approved_runner']['display_name']
+        self.runner.text = "Approved Runner: " + runner
+        if runner == anvil.users.get_user()['display_name']:
+            self.runner.foreground = green
+            # TODO: Buttons to send Runner messages to Offerer and Requester
+      
+      
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
+        self.show_offer()
+        self.show_request()
+        self.show_runner()
         self.show_myself()
         self.populate_addresses()
-        self.expose_messages()
+        self.show_messages()
         
 
     def click_show_message(self, **event_args):
