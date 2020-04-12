@@ -7,7 +7,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
+from ...Globals import ITEM_HEIRARCHY, UNITS_OF_MEASURE
+
 class MyRequests(MyRequestsTemplate):
+    item_choices = ITEM_HEIRARCHY
+    units_of_measure = UNITS_OF_MEASURE
 
     def __init__(self, **properties):
         anvil.users.login_with_form()

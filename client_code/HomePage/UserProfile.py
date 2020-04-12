@@ -7,6 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .TermsOfUse import TermsOfUse
 
+from ...Globals import pink, yellow
+
 class UserProfile(UserProfileTemplate):
 
     def __init__(self, **properties):
@@ -54,9 +56,9 @@ class UserProfile(UserProfileTemplate):
         """ Highlights empty input boxes"""
         if event_args['sender'].text == "":
             if event_args['sender'].tag == "Optional":
-                event_args['sender'].background = '#fefdc7'
+                event_args['sender'].background = yellow
             else:
-                event_args['sender'].background = '#ffe6e6'
+                event_args['sender'].background = pink
         else:
             event_args['sender'].background = white
 

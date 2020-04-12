@@ -7,6 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
+from ...Globals import LOCALE, ADDRESSES, pink, white
+
 class ConfirmMatch(ConfirmMatchTemplate):
 
     def __init__(self, **properties):
@@ -26,9 +28,9 @@ class ConfirmMatch(ConfirmMatchTemplate):
         """ Colour codes dropdown box """
         runner = event_args['sender'].selected_value
         if runner not in event_args['sender'].items:
-            event_args['sender'].background = '#ffe6e6'
+            event_args['sender'].background = pink
         else:
-            event_args['sender'].background = '#ffffff'
+            event_args['sender'].background = white
             user = anvil.users.get_user()
             if runner.replace(" (myself)","") != user['display_name']:
                 self.telephone_to_runner.checked = runner in [x['display_name'] for x in (user['telephone_shared_with'] or [])]

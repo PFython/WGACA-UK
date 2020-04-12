@@ -23,7 +23,7 @@ class MatchesRow(MatchesRowTemplate):
       else:
           event_args['sender'].checked = False
           event_args['sender'].text = "Tick to volunteer"
-      self.volunteers.foreground = '#ff8080' if self.volunteers.text.startswith("0 ") else '#0080c0'
+      self.volunteers.foreground = red if self.volunteers.text.startswith("0 ") else blue
 
   def volunteer_toggle_change(self, **event_args):
     """This method is called when this Volunteer Toggle checkbox is checked or unchecked"""

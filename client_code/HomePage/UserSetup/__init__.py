@@ -6,8 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
-from ...Globals import LOCALE, ADDRESSES
+from ...Globals import LOCALE, ADDRESSES, pink, yellow
 
 class UserSetup(UserSetupTemplate):
     addresses = ADDRESSES
@@ -106,15 +105,15 @@ class UserSetup(UserSetupTemplate):
         """ Highlights empty input boxes and checks for unique Display Name"""
         if event_args['sender'] is self.display_name:
             if self.check_for_existing_display_name():
-                self.display_name.background = '#ffe6e6'
+                self.display_name.background = pink
                 return
         if event_args['sender'].text == "":
             if event_args['sender'].tag == "Optional":
-                event_args['sender'].background = '#fefdc7'
+                event_args['sender'].background = yellow
             else:
-                event_args['sender'].background = '#ffe6e6'
+                event_args['sender'].background = pink
         else:
-            event_args['sender'].background = '#ffffff'
+            event_args['sender'].background = white
 
                 
     def deselect_all_icons(self):
