@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BBSFUW":26,"PLDYMH":3,"JDUESU":26,"LLYYXI":3,"XYNXMI":26,"GJRMJA":3,"UNJYYC":26,"PXCNMK":3,"GHRJKC":3,"XZPJRY":26,"DPDYXW":3,"XSAOBV":26,"AAAEAJ":3,"NZNRAY":26,"BXCHFU":3,"ZCPGXX":26,"GRCDIV":3,"RXLEAS":55,"MVMNSI":5}',
+    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"BBSFUW":26,"PLDYMH":3,"JDUESU":26,"LLYYXI":3,"XYNXMI":26,"GJRMJA":3,"UNJYYC":26,"PXCNMK":3,"GHRJKC":3,"XZPJRY":26,"DPDYXW":3,"XSAOBV":26,"AAAEAJ":3,"NZNRAY":26,"BXCHFU":3,"ZCPGXX":26,"GRCDIV":3,"RXLEAS":55,"MVMNSI":5}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details
   layout_properties: {slot: default}
@@ -364,7 +364,7 @@ components:
   event_bindings: {hide: save_input}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"NUAPNC":55}',
+    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"NUAPNC":55}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties:

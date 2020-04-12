@@ -1,13 +1,15 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"AELAEO":15,"WWCPOC":35,"VCKQPR":10,"KQHXBK":55}',
+    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"AELAEO":15,"WWCPOC":35,"KQHXBK":43}',
     spacing_below: small, background: '#cae4ff'}
   name: my_details_copy
   layout_properties: {slot: default}
   components:
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"ETGFPH":55,"LIVDOL":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"DCQNVS":30,"STSOPJ":10,"APIFTY":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_2
     layout_properties: {grid_position: 'ZRWXFJ,DBCLEV'}
     components:
@@ -20,14 +22,12 @@ components:
       layout_properties:
         col_widths: {}
         grid_position: ZZQNTO,DCQNVS
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+      event_bindings: {}
+    - type: Label
+      properties: {}
       name: id
-      layout_properties: {grid_position: 'UBMCTN,ETGFPH'}
-      data_bindings: []
+      layout_properties: {grid_position: 'ZZQNTO,APIFTY'}
+      event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
         visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
@@ -36,14 +36,17 @@ components:
       name: help0
       layout_properties:
         col_widths: {}
-        grid_position: UBMCTN,LIVDOL
+        grid_position: ZZQNTO,STSOPJ
       data_bindings:
       - {property: tag, code: '"""This is a unique ID used by our app to identify
           you.  You won''t need to remember it, but here it is anyway."""'}
       components: []
       event_bindings: {click: show_help_tag}
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"GJDOZM":55,"IEMOZA":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"BIRSIW":30,"AZKLMC":10,"DGMTCP":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_3
     layout_properties: {grid_position: 'MIZRSY,INYVNA'}
     components:
@@ -55,22 +58,18 @@ components:
       name: label_display_name
       layout_properties: {grid_position: 'TQFARQ,BIRSIW'}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: true, underline: false}
+    - type: Label
+      properties: {}
       name: display_name
-      layout_properties: {grid_position: 'UBRPNL,GJDOZM'}
-      event_bindings: {change: field_change}
-      data_bindings: []
+      layout_properties: {grid_position: 'TQFARQ,DGMTCP'}
+      event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
         visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help1
-      layout_properties: {slot: default, grid_position: 'UBRPNL,IEMOZA'}
+      layout_properties: {slot: default, grid_position: 'TQFARQ,AZKLMC'}
       event_bindings: {click: show_help_tag}
       data_bindings:
       - {property: tag, code: '"""This is the public Display Name (or ''nickname'')
@@ -82,7 +81,9 @@ components:
           something we''re deliberately not making easy or obvious."""'}
       components: []
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"JXBSGL":55,"NTFLUO":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"YIQXMC":30,"LVKDUH":10,"JAXBDN":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_4
     layout_properties: {grid_position: 'QTGFUT,KQHXBK'}
     components:
@@ -94,14 +95,10 @@ components:
       name: label_email
       layout_properties: {grid_position: 'AQMYTX,YIQXMC'}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+    - type: Label
+      properties: {}
       name: email
-      layout_properties: {grid_position: 'OLDFLC,JXBSGL'}
-      data_bindings: []
+      layout_properties: {grid_position: 'AQMYTX,JAXBDN'}
       event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -109,7 +106,7 @@ components:
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help2
-      layout_properties: {slot: default, grid_position: 'OLDFLC,NTFLUO'}
+      layout_properties: {slot: default, grid_position: 'AQMYTX,LVKDUH'}
       data_bindings:
       - {property: tag, code: '"""Your email is kept private unless you explicitly
           choose to share it with other users.  When you accepted our Terms of Use
@@ -119,40 +116,41 @@ components:
       event_bindings: {click: show_help_tag}
       components: []
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"YCVWRE":55,"GDGDBC":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"MACFQV":30,"EOKSCY":10,"TOPTXP":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_5
     layout_properties: {grid_position: 'QLOZGH,PUCVSY'}
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'House Name/Number:', font_size: 14, font: '', spacing_above: none,
+        visible: true, text: 'House Name/No.:', font_size: 14, font: '', spacing_above: none,
         icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:home'}
       name: label_house_number
       layout_properties: {grid_position: 'FZYBAJ,MACFQV'}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+    - type: Label
+      properties: {}
       name: house_number
-      layout_properties: {grid_position: 'GMIRLL,YCVWRE'}
-      event_bindings: {change: field_change}
-      data_bindings: []
+      layout_properties: {grid_position: 'FZYBAJ,TOPTXP'}
+      event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
         visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help3
-      layout_properties: {slot: default, grid_position: 'GMIRLL,GDGDBC'}
+      layout_properties: {slot: default, grid_position: 'FZYBAJ,EOKSCY'}
       data_bindings:
       - {property: tag, code: '"""The house name or number you specified during registration."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"IAZHNT":55,"EBDHCF":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"GEYHOJ":30,"MVOEKQ":10,"TEJYEH":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_6
     layout_properties: {grid_position: 'GLVOEJ,VWFHUF'}
     components:
@@ -164,14 +162,10 @@ components:
       name: label_street
       layout_properties: {grid_position: 'WJRJVD,GEYHOJ', slot: default}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+    - type: Label
+      properties: {}
       name: street
-      layout_properties: {grid_position: 'JSPXDL,IAZHNT'}
-      data_bindings: []
+      layout_properties: {grid_position: 'WJRJVD,TEJYEH'}
       event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -179,13 +173,16 @@ components:
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help4
-      layout_properties: {slot: default, grid_position: 'JSPXDL,EBDHCF'}
+      layout_properties: {slot: default, grid_position: 'WJRJVD,MVOEKQ'}
       data_bindings:
       - {property: tag, code: '"""The Street name you chose when you registered."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"MSRSET":55,"OVPAQX":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"QWBZST":30,"CARTWD":10,"OHJKBB":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_7
     layout_properties: {grid_position: 'SAQBXJ,KSVRDX'}
     components:
@@ -197,14 +194,10 @@ components:
       name: label_town
       layout_properties: {grid_position: 'ZFVMEZ,QWBZST'}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+    - type: Label
+      properties: {}
       name: town
-      layout_properties: {grid_position: 'ASBNGG,MSRSET'}
-      data_bindings: []
+      layout_properties: {grid_position: 'ZFVMEZ,OHJKBB'}
       event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -212,14 +205,17 @@ components:
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help5
-      layout_properties: {slot: default, grid_position: 'ASBNGG,OVPAQX'}
+      layout_properties: {slot: default, grid_position: 'ZFVMEZ,CARTWD'}
       data_bindings:
       - {property: tag, code: '"""This Town or City was automatically selected when
           you chose a Street and County/Borough during registration."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"TYXRJT":55,"UQPSLZ":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"QOREIJ":30,"JHRAVJ":10,"WVZZAT":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_8
     layout_properties: {grid_position: 'XLSYMF,CKYHYX'}
     components:
@@ -231,14 +227,10 @@ components:
       name: label_county
       layout_properties: {grid_position: 'BKRFFW,QOREIJ'}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+    - type: Label
+      properties: {}
       name: county
-      layout_properties: {grid_position: 'ZGFFZT,TYXRJT'}
-      data_bindings: []
+      layout_properties: {grid_position: 'BKRFFW,WVZZAT'}
       event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -246,15 +238,18 @@ components:
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help6
-      layout_properties: {slot: default, grid_position: 'ZGFFZT,UQPSLZ'}
+      layout_properties: {slot: default, grid_position: 'BKRFFW,JHRAVJ'}
       data_bindings:
       - {property: tag, code: '"""The County or Borough you selected when you registered."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"JGMBSS":55,"MDBXOR":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"PZGCHL":30,"FHHFSL":10,"MHELCD":40}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_9
-    layout_properties: {grid_position: 'HHIZBD,HJLMME'}
+    layout_properties: {grid_position: 'HHIZBD,HJLMME', full_width_row: false}
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -264,14 +259,10 @@ components:
       name: label_country
       layout_properties: {grid_position: 'TSZZRJ,PZGCHL'}
       event_bindings: {}
-    - type: TextBox
-      properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
-        border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
-        font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-        background: '#cae4ff', bold: false, underline: false}
+    - type: Label
+      properties: {}
       name: country
-      layout_properties: {grid_position: 'VVMJHR,JGMBSS', slot: default}
-      data_bindings: []
+      layout_properties: {grid_position: 'TSZZRJ,MHELCD'}
       event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
@@ -279,14 +270,17 @@ components:
         spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
         italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
       name: help7
-      layout_properties: {slot: default, grid_position: 'VVMJHR,MDBXOR'}
+      layout_properties: {slot: default, grid_position: 'TSZZRJ,FHHFSL'}
       data_bindings:
       - {property: tag, code: '"""Your Country was set automatically by the server
           when you registered."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"SYXCFB":55,"KLSRBH":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"SYXCFB":50,"KLSRBH":10}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_10
     layout_properties: {grid_position: 'UXXMTA,NPNAMB'}
     components:
@@ -325,8 +319,11 @@ components:
           enough without this."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: ColumnPanel
-    properties: {role: card, col_widths: '{"FHZVID":55,"QXEPLZ":5}'}
+    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"FHZVID":50,"QXEPLZ":10}',
+      spacing_below: small, background: '#eaf4ff'}
     name: card_11
     layout_properties: {grid_position: 'IFMLZH,CAAHGT'}
     components:
@@ -364,6 +361,7 @@ components:
           you''ve met them once in person, and then swap numbers directly."""'}
       event_bindings: {click: show_help_tag}
       components: []
+    event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Transaction
@@ -395,10 +393,6 @@ components:
     name: change_password
     layout_properties: {grid_position: 'QHLEHR,WWCPOC'}
     event_bindings: {click: log_out}
-  - type: ColumnPanel
-    properties: {}
-    name: column_panel_1
-    layout_properties: {grid_position: 'QHLEHR,VCKQPR'}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
@@ -454,6 +448,10 @@ components:
     layout_properties: {grid_position: 'TTSMWD,KPUMTO'}
     event_bindings: {}
     data_bindings: []
+- type: ColumnPanel
+  properties: {}
+  name: column_panel_2
+  layout_properties: {slot: default}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
