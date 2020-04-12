@@ -78,6 +78,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
         self.add_remove_sharing(runner_dict, runner)
         # Update 'shared_with' for Requester
         requester = self.parent.parent.parent.item['request']['user'] #['display_name']
+        print(f"Requester: {requester}")
         requester_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
                       'email_shared_with': self.email_to_requester.checked,
                       'postcode_shared_with': self.postcode_to_requester.checked,}
