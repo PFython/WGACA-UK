@@ -16,7 +16,7 @@ components:
     event_bindings: {click: view_history_click}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Delete Account and Data', font_size: null,
+      foreground: '#ffffff', visible: true, text: ' Delete Account & Data', font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '#ff8080', bold: false, underline: false, icon: 'fa:trash'}
     name: delete_account
