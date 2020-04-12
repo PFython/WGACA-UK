@@ -7,11 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from .TermsOfUse import TermsOfUse
 
-LOCALE = "United Kingdom"
-ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
-
 class UserProfile(UserProfileTemplate):
-    addresses = ADDRESSES
+
     def __init__(self, **properties):
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.

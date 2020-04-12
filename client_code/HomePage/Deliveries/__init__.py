@@ -7,13 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-# ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
-# UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
-
 class Deliveries(DeliveriesTemplate):
-#     item_choices = ITEM_HEIRARCHY
-#     units_of_measure = UNITS_OF_MEASURE
-
     def __init__(self, **properties):
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.

@@ -5,7 +5,8 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from .. import green, grey, red, blue, light_blue, pale_blue, bright_blue, white
+
+from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 class DeliveriesRow(DeliveriesRowTemplate):
     def __init__(self, **properties):
@@ -93,8 +94,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.runner.text = "Approved Runner: " + runner
         if runner == anvil.users.get_user()['display_name']:
             self.runner.foreground = green
-            # TODO: Buttons to send Runner messages to Offerer and Requester
-      
+            # TODO: Buttons to send Runner messages to Offerer and Requester      
       
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
@@ -103,8 +103,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_myself()
         self.populate_addresses()
-        self.show_messages()
-        
+        self.show_messages()        
 
     def click_show_message(self, **event_args):
         """This method is called when the Button is shown on the screen"""

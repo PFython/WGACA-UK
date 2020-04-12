@@ -7,11 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-LOCALE = "United Kingdom"
-ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
-
 class ContactUs(ContactUsTemplate):
-    addresses = ADDRESSES
+
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)

@@ -409,21 +409,22 @@ components:
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#000000',
       visible: true, text: Privacy Notice & Terms of Use, font_size: 16, wrap_on: mobile,
-      font: '', col_spacing: medium, spacing_above: none, icon_align: left, col_widths: '',
+      font: '', col_spacing: medium, spacing_above: none, icon_align: left, col_widths: '{}',
       spacing_below: none, italic: false, background: '', bold: true, underline: false,
       icon: 'fa:caret-up'}
     name: label_privacy
     layout_properties: {grid_position: 'EJWUVK,SONUMJ'}
     event_bindings: {click: expand_privacy_notice}
-  - type: Label
-    properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: 12, font: '', spacing_above: small, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: 'fa:check-square-o'}
-    name: terms_accepted
-    layout_properties: {grid_position: 'EJWUVK,UTHHMA'}
-    event_bindings: {}
-    data_bindings: []
+    components:
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+        visible: true, text: '', font_size: 12, font: '', spacing_above: small, icon_align: left,
+        spacing_below: none, italic: false, background: '', bold: false, underline: false,
+        icon: 'fa:check-square-o'}
+      name: terms_accepted
+      layout_properties: {grid_position: 'SGWBRS,IPIIWZ'}
+      event_bindings: {}
+      data_bindings: []
   - type: TextArea
     properties: {role: null, align: left, height: 920.2991614150391, tooltip: '',
       placeholder: '', border: '', enabled: false, foreground: '', visible: true,

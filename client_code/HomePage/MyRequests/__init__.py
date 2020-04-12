@@ -7,12 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
-UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
-
 class MyRequests(MyRequestsTemplate):
-    item_choices = ITEM_HEIRARCHY
-    units_of_measure = UNITS_OF_MEASURE
 
     def __init__(self, **properties):
         anvil.users.login_with_form()
@@ -20,6 +15,7 @@ class MyRequests(MyRequestsTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.check_request_status()
+        self.product_category.items = list(set([" | ".join(x.split(" | ")[:2]) for x in self.item_choices]))
         self.repeating_panel_1.items = anvil.server.call("get_my_requests")  
     
     def add_to_my_requests(self,product_category, urgent, notes):

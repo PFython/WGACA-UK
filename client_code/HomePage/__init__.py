@@ -14,15 +14,8 @@ from .UserSetup import UserSetup
 from .TermsOfUse import TermsOfUse
 from .AboutThisApp import AboutThisApp
 
-green = '#5eb348'
-grey = '#d8d8d8'
-red = '#ff8080'
-blue = '#0080c0'
-light_blue = '#cae4ff'
-pale_blue = '#eaf4ff'
-bright_blue = '00a3f0'
-white = "#ffffff"
-colours = (green, grey, red, blue, light_blue, pale_blue, bright_blue, white)
+from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+
 menu_font_size = 16
 
 class HomePage(HomePageTemplate):
@@ -33,7 +26,6 @@ class HomePage(HomePageTemplate):
         self.background = bright_blue
         self.navigation_bar.background = blue
         self.title_bar.background = light_blue
-#         self.card_1.background = light_blue
         for button, tag in {self.menu_about: 'About',
                             self.menu_my_offers: 'My Offers',
                             self.menu_my_requests: 'My Requests',
@@ -59,8 +51,6 @@ class HomePage(HomePageTemplate):
         checks += [user['town']]
         checks += [user['county']]
         checks += [user['display_name']]
-#         checks += [user['postcode']]        
-#         checks += [user['telephone']]
         return all(checks)
     
     def force_user_setup(self):
@@ -69,9 +59,7 @@ class HomePage(HomePageTemplate):
             alert(content=TermsOfUse(), title = "Please read and accept the following Privacy Statement & Terms of Use:", large=True,)
         while not self.required_fields_are_populated():
             alert(content=UserSetup(), title = "Please confirm your personal details:", large=True,)
-#         self.column_panel_1.add_component(MyOffers())
-#         self.highlight_selected_menu(self.menu_my_offers)
-            
+
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
         self.title_bar.text = selected.tag
