@@ -45,13 +45,6 @@ class UserProfile(UserProfileTemplate):
         """This method is called when the Delete Account button is clicked"""
         alert("This feature is still being worked on...\nPlease check back later.")
 
-    def log_out(self, **event_args):
-        """This method is called when the Log Out button is clicked"""
-        anvil.users.logout()
-        anvil.users.login_with_form()
-        self.parent.parent.__init__()
-        self.parent.parent.menu_my_data_click()
-         
     def field_change(self, **event_args):
         """ Highlights empty input boxes"""
         if event_args['sender'].text == "":

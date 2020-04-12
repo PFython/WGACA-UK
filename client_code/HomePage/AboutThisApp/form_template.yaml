@@ -93,6 +93,6 @@ components:
     layout_properties:
       col_widths: {}
       grid_position: OMXSGE,GXURPI CAIZBC,OLVQLD
-    event_bindings: {}
+    event_bindings: {click: log_out}
   event_bindings: {}
 is_package: true
