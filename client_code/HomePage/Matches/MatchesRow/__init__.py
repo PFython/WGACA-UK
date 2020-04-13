@@ -14,7 +14,9 @@ class MatchesRow(MatchesRowTemplate):
     self.user = anvil.users.get_user()
     # Any code you write here will run when the form opens.
     self.show_route.url = self.item['route_url']
-
+    self.show_route.foreground = green
+    self.volunteers.bold = True
+    
   def volunteer_toggle_status(self, **event_args):
       """This method is called when the Volunteer Toggle CheckBox is shown on the screen"""
       if self.user in self.item['available_runners']:
@@ -23,7 +25,7 @@ class MatchesRow(MatchesRowTemplate):
       else:
           event_args['sender'].checked = False
           event_args['sender'].text = "Tick to volunteer"
-      self.volunteers.foreground = red if self.volunteers.text.startswith("0 ") else blue
+
 
   def volunteer_toggle_change(self, **event_args):
     """This method is called when this Volunteer Toggle checkbox is checked or unchecked"""
@@ -36,9 +38,12 @@ class MatchesRow(MatchesRowTemplate):
 
   def show_myself(self, **event_args):
       """This method is called when the data row panel is shown on the screen"""
+      self.volunteers.foreground = red if self.volunteers.text.startswith("0 ") else green
+      self.volunteers.icon = "fa:heart o"if self.volunteers.text.startswith("0 ") else "fa:heart"
       user = anvil.users.get_user()
-
+  
       if self.item['request']['user'] == user:
+          self.show_route.foreground = green
           self.label_1.text  = "My Request"
           self.label_1.foreground = green
           self.label_4.foreground = green
@@ -48,6 +53,7 @@ class MatchesRow(MatchesRowTemplate):
           self.request_notes.foreground = green        
 
       if self.item['offer']['user'] == user:
+          self.show_route.foreground = green
           self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
           self.label_2.text  = "My Offer"
           self.label_2.foreground = green

@@ -14,13 +14,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
-        
+        self.show_route.foreground = green       
 
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
 
         if self.item['request']['user'] == user:
+            self.items_dropped_off.foreground = green
             self.label_1.text  = "My Request"
             self.label_1.foreground = green
             self.label_4.foreground = green
@@ -30,6 +31,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.request_notes.foreground = green
 
         if self.item['offer']['user'] == user:
+            self.items_picked_up.foreground = green
             self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
             self.label_2.text  = "My Offer"            
             self.label_2.foreground = green
@@ -39,6 +41,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.offer.foreground = green
             self.offer_notes.foreground = green
             self.offer_expiry.foreground = green
+            
+        if self.item['approved_runner'] == user:
+            self.items_picked_up.foreground = green
  
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
