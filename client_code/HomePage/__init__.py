@@ -13,6 +13,7 @@ from .Deliveries import Deliveries
 from .UserSetup import UserSetup
 from .TermsOfUse import TermsOfUse
 from .AboutThisApp import AboutThisApp
+from .AboutThisApp.News import News
 
 from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -36,6 +37,24 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
         self.check_permissions()
+        self.check_updates()
+        
+        
+    def check_updates(self):
+        """Checks if user has seen latest update and creates an alert if not"""
+        user = anvil.users.get_user()
+        
+        latest_update = News()
+        date = News().date.text
+        updates_read = user['updates_read']
+        if not updates_read:
+            alert(content=latest_update)
+            updates_read = []
+        elif date not in user['updates_read']:
+            alert(content=lastet_update)        
+#         updates_read += [date]
+        anvil.server.call("save_user_setup", "updates_read", updates_read + [date])
+        
         
     def check_permissions(self):
         # 1st step of registration process requires email and password

@@ -218,6 +218,10 @@ db_schema:
       name: last_login
       type: datetime
       admin_ui: {order: 4, width: 50}
+    OQn7NmkiRLg=:
+      name: updates_read
+      type: simpleObject
+      admin_ui: {order: 23, width: 200}
     9y2JHkm27SU=:
       name: enabled
       type: bool

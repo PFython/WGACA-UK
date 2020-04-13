@@ -184,7 +184,7 @@ def save_to_requests_database(product_category, urgent, notes):
     if existing_entry:
         return "Duplicate"    
     app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date(), matches = [])    
-    
+
 @anvil.server.callable
 def save_user_setup(field, value):
     """ General purpose save to the User database """
@@ -195,6 +195,11 @@ def save_user_setup(field, value):
 def STATUSES():
     """ Returns allowable status descriptions other than 'New' or 'X matches found' """
     return "Awaiting Pickup, Pickup Failed, Awaiting Delivery, Delivery Failed, Delivery Complete".split(", ")
+
+@anvil.server.callable
+def string_to_datetime(string, format = "%d %b %Y"):
+    """Converts a date-like string to a datetime object"""
+    return datetime.datetime.strptime(string, format)
   
 @anvil.server.callable
 def terms_accepted(boolean_value):

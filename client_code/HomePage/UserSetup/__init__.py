@@ -98,7 +98,7 @@ class UserSetup(UserSetupTemplate):
         if self.display_name.text != user['display_name']:
             existing_name = anvil.server.call("check_for_display_name", self.display_name.text)
             if existing_name:
-                self.help_text.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken."
+                self.help_text.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken or is not allowed."
                 self.deselect_all_icons()
                 return True
             
