@@ -14,7 +14,7 @@ class AboutThisApp(AboutThisAppTemplate):
     self.init_components(**properties)
     # Any code you write here will run when the form opens.
     if anvil.users.get_user():
-      if anvil.users.get_user()['admin']
+      if anvil.users.get_user()['admin']:
         self.about_this_app.add_component(_DeveloperTools())
 
   def contact_us_click(self, **event_args):
