@@ -13,6 +13,7 @@ class MatchesRow(MatchesRowTemplate):
     self.init_components(**properties)
     self.user = anvil.users.get_user()
     # Any code you write here will run when the form opens.
+    self.show_route.url = self.item['route_url']
 
   def volunteer_toggle_status(self, **event_args):
       """This method is called when the Volunteer Toggle CheckBox is shown on the screen"""

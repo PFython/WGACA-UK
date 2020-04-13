@@ -193,7 +193,7 @@ db_schema:
     cALkDfUDNeM=:
       name: street
       type: string
-      admin_ui: {order: 1.75, width: 132.8182}
+      admin_ui: {order: 1.75, width: 58.667}
     mrMfHwkEbHs=:
       name: house_number
       type: string
@@ -202,13 +202,13 @@ db_schema:
       name: email_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 20, width: 200}
+      admin_ui: {order: 20, width: 92}
       table_id: 48470
     _5XUmSuPCIY=:
       name: postcode_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 21, width: 200}
+      admin_ui: {order: 21, width: 75}
       table_id: 48470
     4dcb9hwysNA=:
       name: Telephone
@@ -222,6 +222,10 @@ db_schema:
       name: enabled
       type: bool
       admin_ui: {order: -1, width: 95.011364}
+    BTP+qTA9o2Q=:
+      name: admin
+      type: bool
+      admin_ui: {order: 22, width: 200}
     DDzn0uu7b3w=:
       name: postcode
       type: string
@@ -230,7 +234,7 @@ db_schema:
       name: telephone_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 19, width: 200}
+      admin_ui: {order: 19, width: 50}
       table_id: 48470
     17CKzaAMkQE=:
       name: telephone
@@ -247,7 +251,7 @@ db_schema:
     4BZlDs8p6Zo=:
       name: remembered_logins
       type: simpleObject
-      admin_ui: {order: 3, width: 93.01136400000001}
+      admin_ui: {order: 3, width: 50}
     02qUcB+MIeE=:
       name: county
       type: string
@@ -263,7 +267,7 @@ db_schema:
     FV4yw9gzoSw=:
       name: email
       type: string
-      admin_ui: {order: 0, width: 254.6667}
+      admin_ui: {order: 0, width: 195.667}
     +yeRpzKf8BA=:
       name: details_complete
       type: bool

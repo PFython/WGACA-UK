@@ -43,9 +43,9 @@ def generate_route_url(new_match):
     pickup = pickup['lat'] + "%2C" + pickup['lon']
     dropoff = nominatim_scrape(dropoff)[0]
     dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
-    osm = "https://www.openstreetmap.org/way/"
+    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
     osm += pickup + "%3B" + dropoff
-    print(osm)
+#     print(osm)
     return osm
 
 @anvil.server.callable
@@ -79,9 +79,9 @@ def _generate_route_url_for_all_matches():
   matches = app_tables.matches.search(tables.order_by("request"))
   count = 0
   for match in matches:
-    if match['route_url'] == None:
-      match['route_url'] = generate_route_url(match)
-      count += 1
+#     if match['route_url'] == None:
+    match['route_url'] = generate_route_url(match)
+    count += 1
   print(f"Populated {count} Matches with a route_url")
   return
 

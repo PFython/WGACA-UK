@@ -73,6 +73,7 @@ components:
       spacing_below: none, background: '', horizontal_align: center}
     name: image_1
     layout_properties: {grid_position: 'OMXSGE,SVIZUH'}
+    event_bindings: {}
   - type: Button
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: Contact Us, font_size: 18, font: '',

@@ -13,6 +13,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.show_route.url = self.item['route_url']
         
 
     def show_myself(self, **event_args):
