@@ -21,6 +21,34 @@ def check_for_display_name(display_name):
     """ Returns boolean check for whether display name already exists in Users database"""
     return True if app_tables.users.get(display_name = display_name) else False
 
+  
+def nominatim_scrape(address_list):
+    """Returns location & address data for supplied address list"""
+    nominatim = 'https://nominatim.openstreetmap.org/search?q='
+    nominatim += f"{','.join(address_list)}.replace(', ',','),{LOCALE},&format=json".replace(" ","%20")
+    print(nominatim)
+    response = anvil.http.request(nominatim, json=True)
+    print(response)
+    return response 
+
+def generate_route_url(new_match):
+    """Creates an Open Street Map url for pickup to dropoff route"""
+    user = new_match['offer']['user']
+    pickup = [user['street'], user['town'], user['county']]
+    user = new_match['request']['user']
+    dropoff = [user['street'], user['town'], user['county']]
+    print(pickup)
+    print(dropoff)
+    pickup = nominatim_scrape(pickup)
+    pickup = pickup['lat'] + "%2C" + pickup['lon']
+    dropoff = nominatim_scrape(dropoff)
+    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
+    osm = "https://www.openstreetmap.org/way/"
+    osm += pickup + "%3B" + dropoff
+    resp = anvil.http.request(osm, json=True)
+    print(response)
+    return response
+
 @anvil.server.callable
 def generate_matches():
     """
@@ -39,11 +67,13 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status="New")
+                    new_match['route_url'] = generate_route_url(new_match)
                     # 'or []' added to address possible database corruption i.e. value = None rather than value = []
                     if new_match not in (offer['matches'] or []):
                         offer['matches'] = (offer['matches'] or []) + [new_match]
                     if new_match not in (request['matches'] or []):
                         request['matches'] = (request['matches'] or []) + [new_match]
+    
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):

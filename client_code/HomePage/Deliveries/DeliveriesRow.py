@@ -117,25 +117,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             event_args['sender'].icon = 'fa:caret-up'
         else:
             event_args['sender'].icon = 'fa:caret-down'       
-     
-    def nominatim_scrape(self, *args):
-        """Returns location & address data for supplied address arguments"""
-        nominatim = 'https://nominatim.openstreetmap.org/search?q='
-        nominatim += f"{','.join(args)},{LOCALE},&format=json".replace(" ","%20")
-        print(nominatim)
-        resp = anvil.http.request("http://ip.jsontest.com", json=True)
-        return requests.get(nominatim).json()[0]           
-
-    def generate_route_url(self, **event_args):
-        """Creates an Open Street Map url for pickup to dropoff route"""
-        pickup = self.pickup.text.split("\n")[1:]
-        dropoff = self.dropoff.text.split("\n")[1:]
-        print(pickup)
-        print(dropoff)
-        pickup = nominatim_scrape(*args)
-        osm = "https://www.openstreetmap.org/way/"
-        resp = anvil.http.request("http://ip.jsontest.com", json=True)
-        self.show_route.url = ""
+ 
 
 
 

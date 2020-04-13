@@ -109,14 +109,18 @@ db_schema:
       backend: anvil.tables.Row
       admin_ui: {order: 1.5, width: 200}
       table_id: 48470
+    YAUMkRJ9AuA=:
+      name: route_url
+      type: string
+      admin_ui: {order: 11, width: 200}
     Vioog5yQ47s=:
       name: messages_dict
       type: simpleObject
-      admin_ui: {order: 10, width: 200}
+      admin_ui: {order: 10, width: 130}
     cN9mqqVsiOo=:
       name: status
       type: string
-      admin_ui: {order: 9, width: 200}
+      admin_ui: {order: 9, width: 74}
     71gSuTeJpNg=:
       name: feedback_from_giver
       type: string
