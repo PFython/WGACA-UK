@@ -22,8 +22,8 @@ LOCALE = "United Kingdom"
 @anvil.server.callable
 def check_for_display_name(display_name):
     """ Returns boolean check for whether display name already exists in Users database"""
-    return True if app_tables.users.get(display_name = display_name) else False
-
+    if display_name != None and display_name != "":
+      return True if app_tables.users.get(display_name = display_name) else False
   
 def nominatim_scrape(address_list):
     """Returns location & address data for supplied address list"""
