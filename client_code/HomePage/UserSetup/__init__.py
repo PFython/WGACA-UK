@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ...Globals import LOCALE, ADDRESSES, pink, yellow
+from ...Globals import LOCALE, ADDRESSES, pink, yellow, white
 
 class UserSetup(UserSetupTemplate):
     addresses = ADDRESSES
@@ -25,11 +25,12 @@ class UserSetup(UserSetupTemplate):
         if user['county']:
             self.county.selected_value = user['county']
         else:
-            self.county.selected_value = sorted(list(self.addresses.keys()))[0]
+            self.county.selected_value = sorted(list(self.addresses.keys()))[-1]
             self.county_change()
         # Create list of valid streets
         self.street.items = self.get_streets_from_county()
         if user['street']:           
+            self.street.selected_value = sorted(list(self.addresses.keys()))[-1]
             self.street.selected_value = user['street']
         else:
             self.street_change()
