@@ -10,6 +10,8 @@ from .Product_Data_UK import products
 from .Unit_Data_UK import units
 from .Address_Data_UK import hierarchy
 
+LOCALE = "United Kingdom"
+
 # This is a server module. It runs on the Anvil server,
 # rather than in the user's browser.
 #
