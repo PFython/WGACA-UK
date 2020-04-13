@@ -31,9 +31,7 @@ def nominatim_scrape(address_list):
     """Returns location & address data for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
-#     print(nominatim)
-    response = anvil.http.request(nominatim, json=True)
-    return response 
+    return  anvil.http.request(nominatim, json=True)
 
 def generate_route_url(new_match):
     """Creates an Open Street Map url for pickup to dropoff route"""
