@@ -3,6 +3,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+import anvil.http
 import datetime
 
 # Change imports for other countries' data:
@@ -76,6 +77,12 @@ def generate_matches():
                     if new_match not in (request['matches'] or []):
                         request['matches'] = (request['matches'] or []) + [new_match]
     
+@anvil.server.callable
+def _generate_route_url_for_all_matches():
+  """This is a developer function to create OSM route urls for all Matches"""
+  matches = app_tables.matches.search(tables.order_by("request"))
+  for match in matches:
+    match['route_url'] = generate_route_url(match)
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):
