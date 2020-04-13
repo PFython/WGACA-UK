@@ -5,7 +5,6 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-import requests
 
 from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -124,16 +123,18 @@ class DeliveriesRow(DeliveriesRowTemplate):
         nominatim = 'https://nominatim.openstreetmap.org/search?q='
         nominatim += f"{','.join(args)},{LOCALE},&format=json".replace(" ","%20")
         print(nominatim)
+        resp = anvil.http.request("http://ip.jsontest.com", json=True)
         return requests.get(nominatim).json()[0]           
 
     def generate_route_url(self, **event_args):
         """Creates an Open Street Map url for pickup to dropoff route"""
-        pickup = self.pickup.split("\n")[1:]
-        dropoff = self.dropoff.split("\n")[1:]
+        pickup = self.pickup.text.split("\n")[1:]
+        dropoff = self.dropoff.text.split("\n")[1:]
         print(pickup)
         print(dropoff)
         pickup = nominatim_scrape(*args)
         osm = "https://www.openstreetmap.org/way/"
+        resp = anvil.http.request("http://ip.jsontest.com", json=True)
         self.show_route.url = ""
 
 
