@@ -35,12 +35,12 @@ components:
         Drop-off addresses.  Check it out in the MATCHES menu and DELIVERIES.
 
 
-        You''re probably also seeing this section for the first time...  Rather than
-        emailing you we thought it would be nice to keep you up to date with a welcome
-        message instead.  What do you think?  Please use the CONTACT US button to
-        send us some feedback!', font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: small, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
+        You''re probably also seeing this pop-up box for the first time...  Rather
+        than emailing you we thought it would be nice to keep you up to date with
+        a welcome message instead.  What do you think?  Please use the CONTACT US
+        button to send us some feedback!', font_size: null, font: '', spacing_above: none,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
     name: description
     layout_properties:
       col_widths: {}
