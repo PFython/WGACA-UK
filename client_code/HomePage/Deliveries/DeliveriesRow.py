@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import requests
 
 from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -13,6 +14,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        
 
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
@@ -115,9 +117,26 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if event_args['sender'].icon == 'fa:caret-down':
             event_args['sender'].icon = 'fa:caret-up'
         else:
-            event_args['sender'].icon = 'fa:caret-down'
-        
-            
+            event_args['sender'].icon = 'fa:caret-down'       
+     
+    def nominatim_scrape(self, *args):
+        """Returns location & address data for supplied address arguments"""
+        nominatim = 'https://nominatim.openstreetmap.org/search?q='
+        nominatim += f"{','.join(args)},{LOCALE},&format=json".replace(" ","%20")
+        print(nominatim)
+        return requests.get(nominatim).json()[0]           
+
+    def generate_route_url(self, **event_args):
+        """Creates an Open Street Map url for pickup to dropoff route"""
+        pickup = self.pickup.split("\n")[1:]
+        dropoff = self.dropoff.split("\n")[1:]
+        print(pickup)
+        print(dropoff)
+        pickup = nominatim_scrape(*args)
+        osm = "https://www.openstreetmap.org/way/"
+        self.show_route.url = ""
+
+
 
 
 
