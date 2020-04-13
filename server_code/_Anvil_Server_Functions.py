@@ -21,7 +21,9 @@ LOCALE = "United Kingdom"
 
 @anvil.server.callable
 def check_for_display_name(display_name):
-    """ Returns boolean check for whether display name already exists in Users database"""
+    """ Returns boolean check for whether display name already exists in Users database, or is simply invalid"""
+    if display_name.startswith(" "):
+      return True
     if display_name != None and display_name != "":
       return True if app_tables.users.get(display_name = display_name) else False
   
