@@ -1,4 +1,3 @@
-﻿
 # Version 0.1 created 2020-04-09
 #
 # This script is intended to:
