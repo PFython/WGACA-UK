@@ -28,10 +28,9 @@ def check_for_display_name(display_name):
 def nominatim_scrape(address_list):
     """Returns location & address data for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
-    nominatim += f"{','.join(address_list)}.replace(', ',','),{LOCALE},&format=json".replace(" ","%20")
-    print(nominatim)
+    nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
+#     print(nominatim)
     response = anvil.http.request(nominatim, json=True)
-    print(response)
     return response 
 
 def generate_route_url(new_match):
@@ -40,17 +39,14 @@ def generate_route_url(new_match):
     pickup = [user['street'], user['town'], user['county']]
     user = new_match['request']['user']
     dropoff = [user['street'], user['town'], user['county']]
-    print(pickup)
-    print(dropoff)
-    pickup = nominatim_scrape(pickup)
+    pickup = nominatim_scrape(pickup)[0]
     pickup = pickup['lat'] + "%2C" + pickup['lon']
-    dropoff = nominatim_scrape(dropoff)
+    dropoff = nominatim_scrape(dropoff)[0]
     dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
     osm = "https://www.openstreetmap.org/way/"
     osm += pickup + "%3B" + dropoff
-    resp = anvil.http.request(osm, json=True)
-    print(response)
-    return response
+    print(osm)
+    return osm
 
 @anvil.server.callable
 def generate_matches():
@@ -81,8 +77,13 @@ def generate_matches():
 def _generate_route_url_for_all_matches():
   """This is a developer function to create OSM route urls for all Matches"""
   matches = app_tables.matches.search(tables.order_by("request"))
+  count = 0
   for match in matches:
-    match['route_url'] = generate_route_url(match)
+    if match['route_url'] == None:
+      match['route_url'] = generate_route_url(match)
+      count += 1
+  print(f"Populated {count} Matches with a route_url")
+  return
 
 @anvil.server.callable
 def get_address_hierarchy(country = "United Kingdom"):
