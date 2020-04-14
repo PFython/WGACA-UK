@@ -12,6 +12,7 @@ class News(NewsTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.title.background = bright_blue
+    self.card_2.background = bright_blue
     # Any code you write here will run when the form opens.
     
 
