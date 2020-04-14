@@ -13,8 +13,11 @@ class MyOffersRow(MyOffersRowTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.status.text = STATUSES[self.item['status_code']]
-        check_request_status()     
+        if not self.item:
+           self.visible = False
+        else:
+          self.status.text = STATUSES[self.item['status_code']]
+          check_request_status()     
 
     def check_request_status(self, **properties):
         matches = anvil.server.call('get_my_matches')
