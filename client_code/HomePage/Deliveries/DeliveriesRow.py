@@ -48,9 +48,11 @@ class DeliveriesRow(DeliveriesRowTemplate):
  
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
+        user=anvil.users.get_user()
         for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
             address.text = self.item[table]['user']['display_name']+"\n"
-            address.text += str(self.item[table]['user']['house_number'])+" "
+            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
+                address.text += str(self.item[table]['user']['house_number'])+" "
             address.text += self.item[table]['user']['street']+"\n"
             address.text += self.item[table]['user']['town']+"\n"
             address.text += self.item[table]['user']['county']+"\n"
