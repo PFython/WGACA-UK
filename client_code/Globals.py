@@ -12,7 +12,6 @@ light_blue = '#cae4ff'
 pale_blue = '#eaf4ff'
 bright_blue = '#00a3f0'
 white = "#ffffff"
-red = '#ff8080'
 pink = '#ffe6e6'
 yellow = '#fefdc7'
 
