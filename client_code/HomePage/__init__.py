@@ -42,8 +42,7 @@ class HomePage(HomePageTemplate):
         
     def check_updates(self):
         """Checks if user has seen latest update and creates an alert if not"""
-        user = anvil.users.get_user()
-        
+        user = anvil.users.get_user()        
         latest_update = News()
         date = News().date.text
         updates_read = user['updates_read']
@@ -51,7 +50,7 @@ class HomePage(HomePageTemplate):
             alert(content=latest_update)
             updates_read = []
         elif date not in user['updates_read']:
-            alert(content=lastet_update)        
+            alert(content=latest_update)        
 #         updates_read += [date]
         anvil.server.call("save_user_setup", "updates_read", updates_read + [date])
         
