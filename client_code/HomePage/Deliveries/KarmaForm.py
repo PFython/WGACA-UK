@@ -28,7 +28,7 @@ class KarmaForm(KarmaFormTemplate):
                 date_time: datetime.datetime.now(),
                 feedback: self.feedback.text,
                 rating: self.rating,}
-      anvil.server.call("add_karma_row", kwargs)
+      anvil.server.call("add_karma_row", **kwargs)
       self.clear()
       self.parent.visible = False
       alert("""Thanks for taking the time to keep things going around and coming around!""")
