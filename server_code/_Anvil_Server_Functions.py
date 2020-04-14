@@ -20,6 +20,11 @@ LOCALE = "United Kingdom"
 # them with @anvil.server.callable.
 
 @anvil.server.callable
+def add_karma_row(**kwargs):
+    print(kwargs)
+    app_tables.karma.add_row(kwargs)
+
+@anvil.server.callable
 def check_for_display_name(display_name):
     """ Returns boolean check for whether display name already exists in Users database, or is simply invalid"""
     if display_name.startswith(" "):

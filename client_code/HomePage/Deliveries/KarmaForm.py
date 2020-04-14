@@ -18,16 +18,17 @@ class KarmaForm(KarmaFormTemplate):
         self.date.format = "D %b %Y"
         self.rating = self.label_3.text
         self.feedback.background = yellow
-        self.regarding.text = "Somebody"
+        self.regarding.text = "Putney Pete"
 
     def submit_form(self, **event_args):
       """This method is called when the button is clicked"""
       regarding_user = anvil.server.call('get_user_from_display_name', self.regarding.text)
-      app_tables.karma.add_row(from_user = anvil.users.get_user(),
-                               regarding_user = regarding_user,
-                               date_time = datetime.datetime.now(),
-                               feedback = self.feedback.text,
-                               rating = self.rating,)
+      kwargs = {from_user: anvil.users.get_user(),
+                regarding_user: regarding_user,
+                date_time: datetime.datetime.now(),
+                feedback: self.feedback.text,
+                rating: self.rating,}
+      anvil.server.call("add_karma_row", kwargs)
       self.clear()
       self.parent.visible = False
       alert("""Thanks for taking the time to keep things going around and coming around!""")
