@@ -64,7 +64,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
 
         if self.item['approved_runner'] == user:
             form.role = "Runner"
-            if self.item['status'] == "Agree Pickup Time" or self.item['status'] == "Offerer: Pickup complete":
+            if int(self.item['status_code']) in [3,4]: # i.e. Runner confirmed or Offerer: Pickup complete
                 form.regarding = self.item['offer']['user']['display_name']
                 form.regarding = "Offerer"
             else:
