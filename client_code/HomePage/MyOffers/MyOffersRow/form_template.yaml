@@ -34,11 +34,9 @@ components:
   event_bindings: {click: show_notes_click}
   data_bindings:
   - {property: visible, code: 'self.item[''notes''] != "(No notes attached)"'}
-- type: Label
+- type: Link
   properties: {}
   name: status
   layout_properties: {column: ITGWVO}
-  event_bindings: {}
-  data_bindings:
-  - {property: foreground, code: ''}
+  event_bindings: {click: click_status}
 is_package: true
