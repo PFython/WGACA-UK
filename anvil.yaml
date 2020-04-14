@@ -316,18 +316,28 @@ db_schema:
   id: 48190
   python_name: offers
   columns:
+    3wtWS84hUU0=:
+      name: date_posted
+      type: date
+      admin_ui: {order: 3, width: 200}
     4UaEbAuDnL8=:
       name: expiry_date
       type: date
       admin_ui: {order: 3.25, width: 200}
+    MnnHOmCcZwA=:
+      name: product_key
+      type: string
+      admin_ui: {order: 1, width: 324.011364}
+    PTg377LK6TQ=:
+      name: user
+      type: liveObject
+      backend: anvil.tables.Row
+      admin_ui: {order: -1, width: 200}
+      table_id: 48470
     ZjWIAoilRMs=:
       name: units
       type: number
       admin_ui: {order: 2, width: 200}
-    1raBp1fYLaI=:
-      name: status
-      type: string
-      admin_ui: {order: 4, width: 200}
     ezVcuRizqLo=:
       name: status_code
       type: string
@@ -338,24 +348,10 @@ db_schema:
       backend: anvil.tables.Row
       admin_ui: {order: 7, width: 200}
       table_id: 48778
-    3wtWS84hUU0=:
-      name: date_posted
-      type: date
-      admin_ui: {order: 3, width: 200}
-    PTg377LK6TQ=:
-      name: user
-      type: liveObject
-      backend: anvil.tables.Row
-      admin_ui: {order: -1, width: 200}
-      table_id: 48470
     zLoT71MB4k0=:
       name: notes
       type: string
       admin_ui: {order: 3.5, width: 200}
-    MnnHOmCcZwA=:
-      name: product_key
-      type: string
-      admin_ui: {order: 1, width: 324.011364}
   access: {python_name: offers, app_id: P33PVE5OAIUCIJY3, server: full, client: full,
     table_id: 48190}
 dependency_order: [OKAB7WUCDJLOUFDW]
