@@ -32,6 +32,11 @@ class KarmaForm(KarmaFormTemplate):
       self.clear()
       self.parent.visible = False
 
+    def description_change(self, **event_args):
+      """This method is called when the text in this text area is edited"""
+      pass
+
+
 
 
 
