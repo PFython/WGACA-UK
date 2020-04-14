@@ -105,7 +105,7 @@ def get_my_matches():
     """ Returns rows from the Matches database """
     user = anvil.users.get_user()
     if user is not None:
-        return app_tables.matches.search(tables.order_by("status"),approved_runner=None)
+        return app_tables.matches.search(tables.order_by("status_code"),approved_runner=None)
         # When approved_runner != None, the Match effectively becomes a Delivery
         # TODO: Filter results by proximity
 
