@@ -12,6 +12,8 @@ class KarmaForm(KarmaFormTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.date.date = datetime.datetime.today()
+        self.date.format = "%D %b %Y"
 
 
     def send_message(self, **event_args):

@@ -17,6 +17,14 @@ components:
     properties: {}
     name: regarding
     layout_properties: {grid_position: 'WSIZUU,ZNACCP'}
+  - type: DatePicker
+    properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
+      placeholder: '', border: '', enabled: false, foreground: '', visible: true,
+      font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
+      date: '', min_date: '', background: '', bold: false, underline: false, format: ''}
+    name: date
+    layout_properties: {grid_position: 'WSIZUU,BFHLNP'}
+    data_bindings: []
   - type: TextArea
     properties: {role: null, align: left, height: 178.90533600000003, tooltip: '',
       placeholder: 'Please DO NOT include any personal information here such as names,
