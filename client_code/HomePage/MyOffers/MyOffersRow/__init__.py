@@ -25,7 +25,7 @@ class MyOffersRow(MyOffersRowTemplate):
         for match in matches:
             if match['request'] == self.item:
                 match_count += 1
-        if match_count > 0 and match['status_code'] in [1,2,3]:                
+        if match_count > 0 and match['status_code'] in ['1','2','3']:                
             self.status.text = f"Matched with {match_count} requests"
         self.refresh_data_bindings()
         

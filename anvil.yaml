@@ -147,7 +147,7 @@ db_schema:
       type: simpleObject
       admin_ui: {order: 10, width: 50}
     cN9mqqVsiOo=:
-      name: status
+      name: status_code
       type: string
       admin_ui: {order: 9, width: 201.666666}
     71gSuTeJpNg=:
@@ -188,14 +188,14 @@ db_schema:
       backend: anvil.tables.Row
       admin_ui: {order: 6, width: 200}
       table_id: 48778
-    OEvAVmxZ5V0=:
-      name: status
-      type: string
-      admin_ui: {order: 5, width: 200}
     P2Egcj0bBgE=:
       name: product_category
       type: string
       admin_ui: {order: 3, width: 200}
+    Zf0f24RB5OY=:
+      name: status_code
+      type: string
+      admin_ui: {order: 7, width: 200}
     m7i_wXQ0xC8=:
       name: user
       type: liveObject

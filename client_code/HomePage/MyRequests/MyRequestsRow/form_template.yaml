@@ -1,6 +1,6 @@
 container:
   type: DataRowPanel
-  event_bindings: {}
+  event_bindings: {show: show_row}
 components:
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: WARNING!  Permanently removes offer from list.,
@@ -24,10 +24,7 @@ components:
   name: status
   layout_properties: {column: RECBJX}
   event_bindings: {}
-  data_bindings:
-  - {property: text, code: 'self.item[''status'']'}
-  - {property: foreground, code: '''#0080c0'' if self.item[''status''].startswith("New")
-      else ''#5eb348'''}
+  data_bindings: []
 - type: Label
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
     text: '', font_size: 20, font: '', spacing_above: small, icon_align: left, spacing_below: small,

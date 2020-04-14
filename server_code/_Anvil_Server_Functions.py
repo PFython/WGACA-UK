@@ -44,12 +44,12 @@ def generate_matches():
     matches = 0
 #     print("Generating Matches...")
     statuses = anvil.server.call("STATUSES").values()
-    for request in (x for x in requests if x['status'] not in statuses):
-        for offer in (x for x in offers if x['status'] not in statuses):
+    for request in (x for x in requests if x['status_code'] == '1'):
+        for offer in (x for x in offers if x['status_code'] == '1'):
             if request['product_category'] in offer['product_key']:
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
-                    new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status="New")
+                    new_match = app_tables.matches.get(request=request, offer=offer) or app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
                     new_match['route_url'] = generate_route_url(new_match)
                     # 'or []' added to address possible database corruption i.e. value = None rather than value = []
                     if new_match not in (offer['matches'] or []):
