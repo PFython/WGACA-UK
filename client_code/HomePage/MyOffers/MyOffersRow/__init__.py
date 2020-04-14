@@ -26,7 +26,7 @@ class MyOffersRow(MyOffersRowTemplate):
             if match['request'] == self.item:
                 match_count += 1
         print ("Matches:",match_count)
-        if match_count > 0 and match['status_code'] == '1':                
+        if match_count > 0 and match['status_code'] in ['1','2']:                
             self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
 #             old_colour = self.parent.parent.parent.parent.border
 #             print(old_colour)

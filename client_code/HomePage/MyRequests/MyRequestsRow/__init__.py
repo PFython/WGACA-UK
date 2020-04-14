@@ -22,7 +22,7 @@ class MyRequestsRow(MyRequestsRowTemplate):
     for match in matches:
         if match['request'] == self.item:
             match_count += 1
-    if match_count > 0 and match['status_code'] == '1':                
+    if match_count > 0 and match['status_code'] in ['1','2']:                
         self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
     self.refresh_data_bindings()
     
