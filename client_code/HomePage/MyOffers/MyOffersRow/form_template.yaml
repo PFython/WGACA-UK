@@ -38,5 +38,5 @@ components:
   properties: {}
   name: status
   layout_properties: {column: ITGWVO}
-  event_bindings: {click: click_status}
+  event_bindings: {}
 is_package: true

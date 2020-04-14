@@ -31,10 +31,6 @@ class MyOffersRow(MyOffersRowTemplate):
         print ("Matches:",match_count)
         if match_count > 0 and self.item['status_code'] in ['1','2']:                
             self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
-#             old_colour = self.parent.parent.parent.parent.border
-#             print(old_colour)
-            self.parent.parent.background = red
-#             menu_my_matches.border = red
         self.refresh_data_bindings()
         
     def delete_row_click(self, **event_args):
@@ -54,12 +50,6 @@ class MyOffersRow(MyOffersRowTemplate):
       self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
       self.check_offer_status()
 
-    def click_status(self, **event_args):
-      """This method is called when the link is clicked"""
-        self.parent.clear()
-        # Add Page1 to the content panel
-        self.column_panel_1.add_component(Matches())
-        self.highlight_selected_menu(self.menu_my_matches)
 
 
 

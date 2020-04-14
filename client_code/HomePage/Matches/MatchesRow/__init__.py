@@ -33,13 +33,17 @@ class MatchesRow(MatchesRowTemplate):
         anvil.server.call("volunteer_as_runner", self.item, True)
     else:
         anvil.server.call("volunteer_as_runner", self.item, False)
-    self.refresh_data_bindings()
     self.volunteer_toggle_status(**event_args)        
+    self.set_volunteer_colour()
 
-  def show_myself(self, **event_args):
-      """This method is called when the data row panel is shown on the screen"""
+  def set_volunteer_colour(self):
+      self.volunteers.text = str(len(self.item['available_runners']))+" volunteer(s)."
       self.volunteers.foreground = red if self.volunteers.text.startswith("0 ") else green
       self.volunteers.icon = "fa:heart o"if self.volunteers.text.startswith("0 ") else "fa:heart"
+    
+  def show_myself(self, **event_args):
+      """This method is called when the data row panel is shown on the screen"""
+      self.set_volunteer_colour()
       user = anvil.users.get_user()
   
       if self.item['request']['user'] == user:
