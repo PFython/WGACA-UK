@@ -21,7 +21,7 @@ ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
 UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
 
 STATUSES = {'1':  "New",
-            '2':  "Matched with...",
+            '2':  "Match found!",
             '3':  "Runner confirmed; Agree Pickup Time",
             '4':  "Offerer: Pickup complete",
             '5':  "Runner: Pickup complete", 

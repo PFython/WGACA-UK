@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ....Globals import STATUSES
+from ....Globals import STATUSES, red
 
 class MyOffersRow(MyOffersRowTemplate):
     def __init__(self, **properties):
@@ -25,8 +25,13 @@ class MyOffersRow(MyOffersRowTemplate):
         for match in matches:
             if match['request'] == self.item:
                 match_count += 1
-        if match_count > 0 and match['status_code'] in ['1','2','3']:                
-            self.status.text = f"Matched with {match_count} requests"
+        print ("Matches:",match_count)
+        if match_count > 0 and match['status_code'] == '1':                
+            self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
+#             old_colour = self.parent.parent.parent.parent.border
+#             print(old_colour)
+            self.parent.background = red
+#             menu_my_matches.border = red
         self.refresh_data_bindings()
         
     def delete_row_click(self, **event_args):
@@ -44,6 +49,7 @@ class MyOffersRow(MyOffersRowTemplate):
       """This method is called when the data row panel is shown on the screen"""
       self.status.text = STATUSES[self.item['status_code']]
       self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
+      self.check_offer_status()
 
 
 

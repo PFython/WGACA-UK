@@ -51,8 +51,8 @@ def generate_matches():
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
                         new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
-                        request['status_code'] = "2"
-                        offer['status_code'] = "2"
+                        request.update(status_code = "2")
+                        offer.update(status_code = "2")
                         new_match['route_url'] = generate_route_url(new_match)
                         # 'or []' added to address possible database corruption i.e. value = None rather than value = []
                         if new_match not in (offer['matches'] or []):

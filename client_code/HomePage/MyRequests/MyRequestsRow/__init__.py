@@ -22,8 +22,8 @@ class MyRequestsRow(MyRequestsRowTemplate):
     for match in matches:
         if match['request'] == self.item:
             match_count += 1
-    if match_count > 0 and match['status_code'] in ['1','2','3']:                
-        self.status.text = f"Matched with {match_count} requests"
+    if match_count > 0 and match['status_code'] == '1':                
+        self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
     self.refresh_data_bindings()
     
   def delete_row_click(self, **event_args):
@@ -36,5 +36,6 @@ class MyRequestsRow(MyRequestsRowTemplate):
       """This method is called when the data row panel is shown on the screen"""
       self.status.text = STATUSES[self.item['status_code']]
       self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
+      self.check_request_status()
 
 
