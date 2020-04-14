@@ -43,7 +43,7 @@ def generate_matches():
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
 #     print("Generating Matches...")
-    statuses = anvil.server.call("STATUSES")
+    statuses = anvil.server.call("STATUSES").items()
     for request in (x for x in requests if x['status'] not in statuses):
         for offer in (x for x in offers if x['status'] not in statuses):
             if request['product_category'] in offer['product_key']:
@@ -197,16 +197,16 @@ def save_user_setup(field, value):
 @anvil.server.callable
 def STATUSES():
     """ Returns allowable status descriptions other than 'New' or 'X matches found' """
-    return ("New",
-            "Matched with...",
-            "Runner confirmed",
-            "Agree Pickup Time",
-            "Offerer: Pickup complete",
-            "Runner: Pickup complete", 
-            "Agree Dropoff Time",
-            "Requester: Dropoff complete",
-            "Runner: Dropoff complete",
-            "Delivery complete")
+    return {1:  "New",
+            2:  "Matched with...",
+            3:  "Runner confirmed",
+            4:  "Agree Pickup Time",
+            5:  "Offerer: Pickup complete",
+            6:  "Runner: Pickup complete", 
+            7:  "Agree Dropoff Time",
+            8:  "Requester: Dropoff complete",
+            9:  "Runner: Dropoff complete",
+            10: "Delivery complete"}
 
     # NB If Requester confirms Dropoff complete, this must force: Delivery complete.
     # If Runner confirms Dropoff complete, this must force Runner: Pickup complete

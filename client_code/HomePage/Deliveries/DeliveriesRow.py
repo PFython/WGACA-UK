@@ -8,6 +8,7 @@ from anvil.tables import app_tables
 from .KarmaForm import KarmaForm
 
 from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from ...Globals import STATUSES
 
 class DeliveriesRow(DeliveriesRowTemplate):
     def __init__(self, **properties):
@@ -34,19 +35,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.offer.foreground = green
             self.offer_notes.foreground = green
             self.offer_expiry.foreground = green
-            
-        if self.item['approved_runner'] == user:
-            self.items_picked_up.foreground = green
-            self.items_picked_up.visible = True
-            if not self.items_picked_up.checked:
-                 self.items_picked_up.enabled = True
-            self.items_dropped_off.foreground = green
-            self.items_dropped_off.visible = True
-            if not self.items_dropped_off.checked:
-                 self.items_dropped_off.enabled = True
-                
+              
         if self.item['request']['user'] == user:
-            self.items_dropped_off.foreground = green
             self.label_1.text  = "My Request"
             self.label_1.foreground = green
             self.label_4.foreground = green
@@ -54,21 +44,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.dropoff.icon = 'fa:home'
             self.request.foreground = green
             self.request_notes.foreground = green
-            self.items_dropped_off.foreground = green
-            self.items_dropped_off.visible = True
-     
+            
+    def reveal_update_status(self):
+        """Display and enable the appropriate status box and message"""
+        if self.item['offer']['user'] == user:
+          
+        if self.item['approved_runner'] == user:
+          
+        if self.item['request']['user'] == user:
+          
     def click_update_status(self):
-        """ "New",
-            "Matched with...",
-            "Runner confirmed",
-            "Agree Pickup Time",
-            "Offerer: Pickup complete",
-            "Runner: Pickup complete", 
-            "Agree Dropoff Time",
-            "Requester: Dropoff complete",
-            "Runner: Dropoff complete",
-            "Delivery complete" """      
-         
+        """Define users role and the name/role of the person the feedback form will be about"""      
         user = anvil.users.get_user()
         form = KarmaForm()
         if self.item['offer']['user'] == user:
@@ -78,11 +64,19 @@ class DeliveriesRow(DeliveriesRowTemplate):
 
         if self.item['approved_runner'] == user:
             form.role = "Runner"
-            
+            if self.item['status'] == "Agree Pickup Time" or self.item['status'] == "Offerer: Pickup complete":
+                form.regarding = self.item['offer']['user']['display_name']
+                form.regarding = "Offerer"
+            else:
+                form.regarding = self.item['request']['user']['display_name']
+                form.regarding = "Requester"                
+                
         if self.item['request']['user'] == user:
             form.role = "Requester"
             form.regarding = self.item['approved_runner']['display_name']
             form.regarding_role = "Runner"
+            
+        self.add_component(form)
 
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
