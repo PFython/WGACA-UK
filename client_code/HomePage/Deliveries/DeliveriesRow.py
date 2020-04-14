@@ -14,7 +14,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
-        self.show_route.foreground = green       
+        self.show_route.foreground = green
+        self.items_picked_up.visible = False
+        self.items_dropped_off.visible = False
 
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
@@ -29,6 +31,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.dropoff.icon = 'fa:home'
             self.request.foreground = green
             self.request_notes.foreground = green
+            self.items_dropped_off.foreground = green
+            self.items_dropped_off.visible = True
 
         if self.item['offer']['user'] == user:
             self.items_picked_up.foreground = green
@@ -44,7 +48,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
         if self.item['approved_runner'] == user:
             self.items_picked_up.foreground = green
-            self.items_dropped_off.foreground = green
+            self.items_picked_up.visible = True
  
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
