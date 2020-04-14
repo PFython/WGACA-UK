@@ -18,7 +18,6 @@ class MyOffers(MyOffersTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.check_offer_status()
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")     
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
