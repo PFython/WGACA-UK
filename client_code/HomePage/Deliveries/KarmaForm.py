@@ -23,11 +23,11 @@ class KarmaForm(KarmaFormTemplate):
     def submit_form(self, **event_args):
       """This method is called when the button is clicked"""
       regarding_user = anvil.server.call('get_user_from_display_name', self.regarding.text)
-      kwargs = {from_user: anvil.users.get_user(),
-                regarding_user: regarding_user,
-                date_time: datetime.datetime.now(),
-                feedback: self.feedback.text,
-                rating: self.rating,}
+      kwargs = {'from_user': anvil.users.get_user(),
+                'regarding_user': regarding_user,
+                'date_time': datetime.datetime.now(),
+                'feedback': self.feedback.text,
+                'rating': self.rating,}
       anvil.server.call("add_karma_row", **kwargs)
       self.clear()
       self.parent.visible = False
