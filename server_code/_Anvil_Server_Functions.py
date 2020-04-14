@@ -197,7 +197,19 @@ def save_user_setup(field, value):
 @anvil.server.callable
 def STATUSES():
     """ Returns allowable status descriptions other than 'New' or 'X matches found' """
-    return "Awaiting Pickup, Pickup Failed, Awaiting Delivery, Delivery Failed, Delivery Complete".split(", ")
+    return ("New",
+            "Matched with...",
+            "Runner confirmed",
+            "Agree Pickup Time",
+            "Offerer: Pickup complete",
+            "Runner: Pickup complete", 
+            "Agree Dropoff Time",
+            "Requester: Dropoff complete",
+            "Runner: Dropoff complete",
+            "Delivery complete")
+
+    # NB If Requester confirms Dropoff complete, this must force: Delivery complete.
+    # If Runner confirms Dropoff complete, this must force Runner: Pickup complete
 
 @anvil.server.callable
 def string_to_datetime(string, format = "%d %b %Y"):

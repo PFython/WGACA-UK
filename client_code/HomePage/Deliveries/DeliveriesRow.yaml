@@ -157,25 +157,12 @@ components:
         then click here to confirm you''ve received the item(s).', font_size: null,
       font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
       bold: false, checked: false, underline: false}
-    name: items_picked_up
+    name: next_steps
     layout_properties:
       col_widths: {}
       grid_position: LQZTGU,SOVMIY VKSQIW,WTWXPD
     data_bindings:
     - {property: checked, code: 'self.item[''offer_collected'']', writeback: true}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'Please arrange drop-off  time with Requester,
-        then click here to confirm you''ve delivered the item(s).', font_size: null,
-      font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
-      bold: false, checked: false, underline: false}
-    name: items_dropped_off
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY LSFXVD,LPRBRE
-    data_bindings:
-    - {property: checked, code: 'self.item[''offer_delivered'']', writeback: true}
-    event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,
