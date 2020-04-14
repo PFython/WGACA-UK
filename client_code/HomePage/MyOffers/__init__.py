@@ -32,19 +32,7 @@ class MyOffers(MyOffersTemplate):
               anvil.server.call('generate_matches')
         self.check_offer_status()
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")    # or refresh_data_bindings() ?
-
-    def check_offer_status(self, **properties):
-        offers = anvil.server.call('get_my_offers')
-        matches = anvil.server.call('get_my_matches')
-        for offer in offers:
-            match_count = 0
-            for match in matches:
-                if match['offer'] == offer:
-                    match_count += 1
-            if match_count > 0 and int(offer['status_code']) in [1,2,3]:                
-                offer['status'] = f"Matched with {match_count} requests"
-        self.refresh_data_bindings()        
-        
+   
     def add_item_click(self, **event_args):
         """This method is called when the Add Item button is clicked"""
         unit_of_measure = self.unit_of_measure.selected_value or self.unit_of_measure.placeholder

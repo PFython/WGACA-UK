@@ -33,18 +33,6 @@ class MyRequests(MyRequestsTemplate):
         self.check_request_status()
         self.repeating_panel_1.items = anvil.server.call('get_my_requests')    
 
-    def check_request_status(self, **properties):
-        requests = anvil.server.call('get_my_requests')
-        matches = anvil.server.call('get_my_matches')
-        for request in requests:
-            match_count = 0
-            for match in matches:
-                if match['request'] == request:
-                    match_count += 1
-            if match_count > 0 and int(offer['status_code']) in [1,2,3]:                
-                offer['status'] = f"Matched with {match_count} requests"
-        self.refresh_data_bindings()
-        
     def add_request_click(self, **event_args):
         """This method is called when the Add Request button is clicked"""
         product_category = (self.product_category.selected_value)
