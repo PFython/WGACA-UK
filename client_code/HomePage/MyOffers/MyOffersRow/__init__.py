@@ -17,7 +17,7 @@ class MyOffersRow(MyOffersRowTemplate):
             self.status.text = STATUSES[self.item['status_code']]
         except KeyError:
             self.visible = False
-            check_request_status()     
+            self.check_request_status()     
 
     def check_request_status(self, **properties):
         matches = anvil.server.call('get_my_matches')
