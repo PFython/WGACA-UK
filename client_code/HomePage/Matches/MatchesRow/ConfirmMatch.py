@@ -19,12 +19,6 @@ class ConfirmMatch(ConfirmMatchTemplate):
         self.message_to_requester.tag = "Optional"
         self.message_to_runner.tag = "Optional"
 
-#     def confirm_match(self, **event_args):
-#       """This method is called when the button is clicked"""
-#       self.clear()
-#       self.parent.visible = False
-#       alert("""Message sent.  Thanks for taking the time to reach out to us!""")
-      
     def dropdown_change(self, **event_args):
         """ Colour codes dropdown box """
         runner = event_args['sender'].selected_value

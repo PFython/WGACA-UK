@@ -17,17 +17,11 @@ class MyOffersRow(MyOffersRowTemplate):
             self.status.text = STATUSES[self.item['status_code']]
         except KeyError:
             pass
-        self.check_offer_status()     
+        if self.item['matches']:
+            self.check_offer_status()     
 
     def check_offer_status(self, **properties):
         match_count = len(self.item['matches'])
-        
-#         matches = anvil.server.call('get_my_matches')
-#         match_count = 0
-#         for match in matches:
-#             if match['request'] == self.item:
-#                 match_count += 1
-                
         print ("Matches:",match_count)
         if match_count > 0 and self.item['status_code'] in ['1','2']:                
             self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
