@@ -13,3 +13,14 @@ class News(NewsTemplate):
     self.init_components(**properties)
     self.title.background = bright_blue
     # Any code you write here will run when the form opens.
+    
+
+  def click_previous_updates(self, **event_args):
+      """This method is called when the link is clicked"""
+      if event_args['sender'].icon == 'fa:caret-down':
+          self.previous_updates.visible = True
+          event_args['sender'].icon = 'fa:caret-up'
+      else:
+          self.previous_updates.visible = False
+          event_args['sender'].icon = 'fa:caret-down'
+
