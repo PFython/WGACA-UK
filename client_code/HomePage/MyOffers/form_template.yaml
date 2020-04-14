@@ -62,8 +62,7 @@ components:
       name: product_description
       layout_properties: {grid_position: 'TJDTSP,MNMBLJ OVKLAI,MNBGTP'}
       event_bindings: {change: drop_down_change}
-      data_bindings:
-      - {property: items, code: self.item_choices}
+      data_bindings: []
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
         visible: true, text: 'Units:', font_size: null, font: '', spacing_above: small,
@@ -103,8 +102,7 @@ components:
       name: unit_of_measure
       layout_properties: {grid_position: 'TJDTSP,MNMBLJ NJPIOS,LNWZVA'}
       event_bindings: {change: unit_of_measure_change}
-      data_bindings:
-      - {property: items, code: self.units_of_measure}
+      data_bindings: []
     - type: Label
       properties: {role: null, align: right, tooltip: '', border: '', foreground: '',
         visible: true, text: 'Quantity:', font_size: null, font: '', spacing_above: small,

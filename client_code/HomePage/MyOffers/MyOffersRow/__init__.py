@@ -16,16 +16,16 @@ class MyOffersRow(MyOffersRowTemplate):
         try:
             self.status.text = STATUSES[self.item['status_code']]
         except KeyError:
-            self.visible = False
-            self.check_request_status()     
+            pass
+        self.check_offer_status()     
 
-    def check_request_status(self, **properties):
+    def check_offer_status(self, **properties):
         matches = anvil.server.call('get_my_matches')
         match_count = 0
         for match in matches:
             if match['request'] == self.item:
                 match_count += 1
-        if match_count > 0 and int(match['status_code']) in [1,2,3]:                
+        if match_count > 0 and match['status_code'] in [1,2,3]:                
             self.status.text = f"Matched with {match_count} requests"
         self.refresh_data_bindings()
         
@@ -39,6 +39,12 @@ class MyOffersRow(MyOffersRowTemplate):
         """This method is called when a Show Notes icon is clicked"""
         text = "\nNOTES:\n\n" + self.item['notes']
         alert(text)
+
+    def show_row(self, **event_args):
+      """This method is called when the data row panel is shown on the screen"""
+      self.status.text = STATUSES[self.item['status_code']]
+      self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
+
 
 
 

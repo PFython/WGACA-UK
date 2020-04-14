@@ -10,15 +10,15 @@ import datetime
 from ...Globals import ITEM_HEIRARCHY, UNITS_OF_MEASURE
 
 class MyOffers(MyOffersTemplate):
-    item_choices = ITEM_HEIRARCHY
-    units_of_measure = UNITS_OF_MEASURE
 
     def __init__(self, **properties):
         anvil.users.login_with_form()
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.repeating_panel_1.items = anvil.server.call("get_my_offers")     
+        self.repeating_panel_1.items = anvil.server.call("get_my_offers")
+        self.unit_of_measure.items = UNITS_OF_MEASURE
+        self.product_description.items = ITEM_HEIRARCHY
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
         """ Add item to Offers database """
@@ -29,8 +29,7 @@ class MyOffers(MyOffersTemplate):
         else:
               self.debug_console.text = "✓ Item added."
               anvil.server.call('generate_matches')
-        self.check_offer_status()
-        self.repeating_panel_1.items = anvil.server.call("get_my_offers")    # or refresh_data_bindings() ?
+        self.repeating_panel_1.items = anvil.server.call("get_my_offers")
    
     def add_item_click(self, **event_args):
         """This method is called when the Add Item button is clicked"""

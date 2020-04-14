@@ -328,10 +328,10 @@ db_schema:
       name: status
       type: string
       admin_ui: {order: 4, width: 200}
-    qQGZFceS+Pc=:
+    ezVcuRizqLo=:
       name: status_code
-      type: number
-      admin_ui: {order: 3.75, width: 200}
+      type: string
+      admin_ui: {order: 8, width: 200}
     o0JaLHAeb14=:
       name: matches
       type: liveObjectArray

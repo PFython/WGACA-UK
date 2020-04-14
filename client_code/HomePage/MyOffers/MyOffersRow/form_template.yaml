@@ -3,7 +3,7 @@ container:
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', auto_display_data: true,
     visible: true, font_size: 14, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}
-  event_bindings: {}
+  event_bindings: {show: show_row}
   data_bindings: []
 components:
 - type: Link
@@ -40,6 +40,5 @@ components:
   layout_properties: {column: ITGWVO}
   event_bindings: {}
   data_bindings:
-  - {property: foreground, code: '''#0080c0'' if self.item[''status''].startswith("New")
-      else ''#5eb348'''}
+  - {property: foreground, code: ''}
 is_package: true

@@ -163,10 +163,10 @@ def save_to_matches_database(match, runner, messages, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    match.update(approved_runner = runner, messages_dict = messages, status = STATUSES()[int(status_code)])
+    match.update(approved_runner = runner, messages_dict = messages, status = STATUSES()[status_code])
     
 @anvil.server.callable
-def save_to_offers_database(product_key, units, expiry_date, notes):
+def save_to_offers_database(product_key, units, expiry_date, notes, status_code="1"):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
     user = anvil.users.get_user()
@@ -175,10 +175,10 @@ def save_to_offers_database(product_key, units, expiry_date, notes):
     existing_entry = app_tables.offers.get(product_key=product_key, expiry_date=expiry_date, user = user)
     if existing_entry:
         return "Duplicate"    
-    app_tables.offers.add_row(status='New',product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date(), matches = [])
+    app_tables.offers.add_row(product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date(), matches = [], status_code = status_code)
  
 @anvil.server.callable
-def save_to_requests_database(product_category, urgent, notes):
+def save_to_requests_database(product_category, urgent, notes, status_code="1"):
     """ Returns 'Duplicate' if product_category request already exists"""
     user = anvil.users.get_user()
     if user is None:
@@ -186,7 +186,7 @@ def save_to_requests_database(product_category, urgent, notes):
     existing_entry = app_tables.requests.get(product_category=product_category, user = user)
     if existing_entry:
         return "Duplicate"    
-    app_tables.requests.add_row(status='New', product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date(), matches = [])    
+    app_tables.requests.add_row(product_category=product_category, urgent = urgent, user = user, notes = str(notes), date_posted=datetime.datetime.today().date(), matches = [], status_code = status_code)    
 
 @anvil.server.callable
 def save_user_setup(field, value):
@@ -225,14 +225,14 @@ def update_offers_status(offer, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    offer.update(status = STATUSES()[int(status_code)])
+    offer.update(status = STATUSES()[status_code])
     
 @anvil.server.callable
 def update_requests_status(request, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    request.update(status = STATUSES()[int(status_code)])
+    request.update(status = STATUSES()[status_code])
     
 @anvil.server.callable
 def volunteer_as_runner(match, boolean_value):
