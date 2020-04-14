@@ -22,7 +22,7 @@ LOCALE = "United Kingdom"
 @anvil.server.callable
 def add_karma_row(**kwargs):
     print(kwargs)
-    app_tables.karma.add_row(kwargs)
+    app_tables.karma.add_row(**kwargs)
 
 @anvil.server.callable
 def check_for_display_name(display_name):
