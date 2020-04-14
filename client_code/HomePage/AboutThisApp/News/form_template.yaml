@@ -37,12 +37,12 @@ components:
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
         visible: true, text: 'We''ve improved the way WGACA tracks progress from a
           Match being auto-detected all the way through to the Requester receiving
-          a delivery.  We''ve had to clear out all the old test data overnight, so
-          please do recreate a few Matches (you can create one account for Requests
-          and another for Offers, say), confirm the Runner (as yourself if needs be)
-          and update progress!', font_size: null, font: '', spacing_above: none, icon_align: left,
-        spacing_below: small, italic: false, background: '#00a3f0', bold: false, underline: false,
-        icon: ''}
+          a delivery.  We''ve had to clear out all the old test database overnight
+          though, so please do make some more Matches (you can create multiple accounts
+          for Requests and Offers), volunteer as a Runner and confirm Matches, then
+          update progress in the Deliveries menu.', font_size: null, font: '', spacing_above: none,
+        icon_align: left, spacing_below: small, italic: false, background: '#00a3f0',
+        bold: false, underline: false, icon: ''}
       name: description
       layout_properties:
         col_widths: {}
