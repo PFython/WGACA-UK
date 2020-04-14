@@ -19,29 +19,13 @@ components:
     layout_properties: {grid_position: 'SCBIXT,FXXWTX'}
     event_bindings: {}
     data_bindings: []
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: 'Can we contact you by telephone to discuss
-        further?', font_size: null, font: '', spacing_above: none, spacing_below: none,
-      italic: false, background: '', bold: false, checked: false, underline: false}
-    name: telephone_ok
-    layout_properties: {grid_position: 'JNTRBT,AZDZCM SQJYYC,KMTUUB'}
-    event_bindings: {}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: 'Can we contact you by email to discuss
-        further?', font_size: null, font: '', spacing_above: none, spacing_below: none,
-      italic: false, background: '', bold: false, checked: false, underline: false}
-    name: email_ok
-    layout_properties: {grid_position: 'JNTRBT,AZDZCM JHLDIR,NFLCSS'}
-    event_bindings: {}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
       foreground: '#ffff', visible: true, text: Cancel, font_size: null, font: '',
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '#ff8080', bold: false, underline: false, icon: 'fa:times'}
     name: cancel
-    layout_properties: {grid_position: 'JNTRBT,HJWGMJ XARGRS,BPNDNO'}
+    layout_properties: {grid_position: 'XARGRS,BPNDNO'}
     event_bindings: {click: cancel_button_click}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
@@ -49,7 +33,7 @@ components:
       icon_align: left, spacing_below: small, italic: false, background: '#0080c0',
       bold: false, underline: false, icon: 'fa:chevron-right'}
     name: button_1
-    layout_properties: {grid_position: 'JNTRBT,HJWGMJ XARGRS,YFVDGM'}
+    layout_properties: {grid_position: 'XARGRS,YFVDGM'}
     event_bindings: {click: send_message}
   - type: Link
     properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#5eb348',
@@ -74,6 +58,38 @@ components:
       grid_position: NNZXSS,RCDKIN SLDUEJ,OPANWZ
       row_background: '#f2f2f2'
     event_bindings: {}
+  - type: Link
+    properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#fea441',
+      visible: true, text: '', font_size: 30, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: none, icon_align: left, col_widths: '', spacing_below: none,
+      italic: false, background: '', bold: false, underline: false, icon: 'fa:star'}
+    name: star_3
+    layout_properties:
+      col_widths: {}
+      grid_position: NNZXSS,RCDKIN SLDUEJ,KKRQSC
+      row_background: '#f2f2f2'
+    event_bindings: {}
+  - type: Link
+    properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#ff8080',
+      visible: true, text: '', font_size: 30, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
+      italic: false, background: '', bold: false, underline: false, icon: 'fa:star'}
+    name: star_2
+    layout_properties:
+      col_widths: {}
+      grid_position: NNZXSS,RCDKIN SLDUEJ,NTUDNB
+      row_background: '#f2f2f2'
+    components: []
+    event_bindings: {}
+  - type: Link
+    properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#ff3333',
+      visible: true, text: '', font_size: 30, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
+      italic: false, background: '', bold: false, underline: false, icon: 'fa:star'}
+    name: star_1
+    layout_properties: {grid_position: 'NNZXSS,RCDKIN SLDUEJ,UCKMVH', row_background: '#f2f2f2'}
+    event_bindings: {}
+    components: []
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: '#5eb348',
       visible: true, text: 'Very
@@ -100,6 +116,39 @@ components:
       grid_position: NNZXSS,RCDKIN CVOLVG,TGAGTU
       row_background: '#f2f2f2'
     event_bindings: {}
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: '#fea441',
+      visible: true, text: Fine, font_size: null, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: false, background: '', bold: true, underline: false,
+      icon: ''}
+    name: label_1_copy_2
+    layout_properties:
+      col_widths: {}
+      grid_position: NNZXSS,RCDKIN CVOLVG,CAZJEA
+      row_background: '#f2f2f2'
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: '#ff8080',
+      visible: true, text: 'Not
+
+        Ideal', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '', bold: true, underline: false,
+      icon: ''}
+    name: label_1_copy
+    layout_properties:
+      col_widths: {}
+      grid_position: NNZXSS,RCDKIN CVOLVG,VOFXSR
+      row_background: '#f2f2f2'
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: '#ff3333',
+      visible: true, text: 'Very
+
+        Bad', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+      italic: false, background: '', bold: true, underline: false, icon: ''}
+    name: label_1
+    layout_properties: {grid_position: 'NNZXSS,RCDKIN CVOLVG,SYNTMM', row_background: '#f2f2f2'}
+    event_bindings: {}
   - type: FlowPanel
     properties: {}
     name: flow_panel_1
@@ -111,72 +160,6 @@ components:
       properties: {}
       name: column_panel_2
       layout_properties: {grid_position: 'BCCRJG,FTDXSW'}
-    - type: Label
-      properties: {role: null, align: center, tooltip: '', border: '', foreground: '#fea441',
-        visible: true, text: Fine, font_size: null, font: '', spacing_above: none,
-        icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-        underline: false, icon: ''}
-      name: label_1_copy_2
-      layout_properties:
-        col_widths: {}
-        grid_position: BCCRJG,JYLDIV NPWVTL,KHPIBV
-        row_background: '#f2f2f2'
-      event_bindings: {}
-    - type: Label
-      properties: {role: null, align: center, tooltip: '', border: '', foreground: '#ff8080',
-        visible: true, text: 'Not
-
-          Ideal', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '', bold: true, underline: false,
-        icon: ''}
-      name: label_1_copy
-      layout_properties:
-        col_widths: {}
-        grid_position: BCCRJG,JYLDIV NPWVTL,MRRHSH
-        row_background: '#f2f2f2'
-      event_bindings: {}
-    - type: Label
-      properties: {role: null, align: center, tooltip: '', border: '', foreground: '#ff3333',
-        visible: true, text: 'Very
-
-          Bad', font_size: null, font: '', spacing_above: small, icon_align: left,
-        spacing_below: small, italic: false, background: '', bold: true, underline: false,
-        icon: ''}
-      name: label_1
-      layout_properties: {grid_position: 'BCCRJG,JYLDIV NPWVTL,USYNMY', row_background: '#f2f2f2'}
-      event_bindings: {}
-    - type: Link
-      properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#fea441',
-        visible: true, text: '', font_size: 30, wrap_on: mobile, font: '', col_spacing: medium,
-        spacing_above: none, icon_align: left, col_widths: '', spacing_below: none,
-        italic: false, background: '', bold: false, underline: false, icon: 'fa:star'}
-      name: star_3
-      layout_properties:
-        col_widths: {}
-        grid_position: BCCRJG,JYLDIV CLQHZB,ATGWEG
-        row_background: '#f2f2f2'
-      event_bindings: {}
-    - type: Link
-      properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#ff8080',
-        visible: true, text: '', font_size: 30, wrap_on: mobile, font: '', col_spacing: medium,
-        spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-        italic: false, background: '', bold: false, underline: false, icon: 'fa:star'}
-      name: star_2
-      layout_properties:
-        col_widths: {}
-        grid_position: BCCRJG,JYLDIV CLQHZB,TLPZLQ
-        row_background: '#f2f2f2'
-      components: []
-      event_bindings: {}
-    - type: Link
-      properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '#ff3333',
-        visible: true, text: '', font_size: 30, wrap_on: mobile, font: '', col_spacing: medium,
-        spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-        italic: false, background: '', bold: false, underline: false, icon: 'fa:star'}
-      name: star_1
-      layout_properties: {grid_position: 'BCCRJG,JYLDIV CLQHZB,GMFJUG', row_background: '#f2f2f2'}
-      event_bindings: {}
-      components: []
     - type: ColumnPanel
       properties: {}
       name: column_panel_1
