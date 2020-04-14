@@ -22,11 +22,10 @@ UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
 
 STATUSES = {1:  "New",
             2:  "Matched with...",
-            3:  "Runner confirmed",
-            4:  "Agree Pickup Time",
-            5:  "Offerer: Pickup complete",
-            6:  "Runner: Pickup complete", 
-            7:  "Agree Dropoff Time",
-            8:  "Requester: Dropoff complete",
-            9:  "Runner: Dropoff complete",
-            10: "Delivery complete"}
+            3:  "Runner confirmed; Agree Pickup Time",
+            4:  "Offerer: Pickup complete",
+            5:  "Runner: Pickup complete", 
+            6:  "Pickup complete; Agree Dropoff Time",
+            7:  "Requester: Dropoff complete",
+            8:  "Runner: Dropoff complete",
+            9: "Delivery complete"}

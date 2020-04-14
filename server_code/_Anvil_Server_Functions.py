@@ -197,16 +197,15 @@ def save_user_setup(field, value):
 @anvil.server.callable
 def STATUSES():
     """ Returns allowable status descriptions other than 'New' or 'X matches found' """
-    return {'1':  "New",
-            '2':  "Matched with...",
-            '3':  "Runner confirmed",
-            '4':  "Agree Pickup Time",
-            '5':  "Offerer: Pickup complete",
-            '6':  "Runner: Pickup complete", 
-            '7':  "Agree Dropoff Time",
-            '8':  "Requester: Dropoff complete",
-            '9':  "Runner: Dropoff complete",
-            '10': "Delivery complete"}
+    return {1:  "New",
+            2:  "Matched with...",
+            3:  "Runner confirmed; Agree Pickup Time",
+            4:  "Offerer: Pickup complete",
+            5:  "Runner: Pickup complete", 
+            6:  "Pickup complete; Agree Dropoff Time",
+            7:  "Requester: Dropoff complete",
+            8:  "Runner: Dropoff complete",
+            9: "Delivery complete"}
 
     # NB If Requester confirms Dropoff complete, this must force: Delivery complete.
     # If Runner confirms Dropoff complete, this must force Runner: Pickup complete
