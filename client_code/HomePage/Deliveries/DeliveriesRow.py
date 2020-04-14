@@ -49,6 +49,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if self.item['approved_runner'] == user:
             self.items_picked_up.foreground = green
             self.items_picked_up.visible = True
+            if not self.items_picked_up.checked:
+                 self.items_picked_up.enabled = True
+            self.items_dropped_off.foreground = green
+            self.items_dropped_off.visible = True
+            if not self.items_dropped_off.checked:
+                 self.items_dropped_off.enabled = True
  
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
