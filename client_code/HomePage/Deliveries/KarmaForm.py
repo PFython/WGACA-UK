@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
+from ...Globals import yellow
 
 class KarmaForm(KarmaFormTemplate):
     def __init__(self, **properties):
@@ -15,20 +16,21 @@ class KarmaForm(KarmaFormTemplate):
         self.date.pick_time = True
         self.date.date = datetime.datetime.today()
         self.date.format = "D %b %Y"
+        self.rating = self.label_3.text
+        self.feedback.background = yellow
+        self.regarding.text = "Somebody"
 
-
-    def send_message(self, **event_args):
+    def submit_form(self, **event_args):
       """This method is called when the button is clicked"""
-      app_tables.feedback.add_row(from_user = anvil.users.get_user(),
-                                  date_time = datetime.datetime.now(),
-                                  category = self.category.selected_value,
-                                  title = self.title.text,
-                                  description = self.description.text,
-                                  telephone_ok = self.telephone_ok.checked,
-                                  email_ok = self.email_ok.checked,)
+      regarding_user = anvil.server.call('get_user_from_display_name', self.regarding.text)
+      app_tables.karma.add_row(from_user = anvil.users.get_user(),
+                               regarding_user = regarding_user,
+                               date_time = datetime.datetime.now(),
+                               feedback = self.feedback.text,
+                               rating = self.rating,)
       self.clear()
       self.parent.visible = False
-      alert("""Message sent.  Thanks for taking the time to reach out to us!""")
+      alert("""Thanks for taking the time to keep things going around and coming around!""")
 
     def cancel_button_click(self, **event_args):
       """This method is called when the button is clicked"""
@@ -49,8 +51,8 @@ class KarmaForm(KarmaFormTemplate):
       for star in stars:
           star.icon = 'fa:star-o'
       event_args['sender'].icon = 'fa:star'
-      rating = stars[event_args['sender']].text
-      print(rating)
+      self.rating = stars[event_args['sender']].text
+
 
 
 

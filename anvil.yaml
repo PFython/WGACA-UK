@@ -10,7 +10,7 @@ services:
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
     remember_me_days: 7, use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
-startup: {type: form, module: KarmaForm}
+startup: {type: form, module: HomePage.Deliveries.KarmaForm}
 package_name: WGACA_UK_DEV_TEST
 allow_embedding: true
 name: WGACA_UK_DEV_TEST
@@ -24,6 +24,36 @@ metadata: {logo_img: 'asset:WGACA Logo transparent.png', title: What Goes Around
     they''ve most needed.'}
 native_deps: {head_html: ''}
 db_schema:
+- name: Karma
+  id: 50478
+  python_name: karma
+  columns:
+    24oqCLC3ztc=:
+      name: rating
+      type: string
+      admin_ui: {order: 3, width: 200}
+    8XXOEz7zI0s=:
+      name: date_time
+      type: datetime
+      admin_ui: {order: 4, width: 200}
+    Hw0fT_uy99Y=:
+      name: feedback
+      type: string
+      admin_ui: {order: 2, width: 200}
+    Hwm0GFSIMXA=:
+      name: from_user
+      type: liveObject
+      backend: anvil.tables.Row
+      admin_ui: {order: 0, width: 200}
+      table_id: 48470
+    Y_7XmIuqKx8=:
+      name: regarding_user
+      type: liveObject
+      backend: anvil.tables.Row
+      admin_ui: {order: 1, width: 200}
+      table_id: 48470
+  access: {python_name: karma, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
+    table_id: 50478}
 - name: Feedback
   id: 49195
   python_name: feedback

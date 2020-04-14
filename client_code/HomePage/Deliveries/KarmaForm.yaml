@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"RCDKIN":29,"OUSGRF":3,"PUFNJG":16,"CSKONK":35,"BFHLNP":20}',
+    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"RCDKIN":29,"PUFNJG":16,"CSKONK":30,"BFHLNP":27}',
     spacing_below: small, background: '#cae4ff'}
   name: karma_form
   layout_properties: {slot: default}
@@ -12,41 +12,43 @@ components:
       icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
       underline: false, icon: ''}
     name: title_label
-    layout_properties: {grid_position: 'WSIZUU,CSKONK OICBRW,IUPLAD'}
+    layout_properties: {grid_position: 'WSIZUU,CSKONK OICBRW,IUPLAD', full_width_row: true}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: regarding
-    layout_properties: {grid_position: 'WSIZUU,CSKONK MOQFEG,LNUXWJ'}
+    layout_properties: {grid_position: 'WSIZUU,CSKONK MOQFEG,LNUXWJ', full_width_row: true}
   - type: DatePicker
     properties: {role: null, align: left, max_date: '', pick_time: false, tooltip: '',
       placeholder: '', border: '', enabled: false, foreground: '', visible: true,
       font_size: null, font: '', spacing_above: none, spacing_below: none, italic: false,
       date: '', min_date: '', background: '', bold: false, underline: false, format: ''}
     name: date
-    layout_properties: {grid_position: 'WSIZUU,BFHLNP'}
+    layout_properties: {grid_position: 'WSIZUU,BFHLNP', full_width_row: true}
     data_bindings: []
   - type: TextArea
-    properties: {role: null, align: left, height: 178.90533600000003, tooltip: '',
-      placeholder: 'Please DO NOT include any personal information here such as names,
-        house numbers or times of day etc.  This feedback will be PUBLIC and is intended
-        to help identify and deter scammers and selfish/malicious users, not feed
-        them!  If your feedback is negative, please be polite and factual and bear
-        in mind that the three parties involved in every delivery (Offerer, Requester,
-        and Runner) will almost certainly guess where the feedback comes from, so
-        be prepared to stand by your comments.  In particular, people will be interested
-        to know about any suspicious behaviour from the person you had contact with,
-        any evidence that items were damaged or stolen during transit, or substandard
-        in the first place (e.g. expired food), or packaged or transported dangerously
-        etc.  On the positive, if the person you had contact with was friendly, helpful,
-        kind, concerned etc. or was just happy to stay and chat, that''s worth mentioning
-        too.', border: '', enabled: true, foreground: '', visible: true, text: '',
-      font_size: 14, auto_expand: false, font: '', spacing_above: small, spacing_below: small,
-      italic: false, background: '', bold: false, underline: false}
+    properties: {role: null, align: left, height: 303.90533600000003, tooltip: '',
+      placeholder: 'This app relies on trust, goodwill and what you might call positive
+        karma, so your feedback will really help to ensure that "What goes around,
+        comes around".  However please DO NOT include any personal information here
+        such as names, house numbers or times of day etc.  This feedback will be PUBLIC
+        and is intended to help identify and deter scammers and selfish/malicious
+        users, not feed them!  If your feedback is negative, please be polite and
+        factual and bear in mind that the three parties involved in every delivery
+        (Offerer, Requester, and Runner) will almost certainly guess where the feedback
+        comes from, so be prepared to stand by your comments.  In particular, people
+        will be interested to know about any suspicious behaviour from the person
+        you had contact with, any evidence that items were damaged or stolen during
+        transit, or substandard in the first place (e.g. expired food), or packaged
+        or transported dangerously etc.  On the positive, if the person you had contact
+        with was friendly, helpful, kind, concerned etc. or was just happy to stay
+        and chat, that''s worth mentioning too.', border: '', enabled: true, foreground: '',
+      visible: true, text: '', font_size: 14, auto_expand: false, font: '', spacing_above: small,
+      spacing_below: small, italic: false, background: '', bold: false, underline: false}
     name: feedback
-    layout_properties: {grid_position: 'SCBIXT,FXXWTX'}
+    layout_properties: {grid_position: 'SCBIXT,FXXWTX', full_width_row: true}
     event_bindings: {change: description_change}
     data_bindings: []
   - type: Link
@@ -108,9 +110,7 @@ components:
     properties: {role: null, align: center, tooltip: '', border: '', foreground: '#5eb348',
       visible: true, text: 'Very
 
-        Good
-
-        ', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+        Good', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
       italic: false, background: '', bold: true, underline: false, icon: ''}
     name: label_5
     layout_properties:
@@ -120,10 +120,9 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: '#8ac97a',
-      visible: true, text: 'Good
-
-        ', font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-      italic: false, background: '', bold: true, underline: false, icon: ''}
+      visible: true, text: Good, font_size: null, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: false, background: '', bold: true, underline: false,
+      icon: ''}
     name: label_4
     layout_properties:
       col_widths: {}
@@ -163,21 +162,6 @@ components:
     name: label_1
     layout_properties: {grid_position: 'NNZXSS,RCDKIN CVOLVG,SYNTMM', row_background: '#f2f2f2'}
     event_bindings: {}
-  - type: FlowPanel
-    properties: {}
-    name: flow_panel_1
-    layout_properties:
-      col_widths: {}
-      grid_position: NNZXSS,OUSGRF
-    components:
-    - type: ColumnPanel
-      properties: {}
-      name: column_panel_2
-      layout_properties: {grid_position: 'BCCRJG,FTDXSW'}
-    - type: ColumnPanel
-      properties: {}
-      name: column_panel_1
-      layout_properties: {grid_position: 'BCCRJG,VKYDMW'}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
       foreground: '#ffff', visible: true, text: Cancel, font_size: null, font: '',
@@ -193,7 +177,7 @@ components:
       background: '#0080c0', bold: false, underline: false, icon: 'fa:chevron-right'}
     name: button_1
     layout_properties: {grid_position: 'NNZXSS,PUFNJG VVDSZC,UDPOFQ'}
-    event_bindings: {click: send_message}
+    event_bindings: {click: submit_form}
   event_bindings: {hide: save_input}
 container:
   type: HtmlTemplate

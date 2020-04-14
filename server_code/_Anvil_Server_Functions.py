@@ -27,27 +27,6 @@ def check_for_display_name(display_name):
     if display_name != None and display_name != "":
       return True if app_tables.users.get(display_name = display_name) else False
   
-def nominatim_scrape(address_list):
-    """Returns location & address data for supplied address list"""
-    nominatim = 'https://nominatim.openstreetmap.org/search?q='
-    nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
-    return  anvil.http.request(nominatim, json=True)
-
-def generate_route_url(new_match):
-    """Creates an Open Street Map url for pickup to dropoff route"""
-    user = new_match['offer']['user']
-    pickup = [user['street'], user['town'], user['county']]
-    user = new_match['request']['user']
-    dropoff = [user['street'], user['town'], user['county']]
-    pickup = nominatim_scrape(pickup)[0]
-    pickup = pickup['lat'] + "%2C" + pickup['lon']
-    dropoff = nominatim_scrape(dropoff)[0]
-    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
-    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
-    osm += pickup + "%3B" + dropoff
-#     print(osm)
-    return osm
-
 @anvil.server.callable
 def generate_matches():
     """
@@ -72,6 +51,21 @@ def generate_matches():
                         offer['matches'] = (offer['matches'] or []) + [new_match]
                     if new_match not in (request['matches'] or []):
                         request['matches'] = (request['matches'] or []) + [new_match]
+
+def generate_route_url(new_match):
+    """Creates an Open Street Map url for pickup to dropoff route"""
+    user = new_match['offer']['user']
+    pickup = [user['street'], user['town'], user['county']]
+    user = new_match['request']['user']
+    dropoff = [user['street'], user['town'], user['county']]
+    pickup = nominatim_scrape(pickup)[0]
+    pickup = pickup['lat'] + "%2C" + pickup['lon']
+    dropoff = nominatim_scrape(dropoff)[0]
+    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
+    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
+    osm += pickup + "%3B" + dropoff
+#     print(osm)
+    return osm
     
 @anvil.server.callable
 def _generate_route_url_for_all_matches():
@@ -138,6 +132,12 @@ def get_user_from_display_name(display_name):
     """ Returns a User (row) object based on display_name string """
     return app_tables.users.get(display_name=display_name)
 
+def nominatim_scrape(address_list):
+    """Returns location & address data for supplied address list"""
+    nominatim = 'https://nominatim.openstreetmap.org/search?q='
+    nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
+    return  anvil.http.request(nominatim, json=True)
+  
 @anvil.server.callable
 def remove_orphan_matches(request_or_offer):
     """ Deletes a Match where the child Request or Offer has just been deleted """
