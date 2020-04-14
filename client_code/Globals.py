@@ -20,12 +20,12 @@ ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
 UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
 
-STATUSES = {1:  "New",
-            2:  "Matched with...",
-            3:  "Runner confirmed; Agree Pickup Time",
-            4:  "Offerer: Pickup complete",
-            5:  "Runner: Pickup complete", 
-            6:  "Pickup complete; Agree Dropoff Time",
-            7:  "Requester: Dropoff complete",
-            8:  "Runner: Dropoff complete",
-            9: "Delivery complete"}
+STATUSES = {'1':  "New",
+            '2':  "Matched with...",
+            '3':  "Runner confirmed; Agree Pickup Time",
+            '4':  "Offerer: Pickup complete",
+            '5':  "Runner: Pickup complete", 
+            '6':  "Pickup complete; Agree Dropoff Time",
+            '7':  "Requester: Dropoff complete",
+            '8':  "Runner: Dropoff complete",
+            '9': "Delivery complete"}
