@@ -44,9 +44,11 @@ components:
         transit, or substandard in the first place (e.g. expired food), or packaged
         or transported dangerously etc.  On the positive, if the person you had contact
         with was friendly, helpful, kind, concerned etc. or was just happy to stay
-        and chat, that''s worth mentioning too.', border: '', enabled: true, foreground: '',
-      visible: true, text: '', font_size: 14, auto_expand: false, font: '', spacing_above: small,
-      spacing_below: small, italic: false, background: '', bold: false, underline: false}
+        and chat, that''s worth mentioning too.  Finally, don''t worry about stating
+        your role in this delivery or their role - the app will add that automatically.',
+      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
+      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false}
     name: feedback
     layout_properties: {grid_position: 'SCBIXT,FXXWTX', full_width_row: true}
     event_bindings: {change: description_change}
