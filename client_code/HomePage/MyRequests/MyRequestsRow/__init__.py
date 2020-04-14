@@ -10,6 +10,7 @@ class MyRequestsRow(MyRequestsRowTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.status.text = STATUSES[self.item['status_code']]    
 
     # Any code you write here will run when the form opens.
 

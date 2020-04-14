@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-from ...Globals import ITEM_HEIRARCHY, UNITS_OF_MEASURE
+from ...Globals import ITEM_HEIRARCHY, UNITS_OF_MEASURE, STATUSES
 
 class MyRequests(MyRequestsTemplate):
     item_choices = ITEM_HEIRARCHY
@@ -41,8 +41,8 @@ class MyRequests(MyRequestsTemplate):
             for match in matches:
                 if match['request'] == request:
                     match_count += 1
-            if match_count > 0 and request['status'] not in anvil.server.call("STATUSES"):
-                request['status'] = f"Matched with {match_count} offers"
+            if match_count > 0 and int(offer['status_code']) in [1,2,3]:                
+                offer['status'] = f"Matched with {match_count} requests"
         self.refresh_data_bindings()
         
     def add_request_click(self, **event_args):
