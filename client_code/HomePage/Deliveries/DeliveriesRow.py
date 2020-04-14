@@ -5,6 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .KarmaForm import KarmaForm
 
 from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -21,18 +22,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
-
-        if self.item['request']['user'] == user:
-            self.items_dropped_off.foreground = green
-            self.label_1.text  = "My Request"
-            self.label_1.foreground = green
-            self.label_4.foreground = green
-            self.dropoff.foreground = green
-            self.dropoff.icon = 'fa:home'
-            self.request.foreground = green
-            self.request_notes.foreground = green
-            self.items_dropped_off.foreground = green
-            self.items_dropped_off.visible = True
 
         if self.item['offer']['user'] == user:
             self.items_picked_up.foreground = green
@@ -55,7 +44,46 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.items_dropped_off.visible = True
             if not self.items_dropped_off.checked:
                  self.items_dropped_off.enabled = True
- 
+                
+        if self.item['request']['user'] == user:
+            self.items_dropped_off.foreground = green
+            self.label_1.text  = "My Request"
+            self.label_1.foreground = green
+            self.label_4.foreground = green
+            self.dropoff.foreground = green
+            self.dropoff.icon = 'fa:home'
+            self.request.foreground = green
+            self.request_notes.foreground = green
+            self.items_dropped_off.foreground = green
+            self.items_dropped_off.visible = True
+     
+    def click_update_status(self):
+        """ "New",
+            "Matched with...",
+            "Runner confirmed",
+            "Agree Pickup Time",
+            "Offerer: Pickup complete",
+            "Runner: Pickup complete", 
+            "Agree Dropoff Time",
+            "Requester: Dropoff complete",
+            "Runner: Dropoff complete",
+            "Delivery complete" """      
+         
+        user = anvil.users.get_user()
+        form = KarmaForm()
+        if self.item['offer']['user'] == user:
+            form.role = "Offerer"
+            form.regarding = self.item['approved_runner']['display_name']
+            form.regarding_role = "Runner"
+
+        if self.item['approved_runner'] == user:
+            form.role = "Runner"
+            
+        if self.item['request']['user'] == user:
+            form.role = "Requester"
+            form.regarding = self.item['approved_runner']['display_name']
+            form.regarding_role = "Runner"
+
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
         user=anvil.users.get_user()
