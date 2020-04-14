@@ -153,9 +153,10 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: true, text: Items Picked Up, font_size: null, font: '',
-      spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
-      checked: false, underline: false}
+      foreground: '', visible: false, text: 'Please arrange pick-up time with Offerer,
+        then click here to confirm you''ve received the item(s).', font_size: null,
+      font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
+      bold: false, checked: false, underline: false}
     name: items_picked_up
     layout_properties:
       col_widths: {}
@@ -164,9 +165,10 @@ components:
     - {property: checked, code: 'self.item[''offer_collected'']', writeback: true}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: true, text: Items Dropped Off, font_size: null, font: '',
-      spacing_above: none, spacing_below: none, italic: false, background: '', bold: false,
-      checked: false, underline: false}
+      foreground: '', visible: false, text: 'Please arrange drop-off  time with Requester,
+        then click here to confirm you''ve delivered the item(s).', font_size: null,
+      font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
+      bold: false, checked: false, underline: false}
     name: items_dropped_off
     layout_properties:
       col_widths: {}
