@@ -43,7 +43,7 @@ def generate_matches():
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
 #     print("Generating Matches...")
-    statuses = anvil.server.call("STATUSES").items()
+    statuses = anvil.server.call("STATUSES").values()
     for request in (x for x in requests if x['status'] not in statuses):
         for offer in (x for x in offers if x['status'] not in statuses):
             if request['product_category'] in offer['product_key']:
@@ -158,12 +158,12 @@ def remove_orphan_matches(request_or_offer):
         pass
 
 @anvil.server.callable
-def save_to_matches_database(match, runner, messages, status):
+def save_to_matches_database(match, runner, messages, status_code):
     """ Returns 'Duplicate' if product_category request already exists"""
     user = anvil.users.get_user()
     if user is None:
         return
-    match.update(approved_runner = runner, messages_dict = messages, status = status)
+    match.update(approved_runner = runner, messages_dict = messages, status = STATUSES()[int(status_code)])
     
 @anvil.server.callable
 def save_to_offers_database(product_key, units, expiry_date, notes):
@@ -197,16 +197,16 @@ def save_user_setup(field, value):
 @anvil.server.callable
 def STATUSES():
     """ Returns allowable status descriptions other than 'New' or 'X matches found' """
-    return {1:  "New",
-            2:  "Matched with...",
-            3:  "Runner confirmed",
-            4:  "Agree Pickup Time",
-            5:  "Offerer: Pickup complete",
-            6:  "Runner: Pickup complete", 
-            7:  "Agree Dropoff Time",
-            8:  "Requester: Dropoff complete",
-            9:  "Runner: Dropoff complete",
-            10: "Delivery complete"}
+    return {'1':  "New",
+            '2':  "Matched with...",
+            '3':  "Runner confirmed",
+            '4':  "Agree Pickup Time",
+            '5':  "Offerer: Pickup complete",
+            '6':  "Runner: Pickup complete", 
+            '7':  "Agree Dropoff Time",
+            '8':  "Requester: Dropoff complete",
+            '9':  "Runner: Dropoff complete",
+            '10': "Delivery complete"}
 
     # NB If Requester confirms Dropoff complete, this must force: Delivery complete.
     # If Runner confirms Dropoff complete, this must force Runner: Pickup complete
@@ -223,18 +223,18 @@ def terms_accepted(boolean_value):
     user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
-def update_offers_status(offer, status):
+def update_offers_status(offer, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    offer.update(status = status)
+    offer.update(status = STATUSES()[int(status_code)])
     
 @anvil.server.callable
-def update_requests_status(request, status):
+def update_requests_status(request, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    request.update(status = status)
+    request.update(status = STATUSES()[int(status_code)])
     
 @anvil.server.callable
 def volunteer_as_runner(match, boolean_value):

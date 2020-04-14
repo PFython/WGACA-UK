@@ -7,7 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-from ....Globals import LOCALE, ADDRESSES, green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from ....Globals import LOCALE, ADDRESSES, STATUSES
+from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 class ConfirmMatch(ConfirmMatchTemplate):
 
@@ -104,9 +105,9 @@ class ConfirmMatch(ConfirmMatchTemplate):
       
     def update_databases(self, runner, messages):
         """ Sets Approved Runner, updates Matches/Offers/Requests, and refreshes the view """
-        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, "Awaiting Pickup")
-        anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], "Awaiting Pickup")
-        anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], "Awaiting Pickup")
+        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, 3)
+        anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], 3)
+        anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], 3)
         anvil.server.call('generate_matches')
         self.parent.parent.parent.refresh_data_bindings()      
       
