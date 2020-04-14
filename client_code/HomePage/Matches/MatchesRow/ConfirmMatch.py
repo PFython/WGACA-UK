@@ -49,7 +49,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
     def exit(self, **event_args):
         """This method is called when the button is clicked"""
         self.parent.parent.parent.show_myself()
-        self.parent.parent.visible = False
+#         self.parent.parent.visible = False
         self.clear()
         self.visible = False
 
@@ -60,7 +60,10 @@ class ConfirmMatch(ConfirmMatchTemplate):
         self.update_shared_with_fields(user, runner)
         messages = self.create_messages_dict(user)
         self.update_databases(runner, messages)
-        self.exit()
+        self.parent.parent.parent.show_myself()
+        self.parent.parent.visible = False
+        self.clear()
+        self.visible = False
         
     def add_remove_sharing(self, user, dictionary, recipient):
         """ Adds or Removes a user in the shared_with column """

@@ -16,6 +16,13 @@ class MatchesRow(MatchesRowTemplate):
     self.show_route.url = self.item['route_url']
     self.show_route.foreground = green
     self.volunteers.bold = True
+    self.dropoff.text = self.item['request']['user']['street']+"\n"+self.item['request']['user']['town']
+    self.pickup.text = self.item['offer']['user']['street']+"\n"+self.item['offer']['user']['town']
+    self.offer_notes.text = self.item['offer']['notes']
+    self.offer.text = self.item['offer']['product_key']+" … "+str(self.item['offer']['units'])
+    self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
+    self.request.text = self.item['request']['product_category']
+    self.request_notes.text = self.item['request']['notes']
     
   def volunteer_toggle_status(self, **event_args):
       """This method is called when the Volunteer Toggle CheckBox is shown on the screen"""
@@ -25,7 +32,6 @@ class MatchesRow(MatchesRowTemplate):
       else:
           event_args['sender'].checked = False
           event_args['sender'].text = "Tick to volunteer"
-
 
   def volunteer_toggle_change(self, **event_args):
     """This method is called when this Volunteer Toggle checkbox is checked or unchecked"""
@@ -39,7 +45,7 @@ class MatchesRow(MatchesRowTemplate):
   def set_volunteer_colour(self):
       self.volunteers.text = str(len(self.item['available_runners']))+" volunteer(s)."
       self.volunteers.foreground = red if self.volunteers.text.startswith("0 ") else green
-      self.volunteers.icon = "fa:heart o"if self.volunteers.text.startswith("0 ") else "fa:heart"
+      self.volunteers.icon = "fa:heart o"if self.volunteers.text.startswith("0 ") else "fa:heart"      
     
   def show_myself(self, **event_args):
       """This method is called when the data row panel is shown on the screen"""
