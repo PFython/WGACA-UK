@@ -118,9 +118,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def change_status(self, new_status):
         """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
         
-        anvil.server.call("save_to_matches_database", self.item, runner, messages, '3')
-        anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], '3')
-        anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], '3')
+#         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
+#         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
+#         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
+        anvil.server.call('update_status_codes', self.item, new_status)
         # 3 in STATUSES = "Runner confirmed"
         anvil.server.call('generate_matches')
         self.parent.parent.parent.refresh_data_bindings()   
