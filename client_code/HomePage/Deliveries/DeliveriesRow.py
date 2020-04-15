@@ -125,12 +125,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.make_status_active if role in ("Offerer", "Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
-            self.click('4')
+            return('4')
         if role == "Offerer+Runner":
             self.status.text = "You've picked up the item(s).  Please agree delivery with Requester."
         if role == "Runner" or role == "Requester+Runner":
             self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
-            self.click('5')
+            return('5')
         if role == "Requester" :
           self.status.text = "Item(s) are waiting to be picked up."        
 
@@ -141,10 +141,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Items have been picked up."
         if role == "Runner":
             self.status.text = "Please confirm you've picked up item(s) from the Offerer."
-            self.click('6')
+            return('6')
         if role == "Requester+Runner":
             self.status.text = "Items have been picked up."
-            self.click('9')
+            return('9')
         if role == "Requester":
             self.status.text = "Awaiting confirmation of pick-up."
 
@@ -153,7 +153,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.make_status_active if role in ("Offerer") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Please confirm the Runner has picked up item(s) from you."
-            self.click('6')
+            return('6')
         if role == "Runner":
             self.status.text = "Items have been picked up.  Please agree delivery with Requester."
         if role == "Requester+Runner":
@@ -167,12 +167,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "You've given your item(s) to the Runner.  Thank you!"
         if role == "Runner" or role == "Offerer+Runner":
             self.status.text = "You've picked up the item(s).  Please click to confirm you've delivered them."
-            self.click('8')
+            return('8')
         if role == "Requester+Runner":
             self.status.text = "Items picked up, delivery complete!"
         if role == "Requester":
             self.status.text = "Runner has your item(s).  Please click to confirm once they've been delivered."
-            self.click('7')
+            return('7')
         
     def status7(self, role, option = "display"):
         self.make_status_active if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
@@ -180,7 +180,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Awaiting confirmation of delivery"
         if role == "Runner" or role == "Offerer+Runner":
             self.status.text = "Please confirm you've dropped the item(s) off with the Requester."
-            self.click('9')
+            return('9')
         if role == "Requester":
             self.status.text = "Items dropped off, delivery complete!"
         if role == "Requester+Runner":
@@ -195,7 +195,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.status.text = "Please click to give feedback on the Requester"
         if role == "Requester":
             self.status.text = "Please confirm item(s) have been dropped off by Runner."
-            self.click('9')
+            return('9')
         if role == "Requester+Runner":
             self.status.text = "Items picked up, delivery complete!"
     
@@ -207,11 +207,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
         """
         Progress to next status_code where allowed, then trigger KarmaForm for feedback.
         show_deliveries_row already handles whether the checkbox is enabled.
+        Update Matches, Offers, Requests tables
         """
-        self.get_status_function(self.get_user_role(), "click")
-
-    def change_status(self, new_status):
-        """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""        
+        new_status = self.get_status_function(self.get_user_role(), "click")   
 #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
 #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
 #         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
