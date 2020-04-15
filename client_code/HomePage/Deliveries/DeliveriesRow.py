@@ -21,6 +21,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.items_picked_up.visible = False
         self.items_dropped_off.visible = False
 
+    def populate_addresses(self):
+        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
+        user=anvil.users.get_user()
+        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
+            address.text = self.item[table]['user']['display_name']+"\n"
+            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
+                address.text += str(self.item[table]['user']['house_number'])+" "
+            address.text += self.item[table]['user']['street']+"\n"
+            address.text += self.item[table]['user']['town']+"\n"
+            address.text += self.item[table]['user']['county']+"\n"
+ 
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
@@ -45,51 +56,38 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.dropoff.icon = 'fa:home'
             self.request.foreground = green
             self.request_notes.foreground = green
-
-    def populate_addresses(self):
-        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
-        user=anvil.users.get_user()
-        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
-            address.text = self.item[table]['user']['display_name']+"\n"
-            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
-                address.text += str(self.item[table]['user']['house_number'])+" "
-            address.text += self.item[table]['user']['street']+"\n"
-            address.text += self.item[table]['user']['town']+"\n"
-            address.text += self.item[table]['user']['county']+"\n"
             
-    def reveal_update_status(self):
-        """Display and enable the appropriate status box and message"""
-        if self.item['offer']['user'] == user:
-          
-        if self.item['approved_runner'] == user:
-          
-        if self.item['request']['user'] == user:
-          
-    def click_update_status(self):
-        """Define user's role and the name/role of the person for use in the Karma Form"""      
-        user = anvil.users.get_user()
-        form = KarmaForm()
-        if self.item['offer']['user'] == user:
-            form.role = "Offerer"
-            form.regarding = self.item['approved_runner']['display_name']
-            form.regarding_role = "Runner"
-
-        if self.item['approved_runner'] == user:
-            form.role = "Runner"
-            if self.item['status_code'] in ['3','4']: # i.e. Runner confirmed or Offerer: Pickup complete
-                form.regarding = self.item['offer']['user']['display_name']
-                form.regarding = "Offerer"
-            else:
-                form.regarding = self.item['request']['user']['display_name']
-                form.regarding = "Requester"                
-                
-        if self.item['request']['user'] == user:
-            form.role = "Requester"
-            form.regarding = self.item['approved_runner']['display_name']
-            form.regarding_role = "Runner"
-            
-        self.add_component(form)
-
+    def show_offer(self):
+        self.offer.text = self.item['offer']['product_key'] + " … "
+        self.offer.text += str(self.item['offer']['units'])
+        expiry = self.item['offer']['expiry_date']
+        self.offer_expiry.text = expiry.strftime('%d %b %Y')
+        if expiry <= datetime.datetime.today():
+            self.offer_expiry.foreground = red
+        self.offer_notes.text = self.item['offer']['notes']
+        expiry = self.item['offer']['expiry_date']
+        self.offer_expiry.text = expiry.strftime('%d %b %Y')
+        if expiry <= datetime.datetime.today():
+              self.offer_expiry.foreground = red
+        
+    def show_request(self):
+        self.request.text = self.item['request']['product_category']
+        self.request_notes.text = self.item['request']['notes']
+       
+    def show_runner(self):
+        runner = self.item['approved_runner']['display_name']
+        self.runner.text = "Approved Runner: " + runner
+        if runner == anvil.users.get_user()['display_name']:
+            self.runner.foreground = green
+      
+    def show_deliveries_row(self, **event_args):
+        """This method is called when the DeliveriesRow is shown on the screen"""
+        self.show_offer()
+        self.show_request()
+        self.show_runner()
+        self.show_myself()
+        self.populate_addresses()
+        self.show_messages()        
 
     def show_messages(self):
         user = anvil.users.get_user()
@@ -125,39 +123,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
                 message.enabled = False
                 message.background = grey
     
-    def show_offer(self):
-        self.offer.text = self.item['offer']['product_key'] + " … "
-        self.offer.text += str(self.item['offer']['units'])
-        expiry = self.item['offer']['expiry_date']
-        self.offer_expiry.text = expiry.strftime('%d %b %Y')
-        if expiry <= datetime.datetime.today():
-            self.offer_expiry.foreground = red
-        self.offer_notes.text = self.item['offer']['notes']
-        expiry = self.item['offer']['expiry_date']
-        self.offer_expiry.text = expiry.strftime('%d %b %Y')
-        if expiry <= datetime.datetime.today():
-              self.offer_expiry.foreground = red
-        
-    def show_request(self):
-        self.request.text = self.item['request']['product_category']
-        self.request_notes.text = self.item['request']['notes']
-       
-    def show_runner(self):
-        runner = self.item['approved_runner']['display_name']
-        self.runner.text = "Approved Runner: " + runner
-        if runner == anvil.users.get_user()['display_name']:
-            self.runner.foreground = green
-            # TODO: Buttons to send Runner messages to Offerer and Requester      
-      
-    def show_deliveries_row(self, **event_args):
-        """This method is called when the DeliveriesRow is shown on the screen"""
-        self.show_offer()
-        self.show_request()
-        self.show_runner()
-        self.show_myself()
-        self.populate_addresses()
-        self.show_messages()        
-
     def click_show_message(self, **event_args):
         """This method is called when the Button is shown on the screen"""
         textbox = {self.message1: self.message1_text, self.message2: self.message2_text}[event_args['sender']]
@@ -167,7 +132,43 @@ class DeliveriesRow(DeliveriesRowTemplate):
             event_args['sender'].icon = 'fa:caret-up'
         else:
             event_args['sender'].icon = 'fa:caret-down'       
- 
+
+
+    def user_is_offerer(self):
+        """Offerer"""
+      
+    def user_is_runner(self):
+      
+    def user_is_requester(self):
+      
+          
+    def click_update_status(self):
+        """Define user's role and the name/role of the person for use in the Karma Form"""      
+        user = anvil.users.get_user()
+        form = KarmaForm()
+        if self.item['offer']['user'] == user:
+            self.user_is_offerer()
+            form.role = "Offerer"
+            form.regarding = self.item['approved_runner']['display_name']
+            form.regarding_role = "Runner"
+
+        if self.item['approved_runner'] == user:
+            self.user_is_runner()
+            form.role = "Runner"
+            if self.item['status_code'] in ['3','4']: # i.e. Runner confirmed or Offerer: Pickup complete
+                form.regarding = self.item['offer']['user']['display_name']
+                form.regarding = "Offerer"
+            else:
+                form.regarding = self.item['request']['user']['display_name']
+                form.regarding = "Requester"                
+                
+        if self.item['request']['user'] == user:
+            self.user_is_requester()
+            form.role = "Requester"
+            form.regarding = self.item['approved_runner']['display_name']
+            form.regarding_role = "Runner"
+            
+        self.add_component(form)
 
 
 
