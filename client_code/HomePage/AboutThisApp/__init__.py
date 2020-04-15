@@ -6,16 +6,12 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .ContactUs import ContactUs
-from .._DeveloperTools import _DeveloperTools
 
 class AboutThisApp(AboutThisAppTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     # Any code you write here will run when the form opens.
-    if anvil.users.get_user():
-      if anvil.users.get_user()['admin']:
-        self.about_this_app.add_component(_DeveloperTools())
 
   def contact_us_click(self, **event_args):
       """This method is called when the button is clicked"""

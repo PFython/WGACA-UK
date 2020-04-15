@@ -1,10 +1,10 @@
 container:
   type: ColumnPanel
   event_bindings: {}
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"OWXXHZ":25,"BBBMTD":20,"WEIXRQ":15}'}
 components:
 - type: Label
-  properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+  properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
     visible: true, text: Database Tools, font_size: null, font: '', spacing_above: small,
     icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
     underline: false, icon: ''}
@@ -18,5 +18,20 @@ components:
   name: button_1
   layout_properties: {grid_position: 'CIEPBC,OWXXHZ'}
   event_bindings: {click: click_OSM_route_generator}
+- type: Button
+  properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: '',
+    visible: true, text: 'Limit status code of all Matches to:', font_size: null,
+    font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+    background: '', bold: false, underline: false, icon: ''}
+  name: limit_status
+  layout_properties:
+    col_widths: {}
+    grid_position: CIEPBC,BBBMTD
+  event_bindings: {click: click_limit_status_codes}
+- type: TextBox
+  properties: {}
+  name: limit_amount
+  layout_properties: {grid_position: 'CIEPBC,WEIXRQ'}
+  data_bindings: []
 is_package: false
 custom_component: false

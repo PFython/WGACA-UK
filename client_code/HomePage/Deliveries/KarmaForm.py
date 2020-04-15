@@ -20,16 +20,20 @@ class KarmaForm(KarmaFormTemplate):
         self.feedback.background = yellow
 #         self.regarding.text = "Putney Pete"
 #         self.regarding_role = "Offerer"
+        print(self.regarding.text)
+#         , self.regarding_role, self.user, self.user_role )
         
     def add_footer(self):
       """Adds details of the person giving feedback and the person who it's about"""
       footer = f"\n[{self.regarding.text} was the {self.regarding_role}\n"
-      footer += f"{anvil.server.call('get_user_from_display_name',anvil.users.get_user())} was the {self.role}]"
+      footer += f"{self.user} was the {self.role}]"
+      return footer
     
     def submit_form(self, **event_args):
       """This method is called when the button is clicked"""
       regarding_user = anvil.server.call('get_user_from_display_name', self.regarding.text)
-      kwargs = {'from_user': anvil.users.get_user(),
+      user = anvil.server.call('get_user_from_display_name', self.user.text)
+      kwargs = {'from_user': user,
                 'regarding_user': regarding_user,
                 'date_time': datetime.datetime.now(),
                 'feedback': self.feedback.text + self.add_footer(),
@@ -42,7 +46,7 @@ class KarmaForm(KarmaFormTemplate):
     def cancel_button_click(self, **event_args):
       """This method is called when the button is clicked"""
       self.clear()
-      self.parent.visible = False
+#       self.parent.visible = False
 
     def description_change(self, **event_args):
       """This method is called when the text in this text area is edited"""

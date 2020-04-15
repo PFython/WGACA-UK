@@ -149,7 +149,7 @@ components:
     spacing_below: small, italic: false, background: '', bold: false, underline: false,
     icon: ''}
   name: title_bar
-  layout_properties: {grid_position: 'KFFCHA,UHPHIP', full_width_row: false}
+  layout_properties: {grid_position: 'APILBW,TDGLNE', full_width_row: false}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,

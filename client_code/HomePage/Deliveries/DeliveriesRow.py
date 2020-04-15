@@ -150,8 +150,11 @@ class DeliveriesRow(DeliveriesRowTemplate):
       
     def create_karma_form(self, user_role, regarding, regarding_role):
           form = KarmaForm()
-          form.user = anvil.users.get_user()
-          self.add_component(form)
+          form.user.text = anvil.users.get_user()['display_name']
+          form.user_role.text = user_role
+          form.regarding.text = regarding
+          form.regarding_role.text = regarding_role
+          self.parent.parent.add_component(form)
           
     def click_update_status(self, **event_args):
         """Define user's role and the name/role of the person for use in the Karma Form"""

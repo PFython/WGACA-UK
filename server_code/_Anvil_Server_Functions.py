@@ -121,6 +121,10 @@ def get_my_matches():
         # TODO: Filter results by proximity
 
 @anvil.server.callable
+def _get_all_matches():
+    return app_tables.matches.search(tables.order_by("status_code"))
+
+@anvil.server.callable
 def get_my_offers():
     """ Returns rows from the Offers database for a given user """
     user = anvil.users.get_user()

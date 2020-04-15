@@ -14,6 +14,7 @@ from .UserSetup import UserSetup
 from .TermsOfUse import TermsOfUse
 from .AboutThisApp import AboutThisApp
 from .AboutThisApp.News import News
+from ._DeveloperTools import _DeveloperTools
 
 from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -37,7 +38,14 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
         self.check_permissions()
-        self.check_updates()        
+        self.check_updates() 
+        self.check_for_boss()
+        
+    def check_for_boss(self):
+#         if anvil.users.get_user():
+        if anvil.users.get_user()['admin']:
+            print("A very good day to you, Mr Administrator...")
+            self.navigation_bar.add_component(_DeveloperTools())
         
     def check_updates(self):
         """Checks if user has seen latest update and creates an alert if not"""
