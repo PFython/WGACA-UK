@@ -37,7 +37,7 @@ class HomePage(HomePageTemplate):
                             self.menu_my_details: 'My Details'}.items():
             button.tag = tag
         self.column_panel_1.add_component(AboutThisApp())
-        self.highlight_selected_menu(self.menu_about)
+#         self.highlight_selected_menu(self.menu_about)
         self.check_permissions()
         self.check_updates() 
         self.check_for_boss()
