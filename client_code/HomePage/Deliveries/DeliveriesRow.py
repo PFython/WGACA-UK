@@ -30,9 +30,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.populate_addresses()
         status_code = self.item['status_code']
         user = anvil.users.get_user()
-        if status_code in ['3'] and self.item['approved_runner'] != user:
+        if status_code in ['3', '5']:
             self.show_offerer_status()
-        elif status_code in ['3', '4', '6', '7'] and self.item['request']['user'] != user:
+        elif status_code in ['4', '6', '7'] and self.item['request']['user'] != user:
             self.show_runner_status()
         elif status_code in ['6', '8']:
             self.show_requester_status()
@@ -160,10 +160,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def click_update_status(self, **event_args):
         """Define user's role and the name/role of the person for use in the Karma Form"""
         user = anvil.users.get_user()
-        if self.item['offer']['user'] == user and self.item['status_code'] == '3':
+        if self.item['offer']['user'] == user:
         # Offerer can confirm pickup complete and submit KarmaForm for Runner
-            self.change_status('4')
-            self.create_karma_form("Offerer", self.item['approved_runner']['display_name'], "Runner")
+            if  self.item['status_code'] == '3':        
+                self.change_status('4')
+                if user == self.item['approved_runner']:
+                    self.change_status('6')
+                else:
+                    self.create_karma_form("Offerer", self.item['approved_runner']['display_name'], "Runner")
+            if self.item['status_code'] == '5':  
+                self.change_status('6')
+                self.create_karma_form("Offerer", self.item['approved_runner']['display_name'], "Runner")
         if self.item['approved_runner'] == user:
         # Runner can confirm pickup complete and submit KarmaForm for Offerer
         # Runner can confirm dropoff complete and submit KarmaForm for Requester
