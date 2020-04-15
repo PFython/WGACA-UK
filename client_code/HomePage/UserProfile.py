@@ -20,6 +20,7 @@ class UserProfile(UserProfileTemplate):
         self.terms_accepted.text = "You accepted this Privacy Notice & Terms of Use on "
         self.terms_accepted.text += anvil.users.get_user()['terms_accepted'].strftime('%d %b %Y')
         self.show_my_details()
+        self.help_box.text = self.help0.tag
         
     def show_my_details(self, **event_args):
         """ Populates User Profile page from User database """

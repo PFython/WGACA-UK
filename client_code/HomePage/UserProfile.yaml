@@ -358,8 +358,7 @@ components:
         background: '', bold: false, underline: false}
       name: telephone
       layout_properties: {grid_position: 'UFWNIH,FHZVID'}
-      data_bindings:
-      - {property: text, code: 'self.item[''text'']', writeback: true}
+      data_bindings: []
       event_bindings: {change: field_change, show: field_change, pressed_enter: save_optional_field,
         lost_focus: save_optional_field}
     - type: Link
@@ -394,11 +393,10 @@ components:
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 12,
       auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
-    name: help_text
+    name: help_box
     layout_properties: {grid_position: 'GFYZTP,NUAPNC'}
     event_bindings: {}
-    data_bindings:
-    - {property: text, code: self.help0.tag, writeback: true}
+    data_bindings: []
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: medium, col_widths: '{}',
