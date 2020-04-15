@@ -29,6 +29,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_myself()
         self.populate_addresses()
         status_code = self.item['status_code']
+        user = anvil.users.get_user()
         if status_code in ['3'] and self.item['approved_runner'] != user:
             self.show_offerer_status()
         elif status_code in ['3', '4', '6', '7'] and self.item['request']['user'] != user:
