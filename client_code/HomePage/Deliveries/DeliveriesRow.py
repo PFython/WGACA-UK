@@ -30,12 +30,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.populate_addresses()
         status_code = self.item['status_code']
         user = anvil.users.get_user()
-        if status_code in ['3', '5']:
-            self.show_offerer_status()
-        elif status_code in ['4', '6', '7'] and self.item['approved_runner'] == user:
-            self.show_runner_status()
-        elif status_code in ['6', '8']:
-            self.show_requester_status()
+        lookup = {}
+        if self.item['offer']['user'] == user:
+            lookup = {'3': OFFER3, '5': OFFER5}
+        elif self.item['approved_runner'] == user:
+            lookup = {'3': RUNNER3, '4': RUNNER4, '6': RUNNER6, '7': RUNNER7}
+        elif self.item['request']['user'] == user:
+            lookup = {'6': REQUEST6, '7': REQUEST7, '8': REQUEST8}
+        lookup[status_code]() if status_code in lookup else OTHER()
         self.show_messages() 
             
     def show_offer(self):
