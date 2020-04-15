@@ -76,6 +76,10 @@ db_schema:
       name: developer_notes
       type: string
       admin_ui: {order: 4.5, width: 439.011364}
+    Xh02_yjigh8=:
+      name: priority
+      type: number
+      admin_ui: {order: 10, width: 200}
     gT4KiE2JZZ8=:
       name: email_ok
       type: bool
@@ -111,7 +115,7 @@ db_schema:
     QYW+Cp6PbUE=:
       name: offer_collected
       type: bool
-      admin_ui: {order: 4, width: 50}
+      admin_ui: {order: 4, width: 60.333665999999994}
     EaU1GoL_KEE=:
       name: feedback_from_runner
       type: string
@@ -149,7 +153,7 @@ db_schema:
     cN9mqqVsiOo=:
       name: status_code
       type: string
-      admin_ui: {order: 9, width: 201.666666}
+      admin_ui: {order: 9, width: 94.333666}
     71gSuTeJpNg=:
       name: feedback_from_giver
       type: string
