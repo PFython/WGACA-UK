@@ -37,7 +37,8 @@ class ConfirmMatch(ConfirmMatchTemplate):
                 self.message_to_runner.visible = True
                 self.telephone_to_runner.visible = True
                 self.email_to_runner.visible = True
-                self.postcode_to_runner.visible = True                
+                self.postcode_to_runner.visible = True
+        self.confirm_match_button.enabled = self.runner_dropdown.selected_value in self.runner_dropdown.items
         self.refresh_data_bindings()
 
     def exit(self, **event_args):

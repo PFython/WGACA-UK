@@ -128,7 +128,7 @@ components:
       grid_position: QPHLQJ,WYIQKS
     event_bindings: {click: confirm_match_button_click}
     data_bindings:
-    - {property: enabled, code: self.runner_dropdown.selected_value in self.runner_dropdown.items}
+    - {property: enabled, code: ''}
   event_bindings: {}
 container:
   type: HtmlTemplate
