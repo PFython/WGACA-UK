@@ -83,7 +83,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_myself()
         self.populate_addresses()
-        self.get_status_function(self.get_user_role(), "display")
+        self.get_status_function()(self.get_user_role())
         self.show_messages()
         
     def get_user_role(self):
@@ -120,7 +120,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.status.enabled = False
         self.status.italic = True
         
-    def status3(self, role, option = "display"):
+    def status3(self, role):
     # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
         self.make_status_active if role in ("Offerer", "Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
@@ -134,7 +134,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if role == "Requester" :
           self.status.text = "Item(s) are waiting to be picked up."        
 
-    def status4(self, role, option = "display"):
+    def status4(self, role):
     # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
         self.make_status_active if role in ("Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
@@ -148,7 +148,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if role == "Requester":
             self.status.text = "Awaiting confirmation of pick-up."
 
-    def status5(self, role, option = "display"):
+    def status5(self, role):
     # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
         self.make_status_active if role in ("Offerer") else self.make_status_inactive()
         if role == "Offerer":
@@ -161,7 +161,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if role == "Requester":
             self.status.text = "Awaiting confirmation of pick-up."
 
-    def status6(self, role, option = "display"):
+    def status6(self, role):
         self.make_status_active if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "You've given your item(s) to the Runner.  Thank you!"
@@ -174,7 +174,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Runner has your item(s).  Please click to confirm once they've been delivered."
             return('7')
         
-    def status7(self, role, option = "display"):
+    def status7(self, role):
         self.make_status_active if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Awaiting confirmation of delivery"
@@ -186,7 +186,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if role == "Requester+Runner":
             self.status.text = "Items picked up, delivery complete!"
         
-    def status8(self, role, option = "display"):
+    def status8(self, role):
         self.make_status_active if role in ("Requester") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Awaiting confirmation of delivery"
@@ -199,7 +199,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if role == "Requester+Runner":
             self.status.text = "Items picked up, delivery complete!"
     
-    def status9(self, role, option = "display"):
+    def status9(self, role):
         self.make_status_inactive()
         self.status.text = "Delivery complete.  What goes around comes around!"
         
@@ -209,7 +209,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
         show_deliveries_row already handles whether the checkbox is enabled.
         Update Matches, Offers, Requests tables
         """
-        new_status = self.get_status_function(self.get_user_role(), "click")   
+        new_status = self.get_status_function(self.get_user_role())   
+        print("Advancing to status:",new_status)
 #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
 #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
 #         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
