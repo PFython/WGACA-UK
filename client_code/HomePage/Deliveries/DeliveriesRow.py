@@ -110,7 +110,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
           '7': self.status7,
           '8': self.status8,
           '9': self.status9,}
-        status_code = self.item['status_code']       
+        status_code = self.item['status_code']
+        print("Status code",status_code)
         return lookup[status_code]                  
                   
     def make_status_active(self):
