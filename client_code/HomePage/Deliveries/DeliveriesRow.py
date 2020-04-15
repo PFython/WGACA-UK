@@ -21,41 +21,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.items_picked_up.visible = False
         self.items_dropped_off.visible = False
 
-    def populate_addresses(self):
-        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
-        user=anvil.users.get_user()
-        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
-            address.text = self.item[table]['user']['display_name']+"\n"
-            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
-                address.text += str(self.item[table]['user']['house_number'])+" "
-            address.text += self.item[table]['user']['street']+"\n"
-            address.text += self.item[table]['user']['town']+"\n"
-            address.text += self.item[table]['user']['county']+"\n"
- 
-    def show_myself(self, **event_args):
-        """Colour codes display to highlight user's own data"""
-        user = anvil.users.get_user()
-
-        if self.item['offer']['user'] == user:
-            self.items_picked_up.foreground = green
-            self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
-            self.label_2.text  = "My Offer"            
-            self.label_2.foreground = green
-            self.label_3.foreground = green        
-            self.pickup.foreground = green
-            self.pickup.icon = 'fa:home'
-            self.offer.foreground = green
-            self.offer_notes.foreground = green
-            self.offer_expiry.foreground = green
-              
-        if self.item['request']['user'] == user:
-            self.label_1.text  = "My Request"
-            self.label_1.foreground = green
-            self.label_4.foreground = green
-            self.dropoff.foreground = green
-            self.dropoff.icon = 'fa:home'
-            self.request.foreground = green
-            self.request_notes.foreground = green
+    def show_deliveries_row(self, **event_args):
+        """This method is called when the DeliveriesRow is shown on the screen"""
+        self.show_offer()
+        self.show_request()
+        self.show_runner()
+        self.show_myself()
+        self.populate_addresses() 
+        self.show_offerer_status()
+        self.show_runner_status()
+        self.show_requester_status()
+        self.show_messages() 
             
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
@@ -79,16 +55,114 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.runner.text = "Approved Runner: " + runner
         if runner == anvil.users.get_user()['display_name']:
             self.runner.foreground = green
-      
-    def show_deliveries_row(self, **event_args):
-        """This method is called when the DeliveriesRow is shown on the screen"""
-        self.show_offer()
-        self.show_request()
-        self.show_runner()
-        self.show_myself()
-        self.populate_addresses()
-        self.show_messages()        
+            
+    def show_myself(self, **event_args):
+        """Colour codes display to highlight user's own data"""
+        user = anvil.users.get_user()
+        if self.item['offer']['user'] == user:
+            self.items_picked_up.foreground = green
+            self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
+            self.label_2.text  = "My Offer"            
+            self.label_2.foreground = green
+            self.label_3.foreground = green        
+            self.pickup.foreground = green
+            self.pickup.icon = 'fa:home'
+            self.offer.foreground = green
+            self.offer_notes.foreground = green
+            self.offer_expiry.foreground = green              
+        if self.item['request']['user'] == user:
+            self.label_1.text  = "My Request"
+            self.label_1.foreground = green
+            self.label_4.foreground = green
+            self.dropoff.foreground = green
+            self.dropoff.icon = 'fa:home'
+            self.request.foreground = green
+            self.request_notes.foreground = green      
+   
+    def populate_addresses(self):
+        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
+        user=anvil.users.get_user()
+        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
+            address.text = self.item[table]['user']['display_name']+"\n"
+            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
+                address.text += str(self.item[table]['user']['house_number'])+" "
+            address.text += self.item[table]['user']['street']+"\n"
+            address.text += self.item[table]['user']['town']+"\n"
+            address.text += self.item[table]['user']['county']+"\n"
+            
+    def show_offerer_status(self):
+        """ Enables and selects relevant status prompt for Offerer"""
+        if self.item['status_code'] == '3':
+            self.status.enabled = True
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        else:
+          self.status.enabled = False
+          self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
+    
+    def show_runner_status(self):
+        """ Enables and selects relevant status prompt for Runner"""
+        self.status.enabled = False
+        if self.item['status_code'] in ['3','4']:
+            self.status.enabled = True
+            self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
+        if self.item['status_code'] == '6':
+            self.status.enabled = True
+            self.status.text = "Please arrange drop-off with Requester, then click here to confirm you've delivered the item(s)."
 
+    def show_requester_status(self):
+        """ Enables and selects relevant status prompt for Requester"""  
+        if self.item['status_code'] == '6':
+            self.status.enabled = True
+            self.status.text = "Please arrange drop-off with Runner, then click here to confirm you've received the item(s)."
+                    
+    def user_is_offerer(self):
+        """Offerer can confirm pickup complete and submit KarmaForm for Runner"""
+        if self.item['status_code'] == '3':
+            self.change_status('4')
+     
+    def user_is_runner(self):
+        """
+        Runner can confirm pickup complete and submit KarmaForm for Offerer
+        Runner can confirm dropoff complete and submit KarmaForm for Requester
+        """
+      
+    def user_is_requester(self):
+      """Requester can confirm dropoff complete and submit KarmaForm for Runner"""
+      
+    def change_status(self, new_status):
+        """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
+        pass
+          
+    def click_update_status(self):
+        """Define user's role and the name/role of the person for use in the Karma Form"""      
+        user = anvil.users.get_user()
+        form = KarmaForm()
+        if self.item['offer']['user'] == user:
+            self.user_is_offerer()
+            form.role = "Offerer"
+            form.regarding = self.item['approved_runner']['display_name']
+            form.regarding_role = "Runner"
+
+        if self.item['approved_runner'] == user:
+            self.user_is_runner()
+            form.role = "Runner"
+            if self.item['status_code'] in ['3','4']: # i.e. Runner confirmed or Offerer: Pickup complete
+                form.regarding = self.item['offer']['user']['display_name']
+                form.regarding = "Offerer"
+            else:
+                form.regarding = self.item['request']['user']['display_name']
+                form.regarding = "Requester"                
+                
+        if self.item['request']['user'] == user:
+            self.user_is_requester()
+            form.role = "Requester"
+            form.regarding = self.item['approved_runner']['display_name']
+            form.regarding_role = "Runner"
+            
+        self.add_component(form)
+        
+
+      
     def show_messages(self):
         user = anvil.users.get_user()
         messages = self.item['messages_dict']
@@ -124,7 +198,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
                 message.background = grey
     
     def click_show_message(self, **event_args):
-        """This method is called when the Button is shown on the screen"""
+        """This method is called when a Message Button is shown on the screen"""
         textbox = {self.message1: self.message1_text, self.message2: self.message2_text}[event_args['sender']]
         textbox.text = event_args['sender'].tag
         textbox.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
@@ -133,72 +207,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         else:
             event_args['sender'].icon = 'fa:caret-down'       
 
-    
-    def show_offerer_status(self):
-        """ Enables and selects relevant status prompt for Offerer"""
-        if self.item['status_code'] == '3':
-            self.status.enabled = True
-            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
-        else:
-          self.status.enabled = False
-          self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
-    
-    def show_runner_status(self):
-        """ Enables and selects relevant status prompt for Runner"""
-        self.status.enabled = True
-        if self.item['status_code'] in ['3','4']:
-            self.status.enabled = True
-            self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
-        if self.item['status_code'] == '6':
-            self.status.enabled = True
-            self.status.text = "Please arrage drop-off with Requester, then click here to confirm you've delivered the item(s)."
-
-    def show_requester_status(self):
-        """ Enables and selects relevant status prompt for Requester"""            
-                    
-    def user_is_offerer(self):
-        """Offerer can confirm pickup complete and submit KarmaForm for Runner"""
-     
-    def user_is_runner(self):
-        """
-        Runner can confirm pickup complete and submit KarmaForm for Offerer
-        Runner can confirm dropoff complete and submit KarmaForm for Requester
-        """
-      
-    def user_is_requester(self):
-      """Requester can confirm dropoff complete and submit KarmaForm for Runner"""
-          
-    def click_update_status(self):
-        """Define user's role and the name/role of the person for use in the Karma Form"""      
-        user = anvil.users.get_user()
-        form = KarmaForm()
-        if self.item['offer']['user'] == user:
-            self.user_is_offerer()
-            form.role = "Offerer"
-            form.regarding = self.item['approved_runner']['display_name']
-            form.regarding_role = "Runner"
-
-        if self.item['approved_runner'] == user:
-            self.user_is_runner()
-            form.role = "Runner"
-            if self.item['status_code'] in ['3','4']: # i.e. Runner confirmed or Offerer: Pickup complete
-                form.regarding = self.item['offer']['user']['display_name']
-                form.regarding = "Offerer"
-            else:
-                form.regarding = self.item['request']['user']['display_name']
-                form.regarding = "Requester"                
-                
-        if self.item['request']['user'] == user:
-            self.user_is_requester()
-            form.role = "Requester"
-            form.regarding = self.item['approved_runner']['display_name']
-            form.regarding_role = "Runner"
-            
-        self.add_component(form)
-        
-    def change_status(self, new_status):
-        """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
-        pass
 
 
 
