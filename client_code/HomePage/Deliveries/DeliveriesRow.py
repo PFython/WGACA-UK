@@ -105,25 +105,25 @@ class DeliveriesRow(DeliveriesRowTemplate):
             print("Offerer, not 3")
             self.status.enabled = False
             self.status.visible = True
-            self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
+            self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
     
     def show_runner_status(self):
         """ Enables and selects relevant status prompt for Runner"""
         if self.item['status_code'] in ['3','4']:
-            print("Runner,3 or 4")
+            print(f"Runner,3 or 4/{self.item['status_code']}")
             self.status.enabled = True
             self.status.visible = True
             self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         elif self.item['status_code'] == '6':
-            print("Runner,6")
+            print(f"Runner,6/{self.item['status_code']}")
             self.status.enabled = True
             self.status.visible = True
             self.status.text = "Please arrange drop-off with Requester, then click here to confirm you've delivered the item(s)."
         else:
-            print("Runner, not 3,4, or 6")
+            print(f"Runner, not 3,4, or 6/{self.item['status_code']}")
             self.status.enabled = False
             self.status.visible = True
-            self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
+            self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
     
     def show_requester_status(self):
         """ Enables and selects relevant status prompt for Requester"""  
@@ -136,6 +136,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             print("Requester, not 6")
             self.status.enabled = False
             self.status.visible = True
+            self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
      
     def change_status(self, new_status):
         """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""        
