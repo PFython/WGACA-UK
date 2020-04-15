@@ -103,7 +103,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
       
     def update_databases(self, runner, messages):
         """ Sets Approved Runner, updates Matches/Offers/Requests, and refreshes the view """
-#         anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, '3')
+        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, '3')
 #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], '3')
 #         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], '3')
         anvil.server.call('update_status_codes', self.parent.parent.parent.item, '3')

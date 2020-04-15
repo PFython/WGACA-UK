@@ -54,7 +54,7 @@ def generate_matches():
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
 #     print("Generating Matches...")
-    statuses = anvil.server.call("STATUSES").values()
+#     statuses = anvil.server.call("STATUSES").values()
     for request in (x for x in requests if x['status_code'] in ['1','2']):
         for offer in (x for x in offers if x['status_code'] in ['1','2']):
             if request['product_category'] in offer['product_key']:
@@ -109,7 +109,7 @@ def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
     user = anvil.users.get_user()
     if user is not None:
-        return [x for x in app_tables.matches.search(tables.order_by("status")) if x['approved_runner'] != None]
+        return [x for x in app_tables.matches.search(tables.order_by("status_code")) if x['approved_runner'] != None]
 
 @anvil.server.callable
 def get_my_matches():
@@ -181,7 +181,7 @@ def save_to_matches_database(match, runner, messages, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    match.update(approved_runner = runner, messages_dict = messages, status = STATUSES()[status_code])
+    match.update(approved_runner = runner, messages_dict = messages, status_code = status_code)
     
 @anvil.server.callable
 def save_to_offers_database(product_key, units, expiry_date, notes, status_code="1"):
@@ -243,14 +243,14 @@ def update_offers_status(offer, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    offer.update(status = STATUSES()[status_code])
+    offer.update(status_code = status_code)
     
 @anvil.server.callable
 def update_requests_status(request, status_code):
     user = anvil.users.get_user()
     if user is None:
         return
-    request.update(status = STATUSES()[status_code])
+    request.update(status_code = status_code)
     
 @anvil.server.callable
 def update_status_codes(match, new_status_code):
