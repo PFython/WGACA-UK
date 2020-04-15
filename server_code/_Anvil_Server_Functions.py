@@ -253,6 +253,12 @@ def update_requests_status(request, status_code):
     request.update(status = STATUSES()[status_code])
     
 @anvil.server.callable
+def update_status_codes(match, new_status_code):
+    match['status_code'] = new_status_code
+    match['request']['status_code'] = new_status_code
+    match['offer']['status_code'] = new_status_code
+    
+@anvil.server.callable
 def volunteer_as_runner(match, boolean_value):
     """ Volunteer/unvolunteer as available_runner in Matches"""
     user = anvil.users.get_user()

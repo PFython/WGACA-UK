@@ -117,11 +117,18 @@ class DeliveriesRow(DeliveriesRowTemplate):
      
     def change_status(self, new_status):
         """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
+        
+        anvil.server.call("save_to_matches_database", self.item, runner, messages, '3')
+        anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], '3')
+        anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], '3')
+        # 3 in STATUSES = "Runner confirmed"
+        anvil.server.call('generate_matches')
+        self.parent.parent.parent.refresh_data_bindings()   
         self.show_deliveries_row()
       
     def create_karma_form(self, user_role, regarding, regarding_role):
-          user = anvil.users.get_user()
           form = KarmaForm()
+          form.user = anvil.users.get_user()
           self.add_component(form)
           
     def click_update_status(self):
