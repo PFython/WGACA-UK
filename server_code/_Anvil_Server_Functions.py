@@ -30,7 +30,19 @@ def check_for_display_name(display_name):
       return True
     if display_name != None and display_name != "":
       return True if app_tables.users.get(display_name = display_name) else False
-  
+
+@anvil.server.callable
+def general_status_messages(status_code):
+    if status_code not in STATUSES():
+        return "Unknown Status Code, sorry..."
+    return {'3': "Runner selected; Next step is to agree a pick-up.",
+            '4': "Offerer has confirmed that the pick-up took place.",
+            '5': "Runner has confirmed that the pick-up took place.", 
+            '6': "Both the Offerer and Runner have confirmed the pick-up took place.",
+            '7': "Requester has confirmed that the drop-off took place.",
+            '8': "Runner has confirmed that the drop-off took place.",
+            '9': "Both the Runner and Requester have confirmed the drop-off took place.",}[status_code]
+    
 @anvil.server.callable
 def generate_matches():
     """

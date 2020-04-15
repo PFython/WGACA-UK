@@ -133,14 +133,40 @@ class DeliveriesRow(DeliveriesRowTemplate):
         else:
             event_args['sender'].icon = 'fa:caret-down'       
 
+    
+    def show_offerer_status(self):
+        """ Enables and selects relevant status prompt for Offerer"""
+        if self.item['status_code'] == '3':
+            self.status.enabled = True
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        else:
+          self.status.enabled = False
+          self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
+    
+    def show_runner_status(self):
+        """ Enables and selects relevant status prompt for Runner"""
+        self.status.enabled = True
+        if self.item['status_code'] in ['3','4']:
+            self.status.enabled = True
+            self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
+        if self.item['status_code'] == '6':
+            self.status.enabled = True
+            self.status.text = "Please arrage drop-off with Requester, then click here to confirm you've delivered the item(s)."
 
+    def show_requester_status(self):
+        """ Enables and selects relevant status prompt for Requester"""            
+                    
     def user_is_offerer(self):
-        """Offerer"""
-      
+        """Offerer can confirm pickup complete and submit KarmaForm for Runner"""
+     
     def user_is_runner(self):
+        """
+        Runner can confirm pickup complete and submit KarmaForm for Offerer
+        Runner can confirm dropoff complete and submit KarmaForm for Requester
+        """
       
     def user_is_requester(self):
-      
+      """Requester can confirm dropoff complete and submit KarmaForm for Runner"""
           
     def click_update_status(self):
         """Define user's role and the name/role of the person for use in the Karma Form"""      
@@ -169,6 +195,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
             form.regarding_role = "Runner"
             
         self.add_component(form)
+        
+    def change_status(self, new_status):
+        """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
+        pass
 
 
 
