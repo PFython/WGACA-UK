@@ -44,6 +44,7 @@ class UserSetup(UserSetupTemplate):
         self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
         self.telephone.tag = "Optional"
+        self.help_box.text = self.help0.tag
         
     def get_streets_from_county(self):
         """ Returns a list of streets derived from County selection """
