@@ -18,9 +18,18 @@ class DeliveriesRow(DeliveriesRowTemplate):
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
         self.show_route.foreground = green
-#         self.items_picked_up.visible = False
-#         self.items_dropped_off.visible = False
 
+    def get_status_function(self):
+        lookup = {'3': self.status3,
+          '4': self.status4,
+          '5': self.status5,
+          '6': self.status6,
+          '7': self.status7,
+          '8': self.status8,
+          '9': self.status9,}
+        status_code = self.item['status_code']       
+        return lookup[status_code](get)
+        
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
         self.show_offer()
@@ -28,15 +37,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_myself()
         self.populate_addresses()
-        lookup = {'3': self.status3,
-                  '4': self.status4,
-                  '5': self.status5,
-                  '6': self.status6,
-                  '7': self.status7,
-                  '8': self.status8,
-                  '9': self.status9,}
-        status_code = self.item['status_code']       
-        lookup[status_code](role)
+
         self.show_messages()
         
     def get_user_role(self):
@@ -62,8 +63,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.status.enabled = False
         self.status.italic = True
         
-    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
     def status3(self, role, option = "display"):
+    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
         self.make_status_active if role in ("Offerer", "Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
@@ -77,6 +78,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
           self.status.text = "Item(s) are waiting to be picked up."        
 
     def status4(self, role, option = "display"):
+    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
         self.make_status_active if role in ("Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Items have been picked up."
@@ -90,6 +92,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Awaiting confirmation of pick-up."
 
     def status5(self, role, option = "display"):
+    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
         self.make_status_active if role in ("Offerer") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Please confirm the Runner has picked up item(s) from you."
@@ -206,7 +209,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
 #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
 #         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
         anvil.server.call('update_status_codes', self.item, new_status)
-        # 3 in STATUSES = "Runner confirmed"
         anvil.server.call('generate_matches')
         self.show_deliveries_row()
       
@@ -219,42 +221,11 @@ class DeliveriesRow(DeliveriesRowTemplate):
           self.parent.parent.add_component(form)
           
     def click_update_status(self, **event_args):
-        """Define user's role and the name/role of the person for use in the Karma Form"""
+        """
+        Progress to next status_code where allowed, then trigger KarmaForm for feedback.
+        show_deliveries_row already handles whether the checkbox is enabled.
+        """
         user = anvil.users.get_user()
-        if self.item['offer']['user'] == user:
-        # Offerer can confirm pickup complete and submit KarmaForm for Runner
-            if  self.item['status_code'] == '3':        
-                self.change_status('4')
-                if user == self.item['approved_runner']:
-                    self.change_status('6')
-                else:
-                    self.create_karma_form("Offerer", self.item['approved_runner']['display_name'], "Runner")
-            if self.item['status_code'] == '5':  
-                self.change_status('6')
-                self.create_karma_form("Offerer", self.item['approved_runner']['display_name'], "Runner")
-        if self.item['approved_runner'] == user:
-        # Runner can confirm pickup complete and submit KarmaForm for Offerer
-        # Runner can confirm dropoff complete and submit KarmaForm for Requester
-            if self.item['status_code'] == '3':
-                self.change_status('5')
-                self.create_karma_form("Runner", self.item['offer']['user']['display_name'], "Offerer")              
-            if self.item['status_code'] == '4':
-                self.change_status('6')
-                self.create_karma_form("Runner", self.item['offer']['user']['display_name'], "Offerer")
-            if self.item['status_code'] == '6':
-                self.change_status('8')
-                self.create_karma_form("Runner", self.item['request']['user']['display_name'], "Requester")
-            if self.item['status_code'] == '7':
-                self.change_status('9')            
-                self.create_karma_form("Runner", self.item['request']['user']['display_name'], "Requester")
-        if self.item['request']['user'] == user:
-        # Requester can confirm dropoff complete and submit KarmaForm for Runner
-            if self.item['status_code'] == '6':
-                self.change_status('7')
-                self.create_karma_form("Requester", self.item['approved_runner']['display_name'], "Runner")
-            if self.item['status_code'] == '8':
-                self.change_status('9')
-                self.create_karma_form("Requester", self.item['approved_runner']['display_name'], "Runner")
       
     def show_messages(self):
         user = anvil.users.get_user()
