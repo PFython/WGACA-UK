@@ -133,6 +133,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if expiry <= datetime.datetime.today():
             self.offer_expiry.foreground = red
         self.offer_notes.text = self.item['offer']['notes']
+        expiry = self.item['offer']['expiry_date']
+        self.offer_expiry.text = expiry.strftime('%d %b %Y')
+        if expiry <= datetime.datetime.today():
+              self.offer_expiry.foreground = red
         
     def show_request(self):
         self.request.text = self.item['request']['product_category']
