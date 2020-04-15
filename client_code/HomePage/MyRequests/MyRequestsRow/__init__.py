@@ -23,7 +23,7 @@ class MyRequestsRow(MyRequestsRowTemplate):
 
     def check_request_status(self, **properties):
       match_count = len(self.item['matches'])
-      if match_count > 0 and match['status_code'] in ['1','2']:                
+      if match_count > 0 and self.item['status_code'] in ['1','2']:                 
           self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
       self.refresh_data_bindings()
 
