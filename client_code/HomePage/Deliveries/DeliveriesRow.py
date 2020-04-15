@@ -31,6 +31,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_offerer_status()
         self.show_runner_status()
         self.show_requester_status()
+        print("Status code:",self.item['status_code'])
         self.show_messages() 
             
     def show_offer(self):
