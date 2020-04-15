@@ -96,7 +96,7 @@ class HomePage(HomePageTemplate):
             button.foreground = light_blue
             button.bold = False
             button.font_size = menu_font_size
-        self.title_bar.text = anvil.users.get_user()['display_name'] + ": " + selected.tag
+        self.title_bar.text = f"{selected.tag} (logged in as: {anvil.users.get_user()['display_name']})"
         selected.background = bright_blue
         selected.foreground = white
         selected.bold = True
