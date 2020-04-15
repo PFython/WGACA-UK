@@ -79,7 +79,7 @@ db_schema:
     Xh02_yjigh8=:
       name: priority
       type: number
-      admin_ui: {order: 10, width: 200}
+      admin_ui: {order: 1.625, width: 79}
     gT4KiE2JZZ8=:
       name: email_ok
       type: bool

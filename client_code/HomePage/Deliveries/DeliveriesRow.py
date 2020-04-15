@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .KarmaForm import KarmaForm
+import datetime
 
 from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 from ...Globals import STATUSES
@@ -44,6 +45,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.dropoff.icon = 'fa:home'
             self.request.foreground = green
             self.request_notes.foreground = green
+
+    def populate_addresses(self):
+        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
+        user=anvil.users.get_user()
+        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
+            address.text = self.item[table]['user']['display_name']+"\n"
+            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
+                address.text += str(self.item[table]['user']['house_number'])+" "
+            address.text += self.item[table]['user']['street']+"\n"
+            address.text += self.item[table]['user']['town']+"\n"
+            address.text += self.item[table]['user']['county']+"\n"
             
     def reveal_update_status(self):
         """Display and enable the appropriate status box and message"""
@@ -54,7 +66,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if self.item['request']['user'] == user:
           
     def click_update_status(self):
-        """Define users role and the name/role of the person the feedback form will be about"""      
+        """Define user's role and the name/role of the person for use in the Karma Form"""      
         user = anvil.users.get_user()
         form = KarmaForm()
         if self.item['offer']['user'] == user:
@@ -78,16 +90,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
         self.add_component(form)
 
-    def populate_addresses(self):
-        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
-        user=anvil.users.get_user()
-        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
-            address.text = self.item[table]['user']['display_name']+"\n"
-            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
-                address.text += str(self.item[table]['user']['house_number'])+" "
-            address.text += self.item[table]['user']['street']+"\n"
-            address.text += self.item[table]['user']['town']+"\n"
-            address.text += self.item[table]['user']['county']+"\n"
 
     def show_messages(self):
         user = anvil.users.get_user()
@@ -126,7 +128,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
         self.offer.text += str(self.item['offer']['units'])
-        self.offer_expiry.text = self.item['offer']['expiry_date'].strftime('%d %b %Y')
+        expiry = self.item['offer']['expiry_date']
+        self.offer_expiry.text = expiry.strftime('%d %b %Y')
+        if expiry <= datetime.datetime.today():
+            self.offer_expiry.foreground = red
         self.offer_notes.text = self.item['offer']['notes']
         
     def show_request(self):

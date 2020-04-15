@@ -5,6 +5,7 @@ import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import datetime
 
 from ....Globals import STATUSES, red
 
@@ -32,7 +33,10 @@ class MyOffersRow(MyOffersRowTemplate):
       self.status.text = STATUSES[self.item['status_code']]
       self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
       self.info.visible = self.item['notes'] != "(No notes attached)"
-      self.expiry_date.text = self.item['expiry_date'].strftime('%d %b %Y')
+      expiry = self.item['expiry_date']
+      self.expiry_date.text = expiry.strftime('%d %b %Y')
+      if expiry <= datetime.datetime.today():
+            self.expiry_date.foreground = red
       if self.item['matches']:
           self.check_offer_status()
 

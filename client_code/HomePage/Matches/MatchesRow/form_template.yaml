@@ -105,6 +105,16 @@ components:
     - {property: text, code: ''}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: true, background: '', bold: false, underline: false,
+      icon: 'fa:hourglass-end'}
+    name: offer_expiry
+    layout_properties: {column: UHJYDW, grid_position: 'EFIYOE,XNRYDH SMDSSW,RUEOWU
+        UXCGUT,FXXDVY'}
+    data_bindings:
+    - {property: text, code: ''}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
       underline: true, icon: 'fa:download'}
