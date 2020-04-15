@@ -21,7 +21,6 @@ LOCALE = "United Kingdom"
 
 @anvil.server.callable
 def add_karma_row(**kwargs):
-    print(kwargs)
     app_tables.karma.add_row(**kwargs)
 
 @anvil.server.callable
@@ -50,7 +49,6 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
-                        print("new match!")
                         new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
                         request.update(status_code = "2")
                         offer.update(status_code = "2")
