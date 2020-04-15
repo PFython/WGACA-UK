@@ -40,9 +40,10 @@ components:
           a delivery.  We''ve had to clear out the old test database overnight though,
           so please do make some more Matches (you can create multiple accounts for
           Requests and Offers), volunteer as a Runner and confirm Matches, then update
-          progress in the Deliveries menu.', font_size: null, font: '', spacing_above: none,
-        icon_align: left, spacing_below: small, italic: false, background: '#00a3f0',
-        bold: false, underline: false, icon: ''}
+          progress in the Deliveries menu.  You should also be prompted to give feedback
+          on other users using the new "Karma Form".  Enjoy!', font_size: null, font: '',
+        spacing_above: none, icon_align: left, spacing_below: small, italic: false,
+        background: '#00a3f0', bold: false, underline: false, icon: ''}
       name: description
       layout_properties:
         col_widths: {}
