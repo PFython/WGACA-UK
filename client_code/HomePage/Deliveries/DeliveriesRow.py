@@ -28,7 +28,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
           '8': self.status8,
           '9': self.status9,}
         status_code = self.item['status_code']       
-        return lookup[status_code](get)
+        return lookup[status_code]
         
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
@@ -37,7 +37,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_myself()
         self.populate_addresses()
-
+        self.get_status_function(self.get_user_role(), "display")
         self.show_messages()
         
     def get_user_role(self):
