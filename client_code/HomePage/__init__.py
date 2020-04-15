@@ -28,6 +28,7 @@ class HomePage(HomePageTemplate):
         self.background = bright_blue
         self.navigation_bar.background = blue
         self.title_bar.background = light_blue
+        self.user_name.background = light_blue
         for button, tag in {self.menu_about: 'About',
                             self.menu_my_offers: 'My Offers',
                             self.menu_my_requests: 'My Requests',
@@ -96,7 +97,8 @@ class HomePage(HomePageTemplate):
             button.foreground = light_blue
             button.bold = False
             button.font_size = menu_font_size
-        self.title_bar.text = f"{selected.tag} (logged in as: {anvil.users.get_user()['display_name']})"
+        self.title_bar.text = selected.tag
+        self.user_name.text = f"(logged in as: {anvil.users.get_user()['display_name']})"
         selected.background = bright_blue
         selected.foreground = white
         selected.bold = True
