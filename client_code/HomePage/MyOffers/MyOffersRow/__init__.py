@@ -31,6 +31,8 @@ class MyOffersRow(MyOffersRowTemplate):
       """This method is called when the data row panel is shown on the screen"""
       self.status.text = STATUSES[self.item['status_code']]
       self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
+      self.info.visible = self.item['notes'] != "(No notes attached)"
+      self.expiry_date.text = self.item['expiry_date'].strftime('%d %b %Y')
       if self.item['matches']:
           self.check_offer_status()
 

@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"BTDGGF":40,"WYIQKS":12,"UCDZVT":40,"VPDNZX":40,"TAHMHE":40}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYIQKS":12,"UCDZVT":40,"VPDNZX":40,"TAHMHE":40}',
     spacing_below: small, background: '#cae4ff'}
   name: confirm_match_column_panel
   layout_properties: {slot: default}
@@ -115,7 +115,7 @@ components:
       spacing_above: small, icon_align: left, spacing_below: small, italic: false,
       background: '#ff8080', bold: false, underline: false, icon: 'fa:times'}
     name: cancel
-    layout_properties: {grid_position: 'QPHLQJ,BTDGGF'}
+    layout_properties: {grid_position: 'QPHLQJ,LSZSUD'}
     event_bindings: {click: exit}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,

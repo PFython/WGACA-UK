@@ -18,22 +18,20 @@ components:
   components: []
 - type: Label
   properties: {}
-  name: expiry_date_formatted
+  name: expiry_date
   layout_properties: {column: FOJVUM}
-  data_bindings:
-  - {property: text, code: 'self.item[''expiry_date''].strftime(''%d %b %Y'')'}
+  data_bindings: []
   event_bindings: {}
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-    visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
+    visible: false, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
     spacing_above: small, icon_align: right, col_widths: '{}', spacing_below: small,
     italic: false, background: '', bold: false, underline: false, icon: 'fa:info'}
-  name: link_1
+  name: info
   layout_properties: {column: GMBNWP}
   components: []
   event_bindings: {click: show_notes_click}
-  data_bindings:
-  - {property: visible, code: 'self.item[''notes''] != "(No notes attached)"'}
+  data_bindings: []
 - type: Link
   properties: {}
   name: status
