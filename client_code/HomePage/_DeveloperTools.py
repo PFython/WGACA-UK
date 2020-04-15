@@ -24,9 +24,10 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     count = 0
     matches = anvil.server.call('_get_all_matches')
     for match in anvil.server.call('_get_all_matches'):
-        if int(match['status_code']) > int(limit):
-            anvil.server.call("update_status_codes", match, limit)
-            count += 1
+        match_value = match['status_code'] or limit
+        if int(match_value) >= int(limit):
+          anvil.server.call("update_status_codes", match, limit)
+          count += 1
     print(f"{count} matches out of {len(matches)} limited to status code [{limit}]")
 
 
