@@ -161,6 +161,7 @@ components:
       col_widths: {}
       grid_position: LQZTGU,SOVMIY VKSQIW,WTWXPD
     data_bindings: []
+    event_bindings: {change: click_update_status}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,

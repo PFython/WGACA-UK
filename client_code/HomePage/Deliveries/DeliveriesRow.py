@@ -29,13 +29,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_myself()
         self.populate_addresses()
         user = anvil.users.get_user()
-        if user == self.item['offer']['user']:
+        if user == self.item['offer']['user'] and user != self.item['approved_runner']:
             self.show_offerer_status()
-        if user == self.item['approved_runner']['user']:
+        if user == self.item['approved_runner']:
             self.show_runner_status()
         if user == self.item['request']['user']:
             self.show_requester_status()
-        print("Status code:",self.item['status_code'])
         self.show_messages() 
             
     def show_offer(self):
@@ -139,8 +138,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.visible = True
      
     def change_status(self, new_status):
-        """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
-        
+        """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""        
 #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
 #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
 #         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
@@ -154,8 +152,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
           form.user = anvil.users.get_user()
           self.add_component(form)
           
-    def click_update_status(self):
+    def click_update_status(self, **event_args):
         """Define user's role and the name/role of the person for use in the Karma Form"""
+        user = anvil.users.get_user()
         if self.item['offer']['user'] == user and self.item['status_code'] == '3':
         # Offerer can confirm pickup complete and submit KarmaForm for Runner
             self.change_status('4')
