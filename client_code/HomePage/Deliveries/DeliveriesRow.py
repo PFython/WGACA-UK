@@ -27,10 +27,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_request()
         self.show_runner()
         self.show_myself()
-        self.populate_addresses() 
-        self.show_offerer_status()
-        self.show_runner_status()
-        self.show_requester_status()
+        self.populate_addresses()
+        user = anvil.users.get_user()
+        if user == self.item['offer']['user']:
+            self.show_offerer_status()
+        if user == self.item['approved_runner']['user']:
+            self.show_runner_status()
+        if user == self.item['request']['user']:
+            self.show_requester_status()
         print("Status code:",self.item['status_code'])
         self.show_messages() 
             
