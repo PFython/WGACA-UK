@@ -217,7 +217,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         show_deliveries_row already handles whether the checkbox is enabled.
         Update Matches, Offers, Requests tables
         """
-        new_status = self.get_status_function(self.get_user_role())   
+        new_status = self.get_status_function()(self.get_user_role)   
         print("Advancing to status:",new_status)
 #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
 #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
