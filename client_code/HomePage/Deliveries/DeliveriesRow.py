@@ -32,7 +32,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         user = anvil.users.get_user()
         if status_code in ['3', '5']:
             self.show_offerer_status()
-        elif status_code in ['4', '6', '7'] and self.item['request']['user'] != user:
+        elif status_code in ['4', '6', '7'] and self.item['approved_runner'] == user:
             self.show_runner_status()
         elif status_code in ['6', '8']:
             self.show_requester_status()
@@ -94,19 +94,23 @@ class DeliveriesRow(DeliveriesRowTemplate):
             address.text += self.item[table]['user']['street']+"\n"
             address.text += self.item[table]['user']['town']+"\n"
             address.text += self.item[table]['user']['county']+"\n"
-            
-    def show_offerer_status(self):
-        """ Enables and selects relevant status prompt for Offerer"""
-        if self.item['status_code'] == '3':
-            print("Offerer,3")
-            self.status.enabled = True
-            self.status.visible = True
-            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
-        else:
-            print("Offerer, not 3")
-            self.status.enabled = False
-            self.status.visible = True
-            self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
+
+
+    def OFFER3(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+
+    def RUNNER3(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
+       
+        
+        print("Offerer, not 3")
+        self.status.enabled = False
+        self.status.visible = True
+        self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
     
     def show_runner_status(self):
         """ Enables and selects relevant status prompt for Runner"""
