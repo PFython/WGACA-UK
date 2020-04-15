@@ -134,13 +134,13 @@ db_schema:
       name: approved_runner
       type: liveObject
       backend: anvil.tables.Row
-      admin_ui: {order: 2, width: 50}
+      admin_ui: {order: 2, width: 214.666666}
       table_id: 48470
     BmxCnJ7ZmEw=:
       name: available_runners
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 1.5, width: 59.011364000000015}
+      admin_ui: {order: 1.5, width: 122.34966600000001}
       table_id: 48470
     YAUMkRJ9AuA=:
       name: route_url
@@ -149,7 +149,7 @@ db_schema:
     Vioog5yQ47s=:
       name: messages_dict
       type: simpleObject
-      admin_ui: {order: 10, width: 50}
+      admin_ui: {order: 10, width: 142.666666}
     cN9mqqVsiOo=:
       name: status_code
       type: string
@@ -166,7 +166,7 @@ db_schema:
       name: offer
       type: liveObject
       backend: anvil.tables.Row
-      admin_ui: {order: 1, width: 50}
+      admin_ui: {order: 1, width: 205.666666}
       table_id: 48190
   access: {python_name: matches, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
     table_id: 48778}
