@@ -36,7 +36,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
                   '8': self.status8,
                   '9': self.status9,}
         status_code = self.item['status_code']       
-        lookup[status_code](role, "display")
+        lookup[status_code](role)
         self.show_messages()
         
     def get_user_role(self):
@@ -53,46 +53,70 @@ class DeliveriesRow(DeliveriesRowTemplate):
             if self.item['request']['user'] != user:
                 if self.item['offer']['user'] != user:  
                     return "Runner"
-      
+                  
+    def make_status_active(self):
+        self.status.enabled = True
+        self.status.italic = False
+            
+    def make_status_inactive(self):
+        self.status.enabled = False
+        self.status.italic = True
+        
     # NB ConfirmMatch will have already moved to status 6 if Runner=Offerer
     def status3(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
-        self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        self.make_status_active if role in ("Offerer", "Runner") else self.make_status_inactive()
+        if role == "Offerer":
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        if role == "Runner" or role == "Requester+Runner":
+          self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
+        if role == "Requester" :
+          self.status.text = "Item(s) awaiting pick-up from Offerer."
+        
 
     def status4(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
-        self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
+        self.make_status_active if role in ("Runner") else self.make_status_inactive()
+        if role == "Runner":
+          self.status.text = "Please confirm you've collected item(s) from Offerer."
 
     def status5(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
-        self.status.text = "Please click to give feedback on the Offerer"
+        self.make_status_active if role in ("Offerer") else self.make_status_inactive()
+        if role == "Offerer":
+          self.status.text = "Please confirm you've collected item(s) from Offerer."
 
     def status6(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
+        self.make_status_active if role in ("Offerer", "Runner") else self.make_status_inactive()
+        if role == "Offerer":
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        if role == "Runner":
+          self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         self.status.text = "Please click to give feedback on the Runner"
         
     def status7(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
+        self.make_status_active if role in ("Offerer", "Runner") else self.make_status_inactive()
+        if role == "Offerer":
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        if role == "Runner":
+          self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         self.status.text = "Please arrange drop-off with Runner, then click here to confirm they've delivered the item(s)."
 
-    def status8(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
+        if role == "Offerer":
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        if role == "Runner":
+          self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         self.status.text = "Please arrange drop-off with Requester, then click here to confirm you've delivered the item(s)."
         
     def status9(self, role, option = "display"):
-        self.status.enabled = True
-        self.status.visible = True
+        if role == "Offerer":
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        if role == "Runner":
+          self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         self.status.text = "Please click to give feedback on the Requester"
         
     def general_status(self, option = "display"):
-        self.status.enabled = False
-        self.status.visible = True
+        if role == "Offerer":
+            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
+        if role == "Runner":
+          self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
             
     def show_offer(self):
