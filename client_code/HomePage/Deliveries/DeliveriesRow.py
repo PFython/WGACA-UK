@@ -32,12 +32,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
         user = anvil.users.get_user()
         lookup = {}
         if self.item['offer']['user'] == user:
-            lookup = {'3': OFFER3, '5': OFFER5}
+            lookup = {'3': self.OFFER3, '5': self.OFFER5}
         elif self.item['approved_runner'] == user:
-            lookup = {'3': RUNNER3, '4': RUNNER4, '6': RUNNER6, '7': RUNNER7}
+            lookup = {'3': self.RUNNER3, '4': self.RUNNER4, '6': self.RUNNER6, '7': self.RUNNER7}
         elif self.item['request']['user'] == user:
-            lookup = {'6': REQUEST6, '7': REQUEST7, '8': REQUEST8}
-        lookup[status_code]() if status_code in lookup else OTHER()
+            lookup = {'6': self.REQUEST6, '7': self.REQUEST7, '8': self.REQUEST8}
+        lookup[status_code]() if status_code in lookup else self.OTHER()
         self.show_messages() 
             
     def show_offer(self):
@@ -142,38 +142,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.status.enabled = False
         self.status.visible = True
         self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
-    
-    def show_runner_status(self):
-        """ Enables and selects relevant status prompt for Runner"""
-        if self.item['status_code'] in ['3','4']:
-            print(f"Runner,3 or 4/{self.item['status_code']}")
-            self.status.enabled = True
-            self.status.visible = True
-            self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
-        elif self.item['status_code'] == '6':
-            print(f"Runner,6/{self.item['status_code']}")
-            self.status.enabled = True
-            self.status.visible = True
-            self.status.text = "Please arrange drop-off with Requester, then click here to confirm you've delivered the item(s)."
-        else:
-            print(f"Runner, not 3,4, or 6/{self.item['status_code']}")
-            self.status.enabled = False
-            self.status.visible = True
-            self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
-    
-    def show_requester_status(self):
-        """ Enables and selects relevant status prompt for Requester"""  
-        if self.item['status_code'] == '6':
-            print("Requester,6")
-            self.status.enabled = True
-            self.status.visible = True
-            self.status.text = "Please arrange drop-off with Runner, then click here to confirm you've received the item(s)."
-        else:
-            print("Requester, not 6")
-            self.status.enabled = False
-            self.status.visible = True
-            self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
-     
+        
     def change_status(self, new_status):
         """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""        
 #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
