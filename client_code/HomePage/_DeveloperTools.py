@@ -24,8 +24,6 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     count = 0
     matches = anvil.server.call('_get_all_matches')
     for match in anvil.server.call('_get_all_matches'):
-        if match['status_code'] == None:
-            match = limit
         if int(match['status_code']) > int(limit):
             anvil.server.call("update_status_codes", match, limit)
             count += 1

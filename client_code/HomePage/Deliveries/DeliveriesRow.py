@@ -124,7 +124,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         
     def status3(self, role):
     # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
-        print("status3()")
+        print("status3()", role)
         self.make_status_active() if role in ("Offerer", "Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
@@ -139,7 +139,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
 
     def status4(self, role):
     # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
-        print("status4()")
+        print("status4()", role)
         self.make_status_active() if role in ("Runner", "Requester+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Items have been picked up."
@@ -154,7 +154,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
 
     def status5(self, role):
     # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
-        print("status5()")
+        print("status5()", role)
         self.make_status_active() if role in ("Offerer") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Please confirm the Runner has picked up item(s) from you."
@@ -167,7 +167,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Awaiting confirmation of pick-up."
 
     def status6(self, role):
-        print("status6()")
+        print("status6()", role)
         self.make_status_active() if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "You've given your item(s) to the Runner.  Thank you!"
@@ -181,7 +181,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             return('7')
         
     def status7(self, role):
-        print("status7()")
+        print("status7()", role)
         self.make_status_active() if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Awaiting confirmation of delivery"
@@ -194,7 +194,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Items picked up, delivery complete!"
         
     def status8(self, role):
-        print("status8()")
+        print("status8()", role)
         self.make_status_active() if role in ("Requester") else self.make_status_inactive()
         if role == "Offerer":
             self.status.text = "Awaiting confirmation of delivery"
@@ -208,7 +208,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.text = "Items picked up, delivery complete!"
     
     def status9(self, role):
-        print("status9()")
+        print("status9()", role)
         self.make_status_inactive()
         self.status.text = "Delivery complete.  What goes around comes around!"
         
