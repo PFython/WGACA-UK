@@ -95,7 +95,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             address.text += self.item[table]['user']['town']+"\n"
             address.text += self.item[table]['user']['county']+"\n"
 
-
+    # NB ConfirmMatch will have already moved to status 6 if Runner=Offerer
     def OFFER3(self):
         self.status.enabled = True
         self.status.visible = True
@@ -105,9 +105,38 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.status.enabled = True
         self.status.visible = True
         self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
-       
+
+    def RUNNER4(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please click to give feedback on the Offerer"
+
+    def OFFER5(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please click to give feedback on the Runner"
         
-        print("Offerer, not 3")
+    def REQUEST6(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please arrange drop-off with Runner, then click here to confirm they've delivered the item(s)."
+
+    def RUNNER6(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please arrange drop-off with Requester, then click here to confirm you've delivered the item(s)."
+        
+    def RUNNER7(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please click to give feedback on the Requester"
+        
+    def REQUEST8(self):
+        self.status.enabled = True
+        self.status.visible = True
+        self.status.text = "Please click to give feedback on the Runner"      
+        
+    def OTHER(self):
         self.status.enabled = False
         self.status.visible = True
         self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
