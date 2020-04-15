@@ -153,7 +153,7 @@ db_schema:
     cN9mqqVsiOo=:
       name: status_code
       type: string
-      admin_ui: {order: 9, width: 94.333666}
+      admin_ui: {order: 3, width: 94.333666}
     71gSuTeJpNg=:
       name: feedback_from_giver
       type: string
@@ -199,7 +199,7 @@ db_schema:
     Zf0f24RB5OY=:
       name: status_code
       type: string
-      admin_ui: {order: 7, width: 200}
+      admin_ui: {order: 1.5, width: 200}
     m7i_wXQ0xC8=:
       name: user
       type: liveObject
@@ -345,12 +345,12 @@ db_schema:
     ezVcuRizqLo=:
       name: status_code
       type: string
-      admin_ui: {order: 8, width: 200}
+      admin_ui: {order: 2.25, width: 200}
     o0JaLHAeb14=:
       name: matches
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 7, width: 200}
+      admin_ui: {order: 2.5, width: 200}
       table_id: 48778
     zLoT71MB4k0=:
       name: notes
