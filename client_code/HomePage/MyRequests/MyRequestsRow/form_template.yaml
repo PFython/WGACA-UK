@@ -14,11 +14,11 @@ components:
   event_bindings: {click: delete_row_click}
 - type: Label
   properties: {}
-  name: date_posted_formatted
+  name: date_posted
   layout_properties: {column: KHAQPE}
   event_bindings: {}
   data_bindings:
-  - {property: text, code: 'self.item[''date_posted''].strftime(''%d %b %Y'')'}
+  - {property: text, code: ''}
 - type: Label
   properties: {}
   name: status
@@ -29,9 +29,8 @@ components:
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
     text: '', font_size: 20, font: '', spacing_above: small, icon_align: left, spacing_below: small,
     italic: false, background: '', bold: false, underline: false, icon: 'fa:exclamation'}
-  name: label_1
+  name: urgent
   layout_properties: {column: TUJLMD}
   event_bindings: {}
-  data_bindings:
-  - {property: visible, code: 'self.item[''urgent'']'}
+  data_bindings: []
 is_package: true

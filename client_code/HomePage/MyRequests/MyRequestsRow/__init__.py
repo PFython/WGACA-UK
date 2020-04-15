@@ -31,6 +31,8 @@ class MyRequestsRow(MyRequestsRowTemplate):
         """This method is called when the data row panel is shown on the screen"""
         self.status.text = STATUSES[self.item['status_code']]
         self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
+        self.urgent.visible = self.item['urgent']
+        self.date_posted.text = self.item['date_posted'].strftime('%d %b %Y')
         if self.item['matches']:
             self.check_request_status()
 
