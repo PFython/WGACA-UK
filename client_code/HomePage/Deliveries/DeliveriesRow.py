@@ -94,25 +94,30 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_offerer_status(self):
         """ Enables and selects relevant status prompt for Offerer"""
         if self.item['status_code'] == '3':
+            print("Offerer,3")
             self.status.enabled = True
             self.status.visible = True
             self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
         else:
-          self.status.enabled = False
-          self.status.visible = True
-          self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
+            print("Offerer, not 3")
+            self.status.enabled = False
+            self.status.visible = True
+            self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
     
     def show_runner_status(self):
         """ Enables and selects relevant status prompt for Runner"""
         if self.item['status_code'] in ['3','4']:
+            print("Runner,3 or 4")
             self.status.enabled = True
             self.status.visible = True
             self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
         elif self.item['status_code'] == '6':
+            print("Runner,6")
             self.status.enabled = True
             self.status.visible = True
             self.status.text = "Please arrange drop-off with Requester, then click here to confirm you've delivered the item(s)."
         else:
+            print("Runner, not 3,4, or 6")
             self.status.enabled = False
             self.status.visible = True
             self.status.text = anvil.server.call("general_status_message", self.item['status_code'])
@@ -120,10 +125,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_requester_status(self):
         """ Enables and selects relevant status prompt for Requester"""  
         if self.item['status_code'] == '6':
+            print("Requester,6")
             self.status.enabled = True
             self.status.visible = True
             self.status.text = "Please arrange drop-off with Runner, then click here to confirm you've received the item(s)."
         else:
+            print("Requester, not 6")
             self.status.enabled = False
             self.status.visible = True
      
@@ -136,7 +143,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         anvil.server.call('update_status_codes', self.item, new_status)
         # 3 in STATUSES = "Runner confirmed"
         anvil.server.call('generate_matches')
-        self.parent.parent.parent.refresh_data_bindings()   
         self.show_deliveries_row()
       
     def create_karma_form(self, user_role, regarding, regarding_role):

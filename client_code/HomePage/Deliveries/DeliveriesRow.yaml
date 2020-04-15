@@ -100,7 +100,7 @@ components:
       grid_position: LQZTGU,WYMIYQ TPZRYP,ZKQOOC OZLREB,OQTHOP
     data_bindings:
     - {property: text, code: ''}
-    event_bindings: {show: show_deliveries_row}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
