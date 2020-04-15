@@ -41,12 +41,18 @@ class DeliveriesRow(DeliveriesRowTemplate):
         
     def get_user_role(self):
         user = anvil.users.get_user()
-        if self.item['offer']['user'] == user:
-             return "Offerer"
+        if self.item['offer']['user'] == user and self.item['approved_runner'] == user:
+            return "Offerer+Runner"
+        if self.item['approved_runner'] == user and self.item['request']['user'] == user:
+            return ("Requester+Runner")
+        if self.item['offer']['user'] == user and self.item['approved_runner'] != user:
+            return "Offerer"
+        if self.item['request']['user'] == user and self.item['approved_runner'] != user:
+            return "Requester"
         if self.item['approved_runner'] == user:
-             return ("Runner")
-        if self.item['request']['user'] == user:
-             return "Requester"
+            if self.item['request']['user'] != user:
+                if self.item['offer']['user'] != user:  
+                    return "Runner"
       
     # NB ConfirmMatch will have already moved to status 6 if Runner=Offerer
     def status3(self, role, option = "display"):
