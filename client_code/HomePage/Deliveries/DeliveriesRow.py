@@ -17,19 +17,65 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
-        self.show_route.foreground = green
-
-    def get_status_function(self):
-        lookup = {'3': self.status3,
-          '4': self.status4,
-          '5': self.status5,
-          '6': self.status6,
-          '7': self.status7,
-          '8': self.status8,
-          '9': self.status9,}
-        status_code = self.item['status_code']       
-        return lookup[status_code]
+        self.show_route.foreground = green  
+               
+    def show_offer(self):
+        self.offer.text = self.item['offer']['product_key'] + " … "
+        self.offer.text += str(self.item['offer']['units'])
+        expiry = self.item['offer']['expiry_date']
+        self.offer_expiry.text = expiry.strftime('%d %b %Y')
+        if expiry <= datetime.datetime.today():
+            self.offer_expiry.foreground = red
+        self.offer_notes.text = self.item['offer']['notes']
+        expiry = self.item['offer']['expiry_date']
+        self.offer_expiry.text = expiry.strftime('%d %b %Y')
+        if expiry <= datetime.datetime.today():
+              self.offer_expiry.foreground = red
         
+    def show_request(self):
+        self.request.text = self.item['request']['product_category']
+        self.request_notes.text = self.item['request']['notes']
+       
+    def show_runner(self):
+        runner = self.item['approved_runner']['display_name']
+        self.runner.text = "Approved Runner: " + runner
+        if runner == anvil.users.get_user()['display_name']:
+            self.runner.foreground = green
+            
+    def show_myself(self, **event_args):
+        """Colour codes display to highlight user's own data"""
+        user = anvil.users.get_user()
+        if self.item['offer']['user'] == user:
+#             self.items_picked_up.foreground = green
+            self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
+            self.label_2.text  = "My Offer"            
+            self.label_2.foreground = green
+            self.label_3.foreground = green        
+            self.pickup.foreground = green
+            self.pickup.icon = 'fa:home'
+            self.offer.foreground = green
+            self.offer_notes.foreground = green
+            self.offer_expiry.foreground = green              
+        if self.item['request']['user'] == user:
+            self.label_1.text  = "My Request"
+            self.label_1.foreground = green
+            self.label_4.foreground = green
+            self.dropoff.foreground = green
+            self.dropoff.icon = 'fa:home'
+            self.request.foreground = green
+            self.request_notes.foreground = green      
+   
+    def populate_addresses(self):
+        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
+        user=anvil.users.get_user()
+        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
+            address.text = self.item[table]['user']['display_name']+"\n"
+            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
+                address.text += str(self.item[table]['user']['house_number'])+" "
+            address.text += self.item[table]['user']['street']+"\n"
+            address.text += self.item[table]['user']['town']+"\n"
+            address.text += self.item[table]['user']['county']+"\n"
+          
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
         self.show_offer()
@@ -54,6 +100,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
             if self.item['request']['user'] != user:
                 if self.item['offer']['user'] != user:  
                     return "Runner"
+                  
+    def get_status_function(self):
+        lookup = {'3': self.status3,
+          '4': self.status4,
+          '5': self.status5,
+          '6': self.status6,
+          '7': self.status7,
+          '8': self.status8,
+          '9': self.status9,}
+        status_code = self.item['status_code']       
+        return lookup[status_code]                  
                   
     def make_status_active(self):
         self.status.enabled = True
@@ -145,64 +202,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def status9(self, role, option = "display"):
         self.make_status_inactive()
         self.status.text = "Delivery complete.  What goes around comes around!"
-               
-    def show_offer(self):
-        self.offer.text = self.item['offer']['product_key'] + " … "
-        self.offer.text += str(self.item['offer']['units'])
-        expiry = self.item['offer']['expiry_date']
-        self.offer_expiry.text = expiry.strftime('%d %b %Y')
-        if expiry <= datetime.datetime.today():
-            self.offer_expiry.foreground = red
-        self.offer_notes.text = self.item['offer']['notes']
-        expiry = self.item['offer']['expiry_date']
-        self.offer_expiry.text = expiry.strftime('%d %b %Y')
-        if expiry <= datetime.datetime.today():
-              self.offer_expiry.foreground = red
         
-    def show_request(self):
-        self.request.text = self.item['request']['product_category']
-        self.request_notes.text = self.item['request']['notes']
-       
-    def show_runner(self):
-        runner = self.item['approved_runner']['display_name']
-        self.runner.text = "Approved Runner: " + runner
-        if runner == anvil.users.get_user()['display_name']:
-            self.runner.foreground = green
-            
-    def show_myself(self, **event_args):
-        """Colour codes display to highlight user's own data"""
-        user = anvil.users.get_user()
-        if self.item['offer']['user'] == user:
-#             self.items_picked_up.foreground = green
-            self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
-            self.label_2.text  = "My Offer"            
-            self.label_2.foreground = green
-            self.label_3.foreground = green        
-            self.pickup.foreground = green
-            self.pickup.icon = 'fa:home'
-            self.offer.foreground = green
-            self.offer_notes.foreground = green
-            self.offer_expiry.foreground = green              
-        if self.item['request']['user'] == user:
-            self.label_1.text  = "My Request"
-            self.label_1.foreground = green
-            self.label_4.foreground = green
-            self.dropoff.foreground = green
-            self.dropoff.icon = 'fa:home'
-            self.request.foreground = green
-            self.request_notes.foreground = green      
-   
-    def populate_addresses(self):
-        """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
-        user=anvil.users.get_user()
-        for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
-            address.text = self.item[table]['user']['display_name']+"\n"
-            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
-                address.text += str(self.item[table]['user']['house_number'])+" "
-            address.text += self.item[table]['user']['street']+"\n"
-            address.text += self.item[table]['user']['town']+"\n"
-            address.text += self.item[table]['user']['county']+"\n"
-   
+    def click_update_status(self, **event_args):
+        """
+        Progress to next status_code where allowed, then trigger KarmaForm for feedback.
+        show_deliveries_row already handles whether the checkbox is enabled.
+        """
+        self.get_status_function(self.get_user_role(), "click")
+
     def change_status(self, new_status):
         """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""        
 #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
@@ -219,14 +226,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
           form.regarding.text = regarding
           form.regarding_role.text = regarding_role
           self.parent.parent.add_component(form)
-          
-    def click_update_status(self, **event_args):
-        """
-        Progress to next status_code where allowed, then trigger KarmaForm for feedback.
-        show_deliveries_row already handles whether the checkbox is enabled.
-        """
-        user = anvil.users.get_user()
-      
+              
     def show_messages(self):
         user = anvil.users.get_user()
         messages = self.item['messages_dict']
