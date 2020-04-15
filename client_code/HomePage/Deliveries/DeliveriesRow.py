@@ -115,8 +115,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.status.enabled = True
             self.status.text = "Please arrange drop-off with Runner, then click here to confirm you've received the item(s)."
      
-    def user_is_runner(self):
-      
     def change_status(self, new_status):
         """Update to new status in status STATUSES and write to Matches, Offers, Requests tables"""
         self.show_deliveries_row()
@@ -131,31 +129,24 @@ class DeliveriesRow(DeliveriesRowTemplate):
 
         if self.item['offer']['user'] == user and self.item['status_code'] == '3':
         # Offerer can confirm pickup complete and submit KarmaForm for Runner
-            self.user_is_offerer()
             self.change_status('4')
             self.create_karma_form("Offerer", self.item['approved_runner']['display_name'], "Runner")
 
         if self.item['approved_runner'] == user:
         # Runner can confirm pickup complete and submit KarmaForm for Offerer
         # Runner can confirm dropoff complete and submit KarmaForm for Requester
-            self.user_is_runner()
-            form.role = "Runner"
-            if self.item['status_code'] in ['3','4']: # i.e. Runner confirmed or Offerer: Pickup complete
-                form.regarding = self.item['offer']['user']['display_name']
-                form.regarding = "Offerer"
-            else:
-                form.regarding = self.item['request']['user']['display_name']
-                form.regarding = "Requester"                
-                
-        if self.item['request']['user'] == user:
+            if self.item['status_code'] == '3':
+                self.change_status('5')
+                self.create_karma_form("Runner", self.item['offer']['user']['display_name'], "Offerer")
+              
+            if self.item['status_code'] == '4':
+                self.change_status('6')
+                self.create_karma_form("Runner", self.item['request']['user']['display_name'], "Requester")
+                          
+        if self.item['request']['user'] == user and self.item['status_code'] == '6':
         # Requester can confirm dropoff complete and submit KarmaForm for Runner
-            self.user_is_requester()
-          self.change_status('4')
-          self.create_karma_form("Requester", self.item['approved_runner']['display_name'], "Runner")
-            
-
-        
-
+            self.change_status('7')
+            self.create_karma_form("Requester", self.item['approved_runner']['display_name'], "Runner")
       
     def show_messages(self):
         user = anvil.users.get_user()
