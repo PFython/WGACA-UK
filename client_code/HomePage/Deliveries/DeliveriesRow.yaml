@@ -138,7 +138,7 @@ components:
       spacing_below: none, italic: false, background: '', bold: true, underline: false,
       icon: 'fa:ambulance'}
     name: runner
-    layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY NZYOZQ,BCSGZB'}
+    layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY KKOWJK,UBRRQK'}
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
