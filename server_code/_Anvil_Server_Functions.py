@@ -44,12 +44,13 @@ def generate_matches():
     matches = 0
 #     print("Generating Matches...")
     statuses = anvil.server.call("STATUSES").values()
-    for request in (x for x in requests if x['status_code'] == '1'):
-        for offer in (x for x in offers if x['status_code'] == '1'):
+    for request in (x for x in requests if x['status_code'] in ['1','2']):
+        for offer in (x for x in offers if x['status_code'] in ['1','2']):
             if request['product_category'] in offer['product_key']:
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
+                        print("new match!")
                         new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
                         request.update(status_code = "2")
                         offer.update(status_code = "2")
@@ -148,7 +149,10 @@ def nominatim_scrape(address_list):
   
 @anvil.server.callable
 def remove_orphan_matches(request_or_offer):
-    """ Deletes a Match where the child Request or Offer has just been deleted """
+    """
+    Deletes a Match where the child Request or Offer has just been deleted
+    and deletes the Match from the corresponding Request or Offer
+    """
     try:
         for match in app_tables.matches.search(request=request_or_offer):
             match.delete()
@@ -157,6 +161,7 @@ def remove_orphan_matches(request_or_offer):
     try:
         for match in app_tables.matches.search(offer=request_or_offer):
             match.delete()
+            offer = app_tables.matches.search()
     except anvil.tables.TableError:
         pass
 

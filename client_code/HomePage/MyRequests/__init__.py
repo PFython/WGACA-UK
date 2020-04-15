@@ -17,7 +17,8 @@ class MyRequests(MyRequestsTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.product_category.items = list(set([" | ".join(x.split(" | ")[:2]) for x in ITEM_HEIRARCHY]))
-        self.repeating_panel_1.items = anvil.server.call("get_my_requests")  
+        self.repeating_panel_1.items = anvil.server.call("get_my_requests")
+        anvil.server.call('generate_matches')
     
     def add_to_my_requests(self,product_category, urgent, notes):
         """ Add request item to Requests database """          

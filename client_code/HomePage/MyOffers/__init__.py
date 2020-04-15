@@ -19,10 +19,10 @@ class MyOffers(MyOffersTemplate):
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")
         self.unit_of_measure.items = UNITS_OF_MEASURE
         self.product_description.items = ITEM_HEIRARCHY
+        anvil.server.call('generate_matches')
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
         """ Add item to Offers database """
-        user = anvil.users.get_user()['email']
         result = anvil.server.call("save_to_offers_database", product_key, units, expiry_date, notes)
         if result == "Duplicate":
               self.debug_console.text = "ⓘ Unable to create new entry because this combination of Product, Unit of Measure, and Expiry Date already exists.  Please consider deleting old entry and creating a new one?"
@@ -30,6 +30,7 @@ class MyOffers(MyOffersTemplate):
               self.debug_console.text = "✓ Item added."
               anvil.server.call('generate_matches')
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")
+
    
     def add_item_click(self, **event_args):
         """This method is called when the Add Item button is clicked"""
