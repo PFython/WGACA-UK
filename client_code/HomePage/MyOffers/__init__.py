@@ -37,7 +37,7 @@ class MyOffers(MyOffersTemplate):
         unit_of_measure = self.unit_of_measure.selected_value or self.unit_of_measure.placeholder
         product_key = (self.product_description.selected_value, unit_of_measure)
         units = int(self.number_of_units.text or self.number_of_units.placeholder)
-        expiry_date = self.expiry_date.date or datetime.datetime.today().date()
+        expiry_date = self.expiry_date.date or datetime.datetime.today().date() + datetime.timedelta(7)
         notes = self.notes.text or "(No notes attached)"
         if not product_key[0] and product_key[1]:
             self.debug_console.text = "⚠ Please select a product and/or unit of measure."
