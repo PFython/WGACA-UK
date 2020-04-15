@@ -37,8 +37,7 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
         self.check_permissions()
-        self.check_updates()
-        
+        self.check_updates()        
         
     def check_updates(self):
         """Checks if user has seen latest update and creates an alert if not"""
@@ -51,9 +50,7 @@ class HomePage(HomePageTemplate):
             updates_read = []
         elif date not in user['updates_read']:
             alert(content=latest_update)        
-#         updates_read += [date]
-        anvil.server.call("save_user_setup", "updates_read", updates_read + [date])
-        
+        anvil.server.call("save_user_setup", "updates_read", updates_read + [date])        
         
     def check_permissions(self):
         # 1st step of registration process requires email and password
@@ -80,38 +77,23 @@ class HomePage(HomePageTemplate):
 
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
+        images = {self.menu_about: self.image_0,
+          self.menu_my_offers: self.image_1,
+          self.menu_my_requests: self.image_2,
+          self.menu_my_matches: self.image_3,
+          self.menu_my_deliveries: self.image_4,
+          self.menu_my_details: self.image_5}   
+        for button in images:
+            button.background = blue
+            button.foreground = light_blue
+            button.bold = False
+            button.font_size = menu_font_size
         self.title_bar.text = selected.tag
-        self.menu_my_offers.background = blue
-        self.menu_my_requests.background = blue
-        self.menu_my_matches.background = blue
-        self.menu_my_deliveries.background = blue
-        self.menu_my_details.background = blue
-        self.menu_my_offers.foreground = light_blue
-        self.menu_my_requests.foreground = light_blue
-        self.menu_my_matches.foreground = light_blue
-        self.menu_my_deliveries.foreground = light_blue
-        self.menu_my_details.foreground = light_blue
-        self.menu_my_offers.bold = False
-        self.menu_my_requests.bold = False
-        self.menu_my_matches.bold = False
-        self.menu_my_deliveries.bold = False
-        self.menu_my_details.bold = False
-        self.menu_my_offers.font_size = menu_font_size
-        self.menu_my_requests.font_size = menu_font_size
-        self.menu_my_matches.font_size = menu_font_size
-        self.menu_my_deliveries.font_size = menu_font_size
-        self.menu_my_details.font_size = menu_font_size
         selected.background = bright_blue
         selected.foreground = white
         selected.bold = True
         selected.font_size = menu_font_size
         # Hide all images
-        images = {self.menu_about: self.image_0,
-                  self.menu_my_offers: self.image_1,
-                  self.menu_my_requests: self.image_2,
-                  self.menu_my_matches: self.image_3,
-                  self.menu_my_deliveries: self.image_4,
-                  self.menu_my_details: self.image_5}        
         for image in images.values():
             setattr(image, "visible", False)
         # Unhide selected image
