@@ -142,16 +142,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def status9(self, role, option = "display"):
         self.make_status_inactive()
         self.status.text = "Delivery complete.  What goes around comes around!"
-        
-        
-    def general_status(self, option = "display"):
-        if role == "Offerer":
-            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
-        if role == "Runner" or "Offerer+Runner":
-            self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
-
-        self.status.text = anvil.server.call("general_status_messages", self.item['status_code'])
-            
+               
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
         self.offer.text += str(self.item['offer']['units'])
