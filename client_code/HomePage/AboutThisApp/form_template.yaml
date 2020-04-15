@@ -13,7 +13,7 @@ components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"SVIZUH":10,"GXURPI":20}',
-    spacing_below: small, background: '#cae4ff'}
+    spacing_below: medium, background: '#cae4ff'}
   name: about_this_app
   layout_properties:
     col_widths: {}
