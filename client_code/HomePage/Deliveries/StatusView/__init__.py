@@ -19,7 +19,7 @@ class StatusView(StatusViewTemplate):
         self.is_requester.checked = self.user == self.match['request']['user']
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.initial_canvas() 
-        for x in (is_offerer, self.is_requester, self.is_runner):
+        for x in (self.is_offerer, self.is_requester, self.is_runner):
             x.enabled = True
         self.refresh_canvas()
 
