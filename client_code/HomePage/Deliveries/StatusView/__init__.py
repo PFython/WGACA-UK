@@ -71,9 +71,9 @@ class StatusView(StatusViewTemplate):
 
           
   def layout_rules(self):
-      ARROWS = self.colour_arrows()
-      TICK = self.checkbox_tick()
-      ENABLE = self.enable_component()
+      ARROWS = self.colour_arrows
+      TICK = self.checkbox_tick
+      ENABLE = self.enable_component
       rules = [(self.offer_matched, ARROWS, [self.arrow1]),
                (self.runner_selected, ARROWS, [self.arrow2]),
                (self.pickup_agreed, ARROWS, [self.arrow3]),
