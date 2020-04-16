@@ -18,7 +18,8 @@ class StatusView(StatusViewTemplate):
     self.is_runner = self.user == self.match['approved_runner']
     self.is_requester = self.user == self.match['request']['user']
     self.build_status_view()
-
+    
+    self.refresh_layout()
     
   def setup_static_view(self):
     self.offer_matched.checked = True
@@ -59,19 +60,7 @@ class StatusView(StatusViewTemplate):
             if component.checked:
                 component.foreground = black
                 component.bold = True
-    self.update_arrows()
-    
-  def update_arrows(self):
-    lookup = {self.offer_matched: [self.arrow1],
-             self.runner_selected: [self.arrow2],
-             self.pickup_agreed: [self.arrow3],
-             self.dropoff_agreed: [self.arrow4,self.arrow5],
-             }
-    for component in lookup:
-        if component.checked:
-          for arrow in lookup[component]:
-            arrow.foreground = black
-          
+             
   def update_runner(self):
         if self.is_runner:
           self.runner_confirms_pickup.enabled = True
@@ -85,28 +74,29 @@ class StatusView(StatusViewTemplate):
           self.runner_confirms_pickup.checked = True
           
   def refresh_layout(self):
-        triggers = []
-        for component in self.get_components():
-            if hasattr(component, "_action"):
-                triggers += [component]
-        lookup = {'enables': }
+      rules = [(self.offer_matched, self.update_arrows, [self.arrow1]),
+               (self.runner_selected, self.update_arrows, [self.arrow2]),
+               (self.pickup_agreed, self.update_arrows, [self.arrow3]),
+               (self.dropoff_agreed, self.update_arrows, [self.arrow4,self.arrow5]),]
+      for component, action, target_list in rules:
+          component._target_list = target_list
+          component.set_event_handler("change", action)
           
-  def layout(self, trigger_list, action, target_list):
-     """
-     Pseudo-English method for creating dynamic dependencies between
-     components in a form: 1...1, 1...n, n...1, and n...n.
-     
-     For example: layout(checkbox1, "enables", checkbox2)
-     When checkbox1 is checked, checkbox2 will be updated too.
-     
-     This methods just setups up the event handler and additional
-     attributes for each component, and works in conjunction with
-     refresh_layout() which figures out what to refresh and how.     
-     """
-     for trigger in trigger_list:
-          trigger.set_event_handler("change", self.refresh_layout)
-          trigger._target_list = target_list
-          trigger._action = action
+  def update_arrows(self, **event_args):
+        component = event_args['sender']
+        if component.checked:
+          for arrow in component._target_list:
+            arrow.foreground = black
+            
+  def enable_checkbox(self, **event_args):
+        component = event_args['sender']
+        if component.checked:
+          for arrow in component._target_list:
+              component.checked = True
+          
+
+
+
 
 
               
