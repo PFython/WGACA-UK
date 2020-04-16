@@ -175,7 +175,7 @@ components:
     name: arrow4
     layout_properties:
       col_widths: {}
-      grid_position: FGCYRW,VQAYOQ
+      grid_position: IYFEHF,IKHRFW
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
