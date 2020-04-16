@@ -1,4 +1,4 @@
-from ._anvil_designer import StatusViewTemplate
+from ._anvil_designer import StatusView_testTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ....Globals import green, grey, red, black, dark_green, dark_blue,blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
-class StatusView(StatusViewTemplate):
+class StatusView_test(StatusView_testTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
@@ -18,21 +18,26 @@ class StatusView(StatusViewTemplate):
 #         self.is_requester.checked = self.user == self.match['request']['user']
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-        self.test_setup()
+        self.test_mode = True
+        if self.test_mode:
+            self.test_setup()
         self.initial_canvas()
         self.initial_options_by_role()
         self.refresh_canvas()
         
     def test_setup(self):
-        self.match = anvil.server.call('_get_all_matches')[0] # Test data
+        # Hash out for Production and after creating StatusView instance, set .match = self.item etc.
+        self.match = anvil.server.call('_get_all_matches')[0]
         for x in (self.is_offerer, self.is_requester, self.is_runner):
             x.enabled = True
-            x.set_event_handler('change', self.initial_options_by_role)     
-        
+            x.set_event_handler('change', self.initial_options_by_role)       
         
     def initial_canvas(self):
+        """
+        How the form layout (canvas) should look when first loaded e.g.
+        colours, font size, labels, enabled and visible defaults
+        """
         self.offer_matched.checked = True
-        self
         if self.match['approved_runner']:
             self.runner_selected.checked = True
         for component in self.card_1.get_components():
@@ -42,49 +47,68 @@ class StatusView(StatusViewTemplate):
             component.bold = True
             component.spacing_above = 'none'
             component.spacing_below = 'none'
-        self.card_1.background = light_blue
-        self.complete.background = red
+        self.card_1.background = bright_blue
+        self.card_2.background = light_blue
         self.offerer.background = dark_blue
         self.runner.background = dark_blue
         self.requester.background = dark_blue
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
-        components = set()
         
+    def conceal(self, component, boolean_value):
+        """
+        Custom appearance/actions for toggling .visible.  During testing,
+        can be helpful to colour code rather than make truly invisible
+        """
+        if self.test_mode:
+            component.background = red if boolean_value else bright_blue
+        else:
+            component.visible = not boolean_value
+            
     def initial_options_by_role(self, **event_args):
         components = set(self.card_1.get_components())
+
         # Single Roles
-        if self.is_runner.checked and not self.is_offerer.checked and not self.is_requester.checked:
+        for checkbox in (self.runner_confirms_pickup,
+                         self.pickup_agreed,
+                         self.feedback_on_offerer_by_runner,
+                         self.dropoff_agreed,
+                         self.runner_confirms_dropoff,
+                         self.requester_confirms_dropoff,
+                         self.feedback_on_requester_by_runner,
+                         self.feedback_on_runner_by_requester):
+            self.conceal(checkbox, self.is_offerer.checked)
+        if self.is_runner.checked:
+            print("Runner")
             components.update({self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed})
-        if self.is_offerer.checked and not self.is_runner.checked:
-            components.update({self.offerer_confirms_pickup, self.pickup_agreed})
         if self.is_requester.checked and not self.is_runner.checked:
+            print("Requester")
             components.update({self.requester_confirms_dropoff, self.dropoff_agreed})
         for component in components:
             component.enabled = True
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.refresh_canvas)
             checkbox.sticky = True
-        # Offerer=Runner       
-        visible = False if self.is_offerer.checked and self.is_runner.checked else True
-        for checkbox in self.all_checkboxes[2:7]:
-            checkbox.visible = visible
-        for arrow in self.all_arrows:
-            arrow.visible = visible
-            self.arrow1.visible = not visible
-            self.arrow2.visible = not visible
-        # Requester=Runner    
-        visible = False if self.is_runner.checked and self.is_requester.checked else True
-        for checkbox in self.all_checkboxes[7:12]:
-            checkbox.visible = visible
-        for arrow in self.all_arrows[-3:-1]:
-            arrow.visible = visible
+#         # Offerer=Runner       
+#         visible = red if self.is_offerer.checked and self.is_runner.checked else bright_blue
+#         for checkbox in self.all_checkboxes[2:7]:
+#             checkbox.background = visible
+#         for arrow in self.all_arrows:
+#             arrow.background = visible
+#             self.arrow1.background = not visible
+#             self.arrow2.background = not visible
+#         # Requester=Runner    
+#         visible = red if self.is_runner.checked and self.is_requester.checked else bright_blue
+#         for checkbox in self.all_checkboxes[7:12]:
+#             checkbox.background = visible
+#         for arrow in self.all_arrows[-3:-1]:
+#             arrow.background = visible
         
     def refresh_canvas(self, **event_args):
         self.sender = event_args.get('sender')
         self.update_arrows()
-        self.update_text_colour()
+#         self.update_text_colour()
         self.update_sticky_items()
         self.update_enablers()
         self.update_predecessors()
