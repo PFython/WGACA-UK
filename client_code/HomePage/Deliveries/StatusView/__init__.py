@@ -12,5 +12,22 @@ class StatusView(StatusViewTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     # Any code you write here will run when the form opens.
+    self.setup_view()
+    # Test data
+    match = anvil.server.call('_get_all_matches')[0]
+    print(match)
+    
+    
+  def setup_view(self):
+    for component in self.card_1.get_components():
+        component.background = bright_blue
+        component.foreground = white
+        component.enabled = False
+    self.card_1.background = light_blue
     self.successful.background = green
     self.unsuccessful.background = red
+
+  def show_status_view(self, **event_args):
+    """This method is called when the column panel is shown on the screen"""
+    pass
+

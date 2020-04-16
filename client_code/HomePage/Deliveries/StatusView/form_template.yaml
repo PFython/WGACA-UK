@@ -4,10 +4,12 @@ container:
   properties: {col_widths: '{}'}
 components:
 - type: ColumnPanel
-  properties: {role: card, col_widths: '{}'}
+  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{}', spacing_below: small,
+    background: ''}
   name: card_1
   layout_properties: {grid_position: 'TJRMBD,DHTDVR'}
-  event_bindings: {}
+  event_bindings: {show: show_status_view}
   components:
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
@@ -50,10 +52,6 @@ components:
     name: pickup_agreed
     layout_properties: {grid_position: 'IOIBVH,ZFDRYZ'}
     event_bindings: {}
-  - type: ColumnPanel
-    properties: {}
-    name: column_panel_1
-    layout_properties: {grid_position: 'NFZGVI,HOFLNM JERLLC,SNKVCY'}
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
@@ -62,11 +60,11 @@ components:
     name: label_1_copy
     layout_properties:
       col_widths: {}
-      grid_position: NFZGVI,HOFLNM JERLLC,NXPLFM
+      grid_position: NNBPDB,RJAONN
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Runner confirms Pickup happened, font_size: 18,
+      foreground: '', visible: true, text: Runner confirms Pickup, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: runner_confirms_pickup
@@ -74,7 +72,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Runner gives feedback on Offerer, font_size: 18,
+      foreground: '', visible: true, text: Runnerfeeds back on Offerer, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: feedback_on_offerer_by_runner
@@ -82,23 +80,9 @@ components:
       col_widths: {}
       grid_position: NFZGVI,HOFLNM JYHLVA,VPCOUS
     event_bindings: {}
-  - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '', bold: false, underline: false,
-      icon: 'fa:arrow-down'}
-    name: label_1_copy_4
-    layout_properties:
-      col_widths: {}
-      grid_position: NFZGVI,VRPPWN GPYCOS,SKXBQG
-    event_bindings: {}
-  - type: ColumnPanel
-    properties: {}
-    name: column_panel_2
-    layout_properties: {grid_position: 'NFZGVI,VRPPWN GPYCOS,TNJFYZ'}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Offerer confirms Pickup happened, font_size: 18,
+      foreground: '', visible: true, text: Offerer confirms Pickup, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: offerer_confirms_pickup
@@ -106,7 +90,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Offerer gives feedback on Runner, font_size: 18,
+      foreground: '', visible: true, text: Offerer feeds back on Runner, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: feedback_on_runner_by_offerer
@@ -132,10 +116,6 @@ components:
     name: dropoff_agreed
     layout_properties: {grid_position: 'NJQFWV,INGTLG'}
     event_bindings: {}
-  - type: ColumnPanel
-    properties: {}
-    name: column_panel_4
-    layout_properties: {grid_position: 'MEUBDB,LSACKH JNBQAP,OGFYPH'}
   - type: Label
     properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
@@ -144,11 +124,11 @@ components:
     name: label_1_copy_5
     layout_properties:
       col_widths: {}
-      grid_position: MEUBDB,LSACKH JNBQAP,YAJPRV
+      grid_position: VDONQA,XTPRJJ
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Runner confirms Dropoff happened, font_size: 18,
+      foreground: '', visible: true, text: 'Runner confirms Dropoff ', font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: runner_confirms_dropoff
@@ -158,30 +138,17 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Runner gives feedback on Requester, font_size: 18,
+      foreground: '', visible: true, text: Runner feeds back on Requester, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: feedback_on_requester_by_runner
     layout_properties:
       col_widths: {}
       grid_position: MEUBDB,LSACKH SSJZHL,NIDYHP
-  - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '', bold: false, underline: false,
-      icon: 'fa:arrow-down'}
-    name: label_1_copy_6
-    layout_properties:
-      col_widths: {}
-      grid_position: MEUBDB,LGMTDJ SGAQHS,KAOYFL
     event_bindings: {}
-  - type: ColumnPanel
-    properties: {}
-    name: column_panel_3
-    layout_properties: {grid_position: 'MEUBDB,LGMTDJ SGAQHS,LOFJOI'}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Requester confirms Dropoff happened, font_size: 18,
+      foreground: '', visible: true, text: Requester confirms Dropoff, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: requester_confirms_dropoff
@@ -191,7 +158,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Requester gives feedback on Runner, font_size: 18,
+      foreground: '', visible: true, text: Requester feeds back on Runner, font_size: 18,
       font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
       bold: false, checked: false, underline: false}
     name: feedback_on_runner_by_requester
@@ -228,4 +195,22 @@ components:
       col_widths: {}
       grid_position: QFICYX,LFEACQ
     event_bindings: {}
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: '', visible: true, text: Offer Matched with Request, font_size: 18,
+    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+    bold: false, checked: false, underline: false}
+  name: offer_matched_copy
+  layout_properties:
+    col_widths: {}
+    grid_position: ICJRAO,CCSSRN
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+    foreground: '', visible: true, text: Offer Matched with Request, font_size: 18,
+    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+    bold: false, checked: false, underline: false}
+  name: offer_matched_copy_2
+  layout_properties:
+    col_widths: {}
+    grid_position: NZFDBN,TWKHWR
 is_package: true
