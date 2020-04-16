@@ -8,8 +8,9 @@ from anvil.tables import app_tables
 from .KarmaForm import KarmaForm
 import datetime
 
-from ...Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
-from ...Globals import STATUSES
+from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from ....Globals import STATUSES
+from .StatusView import StatusView
 
 class DeliveriesRow(DeliveriesRowTemplate):
     def __init__(self, **properties):
@@ -278,6 +279,24 @@ class DeliveriesRow(DeliveriesRowTemplate):
             event_args['sender'].icon = 'fa:caret-up'
         else:
             event_args['sender'].icon = 'fa:caret-down'       
+
+    def click_status_view(self, **event_args):
+        """This method is called when the Status View button is clicked"""
+        status_view = StatusView()
+        status_view.item['match'] = self.item
+        status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
+        if event_args['sender'].icon == 'fa:caret-down':
+            event_args['sender'].icon = 'fa:caret-up'
+            for row in  self.parent.get_components():
+               if row != self:
+                  row.clear()
+            self.parent.parent.add_component(status_view)
+        else:
+            event_args['sender'].icon = 'fa:caret-down'
+#             status_view.clear()
+            status_view.remove_from_parent()
+            self.__init__()
+
 
 
 

@@ -186,7 +186,7 @@ components:
     name: message2
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY CUXNIX,ULUXGJ
+      grid_position: LQZTGU,SOVMIY CUXNIX,LQPWAP
     event_bindings: {click: click_show_message}
   - type: TextArea
     properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
@@ -196,6 +196,16 @@ components:
     name: message2_text
     layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,VUYSCI'}
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: Delivery Status, font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
+    name: status_view
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY SOIKUS,YJVEVP
+    event_bindings: {click: click_status_view}
   event_bindings: {show: show_deliveries_row}
 container:
   type: DataRowPanel
@@ -203,3 +213,4 @@ container:
   properties: {role: null, align: left, tooltip: '', border: '', foreground: '', auto_display_data: false,
     visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}
+is_package: true

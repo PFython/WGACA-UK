@@ -10,7 +10,7 @@ services:
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
     remember_me_days: 7, use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
-startup: {type: form, module: HomePage.Deliveries.StatusView}
+startup: {type: form, module: HomePage}
 package_name: WGACA_UK_DEV_TEST
 allow_embedding: true
 name: WGACA_UK_DEV_TEST
