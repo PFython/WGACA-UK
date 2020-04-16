@@ -1,4 +1,4 @@
-from ._anvil_designer import StatusView_testTemplate
+from ._anvil_designer import StatusViewTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -7,15 +7,13 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 from ....Globals import green, grey, red, black, dark_green, dark_blue,blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
-class StatusView_test(StatusView_testTemplate):
+class StatusView(StatusViewTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
-#         self.is_offerer.checked = self.user == self.match['offer']['user']
-#         self.is_runner.checked = self.user == self.match['approved_runner']
-#         self.is_requester.checked = self.user == self.match['request']['user']
+
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.test_mode = True
@@ -37,6 +35,9 @@ class StatusView_test(StatusView_testTemplate):
         How the form layout (canvas) should look when first loaded e.g.
         colours, font size, labels, enabled and visible defaults
         """
+        self.is_offerer.checked = self.user == self.match['offer']['user']
+        self.is_runner.checked = self.user == self.match['approved_runner']
+        self.is_requester.checked = self.user == self.match['request']['user']
         self.offer_matched.checked = True
         if self.match['approved_runner']:
             self.runner_selected.checked = True
@@ -55,42 +56,29 @@ class StatusView_test(StatusView_testTemplate):
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
-        
-    def conceal(self, component, boolean_value):
-        """
-        Custom appearance/actions for toggling .visible.  During testing,
-        can be helpful to colour code rather than make truly invisible
-        """
-        if self.test_mode:
-            component.background = red if boolean_value else bright_blue
-        else:
-            component.visible = not boolean_value
-            
-    def initial_options_by_role(self, **event_args):
-        components = set(self.card_1.get_components())
 
-        # Single Roles
-        for checkbox in (self.runner_confirms_pickup,
+    def initial_options_by_role(self, **event_args):
+        # Stickiness and Event Hangling
+        for checkbox in self.all_checkboxes:
+            checkbox.set_event_handler("change", self.refresh_canvas)
+            checkbox.sticky = True        
+        # Single Roles: Offerer
+        for checkbox in {self.runner_confirms_pickup,
                          self.pickup_agreed,
                          self.feedback_on_offerer_by_runner,
                          self.dropoff_agreed,
                          self.runner_confirms_dropoff,
                          self.requester_confirms_dropoff,
                          self.feedback_on_requester_by_runner,
-                         self.feedback_on_runner_by_requester):
+                         self.feedback_on_runner_by_requester}:
             self.conceal(checkbox, self.is_offerer.checked)
-        if self.is_runner.checked:
-            print("Runner")
-            components.update({self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed})
-        if self.is_requester.checked and not self.is_runner.checked:
-            print("Requester")
-            components.update({self.requester_confirms_dropoff, self.dropoff_agreed})
-        for component in components:
-            component.enabled = True
-        for checkbox in self.all_checkboxes:
-            checkbox.set_event_handler("change", self.refresh_canvas)
-            checkbox.sticky = True
-#         # Offerer=Runner       
+        # Single Roles: Runner
+        for checkbox in {self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed}:
+            self.conceal(checkbox, self.is_runner.checked)
+        # Single Roles: Requester
+        for checkbox in {self.requester_confirms_dropoff, self.dropoff_agreed}:
+            self.conceal(checkbox, self.is_requester.checked)
+#         # Dual Roles: Offerer=Runner       
 #         visible = red if self.is_offerer.checked and self.is_runner.checked else bright_blue
 #         for checkbox in self.all_checkboxes[2:7]:
 #             checkbox.background = visible
@@ -98,7 +86,7 @@ class StatusView_test(StatusView_testTemplate):
 #             arrow.background = visible
 #             self.arrow1.background = not visible
 #             self.arrow2.background = not visible
-#         # Requester=Runner    
+#         # Dual Roles: Requester=Runner    
 #         visible = red if self.is_runner.checked and self.is_requester.checked else bright_blue
 #         for checkbox in self.all_checkboxes[7:12]:
 #             checkbox.background = visible
@@ -157,11 +145,21 @@ class StatusView_test(StatusView_testTemplate):
             if type(arrows) != list:
                 arrows = [arrows]
             for arrow in arrows:
-                arrow.foreground = black if component.checked else light_blue
+                arrow.foreground = black if component.checked else white
             
     def update_text_colour(self):
         for checkbox in self.all_checkboxes:
             checkbox.foreground = black if checkbox.checked else light_blue
+            
+    def conceal(self, component, boolean_value):
+        """
+        Custom appearance/actions for toggling .visible.  During testing,
+        can be helpful to colour code rather than make truly invisible
+        """
+        if self.test_mode:
+            component.background = red if boolean_value else bright_blue
+        else:
+            component.visible = not boolean_value
         
 
 
