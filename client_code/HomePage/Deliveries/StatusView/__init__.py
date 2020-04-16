@@ -12,19 +12,27 @@ class StatusView(StatusViewTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.match = anvil.server.call('_get_all_matches')[0] # Test data
         self.user = anvil.users.get_user()
-        self.is_offerer.checked = self.user == self.match['offer']['user']
-        self.is_runner.checked = self.user == self.match['approved_runner']
-        self.is_requester.checked = self.user == self.match['request']['user']
+#         self.is_offerer.checked = self.user == self.match['offer']['user']
+#         self.is_runner.checked = self.user == self.match['approved_runner']
+#         self.is_requester.checked = self.user == self.match['request']['user']
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
-        self.initial_canvas() 
+        self.test_setup()
+        self.initial_canvas()
+        self.initial_options_by_role()
+        self.refresh_canvas()
+        
+    def test_setup(self):
+        self.match = anvil.server.call('_get_all_matches')[0] # Test data
         for x in (self.is_offerer, self.is_requester, self.is_runner):
             x.enabled = True
-        self.refresh_canvas()
-
+            x.set_event_handler('change', self.initial_options_by_role)
+            
+        
+        
     def initial_canvas(self):
         self.offer_matched.checked = True
+        self
         if self.match['approved_runner']:
             self.runner_selected.checked = True
         for component in self.card_1.get_components():
@@ -43,6 +51,9 @@ class StatusView(StatusViewTemplate):
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         components = set()
+        
+    def initial_options_by_role(self, **event_args):
+        components = self.card_1.get_components()
         if self.is_runner.checked:
             components.update({self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed})
         if self.is_offerer.checked:
@@ -54,6 +65,13 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.refresh_canvas)
             checkbox.sticky = True
+        if self.is_offerer.checked and self.is_runner.checked:
+            for checkbox in self.all_checkboxes[:7]:
+                checkbox.visible = False
+            self.feedback_on_runner_by_offerer.visible = False
+        if self.is_runner.checked and self.is_requester.checked:
+            self.feedback_on_requester_by_runner.visible= False
+            self.feedback_on_runner_by_requester.visible = False
         
     def refresh_canvas(self, **event_args):
         self.sender = event_args.get('sender')
@@ -62,21 +80,14 @@ class StatusView(StatusViewTemplate):
         self.update_sticky_items()
         self.update_enablers()
         self.update_predecessors()
-        self.update_for_dual_roles()
+        self.update_for_dual_statuses()
         
-    def update_for_dual_roles(self):
-        for checkbox in self.all_checkboxes:
-            checkbox.italic = False
-        if self.is_offerer and self.is_runner:
-            self.feedback_on_offerer_by_runner.enabled = False
-            self.feedback_on_offerer_by_runner.italic = True
-            self.feedback_on_runner_by_offerer.enabled = False
-            self.feedback_on_runner_by_offerer.italic = True
-        if self.is_runner and self.is_requester:
-            self.feedback_on_requester_by_runner.enabled = False
-            self.feedback_on_requester_by_runner.italic = True
-            self.feedback_on_runner_by_requester.enabled = False
-            self.feedback_on_runner_by_requester.italic = True
+    def update_for_dual_statuses(self):
+        if self.runner_confirms_pickup.checked and self.offerer_confirms_pickup.checked:
+            self.pickup_agreed.checked = True
+        self.update_text_colour()
+        self.update_sticky_items()
+        self.update_enablers()    
           
     def update_predecessors(self):
         rules = [(self.runner_confirms_dropoff, self.runner_confirms_pickup),
@@ -86,8 +97,7 @@ class StatusView(StatusViewTemplate):
                 predecessor.checked = True
         self.update_text_colour()
         self.update_sticky_items()
-        self.update_enablers()
-                  
+        self.update_enablers()                  
         
     def update_enablers(self):
         rules = [(self.offerer_confirms_pickup, self.feedback_on_runner_by_offerer),
