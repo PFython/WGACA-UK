@@ -293,9 +293,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.parent.parent.add_component(status_view)
         else:
             event_args['sender'].icon = 'fa:caret-down'
-#             status_view.clear()
-            status_view.remove_from_parent()
-            self.__init__()
+            print("Removing")
+            #             status_view.clear()
+            self.parent.parent.remove_from_parent(status_view)
+            self.parent.parent.parent.__init__()
 
 
 
