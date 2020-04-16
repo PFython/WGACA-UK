@@ -17,7 +17,7 @@ class StatusView(StatusViewTemplate):
     self.is_offerer = self.user == self.match['offer']['user']
     self.is_runner = self.user == self.match['approved_runner']
     self.is_requester = self.user == self.match['request']['user']
-    self.build_status_view()    
+    self.dynamic_canvas()    
     self.layout_rules()
     
   def initial_canvas(self):
@@ -38,7 +38,7 @@ class StatusView(StatusViewTemplate):
     self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
     self.requester.text = "Requester: " + self.match['request']['user']['display_name']
 
-  def build_status_view(self, **event_args):
+  def dynamic_canvas(self, **event_args):
     """This method is called when the column panel is shown on the screen"""
     self.initial_canvas()
     
@@ -85,7 +85,8 @@ class StatusView(StatusViewTemplate):
       for component, action, target_list in rules:
           component._target_list = target_list
           component._action = action
-          component.set_event_handler("change", self.build_status_view)
+          component.set_event_handler("change", self.dynamic_canvas)
+
           
   def checkbox_tick(self, **event_args):
         component = event_args['sender']
@@ -94,10 +95,12 @@ class StatusView(StatusViewTemplate):
             item.checked = True
           
   def colour_arrows(self, **event_args):
-        component = event_args['sender']
-        if component.checked:
-          for arrow in component._target_list:
-            arrow.foreground = black
+#         component = event_args['sender']
+        for component in self.get_components():
+          if component.checked and hasattr(component, "._target_list"):
+            if component._action == "ARROWS":
+              for arrow in component._target_list:
+                arrow.foreground = black
             
   def enable_component(self, **event_args):
         component = event_args['sender']
