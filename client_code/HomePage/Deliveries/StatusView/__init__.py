@@ -53,7 +53,7 @@ class StatusView(StatusViewTemplate):
         components = set()
         
     def initial_options_by_role(self, **event_args):
-        components = self.card_1.get_components()
+        components = set(self.card_1.get_components())
         if self.is_runner.checked:
             components.update({self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed})
         if self.is_offerer.checked:
@@ -65,10 +65,12 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.refresh_canvas)
             checkbox.sticky = True
-        if self.is_offerer.checked and self.is_runner.checked:
-            for checkbox in self.all_checkboxes[:7]:
-                checkbox.visible = False
+        visible = False if self.is_offerer.checked and self.is_runner.checked else True
+        for checkbox in self.all_checkboxes[:7]:
+            checkbox.visible = visible
             self.feedback_on_runner_by_offerer.visible = False
+        else:
+          
         if self.is_runner.checked and self.is_requester.checked:
             self.feedback_on_requester_by_runner.visible= False
             self.feedback_on_runner_by_requester.visible = False
