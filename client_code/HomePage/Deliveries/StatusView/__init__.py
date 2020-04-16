@@ -65,10 +65,19 @@ class StatusView(StatusViewTemplate):
         self.update_for_dual_roles()
         
     def update_for_dual_roles(self):
+        for checkbox in self.all_checkboxes:
+            checkbox.italic = False
         if self.is_offerer and self.is_runner:
             self.feedback_on_offerer_by_runner.enabled = False
-            self.feedback_on_offerer_by_runner.enabled = False
-        
+            self.feedback_on_offerer_by_runner.italic = True
+            self.feedback_on_runner_by_offerer.enabled = False
+            self.feedback_on_runner_by_offerer.italic = True
+        if self.is_runner and self.is_requester:
+            self.feedback_on_requester_by_runner.enabled = False
+            self.feedback_on_requester_by_runner.italic = True
+            self.feedback_on_runner_by_requester.enabled = False
+            self.feedback_on_runner_by_requester.italic = True
+          
     def update_predecessors(self):
         rules = [(self.runner_confirms_dropoff, self.runner_confirms_pickup),
                  ]
