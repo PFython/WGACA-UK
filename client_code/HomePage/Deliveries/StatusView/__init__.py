@@ -19,6 +19,8 @@ class StatusView(StatusViewTemplate):
         self.is_requester.checked = self.user == self.match['request']['user']
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.initial_canvas() 
+        for x in (is_offerer, self.is_requester, self.is_runner):
+            x.enabled = True
         self.refresh_canvas()
 
     def initial_canvas(self):
@@ -51,10 +53,48 @@ class StatusView(StatusViewTemplate):
             component.enabled = True
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.refresh_canvas)
+            checkbox.sticky = True
         
     def refresh_canvas(self, **event_args):
+        self.sender = event_args.get('sender')
         self.update_arrows()
         self.update_text_colour()
+        self.update_sticky_items()
+        self.update_enablers()
+        self.update_predecessors()
+        self.update_for_dual_roles()
+        
+    def update_for_dual_roles(self):
+        if self.is_offerer and self.is_runner:
+            self.feedback_on_offerer_by_runner.enabled = False
+            self.feedback_on_offerer_by_runner.enabled = False
+        
+    def update_predecessors(self):
+        rules = [(self.runner_confirms_dropoff, self.runner_confirms_pickup),
+                 ]
+        for component, predecessor in rules:
+            if component.checked and not predecessor.checked:
+                predecessor.checked = True
+        self.update_text_colour()
+        self.update_sticky_items()
+        self.update_enablers()
+                  
+        
+    def update_enablers(self):
+        rules = [(self.offerer_confirms_pickup, self.feedback_on_runner_by_offerer),
+                 (self.runner_confirms_pickup, self.feedback_on_offerer_by_runner),
+                 (self.requester_confirms_dropoff, self.feedback_on_runner_by_requester),
+                 (self.runner_confirms_dropoff, self.feedback_on_requester_by_runner)]
+        for enabler, target in rules:
+            if enabler.checked:
+                target.enabled = True
+        self.update_sticky_items()
+
+        
+    def update_sticky_items(self):
+        for checkbox in self.all_checkboxes:
+            if checkbox.sticky and checkbox.checked:
+                checkbox.enabled = False
 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
