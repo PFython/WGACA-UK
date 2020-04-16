@@ -68,15 +68,17 @@ class StatusView(StatusViewTemplate):
             checkbox.sticky = True
         # Offerer=Runner       
         visible = False if self.is_offerer.checked and self.is_runner.checked else True
-        for checkbox in self.all_checkboxes[:7]:
+        for checkbox in self.all_checkboxes[2:7]:
             checkbox.visible = visible
-        for arrow in self.all_arrows[:4]:
+        for arrow in self.all_arrows:
             arrow.visible = visible
+            self.arrow1.visible = not visible
+            self.arrow2.visible = not visible
         # Requester=Runner    
         visible = False if self.is_runner.checked and self.is_requester.checked else True
         for checkbox in self.all_checkboxes[7:12]:
             checkbox.visible = visible
-        for arrow in self.all_arrows[-3:]:
+        for arrow in self.all_arrows[-3:-1]:
             arrow.visible = visible
         
     def refresh_canvas(self, **event_args):
