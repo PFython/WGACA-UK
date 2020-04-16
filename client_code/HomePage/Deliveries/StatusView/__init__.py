@@ -17,6 +17,8 @@ class StatusView(StatusViewTemplate):
     self.is_offerer = self.user == self.match['offer']['user']
     self.is_runner = self.user == self.match['approved_runner']
     self.is_requester = self.user == self.match['request']['user']
+    if self.match['approved_runner']:
+        self.runner_selected.checked = True
     self.dynamic_canvas()    
     self.layout_rules()
     
@@ -40,12 +42,9 @@ class StatusView(StatusViewTemplate):
 
   def dynamic_canvas(self, **event_args):
     """This method is called when the column panel is shown on the screen"""
-    self.initial_canvas()
-    
-    if self.match['approved_runner']:
-        self.runner_selected.checked = True
+    self.initial_canvas() 
+
 #     self.update_offerer()
-    self.update_runner()
 #     self.update_requester()
     for component in self.card_1.get_components():
         if hasattr(component, "enabled"):
@@ -61,52 +60,46 @@ class StatusView(StatusViewTemplate):
       if hasattr(component, "_action"):
         component._action(sender=component)
 
-             
-  def update_runner(self):
-        if self.is_runner:
-          self.runner_confirms_pickup.enabled = True
-          self.runner_confirms_dropoff.enabled = True
-          self.dropoff_agreed.enabled = True
-          self.pickup_agreed.enabled = True
-
-          
   def layout_rules(self):
-      ARROWS = self.colour_arrows
-      TICK = self.checkbox_tick
-      ENABLE = self.enable_component
+      ARROWS = self.rule_for_arrows
+      TICK = self.rule_for_checkbox_tick
+      ENABLE = self.rule_for_enabling
       rules = [(self.offer_matched, ARROWS, [self.arrow1]),
                (self.runner_selected, ARROWS, [self.arrow2]),
                (self.pickup_agreed, ARROWS, [self.arrow3]),
                (self.dropoff_agreed, ARROWS, [self.arrow4,self.arrow5]),
                (self.runner_confirms_pickup, ENABLE, [self.feedback_on_offerer_by_runner, self.runner_confirms_dropoff]),
                (self.runner_confirms_dropoff, ENABLE, [self.feedback_on_requester_by_runner]),
-]
-      
+               (self.is_runner, ENABLE, [self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed]),
+                (self.is_offerer, ENABLE, []),
+               (self.is_requester, ENABLE, []),]      
       for component, action, target_list in rules:
           component._target_list = target_list
           component._action = action
           component.set_event_handler("change", self.dynamic_canvas)
 
           
-  def checkbox_tick(self, **event_args):
+  def rule_for_checkbox_tick(self, **event_args):
         component = event_args['sender']
         if component.checked:
           for item in component._target_list:
             item.checked = True
           
-  def colour_arrows(self, **event_args):
-#         component = event_args['sender']
-        for component in self.get_components():
-          if component.checked and hasattr(component, "._target_list"):
-            if component._action == "ARROWS":
+  def rule_for_arrows(self, **event_args):
+        component = event_args['sender']
+            if component.checked:
               for arrow in component._target_list:
                 arrow.foreground = black
             
-  def enable_component(self, **event_args):
+  def rule_for_enabling(self, **event_args):
         component = event_args['sender']
-        if component.checked:
-          for item in component._target_list:
-              item.enabled = True
+        if hasattr(component, "checked"):
+          if not component.checked:
+            return
+        elif not component:
+            return
+        for item in component._target_list:
+                item.enabled = True
           
 
 
