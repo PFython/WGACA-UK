@@ -3,6 +3,36 @@ container:
   event_bindings: {}
   properties: {col_widths: '{}'}
 components:
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+    foreground: '', visible: true, text: 'Is user the Offerer? (Invisible)', font_size: 18,
+    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+    bold: false, checked: false, underline: false}
+  name: is_offerer
+  layout_properties:
+    col_widths: {}
+    grid_position: FNCBWW,UMGCPQ
+  event_bindings: {}
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+    foreground: '', visible: true, text: 'Is user the Runner? (Invisible)', font_size: 18,
+    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+    bold: false, checked: false, underline: false}
+  name: is_runner
+  layout_properties:
+    col_widths: {}
+    grid_position: FNCBWW,XJWICZ
+  event_bindings: {}
+- type: CheckBox
+  properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+    foreground: '', visible: true, text: 'Is user the requester? (Invisible)', font_size: 18,
+    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+    bold: false, checked: false, underline: false}
+  name: is_requester
+  layout_properties:
+    col_widths: {}
+    grid_position: FNCBWW,OYHSCY
+  event_bindings: {}
 - type: Label
   properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
     visible: false, text: Invisible field for holding Match, font_size: null, font: '',
