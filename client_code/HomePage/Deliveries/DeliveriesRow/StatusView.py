@@ -18,7 +18,8 @@ class StatusView(StatusViewTemplate):
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.initial_canvas()
-        self.ingest_match(data)
+        self.ingest_match_data()
+        self.show_form()
         
     def show_form(self, **event_args):
         print("show_form")
@@ -43,7 +44,12 @@ class StatusView(StatusViewTemplate):
         self.offerer.background = dark_blue
         self.runner.background = dark_blue
         self.requester.background = dark_blue
-        self.requester.background = blue 
+        self.requester.background = blue
+        # Stickiness and Event Handling
+        for checkbox in self.all_checkboxes:
+            checkbox.set_event_handler("change", self.update_components())
+            checkbox.sticky = True
+            self.conceal(checkbox, True)
 
     def ingest_match_data(self):
         # Checkboxes
@@ -58,53 +64,50 @@ class StatusView(StatusViewTemplate):
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']
+        
       
     def initial_options_by_role(self, **event_args):
-        # Stickiness and Event Handling
-        for checkbox in self.all_checkboxes:
-            checkbox.set_event_handler("change", self.refresh_canvas)
-            checkbox.sticky = True
-            self.conceal(checkbox, True)
         # Single Roles: Offerer
         if self.is_offerer.checked and (not self.is_runner.checked):
             print("Offerer")
-            checkboxes = {self.pickup_agreed,
+            checkboxes = [self.pickup_agreed,
                           self.offerer_confirms_pickup,
                           self.runner_feedback_by_offerer,
-                          self.delivery}
+                          self.delivery]
         # Single Roles: Runner
         if self.is_runner.checked and (not self.is_offerer.checked) and (not self.is_requester.checked):
             print("Runner")
-            checkboxes = {self.pickup_agreed,
+            checkboxes = [self.pickup_agreed,
                           self.runner_confirms_pickup,
                           self.offerer_feedback_by_runner,
                           self.dropoff_agreed,
                           self.runner_confirms_dropoff,
                           self.requester_feedback_by_runner,
-                          self.delivery}
+                          self.delivery]
         # Single Roles: Requester
         if self.is_requester.checked and (not self.is_runner.checked):
             print("Requester")
-            checkboxes = {self.dropoff_agreed,
+            checkboxes = [self.dropoff_agreed,
                           self.requester_confirms_dropoff,
                           self.runner_feedback_by_requester,
-                          self.delivery}
+                          self.delivery]
         # Dual Roles: Offerer=Runner
         if self.is_offerer.checked and self.is_runner.checked:
             print("Offerer+Runner")
-            checkboxes = {self.dropoff_agreed,
+            checkboxes = [self.dropoff_agreed,
                           self.runner_confirms_dropoff,
                           self.requester_feedback_by_runner,
-                          self.delivery}
+                          self.delivery]
         # Dual Roles: Requester=Runner  
         if self.is_requester.checked and self.is_runner.checked:
             print("Requester+Runner")
-            checkboxes = {self.pickup_agreed,
+            checkboxes = [self.pickup_agreed,
                           self.runner_confirms_pickup,
                           self.offerer_feedback_by_runner,
-                          self.delivery}
+                          self.delivery]
         for checkbox in checkboxes:
             self.conceal(checkbox, False)
+        checkboxes[0].enabled = True
             
     def conceal(self, component, boolean_value):
         """
@@ -154,8 +157,9 @@ class StatusView(StatusViewTemplate):
         
     def update_sticky_items(self):
         for checkbox in self.all_checkboxes:
-            if checkbox.sticky and checkbox.checked:
-                checkbox.enabled = False
+            if hasattr(checkbox, "sticky"):
+                if checkbox.sticky and checkbox.checked:
+                    checkbox.enabled = False
 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
