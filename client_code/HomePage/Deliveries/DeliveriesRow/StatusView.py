@@ -17,12 +17,13 @@ class StatusView(StatusViewTemplate):
             return
 
     def show_form(self, **event_args):
+        print("show_form")
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.setup_test_or_prod()
         self.initial_canvas()
         self.initial_options_by_role()
-#         self.refresh_canvas()
+        self.refresh_canvas()
         
     def setup_test_or_prod(self, **event_args):
         self.test_mode.set_event_handler('change', self.setup_test_or_prod)
@@ -79,25 +80,20 @@ class StatusView(StatusViewTemplate):
             checkbox.set_event_handler("change", self.refresh_canvas)
             checkbox.sticky = True        
         # Single Roles: Offerer
-        for checkbox in {self.runner_confirms_pickup,
-                         self.feedback_on_offerer_by_runner,
-                         self.dropoff_agreed,
-                         self.runner_confirms_dropoff,
-                         self.requester_confirms_dropoff,
-                         self.runner_confirms_dropoff,
-                         self.feedback_on_requester_by_runner,
-                         self.feedback_on_runner_by_requester}:
-            self.conceal(checkbox, self.is_offerer.checked)
+        for checkbox in {self.pickup_agreed,
+                         self.offerer_confirms_pickup,
+                         self.runner_feedback_by_offerer}:
+            self.conceal(checkbox, not self.is_offerer.checked)
         # Single Roles: Runner
         for checkbox in {self.offerer_confirms_pickup,
                          self.feedback_on_runner_by_offerer,
                          self.requester_confirms_dropoff,
                          self.feedback_on_runner_by_requester,}:
-            print(type(checkbox), self.is_runner.checked)
+            print(type(checkbox), not self.is_runner.checked)
             self.conceal(checkbox, self.is_runner.checked)
         # Single Roles: Requester
-#         for checkbox in {self.requester_confirms_dropoff, self.dropoff_agreed}:
-#             self.conceal(checkbox, self.is_requester.checked)
+        for checkbox in {self.requester_confirms_dropoff, self.dropoff_agreed}:
+            self.conceal(checkbox, not self.is_requester.checked)
 #         # Dual Roles: Offerer=Runner       
 #         visible = red if self.is_offerer.checked and self.is_runner.checked else bright_blue
 #         for checkbox in self.all_checkboxes[2:7]:
@@ -120,7 +116,6 @@ class StatusView(StatusViewTemplate):
         self.update_sticky_items()
         self.update_enablers()
         self.update_predecessors()
-        self.update_for_dual_statuses()
         
     def update_for_dual_statuses(self):
         if self.runner_confirms_pickup.checked and self.offerer_confirms_pickup.checked:
@@ -175,6 +170,7 @@ class StatusView(StatusViewTemplate):
         Custom appearance/actions for toggling .visible.  During testing,
         can be helpful to colour code rather than make truly invisible
         """
+        print("conceal")
         if self.test_mode.checked:
             component.background = red if boolean_value else bright_blue
         else:

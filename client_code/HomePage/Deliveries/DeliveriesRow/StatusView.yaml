@@ -180,7 +180,7 @@ components:
         foreground: '', visible: true, text: Feed back on Runner, font_size: 18, font: '',
         spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: feedback_on_runner_by_offerer
+      name: runner_feedback_by_offerer
       layout_properties:
         col_widths: {}
         grid_position: JYHLVA,NODDCW
@@ -190,7 +190,7 @@ components:
         foreground: '', visible: true, text: Feed back on Offerer, font_size: 18,
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: feedback_on_offerer_by_runner
+      name: offerer_feedback_by_runner
       layout_properties:
         col_widths: {}
         grid_position: JYHLVA,VPCOUS
@@ -265,7 +265,7 @@ components:
         foreground: '', visible: true, text: Feed back on Requester, font_size: 18,
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: feedback_on_requester_by_runner
+      name: requester_feedback_by_runner
       layout_properties:
         col_widths: {}
         grid_position: UTIZGO,WIWKHQ
@@ -305,7 +305,7 @@ components:
         col_widths: {}
         grid_position: QFICYX,WVSZDL
       event_bindings: {}
-  event_bindings: {show: show_form}
+  event_bindings: {}
 container:
   type: ColumnPanel
   event_bindings: {}
