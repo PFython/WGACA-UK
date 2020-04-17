@@ -84,8 +84,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_myself()
         self.populate_addresses()
-        self.get_status_function()(self.get_user_role())
-        self.status.text += f" [Status Code {self.item['status_code']}]"
         self.show_messages()
           
 #     def click_update_status(self, **event_args):
@@ -155,19 +153,25 @@ class DeliveriesRow(DeliveriesRowTemplate):
         else:
             event_args['sender'].icon = 'fa:caret-down'       
 
+    def disable_similar_buttons(self, sender):
+        for row in [x for x in self.parent.get_components()]:
+            columns = row.get_components()
+            for column in columns:
+                buttons = [x for x in column.get_components() if type(x) == Button]
+                print(len(buttons)," buttons")
+                button = [x for x in buttons  if "Delivery Status" in x.text]
+                button[0].enabled = False
+        sender.enabled = True 
+            
     def click_status_view(self, **event_args):
         """This method is called when the Status View button is clicked"""
         status_view = StatusView()
         status_view.item['match'] = self.item
         status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
-        if event_args['sender'].icon == 'fa:caret-down':
-            event_args['sender'].icon = 'fa:caret-up'
-            for row in [x for x in self.parent.get_components()]:
-                buttons = [x for x in row.get_components() if type(x) == Button]          
-                for button in buttons:
-                    if "Delivery Status" in button.text:
-                        button.enabled = False
-            event_args['sender'].enabled = True 
+        sender = event_args['sender']
+        if sender.icon == 'fa:caret-down':
+            sender.icon = 'fa:caret-up'
+            self.disable_similar_buttons(sender)
             self.status_view_panel.add_component(status_view)
             self.status_view_panel.visible = True
         else:
