@@ -112,7 +112,7 @@ class StatusView(StatusViewTemplate):
 #         for arrow in self.all_arrows[-3:-1]:
 #             arrow.background = visible
         
-    def refresh_canvas(self, **event_args):
+     def refresh_canvas(self, **event_args):
         self.sender = event_args.get('sender')
         self.update_arrows()
 #         self.update_text_colour()
