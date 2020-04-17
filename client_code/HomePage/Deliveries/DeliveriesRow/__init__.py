@@ -8,7 +8,7 @@ from anvil.tables import app_tables
 from .KarmaForm import KarmaForm
 import datetime
 
-from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink, black
 from ....Globals import STATUSES
 from .StatusView import StatusView
 
@@ -42,6 +42,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.runner.text = "Approved Runner: " + runner
         if runner == anvil.users.get_user()['display_name']:
             self.runner.foreground = green
+            self.status_label.foreground = green
+            self.show_route.foreground = green
+        else:
+            self.show_route.foreground = black
             
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
@@ -64,7 +68,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.dropoff.foreground = green
             self.dropoff.icon = 'fa:home'
             self.request.foreground = green
-            self.request_notes.foreground = green      
+            self.request_notes.foreground = green    
+
    
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
@@ -138,13 +143,13 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.textbox.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
         sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'       
 
-    def disable_similar_buttons(self, sender):
+    def disable_similar_buttons(self, sender, enabled = False):
         for row in [x for x in self.parent.get_components()]:
             columns = row.get_components()
             for column in columns:
                 buttons = [x for x in column.get_components() if type(x) == Button]
                 button = [x for x in buttons  if "Delivery Status" in x.text]
-                button[0].enabled = False
+                button[0].enabled = enabled
         sender.enabled = True 
             
     def click_status_view(self, **event_args):
@@ -159,11 +164,11 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.disable_similar_buttons(sender)
             self.status_view_panel.add_component(status_view)
             self.status_view_panel.visible = True
-
         else:
             event_args['sender'].icon = 'fa:caret-down'
             status_view.remove_from_parent()
             self.status_view_panel.visible = False
+            self.disable_similar_buttons(sender, True)
             
 
 

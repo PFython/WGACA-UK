@@ -26,7 +26,7 @@ class StatusView(StatusViewTemplate):
         
     def setup_test_or_prod(self):
         # Change the following to True for Production use
-        self.test_mode = False
+        self.test_mode = True
         if self.test_mode:
             
             for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
