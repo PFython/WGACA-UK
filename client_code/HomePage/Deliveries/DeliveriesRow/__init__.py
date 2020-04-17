@@ -84,7 +84,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_myself()
         self.populate_addresses()
-        self.show_messages()
+        self.combine_messages()
         self.row_id.text = self.item.get_id()
           
 #     def click_update_status(self, **event_args):
@@ -110,49 +110,33 @@ class DeliveriesRow(DeliveriesRowTemplate):
           form.regarding_role.text = regarding_role
           self.parent.parent.add_component(form)
               
-    def show_messages(self):
+    def combine_messages(self):
         user = anvil.users.get_user()
         messages = self.item['messages_dict']
-        if user == self.item['offer']['user'] :
-            self.message1.text = " Message from Runner"
-            self.message1.tag = messages.get('runner_to_offerer')
-            self.pickup.text += self.item['offer']['user']['postcode'] or ""
-            self.message2.visible = False
-
-        if user == self.item['approved_runner'] :
-            self.message1.text = " Message from Offerer"
-            self.message1.tag = messages.get('offerer_to_runner')
-            self.message2.text = " Message from Requester"
-            self.message2.tag = messages.get('requester_to_runner')
-            # Check if Runner is authorised to see Request/Offer postcodes
-            for shared, address in {self.item['offer']: self.pickup,
-                                    self.item['request']: self.dropoff}.items():
-                post_code_shared = shared['user']['postcode_shared_with'] or []
-                if user in post_code_shared:
-                    address.text += self.item['offer']['user']['postcode'] or ""
-
-        if user == self.item['request']['user'] :
-            self.message2.text = " Message from Runner"
-            self.message2.tag = messages.get('runner_to_requester')
-            self.dropoff.text += self.item['offer']['user']['postcode'] or ""
-            self.message1.visible = False
-            
-        for message in (self.message1, self.message2):
-            message.tag = message.tag or ""
-            message.tag = str(message.tag).strip()
-            if not message.tag:
-                message.enabled = False
-                message.background = grey
+        # Remove unauthorised messages for user
+        keys = 'offerer_to_runner runner_to_offerer runner_to_requester requester_to_runner'.split()
+        if user != self.item['offer']['user'] and keys[1] in messages:
+            del messages[keys[1]]
+        if user != self.item['request']['user'] and keys[2] in messages:
+            del messages[keys[2]]
+        if user != self.item['approved_runner']:
+            for k in (keys[1], keys[2]):
+                if k in messages:
+                    del messages[k]
+        self.textbox.text = ""
+        for address, message in self.item['messages_dict'].items():
+            if message.replace("\n",""):
+                self.textbox.text += address.replace("_"," ").upper() + ":\n"
+                self.textbox.text += message + "\n"
+        if not self.textbox.text:
+            self.show_message.enabled = False
+            self.show_message.background = grey
     
     def click_show_message(self, **event_args):
         """This method is called when a Message Button is shown on the screen"""
-        textbox = {self.message1: self.message1_text, self.message2: self.message2_text}[event_args['sender']]
-        textbox.text = event_args['sender'].tag
-        textbox.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
-        if event_args['sender'].icon == 'fa:caret-down':
-            event_args['sender'].icon = 'fa:caret-up'
-        else:
-            event_args['sender'].icon = 'fa:caret-down'       
+        sender = event_args['sender']
+        self.textbox.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
+        sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'       
 
     def disable_similar_buttons(self, sender):
         for row in [x for x in self.parent.get_components()]:

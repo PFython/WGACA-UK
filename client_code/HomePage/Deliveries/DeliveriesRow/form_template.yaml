@@ -16,6 +16,28 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Pick-up, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:upload'}
+    name: label_3
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,WYMIYQ OWDTFT,XJCHKD
+    event_bindings: {}
+  - type: Label
+    properties: {role: green, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: pickup
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,WYMIYQ BSXEVG,QEFVSK
+    data_bindings:
+    - {property: text, code: ''}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Offer, font_size: 14, font: '', spacing_above: small, icon_align: left,
       spacing_below: small, italic: false, background: '', bold: true, underline: true,
       icon: 'fa:heartbeat'}
@@ -52,65 +74,43 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Pick-up, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:upload'}
-    name: label_3
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ KGXEQR,PCJXTL
-    event_bindings: {}
-  - type: Label
-    properties: {role: green, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: pickup
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ OZLREB,OQTHOP
-    data_bindings:
-    - {property: text, code: ''}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Status, font_size: null, font: '', spacing_above: small,
       icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
       underline: true, icon: 'fa:check-square-o'}
     name: label_6
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF
+      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF LYGZTT,LFQKZH
     data_bindings: []
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:bullhorn'}
-    name: label_1
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY KXLMZD,VSRSWF
-    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: true, underline: false,
       icon: 'fa:ambulance'}
     name: runner
-    layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY KKOWJK,UBRRQK'}
+    layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF
+        UTLSWD,AXXOQV'}
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: request
+      visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:download'}
+    name: label_4
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY KKOWJK,TINIPN
+      grid_position: LQZTGU,SOVMIY KXLMZD,VSRSWF XKHAPO,JJGQEU
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: dropoff
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY KXLMZD,VSRSWF QGNAUG,ROQLSU
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
@@ -121,9 +121,41 @@ components:
       spacing_below: small, italic: false, background: '', bold: true, underline: false,
       icon: 'fa:map-marker'}
     name: show_route
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY HDOQAH,SLDIXG'}
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY HDOQAH,SLDIXG LJCRWO,SVFZYU'}
     event_bindings: {}
     components: []
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Delivery Status', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
+    name: status_view
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY HDOQAH,SLDIXG QKDUCU,KWKXMY
+    event_bindings: {click: click_status_view}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:bullhorn'}
+    name: label_1
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY HDOQAH,UIHVPB MRTXGK,QGQYUY
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: request
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY HDOQAH,UIHVPB AJWPKK,SVUVOZ
+    data_bindings:
+    - {property: text, code: ''}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
@@ -132,82 +164,31 @@ components:
     name: request_notes
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY HDOQAH,TYYAYT
+      grid_position: LQZTGU,SOVMIY HDOQAH,UIHVPB KMZJEF,CFKTCA
     data_bindings: []
     event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '#0080c0',
-      bold: false, underline: false, icon: 'fa:caret-down'}
-    name: message1
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY UTSGFO,APBHRD'}
-    event_bindings: {click: click_show_message}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:download'}
-    name: label_4
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY UTSGFO,FRRNLZ
-  - type: TextArea
-    properties: {role: null, align: left, height: 88, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
-      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: message1_text
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY AVBPFE,CRJOWG'}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: dropoff
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY AVBPFE,EHAGKX
-    data_bindings:
-    - {property: text, code: ''}
-    event_bindings: {}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: '', font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '#0080c0',
-      bold: false, underline: false, icon: 'fa:caret-down'}
-    name: message2
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY CUXNIX,LQPWAP
-    event_bindings: {click: click_show_message}
-  - type: ColumnPanel
-    properties: {}
-    name: column_panel_2
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY CUXNIX,ALOXWR'}
-  - type: TextArea
-    properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
-      border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
-      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: message2_text
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,VUYSCI EFEJJO,KQMULX'}
-    event_bindings: {}
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: Delivery Status, font_size: null,
+      foreground: '#ffffff', visible: true, text: ' Show Messages', font_size: null,
       font: '', spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
-    name: status_view
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY TTEPRB,VUYSCI EGOKAT,LOFFKB
-    event_bindings: {click: click_status_view}
+      background: '#0080c0', bold: false, underline: false, icon: 'fa:caret-down'}
+    name: show_message
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY QMFTQA,YJIZTC'}
+    event_bindings: {click: click_show_message}
   - type: ColumnPanel
-    properties: {}
-    name: column_panel_3
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,YWOBYF'}
+    properties: {col_widths: '{}'}
+    name: column_panel_2
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY AVBPFE,MXCADY'}
+    event_bindings: {}
+    components:
+    - type: TextArea
+      properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
+        border: '', enabled: false, foreground: '', visible: false, text: '', font_size: null,
+        auto_expand: false, font: '', spacing_above: small, spacing_below: small,
+        italic: false, background: '', bold: false, underline: false}
+      name: textbox
+      layout_properties: {grid_position: 'MEVSCZ,UDWTQB', full_width_row: true}
+      event_bindings: {}
   - type: FlowPanel
     properties: {role: null, spacing: medium, align: left, tooltip: '', border: '',
       foreground: '', visible: false, spacing_above: small, spacing_below: small,
