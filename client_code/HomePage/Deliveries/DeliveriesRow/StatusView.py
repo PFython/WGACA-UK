@@ -86,9 +86,9 @@ class StatusView(StatusViewTemplate):
             self.conceal(checkbox, not self.is_offerer.checked)
         # Single Roles: Runner
         for checkbox in {self.offerer_confirms_pickup,
-                         self.feedback_on_runner_by_offerer,
+                         
                          self.requester_confirms_dropoff,
-                         self.feedback_on_runner_by_requester,}:
+                        }:
             print(type(checkbox), not self.is_runner.checked)
             self.conceal(checkbox, self.is_runner.checked)
         # Single Roles: Requester
@@ -135,10 +135,10 @@ class StatusView(StatusViewTemplate):
         self.update_enablers()                  
         
     def update_enablers(self):
-        rules = [(self.offerer_confirms_pickup, self.feedback_on_runner_by_offerer),
-                 (self.runner_confirms_pickup, self.feedback_on_offerer_by_runner),
-                 (self.requester_confirms_dropoff, self.feedback_on_runner_by_requester),
-                 (self.runner_confirms_dropoff, self.feedback_on_requester_by_runner)]
+        rules = [(self.offerer_confirms_pickup, self.runner_feedback_by_offerer),
+                 (self.runner_confirms_pickup, self.offerer_feedback_by_runner),
+                 (self.requester_confirms_dropoff, self.runner_feedback_by_requester),
+                 (self.runner_confirms_dropoff, self.requester_feedback_by_runner)]
         for enabler, target in rules:
             if enabler.checked:
                 target.enabled = True

@@ -275,7 +275,7 @@ components:
         foreground: '', visible: true, text: Feed back on Runner, font_size: 18, font: '',
         spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: feedback_on_runner_by_requester
+      name: runner_feedback_by_requester
       layout_properties:
         col_widths: {}
         grid_position: UTIZGO,XYSNZC
