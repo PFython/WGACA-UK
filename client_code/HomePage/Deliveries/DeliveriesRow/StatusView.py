@@ -20,6 +20,8 @@ class StatusView(StatusViewTemplate):
         self.initial_canvas()
         self.ingest_match_data()
         self.show_form()
+        for checkbox in self.all_checkboxes:
+            checkbox.set_event_handler("change", self.update_components)
         
     def show_form(self, **event_args):
         print("show_form")
@@ -47,7 +49,7 @@ class StatusView(StatusViewTemplate):
         self.requester.background = blue
         # Stickiness and Event Handling
         for checkbox in self.all_checkboxes:
-            checkbox.set_event_handler("change", self.update_components())
+#             checkbox.set_event_handler("change", self.update_components())
             checkbox.sticky = True
             self.conceal(checkbox, True)
 
@@ -107,7 +109,8 @@ class StatusView(StatusViewTemplate):
                           self.delivery]
         for checkbox in checkboxes:
             self.conceal(checkbox, False)
-        checkboxes[0].enabled = True
+            self.enabled = True
+        self.delivery.enabled = True if self.is_requester.checked else False
             
     def conceal(self, component, boolean_value):
         """
@@ -121,18 +124,23 @@ class StatusView(StatusViewTemplate):
 
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
-        self.update_enablers()
+        print(self.sender)
+        self.update_dependencies()
+        print("enabled")
         self.update_predecessors()
+        print("predecessors")
         self.update_for_dual_statuses()
+        print("dual_status")
         self.update_sticky_items()
+        print("sticky")
         self.update_arrows()
+        print("arrows")
         self.update_text_colour()
+        print("colour")
         
-    def update_enablers(self):
-        rules = [(self.offerer_confirms_pickup, self.runner_feedback_by_offerer),
-                 (self.runner_confirms_pickup, self.offerer_feedback_by_runner),
-                 (self.requester_confirms_dropoff, self.runner_feedback_by_requester),
-                 (self.runner_confirms_dropoff, self.requester_feedback_by_runner)]
+    def update_dependencies(self):
+        return
+        rules = []
         for enabler, target in rules:
             if enabler.checked:
                 target.enabled = True
@@ -146,14 +154,14 @@ class StatusView(StatusViewTemplate):
                 predecessor.checked = True
         self.update_text_colour()
         self.update_sticky_items()
-        self.update_enablers()   
+        self.update_dependencies()   
         
     def update_for_dual_statuses(self):
         if self.runner_confirms_pickup.checked and self.offerer_confirms_pickup.checked:
             self.pickup_agreed.checked = True
         self.update_text_colour()
         self.update_sticky_items()
-        self.update_enablers()    
+        self.update_dependencies()    
         
     def update_sticky_items(self):
         for checkbox in self.all_checkboxes:
