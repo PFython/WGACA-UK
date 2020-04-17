@@ -116,7 +116,7 @@ db_schema:
     QYW+Cp6PbUE=:
       name: offer_collected
       type: bool
-      admin_ui: {order: 4, width: 60.333665999999994}
+      admin_ui: {order: 4, width: 153}
     EaU1GoL_KEE=:
       name: feedback_from_runner
       type: string

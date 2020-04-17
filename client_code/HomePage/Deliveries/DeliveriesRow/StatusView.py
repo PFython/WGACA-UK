@@ -13,13 +13,10 @@ class StatusView(StatusViewTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
-#         print("Row:",self.row_id.text)
-#         if not self.row_id.text.startswith('['):
         if not hasattr(self, 'match'):
             return
-#         self.match = anvil.server.call('get_match_by_id', self.row_id.text)
-        print(type(self.match))
-#         self.match = anvil.server.call('_get_all_matches')[0]
+
+    def show_form(self, **event_args):
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.setup_test_or_prod()

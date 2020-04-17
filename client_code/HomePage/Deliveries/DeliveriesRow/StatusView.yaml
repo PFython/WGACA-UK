@@ -31,7 +31,7 @@ components:
   event_bindings: {}
 - type: Label
   properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-    visible: true, text: 'Invisible field for holding row_id or Match or Match dict
+    visible: false, text: 'Invisible field for holding row_id or Match or Match dict
 
       ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
     italic: false, background: '', bold: false, underline: false, icon: ''}
@@ -291,6 +291,7 @@ components:
         col_widths: {}
         grid_position: QFICYX,WVSZDL
       event_bindings: {}
+  event_bindings: {show: show_form}
 container:
   type: ColumnPanel
   event_bindings: {}
