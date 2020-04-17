@@ -6,7 +6,7 @@ components:
       ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
     italic: false, background: '', bold: false, underline: false, icon: ''}
   name: row_id
-  layout_properties: {grid_position: 'FADAPX,KECBZA'}
+  layout_properties: {grid_position: 'FADAPX,KECBZA', full_width_row: true}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
@@ -60,7 +60,7 @@ components:
       spacing_below: small, background: ''}
     name: card_1
     layout_properties: {grid_position: 'YZFYDP,KBWKKA', full_width_row: true}
-    event_bindings: {show: show_status_view}
+    event_bindings: {show: show_form}
     components:
     - type: Link
       properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '',
