@@ -82,17 +82,24 @@ class StatusView(StatusViewTemplate):
         # Single Roles: Offerer
         for checkbox in {self.pickup_agreed,
                          self.offerer_confirms_pickup,
-                         self.runner_feedback_by_offerer}:
+                         self.runner_feedback_by_offerer,
+                         self.delivery}:
             self.conceal(checkbox, not self.is_offerer.checked)
         # Single Roles: Runner
-        for checkbox in {self.offerer_confirms_pickup,
-                         
-                         self.requester_confirms_dropoff,
-                        }:
+        for checkbox in {self.pickup_agreed,
+                         self.runner_confirms_pickup,
+                         self.offerer_feedback_by_runner,
+                         self.dropoff_agreed,
+                         self.runner_confirms_dropoff,
+                         self.requester_feedback_by_runner,
+                         self.delivery}:
             print(type(checkbox), not self.is_runner.checked)
             self.conceal(checkbox, self.is_runner.checked)
         # Single Roles: Requester
-        for checkbox in {self.requester_confirms_dropoff, self.dropoff_agreed}:
+        for checkbox in {self.dropoff_agreed,
+                         self.requester_confirms_dropoff,
+                         self.runner_feedback_by_requester,
+                         self.delivery}:
             self.conceal(checkbox, not self.is_requester.checked)
 #         # Dual Roles: Offerer=Runner       
 #         visible = red if self.is_offerer.checked and self.is_runner.checked else bright_blue
