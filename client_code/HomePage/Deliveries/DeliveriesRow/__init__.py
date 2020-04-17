@@ -73,8 +73,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
             address.text = self.item[table]['user']['display_name']+"\n"
             if self.item['approved_runner'] == user or self.item[table]['user'] == user:
                 address.text += str(self.item[table]['user']['house_number'])+" "
-            address.text += self.item[table]['user']['street']+"\n"
-            address.text += self.item[table]['user']['town']+"\n"
+            address.text += self.item[table]['user']['street']+", "
+            address.text += self.item[table]['user']['town']+", "
             address.text += self.item[table]['user']['county']+"\n"
           
     def show_deliveries_row(self, **event_args):
@@ -173,8 +173,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if sender.icon == 'fa:caret-down':
             sender.icon = 'fa:caret-up'
             self.disable_similar_buttons(sender)
-            print(self.item)
-            print(type(self.item))
             self.status_view_panel.add_component(status_view)
             self.status_view_panel.visible = True
 

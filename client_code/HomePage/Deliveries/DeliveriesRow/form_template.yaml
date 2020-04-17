@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYMIYQ":40,"SOVMIY":20}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYMIYQ":20,"SOVMIY":40}',
     spacing_below: small, background: '#eaf4ff'}
   name: column_panel_1
   layout_properties: {}
@@ -20,16 +20,14 @@ components:
       spacing_below: small, italic: false, background: '', bold: true, underline: true,
       icon: 'fa:heartbeat'}
     name: label_2
-    layout_properties: {grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG KUGOML,FLMTLV',
-      column: RTJNNJ}
+    layout_properties: {grid_position: 'LQZTGU,WYMIYQ KUGOML,FLMTLV', column: RTJNNJ}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: offer
-    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
-        ADFQWT,VETGBA'}
+    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ADFQWT,VETGBA'}
     data_bindings:
     - {property: text, code: ''}
   - type: Label
@@ -38,8 +36,7 @@ components:
       spacing_below: none, italic: true, background: '', bold: false, underline: false,
       icon: 'fa:hourglass-end'}
     name: offer_expiry
-    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
-        YVUXXI,QWIUBH'}
+    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ YVUXXI,QWIUBH'}
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
@@ -49,43 +46,9 @@ components:
       spacing_below: none, italic: true, background: '', bold: false, underline: false,
       icon: 'fa:info-circle'}
     name: offer_notes
-    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ ARCRJW,IIXKLG
-        CDHDSW,TOIMCF'}
+    layout_properties: {column: RTJNNJ, grid_position: 'LQZTGU,WYMIYQ CDHDSW,TOIMCF'}
     data_bindings:
     - {property: text, code: ''}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:bullhorn'}
-    name: label_1
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY VPRKOM,QYETXH
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: request
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY AHBOTQ,PLMAWV
-    data_bindings:
-    - {property: text, code: ''}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: true, background: '', bold: false, underline: false,
-      icon: 'fa:info-circle'}
-    name: request_notes
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ ARCRJW,UKLCWY JPWMIR,HPQFPM
-    data_bindings: []
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
@@ -95,7 +58,7 @@ components:
     name: label_3
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,WYMIYQ TPZRYP,ZKQOOC KGXEQR,PCJXTL
+      grid_position: LQZTGU,WYMIYQ KGXEQR,PCJXTL
     event_bindings: {}
   - type: Label
     properties: {role: green, align: left, tooltip: '', border: '', foreground: '',
@@ -105,28 +68,7 @@ components:
     name: pickup
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,WYMIYQ TPZRYP,ZKQOOC OZLREB,OQTHOP
-    data_bindings:
-    - {property: text, code: ''}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:download'}
-    name: label_4
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ TPZRYP,VNFVFM NQIVPI,GQUGFH
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
-    name: dropoff
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,WYMIYQ TPZRYP,VNFVFM YFYBYQ,WJSFWJ
+      grid_position: LQZTGU,WYMIYQ OZLREB,OQTHOP
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
@@ -142,6 +84,16 @@ components:
     data_bindings: []
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Request, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:bullhorn'}
+    name: label_1
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY KXLMZD,VSRSWF
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: true, underline: false,
       icon: 'fa:ambulance'}
@@ -150,14 +102,38 @@ components:
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: request
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY KKOWJK,TINIPN
+    data_bindings:
+    - {property: text, code: ''}
+    event_bindings: {}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: Show Route, font_size: null, wrap_on: mobile, font: '',
-      col_spacing: medium, spacing_above: small, icon_align: left, col_widths: '',
+      col_spacing: medium, spacing_above: small, icon_align: left, col_widths: '{}',
       spacing_below: small, italic: false, background: '', bold: true, underline: false,
       icon: 'fa:map-marker'}
     name: show_route
     layout_properties: {grid_position: 'LQZTGU,SOVMIY HDOQAH,SLDIXG'}
+    event_bindings: {}
+    components: []
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: 12, font: '', spacing_above: none, icon_align: left,
+      spacing_below: none, italic: true, background: '', bold: false, underline: false,
+      icon: 'fa:info-circle'}
+    name: request_notes
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY HDOQAH,TYYAYT
+    data_bindings: []
     event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -167,6 +143,15 @@ components:
     name: message1
     layout_properties: {grid_position: 'LQZTGU,SOVMIY UTSGFO,APBHRD'}
     event_bindings: {click: click_show_message}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: Drop-off, font_size: 14, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
+      underline: true, icon: 'fa:download'}
+    name: label_4
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY UTSGFO,FRRNLZ
   - type: TextArea
     properties: {role: null, align: left, height: 88, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
@@ -174,6 +159,18 @@ components:
       background: '', bold: false, underline: false}
     name: message1_text
     layout_properties: {grid_position: 'LQZTGU,SOVMIY AVBPFE,CRJOWG'}
+    event_bindings: {}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
+      spacing_below: none, italic: false, background: '', bold: false, underline: false,
+      icon: ''}
+    name: dropoff
+    layout_properties:
+      col_widths: {}
+      grid_position: LQZTGU,SOVMIY AVBPFE,EHAGKX
+    data_bindings:
+    - {property: text, code: ''}
     event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -185,13 +182,17 @@ components:
       col_widths: {}
       grid_position: LQZTGU,SOVMIY CUXNIX,LQPWAP
     event_bindings: {click: click_show_message}
+  - type: ColumnPanel
+    properties: {}
+    name: column_panel_2
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY CUXNIX,ALOXWR'}
   - type: TextArea
     properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
       auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
       background: '', bold: false, underline: false}
     name: message2_text
-    layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,VUYSCI'}
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,VUYSCI EFEJJO,KQMULX'}
     event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
@@ -201,8 +202,12 @@ components:
     name: status_view
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY SOIKUS,YJVEVP
+      grid_position: LQZTGU,SOVMIY TTEPRB,VUYSCI EGOKAT,LOFFKB
     event_bindings: {click: click_status_view}
+  - type: ColumnPanel
+    properties: {}
+    name: column_panel_3
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY TTEPRB,YWOBYF'}
   - type: FlowPanel
     properties: {role: null, spacing: medium, align: left, tooltip: '', border: '',
       foreground: '', visible: false, spacing_above: small, spacing_below: small,
