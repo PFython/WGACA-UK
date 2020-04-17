@@ -154,7 +154,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
     def click_status_view(self, **event_args):
         """This method is called when the Status View button is clicked"""
-        status_view = StatusView()
+        status_view = StatusView(self.item)
         status_view.row_id.text = self.row_id.text
         status_view.match = self.item
         status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False

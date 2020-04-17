@@ -55,7 +55,7 @@ components:
       spacing_below: small, background: ''}
     name: card_1
     layout_properties: {grid_position: 'YZFYDP,KBWKKA', full_width_row: true}
-    event_bindings: {show: show_form}
+    event_bindings: {}
     components:
     - type: Link
       properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '',

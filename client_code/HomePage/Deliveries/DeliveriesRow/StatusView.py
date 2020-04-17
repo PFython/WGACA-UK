@@ -8,23 +8,22 @@ from anvil.tables import app_tables
 from ....Globals import green, grey, red, black, dark_green, dark_blue,blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 class StatusView(StatusViewTemplate):
-    def __init__(self, **properties):
+    def __init__(self, match, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.match = match        
         self.user = anvil.users.get_user()
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.initial_canvas()
+        self.ingest_match(data)
         
     def show_form(self, **event_args):
         print("show_form")
-        if not hasattr(self, 'match'):
-            return
-        self.imported_match_data()
         self.initial_options_by_role()
-#         self.refresh_canvas()
+        self.update_components()
         
     def initial_canvas(self):
         """
@@ -46,8 +45,7 @@ class StatusView(StatusViewTemplate):
         self.requester.background = dark_blue
         self.requester.background = blue 
 
-
-    def imported_match_data(self):
+    def ingest_match_data(self):
         # Checkboxes
         self.offer_matched.checked = True if self.match else False
         if self.match['approved_runner']:
@@ -60,8 +58,7 @@ class StatusView(StatusViewTemplate):
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']
-
-        
+      
     def initial_options_by_role(self, **event_args):
         # Stickiness and Event Handling
         for checkbox in self.all_checkboxes:
@@ -119,30 +116,14 @@ class StatusView(StatusViewTemplate):
         else:
             component.visible = not boolean_value
 
-    def refresh_canvas(self, **event_args):
+    def update_components(self, **event_args):
         self.sender = event_args.get('sender')
-        self.update_arrows()
-#         self.update_text_colour()
-        self.update_sticky_items()
         self.update_enablers()
         self.update_predecessors()
-        
-    def update_for_dual_statuses(self):
-        if self.runner_confirms_pickup.checked and self.offerer_confirms_pickup.checked:
-            self.pickup_agreed.checked = True
-        self.update_text_colour()
+        self.update_for_dual_statuses()
         self.update_sticky_items()
-        self.update_enablers()    
-          
-    def update_predecessors(self):
-        rules = [(self.runner_confirms_dropoff, self.runner_confirms_pickup),
-                 ]
-        for component, predecessor in rules:
-            if component.checked and not predecessor.checked:
-                predecessor.checked = True
+        self.update_arrows()
         self.update_text_colour()
-        self.update_sticky_items()
-        self.update_enablers()                  
         
     def update_enablers(self):
         rules = [(self.offerer_confirms_pickup, self.runner_feedback_by_offerer),
@@ -153,6 +134,23 @@ class StatusView(StatusViewTemplate):
             if enabler.checked:
                 target.enabled = True
         self.update_sticky_items()
+    
+    def update_predecessors(self):
+        rules = [(self.runner_confirms_dropoff, self.runner_confirms_pickup),
+                 ]
+        for component, predecessor in rules:
+            if component.checked and not predecessor.checked:
+                predecessor.checked = True
+        self.update_text_colour()
+        self.update_sticky_items()
+        self.update_enablers()   
+        
+    def update_for_dual_statuses(self):
+        if self.runner_confirms_pickup.checked and self.offerer_confirms_pickup.checked:
+            self.pickup_agreed.checked = True
+        self.update_text_colour()
+        self.update_sticky_items()
+        self.update_enablers()    
         
     def update_sticky_items(self):
         for checkbox in self.all_checkboxes:
