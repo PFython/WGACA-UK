@@ -17,6 +17,7 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
+        self.define_options_by_role()
         self.initial_canvas()
         self.ingest_match_data()
         self.show_form()
@@ -25,7 +26,7 @@ class StatusView(StatusViewTemplate):
         
     def show_form(self, **event_args):
         print("show_form")
-        self.initial_options_by_role()
+        self.display_options_by_role()
         self.update_components()
         
     def initial_canvas(self):
@@ -67,48 +68,50 @@ class StatusView(StatusViewTemplate):
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']
         
-      
-    def initial_options_by_role(self, **event_args):
+    def define_options_by_role(self):
+        """Attributes set with list of visible options, determined by role"""
+        self.offerer_options = [self.pickup_agreed,
+                                self.offerer_confirms_pickup,
+                                self.runner_feedback_by_offerer,
+                                self.delivery]
+        self.runner_options = [self.pickup_agreed,
+                               self.runner_confirms_pickup,
+                               self.offerer_feedback_by_runner,
+                               self.dropoff_agreed,
+                               self.runner_confirms_dropoff,
+                               self.requester_feedback_by_runner,
+                               self.delivery]
+        self.requester_options = [self.dropoff_agreed,
+                                  self.requester_confirms_dropoff,
+                                  self.runner_feedback_by_requester,
+                                  self.delivery]
+        self.offererrunner_options = [self.dropoff_agreed,
+                                      self.runner_confirms_dropoff,
+                                      self.requester_feedback_by_runner,
+                                      self.delivery]
+        self.requesterrunner_options = [self.pickup_agreed,
+                                        self.runner_confirms_pickup,
+                                        self.offerer_feedback_by_runner,
+                                        self.delivery]
+        
+    def display_options_by_role(self, **event_args):
         # Single Roles: Offerer
-        if self.is_offerer.checked and (not self.is_runner.checked):
-            print("Offerer")
-            checkboxes = [self.pickup_agreed,
-                          self.offerer_confirms_pickup,
-                          self.runner_feedback_by_offerer,
-                          self.delivery]
+        if self.is_offerer.checked and not self.is_runner.checked:
+            checkboxes = self.offerer_options
         # Single Roles: Runner
-        if self.is_runner.checked and (not self.is_offerer.checked) and (not self.is_requester.checked):
-            print("Runner")
-            checkboxes = [self.pickup_agreed,
-                          self.runner_confirms_pickup,
-                          self.offerer_feedback_by_runner,
-                          self.dropoff_agreed,
-                          self.runner_confirms_dropoff,
-                          self.requester_feedback_by_runner,
-                          self.delivery]
+        if self.is_runner.checked and not self.is_offerer.checked and not self.is_requester.checked:
+            checkboxes = self.runner_options
         # Single Roles: Requester
         if self.is_requester.checked and (not self.is_runner.checked):
-            print("Requester")
-            checkboxes = [self.dropoff_agreed,
-                          self.requester_confirms_dropoff,
-                          self.runner_feedback_by_requester,
-                          self.delivery]
+            checkboxes = self.requester_options
         # Dual Roles: Offerer=Runner
         if self.is_offerer.checked and self.is_runner.checked:
-            print("Offerer+Runner")
-            checkboxes = [self.dropoff_agreed,
-                          self.runner_confirms_dropoff,
-                          self.requester_feedback_by_runner,
-                          self.delivery]
+            checkboxes = self.offererrunner_options
         # Dual Roles: Requester=Runner  
         if self.is_requester.checked and self.is_runner.checked:
-            print("Requester+Runner")
-            checkboxes = [self.pickup_agreed,
-                          self.runner_confirms_pickup,
-                          self.offerer_feedback_by_runner,
-                          self.delivery]
+            checkboxes = self.requesterrunner_options            
         for checkbox in checkboxes:
-            self.conceal(checkbox, False)
+            self.conceal(checkbox, False) # False means 'reveal'
             self.enabled = True
         self.delivery.enabled = True if self.is_requester.checked else False
             
@@ -124,18 +127,19 @@ class StatusView(StatusViewTemplate):
 
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
-        print(self.sender)
+        print("Updating components.\nSender:", self.sender)
         self.update_dependencies()
-        print("enabled")
-        self.update_for_dual_statuses()
-        print("dual_status")
+#         print("enabled")
+        self.update_predecessors()
         self.update_arrows()
-        print("arrows")
+#         print("arrows")
         self.update_text_colour()
-        print("colour")
+#         print("colour")
         
     def update_dependencies(self):
-        return
+        """These are 1...1 dependencies.
+        Multiple predecessors i.e. backfill are handled by update_predecessors
+        """
         rules = [(self.offerer_confirms_pickup, self.feedback_on_runner_by_offerer),
                  (self.runner_confirms_pickup, self.feedback_on_offerer_by_runner),
                  (self.runner_confirms_dropoff, self.feedback_on_requester_by_runner),
@@ -145,10 +149,6 @@ class StatusView(StatusViewTemplate):
                 target.enabled = True
             if target.checked and not enabler.checked:
                 enabler.checked = True
-
-    def update_for_dual_statuses(self):
-        if self.runner_confirms_pickup.checked and self.offerer_confirms_pickup.checked:
-            self.pickup_agreed.checked = True
 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
