@@ -69,42 +69,39 @@ class StatusView(StatusViewTemplate):
             checkbox.sticky = True
             checkbox.visible = False
         # Single Roles: Offerer
-        for checkbox in {self.pickup_agreed,
-                         self.offerer_confirms_pickup,
-                         self.runner_feedback_by_offerer,
-                         self.delivery}:
-            self.conceal(checkbox, not self.is_offerer.checked)
+        if self.is_offerer and not self.is_runner:
+            checkboxes = {self.pickup_agreed,
+                          self.offerer_confirms_pickup,
+                          self.runner_feedback_by_offerer,
+                          self.delivery}
         # Single Roles: Runner
-        for checkbox in {self.pickup_agreed,
-                         self.runner_confirms_pickup,
-                         self.offerer_feedback_by_runner,
-                         self.dropoff_agreed,
-                         self.runner_confirms_dropoff,
-                         self.requester_feedback_by_runner,
-                         self.delivery}:
-            print(type(checkbox), not self.is_runner.checked)
-            self.conceal(checkbox, self.is_runner.checked)
+        if self.is_runner and not self.is_offerer and not self.is_requester:
+            checkboxes = {self.pickup_agreed,
+                          self.runner_confirms_pickup,
+                          self.offerer_feedback_by_runner,
+                          self.dropoff_agreed,
+                          self.runner_confirms_dropoff,
+                          self.requester_feedback_by_runner,
+                          self.delivery}
         # Single Roles: Requester
-        for checkbox in {self.dropoff_agreed,
-                         self.requester_confirms_dropoff,
-                         self.runner_feedback_by_requester,
-                         self.delivery}:
-            self.conceal(checkbox, not self.is_requester.checked)
-#         # Dual Roles: Offerer=Runner       
-#         visible = red if self.is_offerer.checked and self.is_runner.checked else bright_blue
-#         for checkbox in self.all_checkboxes[2:7]:
-#             checkbox.background = visible
-#         for arrow in self.all_arrows:
-#             arrow.background = visible
-#             self.arrow1.background = not visible
-#             self.arrow2.background = not visible
-#         # Dual Roles: Requester=Runner    
-#         visible = red if self.is_runner.checked and self.is_requester.checked else bright_blue
-#         for checkbox in self.all_checkboxes[7:12]:
-#             checkbox.background = visible
-#         for arrow in self.all_arrows[-3:-1]:
-#             arrow.background = visible
-        
+        if self.is_requester and not self.is_runner:
+            checkboxes = {self.dropoff_agreed,
+                          self.requester_confirms_dropoff,
+                          self.runner_feedback_by_requester,
+                          self.delivery}
+        # Dual Roles: Offerer=Runner
+        if self.is_offerer and self.is_runner:
+            checkboxes = {self.dropoff_agreed,
+                          self.runner_confirms_dropoff,
+                          self.requester_feedback_by_runner,
+                          self.delivery}
+        # Dual Roles: Requester=Runner  
+        if self.
+#     
+        for checkbox in checkboxes:
+            self.conceal(checkbox, False)
+
+
     def refresh_canvas(self, **event_args):
         self.sender = event_args.get('sender')
         self.update_arrows()
