@@ -36,23 +36,23 @@ class StatusView(StatusViewTemplate):
         if self.test_mode.checked:      
             for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
                 checkbox.enabled = True
-                checkbox.checked = False
                 checkbox.visible = True
                 checkbox.set_event_handler('change', self.initial_options_by_role)
-        else:
-            self.is_offerer.checked = self.user == self.match['offer']['user']
-            self.is_runner.checked = self.user == self.match['approved_runner']
-            self.is_requester.checked = self.user == self.match['request']['user']
-            pass
+
         
     def initial_canvas(self):
         """
         How the form layout (canvas) should look when first loaded e.g.
         colours, font size, labels, enabled and visible defaults
         """
+        # Checkboxes
         self.offer_matched.checked = True if self.match else False
         if self.match['approved_runner']:
             self.runner_selected.checked = True
+        self.is_offerer.checked = self.user == self.match['offer']['user']
+        self.is_runner.checked = self.user == self.match['approved_runner']
+        self.is_requester.checked = self.user == self.match['request']['user']
+        # Colours, Bold, Spacing, Enabled, Label Text
         for component in self.card_1.get_components():
             component.background = bright_blue
             component.foreground = white
@@ -93,7 +93,8 @@ class StatusView(StatusViewTemplate):
                          self.feedback_on_runner_by_offerer,
                          self.requester_confirms_dropoff,
                          self.feedback_on_runner_by_requester,}:
-#             self.conceal(checkbox, self.is_runner.checked)
+            print(type(checkbox), self.is_runner.checked)
+            self.conceal(checkbox, self.is_runner.checked)
         # Single Roles: Requester
 #         for checkbox in {self.requester_confirms_dropoff, self.dropoff_agreed}:
 #             self.conceal(checkbox, self.is_requester.checked)
@@ -112,7 +113,7 @@ class StatusView(StatusViewTemplate):
 #         for arrow in self.all_arrows[-3:-1]:
 #             arrow.background = visible
         
-     def refresh_canvas(self, **event_args):
+    def refresh_canvas(self, **event_args):
         self.sender = event_args.get('sender')
         self.update_arrows()
 #         self.update_text_colour()
