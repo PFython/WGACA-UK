@@ -13,7 +13,7 @@ class StatusView(StatusViewTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
-        self.test_mode = False
+        self.test_mode = True
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.initial_canvas()
@@ -96,10 +96,24 @@ class StatusView(StatusViewTemplate):
                           self.requester_feedback_by_runner,
                           self.delivery}
         # Dual Roles: Requester=Runner  
-        if self.
-#     
+        if self.is_requester and self.is_runner:
+            checkboxes = {self.pickup_agreed,
+                          self.runner_confirms_pickup,
+                          self.offerer_feedback_by_runner,
+                          delivery}
         for checkbox in checkboxes:
             self.conceal(checkbox, False)
+            
+    def conceal(self, component, boolean_value):
+        """
+        Custom appearance/actions for toggling .visible.  During testing,
+        can be helpful to colour code rather than make truly invisible
+        """
+        print("conceal")
+        if self.test_mode:
+            component.background = red if boolean_value else bright_blue
+        else:
+            component.visible = not boolean_value
 
 
     def refresh_canvas(self, **event_args):
@@ -158,16 +172,7 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.foreground = black if checkbox.checked else light_blue
             
-    def conceal(self, component, boolean_value):
-        """
-        Custom appearance/actions for toggling .visible.  During testing,
-        can be helpful to colour code rather than make truly invisible
-        """
-        print("conceal")
-        if self.test_mode:
-            component.background = red if boolean_value else bright_blue
-        else:
-            component.visible = not boolean_value
+
         
 
 
