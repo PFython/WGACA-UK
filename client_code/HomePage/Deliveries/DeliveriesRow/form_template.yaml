@@ -201,6 +201,7 @@ components:
       background: ''}
     name: status_view_panel
     layout_properties: {grid_position: 'DJQOQT,MDJANA'}
+    components: []
   event_bindings: {show: show_deliveries_row}
 container:
   type: DataRowPanel

@@ -38,7 +38,7 @@ components:
     visible: false, text: Invisible field for holding Match, font_size: null, font: '',
     spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '',
     bold: false, underline: false, icon: ''}
-  name: invisible_field
+  name: match_holder
   layout_properties: {grid_position: 'FADAPX,KECBZA'}
   event_bindings: {}
 - type: ColumnPanel
@@ -48,7 +48,7 @@ components:
   components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":40,"JLYSPS":20,"ZFDRYZ":40,"SZCLVN":20,"LEZMMU":20,"INGTLG":40,"OGXJIC":20,"WVSZDL":40}',
+      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":25,"JLYSPS":35,"ZFDRYZ":35,"SZCLVN":25,"LEZMMU":25,"INGTLG":35,"OGXJIC":25,"WVSZDL":35}',
       spacing_below: small, background: ''}
     name: card_1
     layout_properties: {grid_position: 'YZFYDP,KBWKKA'}
@@ -295,3 +295,6 @@ components:
         grid_position: QFICYX,WVSZDL
       event_bindings: {}
 is_package: true
+custom_component: true
+properties:
+- {name: match, type: object, default_value: null, default_binding_prop: true}

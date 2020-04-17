@@ -18,7 +18,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
-        self.show_route.foreground = green  
+        self.show_route.foreground = green
+
                
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
@@ -158,7 +159,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             columns = row.get_components()
             for column in columns:
                 buttons = [x for x in column.get_components() if type(x) == Button]
-                print(len(buttons)," buttons")
                 button = [x for x in buttons  if "Delivery Status" in x.text]
                 button[0].enabled = False
         sender.enabled = True 
@@ -166,23 +166,20 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def click_status_view(self, **event_args):
         """This method is called when the Status View button is clicked"""
         status_view = StatusView()
-        status_view.item['match'] = self.item
         status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
         sender = event_args['sender']
         if sender.icon == 'fa:caret-down':
             sender.icon = 'fa:caret-up'
             self.disable_similar_buttons(sender)
-            self.status_view_panel.add_component(status_view)
+            print(self.item)
+            print(type(self.item))
+            self.status_view_panel.add_component(status_view, match=self.item)
             self.status_view_panel.visible = True
+            status_
         else:
             event_args['sender'].icon = 'fa:caret-down'
-            print("Removing")
-            self.status_view_panel.clear()
-            status_view.clear()
             status_view.remove_from_parent()
             self.status_view_panel.visible = False
-#             self.show_deliveries_row()
-#             self.parent.parent.parent.__init__()
             
 
 

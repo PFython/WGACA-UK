@@ -13,9 +13,9 @@ class StatusView(StatusViewTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
-        if not hasattr(self, 'match'):
-            print("No .match inherited...")
-            self.match = anvil.server.call('_get_all_matches')[0]
+        
+        print(properties.keys())
+        self.match = anvil.server.call('_get_all_matches')[0]
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.setup_test_or_prod()
@@ -34,9 +34,10 @@ class StatusView(StatusViewTemplate):
                 checkbox.visible = False
                 checkbox.set_event_handler('change', self.initial_options_by_role)  
         else:
-            self.is_offerer.checked = self.user == self.match['offer']['user']
-            self.is_runner.checked = self.user == self.match['approved_runner']
-            self.is_requester.checked = self.user == self.match['request']['user']
+#             self.is_offerer.checked = self.user == self.match.tag['offer']['user']
+#             self.is_runner.checked = self.user == self.match.tag['approved_runner']
+#             self.is_requester.checked = self.user == self.match.tag['request']['user']
+            pass
         
     def initial_canvas(self):
         """
