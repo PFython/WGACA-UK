@@ -24,10 +24,17 @@ class StatusView(StatusViewTemplate):
         self.initial_options_by_role()
 #         self.refresh_canvas()
         
-    def setup_test_or_prod(self):
-        # Change the following to True for Production use
-        if self.test_mode.checked:
-            print("Test Mode")            
+    def setup_test_or_prod(self, **event_args):
+        self.test_mode.set_event_handler('change', self.setup_test_or_prod)
+        if anvil.users.get_user()['admin']:
+            self.test_mode.enabled = True
+            self.test_mode.visible = True
+            
+        else:
+            self.test_mode.enabled = False
+            self.test_mode.checked = False
+            self.test_mode.visible = False
+        if self.test_mode.checked:      
             for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
                 checkbox.enabled = True
                 checkbox.checked = False
@@ -65,11 +72,7 @@ class StatusView(StatusViewTemplate):
         self.runner.background = blue
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         self.requester.background = blue
-        if anvil.users.get_user()['admin:']:
-            self.test_mode.enabled = True
-            self.test_mode.checked = True
-            self.test_mode.visible = True
-            self.test_mode.set_event_handler('change', self.setup_test_or_prod)
+
         
     def initial_options_by_role(self, **event_args):
         # Stickiness and Event Handling
