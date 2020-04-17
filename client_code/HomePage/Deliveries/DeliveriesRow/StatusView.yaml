@@ -1,11 +1,29 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"LUSCAN":20,"CBPMWP":40}',
     spacing_below: small, background: ''}
   name: card_2
   layout_properties: {grid_position: 'AGGBNC,OJBRKS', full_width_row: true}
   components:
+  - type: Label
+    properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
+      visible: false, text: 'Invisible field for holding row_id or Match or Match
+        dict
+
+        ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
+      italic: false, background: '', bold: false, underline: false, icon: ''}
+    name: row_id
+    layout_properties: {grid_position: 'JSNUSP,UMRXST', full_width_row: true}
+    event_bindings: {}
+  - type: CheckBox
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+      foreground: '', visible: false, text: Test Mode, font_size: null, font: '',
+      spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
+      checked: false, underline: false}
+    name: test_mode
+    layout_properties: {grid_position: 'PUTAOW,SJGWWB', full_width_row: true}
+    event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
       foreground: '', visible: false, text: 'Is user the Offerer? (Invisible)', font_size: 18,
@@ -14,7 +32,7 @@ components:
     name: is_offerer
     layout_properties:
       col_widths: {}
-      grid_position: SSVVJU,GELXZA
+      grid_position: UBFVUY,LUSCAN
       full_width_row: true
     event_bindings: {}
   - type: CheckBox
@@ -25,7 +43,7 @@ components:
     name: is_runner
     layout_properties:
       col_widths: {}
-      grid_position: SSVVJU,DGESUK
+      grid_position: UBFVUY,CBPMWP AMEVMX,NHDBRU
       full_width_row: true
     event_bindings: {}
   - type: CheckBox
@@ -36,33 +54,9 @@ components:
     name: is_requester
     layout_properties:
       col_widths: {}
-      grid_position: SSVVJU,QVZMYA
+      grid_position: UBFVUY,CBPMWP AMEVMX,ATXLNO
       full_width_row: true
     event_bindings: {}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: Test Mode, font_size: null, font: '',
-      spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
-      checked: false, underline: false}
-    name: test_mode
-    layout_properties: {grid_position: 'UBFVUY,LUSCAN', full_width_row: true}
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-      visible: false, text: 'Invisible field for holding row_id or Match or Match
-        dict
-
-        ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: small,
-      italic: false, background: '', bold: false, underline: false, icon: ''}
-    name: row_id
-    layout_properties: {grid_position: 'UBFVUY,CBPMWP', full_width_row: true}
-    event_bindings: {}
-  - type: ColumnPanel
-    properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '',
-      spacing_below: small, background: ''}
-    name: column_panel_11
-    layout_properties: {grid_position: 'LHKIVT,DZMCAR', full_width_row: true}
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
       wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":30,"JLYSPS":30,"ZFDRYZ":30,"SZCLVN":30,"LEZMMU":30,"INGTLG":30,"OGXJIC":30,"WVSZDL":30}',
