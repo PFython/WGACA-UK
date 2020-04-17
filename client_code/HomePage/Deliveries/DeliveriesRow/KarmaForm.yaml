@@ -216,4 +216,4 @@ container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
     role: null, html: ''}
-  event_bindings: {refreshing_data_bindings: form_refreshing_data_bindings, show: form_show}
+  event_bindings: {}

@@ -19,7 +19,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
         self.show_route.foreground = green
-
                
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
@@ -86,6 +85,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_myself()
         self.populate_addresses()
         self.show_messages()
+        self.row_id.text = self.item.get_id()
           
 #     def click_update_status(self, **event_args):
 #         """
@@ -166,6 +166,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def click_status_view(self, **event_args):
         """This method is called when the Status View button is clicked"""
         status_view = StatusView()
+        status_view.row_id.text = self.row_id.text
+        status_view.match = self.item
         status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
         sender = event_args['sender']
         if sender.icon == 'fa:caret-down':
@@ -173,9 +175,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.disable_similar_buttons(sender)
             print(self.item)
             print(type(self.item))
-            self.status_view_panel.add_component(status_view, match=self.item)
+            self.status_view_panel.add_component(status_view)
             self.status_view_panel.visible = True
-            status_
+
         else:
             event_args['sender'].icon = 'fa:caret-down'
             status_view.remove_from_parent()

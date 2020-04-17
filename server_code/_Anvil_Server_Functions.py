@@ -104,18 +104,22 @@ def get_address_hierarchy(country = "United Kingdom"):
     global hierarchy
     return hierarchy[country]    
   
+@anvil.server.callable  
+def get_match_by_id(row_id):
+    if anvil.users.get_user() is not None:
+        return app_tables.matches.get_by_id(row_id)
+  
+  
 @anvil.server.callable
 def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
-    user = anvil.users.get_user()
-    if user is not None:
+    if anvil.users.get_user() is not None:
         return [x for x in app_tables.matches.search(tables.order_by("status_code")) if x['approved_runner'] != None]
 
 @anvil.server.callable
 def get_my_matches():
     """ Returns rows from the Matches database """
-    user = anvil.users.get_user()
-    if user is not None:
+    if anvil.users.get_user() is not None:
         return app_tables.matches.search(tables.order_by("status_code"),approved_runner=None)
         # When approved_runner != None, the Match effectively becomes a Delivery
         # TODO: Filter results by proximity
@@ -186,8 +190,7 @@ def remove_orphan_matches(request_or_offer):
 @anvil.server.callable
 def save_to_matches_database(match, runner, messages, status_code):
     """ Returns 'Duplicate' if product_category request already exists"""
-    user = anvil.users.get_user()
-    if user is None:
+    if anvil.users.get_user() is None:
         return
     match.update(approved_runner = runner, messages_dict = messages, status_code = status_code)
     
@@ -217,8 +220,7 @@ def save_to_requests_database(product_category, urgent, notes, status_code="1"):
 @anvil.server.callable
 def save_user_setup(field, value):
     """ General purpose save to the User database """
-    user = anvil.users.get_user()
-    user[field] = value
+    anvil.users.get_user()[field] = value
   
 @anvil.server.callable
 def STATUSES():
@@ -243,20 +245,17 @@ def string_to_datetime(string, format = "%d %b %Y"):
 @anvil.server.callable
 def terms_accepted(boolean_value):
     """ Records today's date (or None) in the User database for Terms Accepted"""
-    user = anvil.users.get_user()
-    user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
+    anvil.users.get_user()['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
 def update_offers_status(offer, status_code):
-    user = anvil.users.get_user()
-    if user is None:
+    if anvil.users.get_user() is None:
         return
     offer.update(status_code = status_code)
     
 @anvil.server.callable
 def update_requests_status(request, status_code):
-    user = anvil.users.get_user()
-    if user is None:
+    if anvil.users.get_user() is None:
         return
     request.update(status_code = status_code)
     
