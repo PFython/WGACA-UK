@@ -13,42 +13,18 @@ class StatusView(StatusViewTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
-        self.test_mode = True
+        self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-        if not hasattr(self, 'match'):
-            return
-
+        self.initial_canvas()
+        
     def show_form(self, **event_args):
         print("show_form")
-        self.initial_canvas()
-        self.import_match_data()
-        self.setup_test_or_prod()
-        self.imported_data()
+        if not hasattr(self, 'match'):
+            return
+        self.imported_match_data()
         self.initial_options_by_role()
-        self.refresh_canvas()
-        
-    def setup_test_or_prod(self, **event_args):
-          for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
-              checkbox.enabled = self.test_mode
-              checkbox.visible = self.test_mode
-              checkbox.set_event_handler('change', show_form)
-          if not self.test_mode:
-              self.is_offerer.checked = self.user == self.match['offer']['user']
-              self.is_runner.checked = self.user == self.match['approved_runner']
-              self.is_requester.checked = self.user == self.match['request']['user']
-
-    def imported_match_data(self):
-        # Checkboxes
-        self.offer_matched.checked = True if self.match else False
-        if self.match['approved_runner']:
-            self.runner_selected.checked = True
-
-        self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
-        self.offerer.background = blue
-        self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
-        self.runner.background = blue
-        self.requester.text = "Requester: " + self.match['request']['user']['display_name']
+#         self.refresh_canvas()
         
     def initial_canvas(self):
         """
@@ -68,7 +44,22 @@ class StatusView(StatusViewTemplate):
         self.offerer.background = dark_blue
         self.runner.background = dark_blue
         self.requester.background = dark_blue
-        self.requester.background = blue
+        self.requester.background = blue 
+
+
+    def imported_match_data(self):
+        # Checkboxes
+        self.offer_matched.checked = True if self.match else False
+        if self.match['approved_runner']:
+            self.runner_selected.checked = True
+        self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
+        self.offerer.background = blue
+        self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
+        self.runner.background = blue
+        self.requester.text = "Requester: " + self.match['request']['user']['display_name']
+        self.is_offerer.checked = self.user == self.match['offer']['user']
+        self.is_runner.checked = self.user == self.match['approved_runner']
+        self.is_requester.checked = self.user == self.match['request']['user']
 
         
     def initial_options_by_role(self, **event_args):

@@ -18,15 +18,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: Test Mode, font_size: null, font: '',
-      spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
-      checked: false, underline: false}
-    name: test_mode
-    layout_properties: {grid_position: 'PUTAOW,SJGWWB', full_width_row: true}
-    event_bindings: {}
-  - type: CheckBox
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'User is Offerer?', font_size: 18, font: '',
+      foreground: '', visible: true, text: 'User is Offerer?', font_size: 18, font: '',
       spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: is_offerer
@@ -37,7 +29,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'User is Runner?', font_size: 18, font: '',
+      foreground: '', visible: true, text: 'User is Runner?', font_size: 18, font: '',
       spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: is_runner
@@ -48,7 +40,7 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'User is Requester?', font_size: 18, font: '',
+      foreground: '', visible: true, text: 'User is Requester?', font_size: 18, font: '',
       spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
       checked: false, underline: false}
     name: is_requester
