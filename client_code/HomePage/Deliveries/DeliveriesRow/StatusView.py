@@ -13,46 +13,48 @@ class StatusView(StatusViewTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
+        self.test_mode = True
+        self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
+        self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         if not hasattr(self, 'match'):
             return
 
     def show_form(self, **event_args):
         print("show_form")
-        self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
-        self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-        self.setup_test_or_prod()
         self.initial_canvas()
+        self.import_match_data()
+        self.setup_test_or_prod()
+        self.imported_data()
         self.initial_options_by_role()
         self.refresh_canvas()
         
     def setup_test_or_prod(self, **event_args):
-        self.test_mode.set_event_handler('change', self.setup_test_or_prod)
-        if anvil.users.get_user()['admin']:
-            self.test_mode.enabled = True
-            self.test_mode.visible = True            
-        else:
-            self.test_mode.enabled = False
-            self.test_mode.checked = False
-            self.test_mode.visible = False
-        if self.test_mode.checked:      
-            for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
-                checkbox.enabled = True
-                checkbox.visible = True
-                checkbox.set_event_handler('change', self.initial_options_by_role)
+          for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
+              checkbox.enabled = self.test_mode
+              checkbox.visible = self.test_mode
+              checkbox.set_event_handler('change', show_form)
+          if not self.test_mode:
+              self.is_offerer.checked = self.user == self.match['offer']['user']
+              self.is_runner.checked = self.user == self.match['approved_runner']
+              self.is_requester.checked = self.user == self.match['request']['user']
 
+    def imported_match_data(self):
+        # Checkboxes
+        self.offer_matched.checked = True if self.match else False
+        if self.match['approved_runner']:
+            self.runner_selected.checked = True
+
+        self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
+        self.offerer.background = blue
+        self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
+        self.runner.background = blue
+        self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         
     def initial_canvas(self):
         """
         How the form layout (canvas) should look when first loaded e.g.
         colours, font size, labels, enabled and visible defaults
         """
-        # Checkboxes
-        self.offer_matched.checked = True if self.match else False
-        if self.match['approved_runner']:
-            self.runner_selected.checked = True
-        self.is_offerer.checked = self.user == self.match['offer']['user']
-        self.is_runner.checked = self.user == self.match['approved_runner']
-        self.is_requester.checked = self.user == self.match['request']['user']
         # Colours, Bold, Spacing, Enabled, Label Text
         for component in self.card_1.get_components():
             component.background = bright_blue
@@ -66,11 +68,6 @@ class StatusView(StatusViewTemplate):
         self.offerer.background = dark_blue
         self.runner.background = dark_blue
         self.requester.background = dark_blue
-        self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
-        self.offerer.background = blue
-        self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
-        self.runner.background = blue
-        self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         self.requester.background = blue
 
         
@@ -78,7 +75,8 @@ class StatusView(StatusViewTemplate):
         # Stickiness and Event Handling
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.refresh_canvas)
-            checkbox.sticky = True        
+            checkbox.sticky = True
+            checkbox.visible = False
         # Single Roles: Offerer
         for checkbox in {self.pickup_agreed,
                          self.offerer_confirms_pickup,
@@ -178,7 +176,7 @@ class StatusView(StatusViewTemplate):
         can be helpful to colour code rather than make truly invisible
         """
         print("conceal")
-        if self.test_mode.checked:
+        if self.test_mode:
             component.background = red if boolean_value else bright_blue
         else:
             component.visible = not boolean_value
