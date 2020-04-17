@@ -118,7 +118,9 @@ class StatusView(StatusViewTemplate):
     def conceal(self, component, boolean_value):
         """
         Custom appearance/actions for toggling .visible.  During testing,
-        can be helpful to colour code rather than make truly invisible
+        can be helpful to colour code rather than make truly invisible.
+        boolean_value = False means 'reveal' instead of 'conceal' and
+        simply reverses values.
         """
         if self.test_mode:
             component.background = red if boolean_value else bright_blue
@@ -128,17 +130,20 @@ class StatusView(StatusViewTemplate):
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
         print("Updating components.\nSender:", self.sender)
+        #TODO: KarmaForm button and sticky status
         self.update_dependencies()
 #         print("enabled")
         self.update_predecessors()
+#         print("predecessors")
         self.update_arrows()
 #         print("arrows")
         self.update_text_colour()
 #         print("colour")
         
     def update_dependencies(self):
-        """These are 1...1 dependencies.
-        Multiple predecessors i.e. backfill are handled by update_predecessors
+        """
+        These are 1...1 dependencies.  Multiple predecessors
+        i.e. 'backfill' are handled by update_predecessors
         """
         rules = [(self.offerer_confirms_pickup, self.feedback_on_runner_by_offerer),
                  (self.runner_confirms_pickup, self.feedback_on_offerer_by_runner),
@@ -149,7 +154,11 @@ class StatusView(StatusViewTemplate):
                 target.enabled = True
             if target.checked and not enabler.checked:
                 enabler.checked = True
-
+                
+    def update_predecessors(self):
+        """Allows user to select later values and auto-complete/backfill earlier ones"""
+        # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
+        
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
                  (self.runner_selected, self.arrow2),
