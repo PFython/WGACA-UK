@@ -71,6 +71,7 @@ components:
       layout_properties:
         col_widths: {}
         grid_position: CZPIUW,IUFPGA
+      event_bindings: {}
     - type: Link
       properties: {role: null, url: '', align: center, tooltip: '', border: '', foreground: '',
         visible: true, text: '', font_size: 18, wrap_on: mobile, font: '', col_spacing: medium,

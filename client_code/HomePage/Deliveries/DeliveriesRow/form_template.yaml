@@ -206,6 +206,12 @@ components:
       col_widths: {}
       grid_position: LQZTGU,SOVMIY SOIKUS,YJVEVP
     event_bindings: {click: click_status_view}
+  - type: FlowPanel
+    properties: {role: null, spacing: medium, align: left, tooltip: '', border: '',
+      foreground: '', visible: false, spacing_above: small, spacing_below: small,
+      background: ''}
+    name: status_view_panel
+    layout_properties: {grid_position: 'DJQOQT,MDJANA'}
   event_bindings: {show: show_deliveries_row}
 container:
   type: DataRowPanel

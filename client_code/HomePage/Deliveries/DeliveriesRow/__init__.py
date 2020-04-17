@@ -87,146 +87,21 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.get_status_function()(self.get_user_role())
         self.status.text += f" [Status Code {self.item['status_code']}]"
         self.show_messages()
-        
-    def get_user_role(self):
-        user = anvil.users.get_user()
-        if self.item['offer']['user'] == user and self.item['approved_runner'] == user:
-            return "Offerer+Runner"
-        if self.item['approved_runner'] == user and self.item['request']['user'] == user:
-            return ("Requester+Runner")
-        if self.item['offer']['user'] == user and self.item['approved_runner'] != user:
-            return "Offerer"
-        if self.item['request']['user'] == user and self.item['approved_runner'] != user:
-            return "Requester"
-        if self.item['approved_runner'] == user:
-            if self.item['request']['user'] != user:
-                if self.item['offer']['user'] != user:  
-                    return "Runner"
-                  
-    def get_status_function(self):
-        lookup = {'3': self.status3,
-          '4': self.status4,
-          '5': self.status5,
-          '6': self.status6,
-          '7': self.status7,
-          '8': self.status8,
-          '9': self.status9,}
-        status_code = self.item['status_code']
-        print("Status code",status_code)
-        return lookup[status_code]                  
-                  
-    def make_status_active(self):
-        self.status.enabled = True
-        self.status.italic = False
-            
-    def make_status_inactive(self):
-        self.status.enabled = False
-        self.status.italic = True
-        
-    def status3(self, role):
-    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
-        print("status3()", role)
-        self.make_status_active() if role in ("Offerer", "Runner", "Requester+Runner") else self.make_status_inactive()
-        if role == "Offerer":
-            self.status.text = "Please arrange pick-up with Runner, then click here to confirm they've collected your item(s)."
-            return('4')
-        if role == "Offerer+Runner":
-            self.status.text = "You've picked up the item(s).  Please agree delivery with Requester."
-        if role == "Runner" or role == "Requester+Runner":
-            self.status.text = "Please arrange pick-up with Offerer, then click here to confirm you've collected their item(s)."
-            return('5')
-        if role == "Requester" :
-          self.status.text = "Item(s) are waiting to be picked up."        
-
-    def status4(self, role):
-    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
-        print("status4()", role)
-        self.make_status_active() if role in ("Runner", "Requester+Runner") else self.make_status_inactive()
-        if role == "Offerer":
-            self.status.text = "Items have been picked up."
-        if role == "Runner":
-            self.status.text = "Please confirm you've picked up item(s) from the Offerer."
-            return('6')
-        if role == "Requester+Runner":
-            self.status.text = "Items have been picked up."
-            return('9')
-        if role == "Requester":
-            self.status.text = "Awaiting confirmation of pick-up."
-
-    def status5(self, role):
-    # NB ConfirmMatch will have already moved to status 6 if Offerer+Runner
-        print("status5()", role)
-        self.make_status_active() if role in ("Offerer") else self.make_status_inactive()
-        if role == "Offerer":
-            self.status.text = "Please confirm the Runner has picked up item(s) from you."
-            return('6')
-        if role == "Runner":
-            self.status.text = "Items have been picked up.  Please agree delivery with Requester."
-        if role == "Requester+Runner":
-            self.status.text = "Items picked up, delivery complete!"
-        if role == "Requester":
-            self.status.text = "Awaiting confirmation of pick-up."
-
-    def status6(self, role):
-        print("status6()", role)
-        self.make_status_active() if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
-        if role == "Offerer":
-            self.status.text = "You've given your item(s) to the Runner.  Thank you!"
-        if role == "Runner" or role == "Offerer+Runner":
-            self.status.text = "You've picked up the item(s).  Please click to confirm you've delivered them."
-            return('8')
-        if role == "Requester+Runner":
-            self.status.text = "Items picked up, delivery complete!"
-        if role == "Requester":
-            self.status.text = "Runner has your item(s).  Please click to confirm once they've been delivered."
-            return('7')
-        
-    def status7(self, role):
-        print("status7()", role)
-        self.make_status_active() if role in ("Runner", "Offerer+Runner") else self.make_status_inactive()
-        if role == "Offerer":
-            self.status.text = "Awaiting confirmation of delivery"
-        if role == "Runner" or role == "Offerer+Runner":
-            self.status.text = "Please confirm you've dropped the item(s) off with the Requester."
-            return('9')
-        if role == "Requester":
-            self.status.text = "Items dropped off, delivery complete!"
-        if role == "Requester+Runner":
-            self.status.text = "Items picked up, delivery complete!"
-        
-    def status8(self, role):
-        print("status8()", role)
-        self.make_status_active() if role in ("Requester") else self.make_status_inactive()
-        if role == "Offerer":
-            self.status.text = "Awaiting confirmation of delivery"
-        if role == "Runner" or role == "Offerer+Runner":
-          self.status.text = "Items have been dropped off.  Awaiting final confirmation from Requester."  
-        self.status.text = "Please click to give feedback on the Requester"
-        if role == "Requester":
-            self.status.text = "Please confirm item(s) have been dropped off by Runner."
-            return('9')
-        if role == "Requester+Runner":
-            self.status.text = "Items picked up, delivery complete!"
-    
-    def status9(self, role):
-        print("status9()", role)
-        self.make_status_inactive()
-        self.status.text = "Delivery complete.  What goes around comes around!"
-        
-    def click_update_status(self, **event_args):
-        """
-        Progress to next status_code where allowed, then trigger KarmaForm for feedback.
-        show_deliveries_row already handles whether the checkbox is enabled.
-        Update Matches, Offers, Requests tables
-        """
-        new_status = self.get_status_function()(self.get_user_role())   
-        print("Advancing to status:",new_status)
-#         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
-#         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
-#         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
-        anvil.server.call('update_status_codes', self.item, new_status)
-        anvil.server.call('generate_matches')
-        self.show_deliveries_row()
+          
+#     def click_update_status(self, **event_args):
+#         """
+#         Progress to next status_code where allowed, then trigger KarmaForm for feedback.
+#         show_deliveries_row already handles whether the checkbox is enabled.
+#         Update Matches, Offers, Requests tables
+#         """
+#         new_status = self.get_status_function()(self.get_user_role())   
+#         print("Advancing to status:",new_status)
+# #         anvil.server.call("save_to_matches_database", self.item, runner, messages, new_status)
+# #         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status)
+# #         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status)
+#         anvil.server.call('update_status_codes', self.item, new_status)
+#         anvil.server.call('generate_matches')
+#         self.show_deliveries_row()
       
     def create_karma_form(self, user_role, regarding, regarding_role):
           form = KarmaForm()
@@ -287,16 +162,25 @@ class DeliveriesRow(DeliveriesRowTemplate):
         status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
         if event_args['sender'].icon == 'fa:caret-down':
             event_args['sender'].icon = 'fa:caret-up'
-            for row in  self.parent.get_components():
-               if row != self:
-                  row.clear()
-            self.parent.parent.add_component(status_view)
+            for row in [x for x in self.parent.get_components()]:
+                buttons = [x for x in row.get_components() if type(x) == Button]          
+                for button in buttons:
+                    if "Delivery Status" in button.text:
+                        button.enabled = False
+            event_args['sender'].enabled = True 
+            self.status_view_panel.add_component(status_view)
+            self.status_view_panel.visible = True
         else:
             event_args['sender'].icon = 'fa:caret-down'
             print("Removing")
-            #             status_view.clear()
-            self.parent.parent.remove_from_parent(status_view)
-            self.parent.parent.parent.__init__()
+            self.status_view_panel.clear()
+            status_view.clear()
+            status_view.remove_from_parent()
+            self.status_view_panel.visible = False
+#             self.show_deliveries_row()
+#             self.parent.parent.parent.__init__()
+            
+
 
 
 

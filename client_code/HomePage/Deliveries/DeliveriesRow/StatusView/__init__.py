@@ -58,9 +58,12 @@ class StatusView(StatusViewTemplate):
         self.runner.background = dark_blue
         self.requester.background = dark_blue
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
+        self.offerer.background = blue
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
+        self.runner.background = blue
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
-
+        self.requester.background = blue
+        
     def initial_options_by_role(self, **event_args):
         # Stickiness and Event Hangling
         for checkbox in self.all_checkboxes:
