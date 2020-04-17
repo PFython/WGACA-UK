@@ -100,7 +100,7 @@ class StatusView(StatusViewTemplate):
             checkboxes = {self.pickup_agreed,
                           self.runner_confirms_pickup,
                           self.offerer_feedback_by_runner,
-                          delivery}
+                          self.delivery}
         for checkbox in checkboxes:
             self.conceal(checkbox, False)
             
@@ -114,7 +114,6 @@ class StatusView(StatusViewTemplate):
             component.background = red if boolean_value else bright_blue
         else:
             component.visible = not boolean_value
-
 
     def refresh_canvas(self, **event_args):
         self.sender = event_args.get('sender')
