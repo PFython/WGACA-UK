@@ -12,7 +12,7 @@ components:
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: row_id
-    layout_properties: {grid_position: 'DVIWBA,DKBADT'}
+    layout_properties: {grid_position: 'DVIWBA,DKBADT', full_width_row: true}
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
