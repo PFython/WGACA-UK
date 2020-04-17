@@ -48,7 +48,7 @@ components:
   components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{}',
+      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":40,"JLYSPS":20,"ZFDRYZ":40,"SZCLVN":20,"LEZMMU":20,"INGTLG":40,"OGXJIC":20,"WVSZDL":40}',
       spacing_below: small, background: ''}
     name: card_1
     layout_properties: {grid_position: 'YZFYDP,KBWKKA'}
@@ -106,6 +106,11 @@ components:
       name: runner_selected
       layout_properties: {grid_position: 'GMHINI,FZYZUW'}
       event_bindings: {}
+    - type: ColumnPanel
+      properties: {col_widths: '{}'}
+      name: column_panel_4
+      layout_properties: {grid_position: 'GMHINI,JLYSPS'}
+      components: []
     - type: Label
       properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
         visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
@@ -124,6 +129,10 @@ components:
       name: pickup_agreed
       layout_properties: {grid_position: 'IOIBVH,ZFDRYZ'}
       event_bindings: {}
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_3
+      layout_properties: {grid_position: 'IOIBVH,SZCLVN'}
     - type: Label
       properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
         visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
@@ -136,26 +145,29 @@ components:
       event_bindings: {}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Offerer confirms Pickup, font_size: 18,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+        foreground: '', visible: true, text: Confirm Pickup, font_size: 18, font: '',
+        spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
       name: offerer_confirms_pickup
       layout_properties: {grid_position: 'DCAWSJ,NRGWEN'}
       event_bindings: {}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Runner confirms Pickup, font_size: 18,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+        foreground: '', visible: true, text: Confirm Pickup, font_size: 18, font: '',
+        spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
       name: runner_confirms_pickup
       layout_properties: {grid_position: 'DCAWSJ,UVSDGB'}
       event_bindings: {}
-      data_bindings:
-      - {property: enabled, code: not self.runner_confirms_pickup.checked}
+      data_bindings: []
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_1
+      layout_properties: {grid_position: 'DCAWSJ,THDNOG'}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Offerer feeds back on Runner, font_size: 18,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+        foreground: '', visible: true, text: Feed back on Runner, font_size: 18, font: '',
+        spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
       name: feedback_on_runner_by_offerer
       layout_properties:
@@ -164,7 +176,7 @@ components:
       event_bindings: {}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Runner feeds back on Offerer, font_size: 18,
+        foreground: '', visible: true, text: Feed back on Offerer, font_size: 18,
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
       name: feedback_on_offerer_by_runner
@@ -173,6 +185,10 @@ components:
         grid_position: JYHLVA,VPCOUS
       event_bindings: {}
       data_bindings: []
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_2
+      layout_properties: {grid_position: 'JYHLVA,VKVZSE'}
     - type: Label
       properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
         visible: true, text: '', font_size: 30, font: '', spacing_above: small, icon_align: left,
@@ -183,6 +199,10 @@ components:
         col_widths: {}
         grid_position: IYFEHF,IKHRFW
       event_bindings: {}
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_5
+      layout_properties: {grid_position: 'NJQFWV,LEZMMU'}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '', visible: true, text: Dropoff time/date agreed, font_size: 18,
@@ -201,20 +221,14 @@ components:
         col_widths: {}
         grid_position: VDONQA,XTPRJJ
       event_bindings: {}
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_6
+      layout_properties: {grid_position: 'LZJUZJ,QMHUXC'}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Requester confirms Dropoff, font_size: 18,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-        bold: false, checked: false, underline: false}
-      name: requester_confirms_dropoff
-      layout_properties:
-        col_widths: {}
-        grid_position: LZJUZJ,KGRHLT
-      event_bindings: {}
-    - type: CheckBox
-      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: 'Runner confirms Dropoff ', font_size: 18,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+        foreground: '', visible: true, text: 'Confirm Dropoff ', font_size: 18, font: '',
+        spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
       name: runner_confirms_dropoff
       layout_properties:
@@ -223,23 +237,37 @@ components:
       event_bindings: {}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Requester feeds back on Runner, font_size: 18,
-        font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+        foreground: '', visible: true, text: Confirm Dropoff, font_size: 18, font: '',
+        spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: feedback_on_runner_by_requester
+      name: requester_confirms_dropoff
       layout_properties:
         col_widths: {}
-        grid_position: UTIZGO,BLPRTH
+        grid_position: LZJUZJ,TKPVFU
       event_bindings: {}
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_7
+      layout_properties: {grid_position: 'UTIZGO,MXSGWQ'}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: Runner feeds back on Requester, font_size: 18,
+        foreground: '', visible: true, text: Feed back on Requester, font_size: 18,
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
       name: feedback_on_requester_by_runner
       layout_properties:
         col_widths: {}
         grid_position: UTIZGO,WIWKHQ
+      event_bindings: {}
+    - type: CheckBox
+      properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+        foreground: '', visible: true, text: Feed back on Runner, font_size: 18, font: '',
+        spacing_above: small, spacing_below: small, italic: false, background: '',
+        bold: false, checked: false, underline: false}
+      name: feedback_on_runner_by_requester
+      layout_properties:
+        col_widths: {}
+        grid_position: UTIZGO,XYSNZC
       event_bindings: {}
     - type: Label
       properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
@@ -250,6 +278,11 @@ components:
       layout_properties:
         col_widths: {}
         grid_position: UZZWTY,ORSXJA
+      event_bindings: {}
+    - type: ColumnPanel
+      properties: {}
+      name: column_panel_8
+      layout_properties: {grid_position: 'QFICYX,OGXJIC'}
       event_bindings: {}
     - type: CheckBox
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,

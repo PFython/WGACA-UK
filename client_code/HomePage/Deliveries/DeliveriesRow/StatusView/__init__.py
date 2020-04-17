@@ -31,6 +31,7 @@ class StatusView(StatusViewTemplate):
             for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
                 checkbox.enabled = True
                 checkbox.checked = False
+                checkbox.visible = False
                 checkbox.set_event_handler('change', self.initial_options_by_role)  
         else:
             self.is_offerer.checked = self.user == self.match['offer']['user']
