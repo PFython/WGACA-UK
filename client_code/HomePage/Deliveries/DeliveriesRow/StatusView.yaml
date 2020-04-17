@@ -26,9 +26,9 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'Is user the Offerer? (Invisible)', font_size: 18,
-      font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-      bold: false, checked: false, underline: false}
+      foreground: '', visible: false, text: 'User is Offerer?', font_size: 18, font: '',
+      spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
+      checked: false, underline: false}
     name: is_offerer
     layout_properties:
       col_widths: {}
@@ -37,9 +37,9 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'Is user the Runner? (Invisible)', font_size: 18,
-      font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-      bold: false, checked: false, underline: false}
+      foreground: '', visible: false, text: 'User is Runner?', font_size: 18, font: '',
+      spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
+      checked: false, underline: false}
     name: is_runner
     layout_properties:
       col_widths: {}
@@ -48,9 +48,9 @@ components:
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-      foreground: '', visible: false, text: 'Is user the requester? (Invisible)',
-      font_size: 18, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, checked: false, underline: false}
+      foreground: '', visible: false, text: 'User is Requester?', font_size: 18, font: '',
+      spacing_above: small, spacing_below: small, italic: false, background: '', bold: false,
+      checked: false, underline: false}
     name: is_requester
     layout_properties:
       col_widths: {}

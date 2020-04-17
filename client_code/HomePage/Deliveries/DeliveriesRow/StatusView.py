@@ -28,8 +28,7 @@ class StatusView(StatusViewTemplate):
         self.test_mode.set_event_handler('change', self.setup_test_or_prod)
         if anvil.users.get_user()['admin']:
             self.test_mode.enabled = True
-            self.test_mode.visible = True
-            
+            self.test_mode.visible = True            
         else:
             self.test_mode.enabled = False
             self.test_mode.checked = False
@@ -90,7 +89,10 @@ class StatusView(StatusViewTemplate):
                          self.feedback_on_runner_by_requester}:
             self.conceal(checkbox, self.is_offerer.checked)
         # Single Roles: Runner
-#         for checkbox in {self.runner_confirms_pickup, self.runner_confirms_dropoff, self.dropoff_agreed, self.pickup_agreed}:
+        for checkbox in {self.offerer_confirms_pickup,
+                         self.feedback_on_runner_by_offerer,
+                         self.requester_confirms_dropoff,
+                         self.feedback_on_runner_by_requester,}:
 #             self.conceal(checkbox, self.is_runner.checked)
         # Single Roles: Requester
 #         for checkbox in {self.requester_confirms_dropoff, self.dropoff_agreed}:
