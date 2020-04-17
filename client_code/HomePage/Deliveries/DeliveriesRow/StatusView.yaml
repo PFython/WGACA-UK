@@ -1,34 +1,4 @@
 components:
-- type: CheckBox
-  properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-    foreground: '', visible: true, text: 'Is user the Offerer? (Invisible)', font_size: 18,
-    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-    bold: false, checked: false, underline: false}
-  name: is_offerer
-  layout_properties:
-    col_widths: {}
-    grid_position: FNCBWW,UMGCPQ
-  event_bindings: {}
-- type: CheckBox
-  properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-    foreground: '', visible: true, text: 'Is user the Runner? (Invisible)', font_size: 18,
-    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-    bold: false, checked: false, underline: false}
-  name: is_runner
-  layout_properties:
-    col_widths: {}
-    grid_position: FNCBWW,XJWICZ
-  event_bindings: {}
-- type: CheckBox
-  properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
-    foreground: '', visible: true, text: 'Is user the requester? (Invisible)', font_size: 18,
-    font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
-    bold: false, checked: false, underline: false}
-  name: is_requester
-  layout_properties:
-    col_widths: {}
-    grid_position: FNCBWW,OYHSCY
-  event_bindings: {}
 - type: Label
   properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
     visible: false, text: 'Invisible field for holding row_id or Match or Match dict
@@ -39,16 +9,57 @@ components:
   layout_properties: {grid_position: 'FADAPX,KECBZA'}
   event_bindings: {}
 - type: ColumnPanel
-  properties: {role: card, col_widths: '{}'}
+  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
   name: card_2
-  layout_properties: {grid_position: 'AGGBNC,OJBRKS'}
+  layout_properties: {grid_position: 'AGGBNC,OJBRKS', full_width_row: true}
   components:
+  - type: CheckBox
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+      foreground: '', visible: false, text: 'Is user the Offerer? (Invisible)', font_size: 18,
+      font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+      bold: false, checked: false, underline: false}
+    name: is_offerer
+    layout_properties:
+      col_widths: {}
+      grid_position: SSVVJU,GELXZA
+      full_width_row: true
+    event_bindings: {}
+  - type: CheckBox
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+      foreground: '', visible: false, text: 'Is user the Runner? (Invisible)', font_size: 18,
+      font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
+      bold: false, checked: false, underline: false}
+    name: is_runner
+    layout_properties:
+      col_widths: {}
+      grid_position: SSVVJU,DGESUK
+      full_width_row: true
+    event_bindings: {}
+  - type: CheckBox
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: false,
+      foreground: '', visible: false, text: 'Is user the requester? (Invisible)',
+      font_size: 18, font: '', spacing_above: small, spacing_below: small, italic: false,
+      background: '', bold: false, checked: false, underline: false}
+    name: is_requester
+    layout_properties:
+      col_widths: {}
+      grid_position: SSVVJU,QVZMYA
+      full_width_row: true
+    event_bindings: {}
+  - type: ColumnPanel
+    properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+      wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '',
+      spacing_below: small, background: ''}
+    name: column_panel_11
+    layout_properties: {grid_position: 'LHKIVT,DZMCAR', full_width_row: true}
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
       wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":25,"JLYSPS":35,"ZFDRYZ":35,"SZCLVN":25,"LEZMMU":25,"INGTLG":35,"OGXJIC":25,"WVSZDL":35}',
       spacing_below: small, background: ''}
     name: card_1
-    layout_properties: {grid_position: 'YZFYDP,KBWKKA'}
+    layout_properties: {grid_position: 'YZFYDP,KBWKKA', full_width_row: true}
     event_bindings: {show: show_status_view}
     components:
     - type: Link

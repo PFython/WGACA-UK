@@ -20,24 +20,23 @@ class StatusView(StatusViewTemplate):
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.setup_test_or_prod()
-        self.initial_canvas()
-        self.initial_options_by_role()
-        self.refresh_canvas()
+#         self.initial_canvas()
+#         self.initial_options_by_role()
+#         self.refresh_canvas()
         
     def setup_test_or_prod(self):
         # Change the following to True for Production use
-        self.test_mode = True
+        self.test_mode = False
         if self.test_mode:
-            
+            print("Test Mode")            
             for checkbox in (self.is_offerer, self.is_requester, self.is_runner):
                 checkbox.enabled = True
                 checkbox.checked = False
-                checkbox.visible = False
-                checkbox.set_event_handler('change', self.initial_options_by_role)  
+                checkbox.visible = True
         else:
-#             self.is_offerer.checked = self.user == self.match.tag['offer']['user']
-#             self.is_runner.checked = self.user == self.match.tag['approved_runner']
-#             self.is_requester.checked = self.user == self.match.tag['request']['user']
+            self.is_offerer.checked = self.user == self.match['offer']['user']
+            self.is_runner.checked = self.user == self.match['approved_runner']
+            self.is_requester.checked = self.user == self.match['request']['user']
             pass
         
     def initial_canvas(self):
