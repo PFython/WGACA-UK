@@ -13,7 +13,7 @@ class StatusView(StatusViewTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.user = anvil.users.get_user()
-        self.test_mode = True
+        self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.initial_canvas()
@@ -67,15 +67,17 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.refresh_canvas)
             checkbox.sticky = True
-            checkbox.visible = False
+            self.conceal(checkbox, True)
         # Single Roles: Offerer
-        if self.is_offerer and not self.is_runner:
+        if self.is_offerer.checked and (not self.is_runner.checked):
+            print("Offerer")
             checkboxes = {self.pickup_agreed,
                           self.offerer_confirms_pickup,
                           self.runner_feedback_by_offerer,
                           self.delivery}
         # Single Roles: Runner
-        if self.is_runner and not self.is_offerer and not self.is_requester:
+        if self.is_runner.checked and (not self.is_offerer.checked) and (not self.is_requester.checked):
+            print("Runner")
             checkboxes = {self.pickup_agreed,
                           self.runner_confirms_pickup,
                           self.offerer_feedback_by_runner,
@@ -84,19 +86,22 @@ class StatusView(StatusViewTemplate):
                           self.requester_feedback_by_runner,
                           self.delivery}
         # Single Roles: Requester
-        if self.is_requester and not self.is_runner:
+        if self.is_requester.checked and (not self.is_runner.checked):
+            print("Requester")
             checkboxes = {self.dropoff_agreed,
                           self.requester_confirms_dropoff,
                           self.runner_feedback_by_requester,
                           self.delivery}
         # Dual Roles: Offerer=Runner
-        if self.is_offerer and self.is_runner:
+        if self.is_offerer.checked and self.is_runner.checked:
+            print("Offerer+Runner")
             checkboxes = {self.dropoff_agreed,
                           self.runner_confirms_dropoff,
                           self.requester_feedback_by_runner,
                           self.delivery}
         # Dual Roles: Requester=Runner  
-        if self.is_requester and self.is_runner:
+        if self.is_requester.checked and self.is_runner.checked:
+            print("Requester+Runner")
             checkboxes = {self.pickup_agreed,
                           self.runner_confirms_pickup,
                           self.offerer_feedback_by_runner,
@@ -109,7 +114,6 @@ class StatusView(StatusViewTemplate):
         Custom appearance/actions for toggling .visible.  During testing,
         can be helpful to colour code rather than make truly invisible
         """
-        print("conceal")
         if self.test_mode:
             component.background = red if boolean_value else bright_blue
         else:
