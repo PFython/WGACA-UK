@@ -134,7 +134,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             for column in columns:
                 buttons = [x for x in column.get_components() if type(x) == Button]
                 button = [x for x in buttons  if "Delivery Status" in x.text]
-                button[0].enabled = enabled
         sender.enabled = True 
             
     def click_status_view(self, **event_args):
@@ -144,16 +143,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
         status_view.match = self.item
         status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
         sender = event_args['sender']
-        if sender.icon == 'fa:caret-down':
-            sender.icon = 'fa:caret-up'
-            self.disable_similar_buttons(sender)
-            self.status_view_panel.add_component(status_view)
-            self.status_view_panel.visible = True
-        else:
-            event_args['sender'].icon = 'fa:caret-down'
-            status_view.remove_from_parent()
-            self.status_view_panel.visible = False
-            self.disable_similar_buttons(sender, True)
+        self.disable_similar_buttons(sender)
+        self.status_view_panel.add_component(status_view)
+        self.status_view_panel.visible = True
             
 
 

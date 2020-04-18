@@ -189,9 +189,8 @@ def save_to_matches_database(match, runner, messages, status_code):
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
-def save_matches_status_dict(match):
-    match.update(status_dict = match.status_dict)
-
+def save_matches_status_dict(match, status_dict):
+    match.update(status_dict = status_dict)
     
 @anvil.server.callable
 def save_to_offers_database(product_key, units, expiry_date, notes, status_code="1"):

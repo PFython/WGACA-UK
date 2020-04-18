@@ -63,7 +63,10 @@ class StatusView(StatusViewTemplate):
         """Update labels, checkboxes, and colours based on self.match data"""
         self.status_dict = self.match['status_dict'] or {"offer_matched": True,
                                                          "runner_selected": True}
-        self.status_dict2 = self.status_dict.copy()
+        # BUG: For some reason 'sender' is detected as a CheckBox...
+        if 'sender' in self.status_dict:
+            del self.status_dict['sender']
+        print(self.status_dict)
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.offerer.background = blue
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
@@ -170,18 +173,16 @@ class StatusView(StatusViewTemplate):
         Allows user to select later values and auto-complete/backfill earlier ones.
         """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
-        if self.status_dict == self.status_dict2:
-            print('backfilling')
-            backfill = False
-            for checkbox in self.checkboxes[::-1]:
-                if not checkbox.checked and not backfill:
-                    continue
-                if checkbox.checked and not backfill:
-                    backfill = True # Backfill for remaining iterations
-                if not checkbox.checked and backfill:
-                    checkbox.checked = True
-
-        
+        print('backfilling')
+        backfill = False
+        for checkbox in self.checkboxes[::-1]:
+            if not checkbox.checked and not backfill:
+                continue
+            if checkbox.checked and not backfill:
+                backfill = True # Backfill for remaining iterations
+            if not checkbox.checked and backfill:
+                checkbox.checked = True
+                
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
                  (self.runner_selected, self.arrow2),
@@ -203,19 +204,23 @@ class StatusView(StatusViewTemplate):
 
     def save_status(self):
         """Saves checkbox status to status_dict and back to Match database"""
-        for checkbox, checked in self.status_dict.items():
-            object = getattr(self, checkbox)
-            setattr(object, "checked", object.checked)
-        anvil.server.call("save_matches_status_dict", self.status_dict)
+        checkbox_names = [x for x in dir(self) if type(getattr(self,x)) == CheckBox]
+        for checkbox_name in checkbox_names:
+            checkbox_object = getattr(self, checkbox_name)
+            self.status_dict[checkbox_name] = getattr(checkbox_object, "checked")
+        anvil.server.call("save_matches_status_dict", self.match, self.status_dict)
+        pass
      
     def click_confirm(self, **event_args):
         """This method is called when the Confirm button is clicked"""
         self.save_status()
-        self.parent.parent.parent.status_view.raise_event('click')
+        self.click_cancel()
       
     def click_cancel(self, **event_args):
         """This method is called when the Cancel button is clicked"""
         self.parent.parent.parent.status_view.raise_event('click')
+        self.remove_from_parent()
+        self.clear()
 
     def click_toggle_view(self, **event_args):
         """This method is called when the Toggle View button is clicked"""

@@ -108,7 +108,7 @@ components:
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Delivery Status', font_size: null,
       font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:pencil-square-o'}
     name: status_view
     layout_properties:
       col_widths: {}
