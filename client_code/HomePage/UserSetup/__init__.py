@@ -99,7 +99,7 @@ class UserSetup(UserSetupTemplate):
         if self.display_name.text != user['display_name']:
             existing_name = anvil.server.call("check_for_display_name", self.display_name.text)
             if existing_name:
-                self.help_text.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken or is not allowed."
+                self.help_box.text = f"⚠ Sorry, the Display Name '{self.display_name.text}' has already been taken or is not allowed."
                 self.deselect_all_icons()
                 return True
             
@@ -128,7 +128,7 @@ class UserSetup(UserSetupTemplate):
             
     def show_help_tag(self, **event_args):
         """This method is called when the link is clicked"""
-        self.help_text.text = event_args['sender'].tag
+        self.help_box.text = event_args['sender'].tag
         self.deselect_all_icons()
         # Set clicked icon to selected
         event_args['sender'].icon = 'fa:question-circle'        
