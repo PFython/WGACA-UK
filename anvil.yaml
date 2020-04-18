@@ -4,7 +4,7 @@ dependencies:
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
-  server_config: {auto_create_missing_columns: true}
+  server_config: {auto_create_missing_columns: false}
 - source: /runtime/services/anvil/users.yml
   client_config: {use_microsoft: false, require_secure_passwords: false, use_email: true,
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
@@ -112,62 +112,46 @@ db_schema:
   id: 48778
   python_name: matches
   columns:
-    QYW+Cp6PbUE=:
-      name: offer_collected
-      type: bool
-      admin_ui: {order: 4, width: 60.333665999999994}
-    EaU1GoL_KEE=:
-      name: feedback_from_runner
-      type: string
-      admin_ui: {order: 8, width: 50}
-    dDQHll3qrSE=:
-      name: offer_delivered
-      type: bool
-      admin_ui: {order: 5, width: 50}
-    KfgMeFePreY=:
-      name: request
-      type: liveObject
-      backend: anvil.tables.Row
-      admin_ui: {order: 0, width: 136.01136400000001}
-      table_id: 48657
     447fta7e8os=:
       name: approved_runner
       type: liveObject
       backend: anvil.tables.Row
       admin_ui: {order: 2, width: 214.666666}
       table_id: 48470
-    BmxCnJ7ZmEw=:
-      name: available_runners
-      type: liveObjectArray
-      backend: anvil.tables.Row
-      admin_ui: {order: 1.5, width: 122.34966600000001}
-      table_id: 48470
-    YAUMkRJ9AuA=:
-      name: route_url
-      type: string
-      admin_ui: {order: 11, width: 962.6669999999999}
-    Vioog5yQ47s=:
-      name: messages_dict
-      type: simpleObject
-      admin_ui: {order: 10, width: 142.666666}
-    cN9mqqVsiOo=:
-      name: status_code
-      type: string
-      admin_ui: {order: 3, width: 94.333666}
-    71gSuTeJpNg=:
-      name: feedback_from_giver
-      type: string
-      admin_ui: {order: 7, width: 50}
-    LMrS6TcLj8U=:
-      name: feedback_from_requester
-      type: string
-      admin_ui: {order: 6, width: 50}
     6gFeCeGqv6k=:
       name: offer
       type: liveObject
       backend: anvil.tables.Row
       admin_ui: {order: 1, width: 205.666666}
       table_id: 48190
+    BmxCnJ7ZmEw=:
+      name: available_runners
+      type: liveObjectArray
+      backend: anvil.tables.Row
+      admin_ui: {order: 1.5, width: 122.34966600000001}
+      table_id: 48470
+    KfgMeFePreY=:
+      name: request
+      type: liveObject
+      backend: anvil.tables.Row
+      admin_ui: {order: 0, width: 136.01136400000001}
+      table_id: 48657
+    Vioog5yQ47s=:
+      name: messages_dict
+      type: simpleObject
+      admin_ui: {order: 10, width: 142.666666}
+    YAUMkRJ9AuA=:
+      name: route_url
+      type: string
+      admin_ui: {order: 11, width: 962.6669999999999}
+    cN9mqqVsiOo=:
+      name: status_code
+      type: string
+      admin_ui: {order: 3, width: 94.333666}
+    lEO1l9y6cns=:
+      name: status_dict
+      type: simpleObject
+      admin_ui: {order: 7, width: 200}
   access: {python_name: matches, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
     table_id: 48778}
 - name: Requests

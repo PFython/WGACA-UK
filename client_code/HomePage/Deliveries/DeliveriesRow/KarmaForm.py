@@ -6,7 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
-from ...Globals import yellow
+from ....Globals import yellow
 
 class KarmaForm(KarmaFormTemplate):
     def __init__(self, **properties):
@@ -63,6 +63,9 @@ class KarmaForm(KarmaFormTemplate):
           star.icon = 'fa:star-o'
       event_args['sender'].icon = 'fa:star'
       self.rating = stars[event_args['sender']].text
+
+
+
 
 
 

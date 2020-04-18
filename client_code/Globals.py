@@ -5,6 +5,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 green = '#5eb348'
+dark_green = '#3d732f'
 grey = '#d8d8d8'
 red = '#ff8080'
 blue = '#0080c0'
@@ -14,6 +15,8 @@ bright_blue = '#00a3f0'
 white = "#ffffff"
 pink = '#ffe6e6'
 yellow = '#fefdc7'
+dark_blue = '#0000ff'
+black = '#3b3b3b'
 
 LOCALE = "United Kingdom"
 ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)

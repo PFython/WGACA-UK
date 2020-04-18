@@ -31,18 +31,7 @@ def check_for_display_name(display_name):
     if display_name != None and display_name != "":
       return True if app_tables.users.get(display_name = display_name) else False
 
-# @anvil.server.callable
-# def general_status_messages(status_code):
-#     if status_code not in STATUSES():
-#         return "Unknown Status Code, sorry..."
-#     return {'3': "Runner selected; Next step is to agree a pick-up.",
-#             '4': "Offerer has confirmed that the pick-up took place.",
-#             '5': "Runner has confirmed that the pick-up took place.", 
-#             '6': "Both the Offerer and Runner have confirmed the pick-up took place.",
-#             '7': "Requester has confirmed that the drop-off took place.",
-#             '8': "Runner has confirmed that the drop-off took place.",
-#             '9': "Both the Runner and Requester have confirmed the drop-off took place.",}[status_code]
-    
+# @anvil.tables.in_transaction
 @anvil.server.callable
 def generate_matches():
     """
@@ -85,7 +74,8 @@ def generate_route_url(new_match):
     osm += pickup + "%3B" + dropoff
 #     print(osm)
     return osm
-    
+
+# @anvil.tables.in_transaction
 @anvil.server.callable
 def _generate_route_url_for_all_matches():
   """This is a developer function to create OSM route urls for all Matches"""
@@ -104,18 +94,22 @@ def get_address_hierarchy(country = "United Kingdom"):
     global hierarchy
     return hierarchy[country]    
   
+@anvil.server.callable  
+def get_match_by_id(row_id):
+    if anvil.users.get_user() is not None:
+        return app_tables.matches.get_by_id(row_id)
+  
+  
 @anvil.server.callable
 def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
-    user = anvil.users.get_user()
-    if user is not None:
+    if anvil.users.get_user() is not None:
         return [x for x in app_tables.matches.search(tables.order_by("status_code")) if x['approved_runner'] != None]
 
 @anvil.server.callable
 def get_my_matches():
     """ Returns rows from the Matches database """
-    user = anvil.users.get_user()
-    if user is not None:
+    if anvil.users.get_user() is not None:
         return app_tables.matches.search(tables.order_by("status_code"),approved_runner=None)
         # When approved_runner != None, the Match effectively becomes a Delivery
         # TODO: Filter results by proximity
@@ -123,6 +117,10 @@ def get_my_matches():
 @anvil.server.callable
 def _get_all_matches():
     return app_tables.matches.search(tables.order_by("status_code"))
+  
+@anvil.server.callable
+def _get_test_match():
+    return app_tables.matches.get()
 
 @anvil.server.callable
 def get_my_offers():
@@ -155,12 +153,14 @@ def get_user_from_display_name(display_name):
     """ Returns a User (row) object based on display_name string """
     return app_tables.users.get(display_name=display_name)
 
+# @anvil.tables.in_transaction
 def nominatim_scrape(address_list):
     """Returns location & address data for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
     return  anvil.http.request(nominatim, json=True)
   
+# @anvil.tables.in_transaction  
 @anvil.server.callable
 def remove_orphan_matches(request_or_offer):
     """
@@ -179,13 +179,18 @@ def remove_orphan_matches(request_or_offer):
     except anvil.tables.TableError:
         pass
 
+# @anvil.tables.in_transaction      
 @anvil.server.callable
 def save_to_matches_database(match, runner, messages, status_code):
     """ Returns 'Duplicate' if product_category request already exists"""
-    user = anvil.users.get_user()
-    if user is None:
+    if anvil.users.get_user() is None:
         return
     match.update(approved_runner = runner, messages_dict = messages, status_code = status_code)
+
+# @anvil.tables.in_transaction
+@anvil.server.callable
+def save_matches_status_dict(match, status_dict):
+    match.update(status_dict = status_dict)
     
 @anvil.server.callable
 def save_to_offers_database(product_key, units, expiry_date, notes, status_code="1"):
@@ -213,8 +218,7 @@ def save_to_requests_database(product_category, urgent, notes, status_code="1"):
 @anvil.server.callable
 def save_user_setup(field, value):
     """ General purpose save to the User database """
-    user = anvil.users.get_user()
-    user[field] = value
+    anvil.users.get_user()[field] = value
   
 @anvil.server.callable
 def STATUSES():
@@ -239,29 +243,28 @@ def string_to_datetime(string, format = "%d %b %Y"):
 @anvil.server.callable
 def terms_accepted(boolean_value):
     """ Records today's date (or None) in the User database for Terms Accepted"""
-    user = anvil.users.get_user()
-    user['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
+    anvil.users.get_user()['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
 @anvil.server.callable
 def update_offers_status(offer, status_code):
-    user = anvil.users.get_user()
-    if user is None:
+    if anvil.users.get_user() is None:
         return
     offer.update(status_code = status_code)
     
 @anvil.server.callable
 def update_requests_status(request, status_code):
-    user = anvil.users.get_user()
-    if user is None:
+    if anvil.users.get_user() is None:
         return
     request.update(status_code = status_code)
-    
+
+# @anvil.tables.in_transaction
 @anvil.server.callable
 def update_status_codes(match, new_status_code):
     match['status_code'] = new_status_code
     match['request']['status_code'] = new_status_code
     match['offer']['status_code'] = new_status_code
-    
+
+# @anvil.tables.in_transaction    
 @anvil.server.callable
 def volunteer_as_runner(match, boolean_value):
     """ Volunteer/unvolunteer as available_runner in Matches"""
