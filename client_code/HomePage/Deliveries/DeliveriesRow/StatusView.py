@@ -72,8 +72,11 @@ class StatusView(StatusViewTemplate):
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
-        self.is_requester.checked = self.user == self.match['request']['user']
-        
+        self.is_requester.checked = self.user == self.match['request']['user']        
+        for checkbox, checked in self.status_dict.items():
+            object = getattr(self, checkbox)
+            setattr(object, "checked", checked)
+        # TODO: Make general purpose/DRY method combined with lock_history()        
         
     def define_options_by_role(self):
         """Attributes set with list of visible options, determined by role"""
@@ -196,7 +199,10 @@ class StatusView(StatusViewTemplate):
                 
     def lock_history(self):
         """Disable all checkboxes already saved as checked to the database"""
-        for
+        for checkbox, checked in self.status_dict.items():
+            object = getattr(self, checkbox)
+            if getattr(object, "checked"):
+                setattr(object, "enabled", False)
 
     def save_status(self):
         """Saves checkbox status to status_dict and back to Match database"""
