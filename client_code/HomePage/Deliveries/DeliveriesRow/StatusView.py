@@ -201,16 +201,13 @@ class StatusView(StatusViewTemplate):
             else:
                 checkbox.foreground = white if checkbox.enabled else light_blue
 
-    def save_status_to_dict(self):
+    def save_status(self):
+        """Saves checkbox status to status_dict and back to Match database"""
         for checkbox, checked in self.status_dict.items():
             object = getattr(self, checkbox)
             setattr(object, "checked", object.checked)
-                
-    def save_status(self):
-        """Saves checkbox status to status_dict and back to Match database"""
-        pass
         anvil.server.call("save_matches_status_dict", self.status_dict)
-# #         
+     
     def click_confirm(self, **event_args):
         """This method is called when the Confirm button is clicked"""
         self.save_status()
@@ -229,12 +226,12 @@ class StatusView(StatusViewTemplate):
             for component in self.card_1.get_components():
                 print(type(component))
                 component.visible = True
-#             self.refresh_data_bindings()
+
         else:
               event_args['sender'].icon = 'fa:search-plus'
               sender.text = "  Full View"
-              # Save status to .status_dict
-              self.save_status_to_dict()
+              # Save status, destroy, and recreate
+              self.save_status()
               print(self.status_dict)
               self.parent.parent.parent.status_view.raise_event('click')
           
