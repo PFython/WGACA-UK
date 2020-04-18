@@ -310,7 +310,7 @@ components:
       layout_properties:
         col_widths: {}
         grid_position: ERYXYR,EJKVXW
-      event_bindings: {}
+      event_bindings: {click: click_cancel}
     - type: Button
       properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
         foreground: '', visible: true, text: ' Confirm', font_size: null, font: '',

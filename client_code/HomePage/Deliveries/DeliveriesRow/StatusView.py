@@ -16,9 +16,6 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-        self.status_dict = self.match['status_dict'] or {"offer_matched": True,
-                                                         "runner_selected": True}
-        self.status_dict2 = self.status_dict.copy()
         self.initial_canvas()
         self.match = match
         self.ingest_match_data()
@@ -69,6 +66,9 @@ class StatusView(StatusViewTemplate):
 
     def ingest_match_data(self):
         """Update labels, checkboxes, and colours based on self.match data"""
+        self.status_dict = self.match['status_dict'] or {"offer_matched": True,
+                                                         "runner_selected": True}
+        self.status_dict2 = self.status_dict.copy()
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.offerer.background = blue
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
@@ -214,8 +214,8 @@ class StatusView(StatusViewTemplate):
         self.save_status()
         self.parent.parent.parent.status_view.raise_event('click')
       
-    def click_confirm(self, **event_args):
-        """This method is called when the Confirm button is clicked"""
+    def click_cancel(self, **event_args):
+        """This method is called when the Cancel button is clicked"""
         self.parent.parent.parent.status_view.raise_event('click')
 
     def click_toggle_view(self, **event_args):
