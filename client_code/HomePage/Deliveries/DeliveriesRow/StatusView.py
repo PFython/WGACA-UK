@@ -73,9 +73,7 @@ class StatusView(StatusViewTemplate):
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']
-        for checkbox, checked in self.status_dict.items():
-            object = getattr(self, checkbox)
-            setattr(object, "checked", checked)
+        
         
     def define_options_by_role(self):
         """Attributes set with list of visible options, determined by role"""
@@ -142,16 +140,12 @@ class StatusView(StatusViewTemplate):
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
         print("Updating components.\nSender:", self.sender)
-        #TODO: KarmaForm button and sticky status
         self.update_dependencies()
-#         print("enabled")
         self.update_predecessors()
-#         print("predecessors")
         self.update_arrows()
-#         print("arrows")
         self.update_text_colour()
-#         print("colour")
-        
+        self.lock_history()
+    
     def update_dependencies(self):
         """
         These are 1...1 dependencies.  Multiple predecessors
@@ -199,6 +193,10 @@ class StatusView(StatusViewTemplate):
                 checkbox.foreground = black 
             else:
                 checkbox.foreground = white if checkbox.enabled else light_blue
+                
+    def lock_history(self):
+        """Disable all checkboxes already saved as checked to the database"""
+        for
 
     def save_status(self):
         """Saves checkbox status to status_dict and back to Match database"""
