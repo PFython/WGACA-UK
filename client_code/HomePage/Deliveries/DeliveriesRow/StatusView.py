@@ -18,7 +18,6 @@ class StatusView(StatusViewTemplate):
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.status_dict = self.match['status_dict'] or {"offer_matched": True,
-                                                         "delivery": True,
                                                          "runner_selected": True}
         self.status_dict2 = self.status_dict.copy()
         print(self.status_dict)
