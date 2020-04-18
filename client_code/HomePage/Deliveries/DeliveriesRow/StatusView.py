@@ -180,7 +180,7 @@ class StatusView(StatusViewTemplate):
                 backfill = True # Backfill for remaining iterations
             if not checkbox.checked and backfill:
                 checkbox.checked = True
-        # Additional "backfill" Requester+Runner
+        # Additional "forward-fill" Requester+Runner
         if self.is_requester.checked and self.is_runner.checked and self.runner_confirms_pickup.checked:
             for option in [self.dropoff_agreed,
                            self.runner_confirms_dropoff,
@@ -188,13 +188,22 @@ class StatusView(StatusViewTemplate):
                            self.feedback_RUN_on_REQ,
                            self.feedback_REQ_on_RUN,]:
                 option.checked = True
-        # Additional "backfill" Offerer+Runner
+        # Additional "forward-fill" Offerer+Runner
         if self.is_offerer.checked and self.is_runner.checked:
             for option in [self.pickup_agreed,
                            self.runner_confirms_pickup,
                            self.offerer_confirms_pickup,
                            self.feedback_RUN_on_OFF,
                            self.feedback_OFF_on_RUN,]:
+                option.checked = True
+        # Additional "backfill" for Delivery Complete
+        if self.delivery.checked:
+            for option in [self.pickup_agreed_agreed,
+                           self.runner_confirms_pickup,
+                           self.offerer_confirms_pickup,
+                           self.dropoff_agreed_agreed,
+                           self.runner_confirms_dropoff,
+                           self.requester_confirms_dropoff,]:
                 option.checked = True
                 
     def update_arrows(self):
