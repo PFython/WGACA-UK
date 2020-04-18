@@ -128,7 +128,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.textbox.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
         sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'       
 
-    def disable_similar_buttons(self, sender, enabled = False):
+    def disable_similar_buttons(self, enabled = False):
         for row in [x for x in self.parent.get_components()]:
             columns = row.get_components()
             for column in columns:

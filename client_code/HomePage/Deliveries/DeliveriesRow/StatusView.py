@@ -218,6 +218,7 @@ class StatusView(StatusViewTemplate):
       
     def click_cancel(self, **event_args):
         """This method is called when the Cancel button is clicked"""
+        self.parent.parent.parent.disable_similar_buttons(enabled = True)
         self.parent.parent.parent.status_view.raise_event('click')
         self.remove_from_parent()
         self.clear()
@@ -239,5 +240,6 @@ class StatusView(StatusViewTemplate):
               self.save_status()
               print(self.status_dict)
               self.parent.parent.parent.status_view.raise_event('click')
+              
           
 
