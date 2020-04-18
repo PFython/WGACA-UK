@@ -161,8 +161,11 @@ class StatusView(StatusViewTemplate):
                  (self.runner_confirms_dropoff, self.feedback_RUN_on_REQ),
                  (self.requester_confirms_dropoff, self.feedback_REQ_on_RUN),]
         for enabler, target in rules:
-            target.enabled = True if enabler.checked else False
-        self.update_predecessors()
+            if not enabler.checked:
+                target.checked = False
+                target.enabled = False
+            
+
 
                 
     def update_predecessors(self):
