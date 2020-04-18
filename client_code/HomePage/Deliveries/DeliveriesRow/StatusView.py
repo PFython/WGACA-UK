@@ -63,16 +63,19 @@ class StatusView(StatusViewTemplate):
         """Update labels, checkboxes, and colours based on self.match data"""
         self.status_dict = self.match['status_dict'] or {"offer_matched": True,
                                                          "runner_selected": True}
-        # BUG: For some reason 'sender' is detected as a CheckBox...
-        if 'sender' in self.status_dict:
-            del self.status_dict['sender']
-        print(self.status_dict)
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']        
+        # BUG For some reason 'sender' is detected as a CheckBox...
+        # Remove false identities to avoid multi-user problems!
+        removals = "sender is_offerer is_runner is_requester".split()
+        for removal in removals:
+            if removal in self.status_dict:
+            del self.status_dict[removal]
+        print(self.status_dict)        
         for checkbox, checked in self.status_dict.items():
             object = getattr(self, checkbox)
             setattr(object, "checked", checked)
