@@ -144,7 +144,7 @@ class StatusView(StatusViewTemplate):
         #TODO: KarmaForm button and sticky status
         self.update_dependencies()
 #         print("enabled")
-#         self.update_predecessors()
+        self.update_predecessors()
 #         print("predecessors")
         self.update_arrows()
 #         print("arrows")
@@ -201,6 +201,11 @@ class StatusView(StatusViewTemplate):
             else:
                 checkbox.foreground = white if checkbox.enabled else light_blue
 
+    def save_status_to_dict(self):
+        for checkbox, checked in self.status_dict.items():
+            object = getattr(self, checkbox)
+            setattr(object, "checked", object.checked)
+                
     def save_status(self):
         """Saves checkbox status to status_dict and back to Match database"""
         pass
@@ -228,5 +233,9 @@ class StatusView(StatusViewTemplate):
         else:
               event_args['sender'].icon = 'fa:search-plus'
               sender.text = "  Full View"
-              self.show_form()
+              # Save status to .status_dict
+              self.save_status_to_dict()
+              print(self.status_dict)
+              self.parent.parent.parent.status_view.raise_event('click')
+          
 
