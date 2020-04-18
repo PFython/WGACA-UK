@@ -24,12 +24,10 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.update_components)    
 
-        
-        
     def show_form(self, **event_args):
         print("show_form")
         self.display_options_by_role()
-#         self.update_components()
+        self.update_components()
         
     def initial_canvas(self):
         """
@@ -39,25 +37,20 @@ class StatusView(StatusViewTemplate):
         # Colours, Bold, Spacing, Enabled, Label Text
         for component in self.card_1.get_components():
             component.background = bright_blue
-            component.foreground = light_blue
+            component.foreground = white
             component.bold = False
+            component.italic = True
             component.spacing_above = 'none'
             component.spacing_below = 'none'
             component.enabled = False
-            component.italic = True
-        self.confirm.enabled = True
-        self.confirm.background = green
-        self.confirm.spacing_above = "medium"
-        self.cancel.enabled = True
-        self.cancel.background = red
-        self.cancel.spacing_above = "medium"
-        self.toggle_view.enabled = True
-        self.toggle_view.background = bright_blue
-        self.toggle_view.spacing_above = "medium"
+        for component in (self.confirm, self.cancel, self.toggle_view):
+            component.enabled = True
+            component.background = green
+            component.spacing_above = "medium"
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
         for component in (self.offerer, self.runner, self.requester):
-            component.background = dark_blue
+            component.background = blue
             component.italic = False
             component.bold = True
         # Event Handling
@@ -202,7 +195,10 @@ class StatusView(StatusViewTemplate):
             
     def update_text_colour(self):
         for checkbox in self.all_checkboxes:
-            checkbox.foreground = black if checkbox.checked else light_blue
+            if checkbox.checked:
+                checkbox.foreground = black 
+            else:
+                checkbox.foreground = white if checkbox.enabled else light_blue
 
     def save_status(self):
         """Saves checkbox status to status_dict and back to Match database"""
