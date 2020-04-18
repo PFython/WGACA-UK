@@ -26,10 +26,7 @@ class StatusView(StatusViewTemplate):
         self.ingest_match_data()
         self.show_form()
         for checkbox in self.all_checkboxes:
-            checkbox.set_event_handler("change", self.update_components)
-
-
-        
+            checkbox.set_event_handler("change", self.update_components)    
 
         
         
@@ -200,4 +197,17 @@ class StatusView(StatusViewTemplate):
     def click_confirm(self, **event_args):
         """This method is called when the Confirm button is clicked"""
         self.parent.parent.parent.status_view.raise_event('click')
+
+    def click_toggle_view(self, **event_args):
+        """This method is called when the Toggle View button is clicked"""
+        
+        if sender.icon == 'fa:search-plus':
+            sender.icon = 'fa:search-minus'
+            sender.text = "  My View"
+            for component in self.get_components():
+                component.visible = True
+        else:
+              event_args['sender'].icon = 'fa:search-plus'
+              sender.text = "  Full View"
+              self.show_form()
 
