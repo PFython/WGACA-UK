@@ -180,6 +180,8 @@ class StatusView(StatusViewTemplate):
                 backfill = True # Backfill for remaining iterations
             if not checkbox.checked and backfill:
                 checkbox.checked = True
+        # Additional "backfill" Requester+Runner
+        for option in ""
                 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
