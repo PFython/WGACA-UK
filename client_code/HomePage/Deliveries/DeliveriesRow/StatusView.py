@@ -42,6 +42,8 @@ class StatusView(StatusViewTemplate):
             component.bold = True
             component.spacing_above = 'none'
             component.spacing_below = 'none'
+        self.confirm.enabled = True
+        self.confirm.background = green
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
         self.offerer.background = dark_blue
@@ -175,12 +177,7 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.foreground = black if checkbox.checked else light_blue
             
-
-        
-
-
-
-
-
-              
+    def click_confirm(self, **event_args):
+      """This method is called when the Confirm button is clicked"""
+      self.parent.parent.parent.status_view.raise_event('click')
 
