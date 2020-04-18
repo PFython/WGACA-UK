@@ -134,7 +134,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             for column in columns:
                 buttons = [x for x in column.get_components() if type(x) == Button]
                 button = [x for x in buttons  if "Delivery Status" in x.text]
-                button[0].enabled = False
+                button[0].enabled = enabled
             
     def click_status_view(self, **event_args):
         """This method is called when the Status View button is clicked"""
