@@ -45,8 +45,10 @@ class StatusView(StatusViewTemplate):
             component.enabled = False
         for component in (self.confirm, self.cancel, self.toggle_view):
             component.enabled = True
-            component.background = green
             component.spacing_above = "medium"
+        self.cancel.background = red
+        self.confirm.background = green
+        self.toggle_view.background = bright_blue
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
         for component in (self.offerer, self.runner, self.requester):
