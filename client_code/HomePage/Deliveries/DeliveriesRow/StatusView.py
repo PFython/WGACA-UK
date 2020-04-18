@@ -17,12 +17,20 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
+        self.status_dict = self.match['status_dict'] or {}
+        print(self.status_dict)
         self.define_options_by_role()
         self.initial_canvas()
         self.ingest_match_data()
         self.show_form()
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.update_components)
+
+
+        
+        object = getattr(self, pete)
+        setattr(object, "checked", self.status_dict[pete])
+        
         
     def show_form(self, **event_args):
         print("show_form")
@@ -45,7 +53,7 @@ class StatusView(StatusViewTemplate):
         self.confirm.enabled = True
         self.confirm.background = green
         self.cancel.enabled = True
-        self.cancel.background = green
+        self.cancel.background = red
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
         self.offerer.background = dark_blue

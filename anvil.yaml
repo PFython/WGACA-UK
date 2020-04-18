@@ -4,7 +4,7 @@ dependencies:
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
-  server_config: {auto_create_missing_columns: true}
+  server_config: {auto_create_missing_columns: false}
 - source: /runtime/services/anvil/users.yml
   client_config: {use_microsoft: false, require_secure_passwords: false, use_email: true,
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
@@ -130,10 +130,6 @@ db_schema:
       backend: anvil.tables.Row
       admin_ui: {order: 1.5, width: 122.34966600000001}
       table_id: 48470
-    EaU1GoL_KEE=:
-      name: feedback_from_runner
-      type: string
-      admin_ui: {order: 8, width: 50}
     KfgMeFePreY=:
       name: request
       type: liveObject
@@ -152,6 +148,10 @@ db_schema:
       name: status_code
       type: string
       admin_ui: {order: 3, width: 94.333666}
+    lEO1l9y6cns=:
+      name: status_dict
+      type: simpleObject
+      admin_ui: {order: 7, width: 200}
   access: {python_name: matches, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
     table_id: 48778}
 - name: Requests
