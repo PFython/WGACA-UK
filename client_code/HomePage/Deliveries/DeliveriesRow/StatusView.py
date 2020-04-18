@@ -46,6 +46,7 @@ class StatusView(StatusViewTemplate):
         for component in (self.confirm, self.cancel, self.toggle_view):
             component.enabled = True
             component.spacing_above = "medium"
+            component.italic = False
         self.cancel.background = red
         self.confirm.background = green
         self.toggle_view.background = bright_blue
@@ -198,10 +199,10 @@ class StatusView(StatusViewTemplate):
                 option.checked = True
         # Additional "backfill" for Delivery Complete
         if self.delivery.checked:
-            for option in [self.pickup_agreed_agreed,
+            for option in [self.pickup_agreed,
                            self.runner_confirms_pickup,
                            self.offerer_confirms_pickup,
-                           self.dropoff_agreed_agreed,
+                           self.dropoff_agreed,
                            self.runner_confirms_dropoff,
                            self.requester_confirms_dropoff,]:
                 option.checked = True
