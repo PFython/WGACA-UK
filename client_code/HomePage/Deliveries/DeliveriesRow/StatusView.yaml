@@ -178,7 +178,7 @@ components:
         foreground: '', visible: true, text: Feed back on Runner, font_size: 18, font: '',
         spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: runner_feedback_by_offerer
+      name: feedback_OFF_on_RUN
       layout_properties:
         col_widths: {}
         grid_position: JYHLVA,NODDCW
@@ -188,7 +188,7 @@ components:
         foreground: '', visible: true, text: Feed back on Offerer, font_size: 18,
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: offerer_feedback_by_runner
+      name: feedback_RUN_on_OFF
       layout_properties:
         col_widths: {}
         grid_position: JYHLVA,VPCOUS
@@ -271,7 +271,7 @@ components:
         foreground: '', visible: true, text: Feed back on Requester, font_size: 18,
         font: '', spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: requester_feedback_by_runner
+      name: feedback_RUN_on_REQ
       layout_properties:
         col_widths: {}
         grid_position: UTIZGO,WIWKHQ
@@ -281,7 +281,7 @@ components:
         foreground: '', visible: true, text: Feed back on Runner, font_size: 18, font: '',
         spacing_above: small, spacing_below: small, italic: false, background: '',
         bold: false, checked: false, underline: false}
-      name: runner_feedback_by_requester
+      name: feedback_REQ_on_RUN
       layout_properties:
         col_widths: {}
         grid_position: UTIZGO,XYSNZC

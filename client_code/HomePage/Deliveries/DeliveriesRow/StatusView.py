@@ -72,26 +72,26 @@ class StatusView(StatusViewTemplate):
         """Attributes set with list of visible options, determined by role"""
         self.offerer_options = [self.pickup_agreed,
                                 self.offerer_confirms_pickup,
-                                self.runner_feedback_by_offerer,
+                                self.feedback_OFF_on_RUN,
                                 self.delivery]
         self.runner_options = [self.pickup_agreed,
                                self.runner_confirms_pickup,
-                               self.offerer_feedback_by_runner,
+                               self.feedback_RUN_on_OFF,
                                self.dropoff_agreed,
                                self.runner_confirms_dropoff,
-                               self.requester_feedback_by_runner,
+                               self.feedback_RUN_on_REQ,
                                self.delivery]
         self.requester_options = [self.dropoff_agreed,
                                   self.requester_confirms_dropoff,
-                                  self.runner_feedback_by_requester,
+                                  self.feedback_REQ_on_RUN,
                                   self.delivery]
         self.offererrunner_options = [self.dropoff_agreed,
                                       self.runner_confirms_dropoff,
-                                      self.requester_feedback_by_runner,
+                                      self.feedback_RUN_on_REQ,
                                       self.delivery]
         self.requesterrunner_options = [self.pickup_agreed,
                                         self.runner_confirms_pickup,
-                                        self.offerer_feedback_by_runner,
+                                        self.feedback_RUN_on_OFF,
                                         self.delivery]
         
     def display_options_by_role(self, **event_args):
@@ -145,10 +145,10 @@ class StatusView(StatusViewTemplate):
         These are 1...1 dependencies.  Multiple predecessors
         i.e. 'backfill' are handled by update_predecessors
         """
-        rules = [(self.offerer_confirms_pickup, self.feedback_on_runner_by_offerer),
-                 (self.runner_confirms_pickup, self.feedback_on_offerer_by_runner),
-                 (self.runner_confirms_dropoff, self.feedback_on_requester_by_runner),
-                 (self.requester_confirms_dropoff, self.feedback_runner_by_requester),]
+        rules = [(self.offerer_confirms_pickup, self.feedback_OFF_on_RUN),
+                 (self.runner_confirms_pickup, self.feedback_RUN_on_OFF),
+                 (self.runner_confirms_dropoff, self.feedback_RUN_on_REQ),
+                 (self.requester_confirms_dropoff, self.feedback_REQ_on_RUN),]
         for enabler, target in rules:
             if enabler.checked:
                 target.enabled = True
