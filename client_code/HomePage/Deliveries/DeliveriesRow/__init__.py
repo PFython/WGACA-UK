@@ -134,14 +134,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
             for column in columns:
                 buttons = [x for x in column.get_components() if type(x) == Button]
                 button = [x for x in buttons  if "Delivery Status" in x.text]
-        sender.enabled = True 
+                button[0].enabled = False
             
     def click_status_view(self, **event_args):
         """This method is called when the Status View button is clicked"""
         status_view = StatusView(self.item)
         status_view.row_id.text = self.row_id.text
         status_view.match = self.item
-        status_view.visible = True if event_args['sender'].icon == 'fa:caret-down' else False
+        status_view.visible = True
         sender = event_args['sender']
         self.disable_similar_buttons(sender)
         self.status_view_panel.add_component(status_view)
