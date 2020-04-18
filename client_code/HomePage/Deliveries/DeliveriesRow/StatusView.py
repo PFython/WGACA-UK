@@ -43,17 +43,24 @@ class StatusView(StatusViewTemplate):
         # Colours, Bold, Spacing, Enabled, Label Text
         for component in self.card_1.get_components():
             component.background = bright_blue
-            component.foreground = white
-            component.bold = True
+            component.foreground = light_blue
+            component.bold = False
             component.spacing_above = 'none'
             component.spacing_below = 'none'
+            component.enabled = False
+            component.italic = True
         for checkbox, checked in self.status_dict.items():
             object = getattr(self, checkbox)
             setattr(object, "checked", checked)
         self.confirm.enabled = True
         self.confirm.background = green
+        self.confirm.spacing_above = "medium"
         self.cancel.enabled = True
         self.cancel.background = red
+        self.cancel.spacing_above = "medium"
+        self.toggle_view.enabled = True
+        self.toggle_view.background = bright_blue
+        self.toggle_view.spacing_above = "medium"
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
         self.offerer.background = dark_blue
@@ -121,7 +128,9 @@ class StatusView(StatusViewTemplate):
             checkboxes = self.requesterrunner_options            
         for checkbox in checkboxes:
             self.conceal(checkbox, False) # False means 'reveal'
-            self.enabled = True
+            checkbox.enabled = True if not checkbox.checked else False
+            checkbox.italic = False
+            checkbox.foreground = white
         self.delivery.enabled = True if self.is_requester.checked else False
             
     def conceal(self, component, boolean_value):
@@ -200,12 +209,14 @@ class StatusView(StatusViewTemplate):
 
     def click_toggle_view(self, **event_args):
         """This method is called when the Toggle View button is clicked"""
-        
+        sender = event_args['sender']
         if sender.icon == 'fa:search-plus':
             sender.icon = 'fa:search-minus'
             sender.text = "  My View"
-            for component in self.get_components():
+            for component in self.card_1.get_components():
+                print(type(component))
                 component.visible = True
+#             self.refresh_data_bindings()
         else:
               event_args['sender'].icon = 'fa:search-plus'
               sender.text = "  Full View"
