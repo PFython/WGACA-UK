@@ -74,7 +74,7 @@ class StatusView(StatusViewTemplate):
         removals = "sender is_offerer is_runner is_requester".split()
         for removal in removals:
             if removal in self.status_dict:
-            del self.status_dict[removal]
+                del self.status_dict[removal]
         print(self.status_dict)        
         for checkbox, checked in self.status_dict.items():
             object = getattr(self, checkbox)

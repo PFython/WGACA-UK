@@ -299,7 +299,7 @@ components:
         spacing_above: medium, icon_align: left, spacing_below: none, italic: false,
         background: '', bold: false, underline: false, icon: 'fa:search-plus'}
       name: toggle_view
-      layout_properties: {grid_position: 'ERYXYR,QJBEUZ'}
+      layout_properties: {grid_position: 'ERYXYR,QJBEUZ', full_width_row: false}
       event_bindings: {click: click_toggle_view}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
@@ -310,6 +310,7 @@ components:
       layout_properties:
         col_widths: {}
         grid_position: ERYXYR,EJKVXW
+        full_width_row: false
       event_bindings: {click: click_cancel}
     - type: Button
       properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
@@ -317,7 +318,7 @@ components:
         spacing_above: medium, icon_align: left, spacing_below: none, italic: false,
         background: '', bold: false, underline: false, icon: 'fa:caret-up'}
       name: confirm
-      layout_properties: {grid_position: 'ERYXYR,OGZSZF'}
+      layout_properties: {grid_position: 'ERYXYR,OGZSZF', full_width_row: false}
       event_bindings: {click: click_confirm}
   event_bindings: {}
 container:

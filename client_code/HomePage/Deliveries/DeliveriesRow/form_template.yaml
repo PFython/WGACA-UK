@@ -185,7 +185,7 @@ components:
     data_bindings: []
     event_bindings: {}
   - type: FlowPanel
-    properties: {role: null, spacing: medium, align: left, tooltip: '', border: '',
+    properties: {role: null, spacing: none, align: center, tooltip: '', border: '',
       foreground: '', visible: false, spacing_above: small, spacing_below: small,
       background: ''}
     name: status_view_panel
