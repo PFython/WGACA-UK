@@ -169,19 +169,19 @@ class StatusView(StatusViewTemplate):
     def update_predecessors(self):
         """
         Allows user to select later values and auto-complete/backfill earlier ones.
-        NB one earlier value may already be linked via .update_dependencies
-        so [rules] only needs to include additional values over and above those.
         """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
         if self.status_dict == self.status_dict2:
             pass
-        rules = [(self.pickup_agreed, self.feedback_OFF_on_RUN),
-                 (self.pickup_agreed, self.feedback_RUN_on_OFF),
-                 (self.dropoff_agreed, self.feedback_RUN_on_REQ),
-                 (self.dropoff_agreed, self.feedback_REQ_on_RUN),]
-        for predecessor, target in rules:
-            predecessor.checked = True if target.checked and not predecessor.checked else False
-        
+        rules = [(self.feedback_OFF_on_RUN, [self.pickup_agreed, self.offerer_confirms_pickup]),
+                 (self.feedback_RUN_on_OFF, [self.pickup_agreed, self.runner_confirms_pickup]),
+                 (self.feedback_RUN_on_REQ, self.dropoff_agreed,),
+                 (self.feedback_REQ_on_RUN, self.dropoff_agreed),]
+        for target, predecessors in rules:
+            if type(predecessors) != list:
+                predecessors = [list]
+            for predecessor in predecessors:
+              predecessor.checked = True if target.checked and not predecessor.checked else False        
         
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
