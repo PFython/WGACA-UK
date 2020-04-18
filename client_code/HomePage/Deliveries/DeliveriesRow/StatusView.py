@@ -29,7 +29,7 @@ class StatusView(StatusViewTemplate):
     def show_form(self, **event_args):
         print("show_form")
         self.display_options_by_role()
-        self.update_components()
+#         self.update_components()
         
     def initial_canvas(self):
         """
@@ -56,10 +56,10 @@ class StatusView(StatusViewTemplate):
         self.toggle_view.spacing_above = "medium"
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
-        self.offerer.background = dark_blue
-        self.runner.background = dark_blue
-        self.requester.background = dark_blue
-        self.requester.background = blue
+        for component in (self.offerer, self.runner, self.requester):
+            component.background = dark_blue
+            component.italic = False
+            component.bold = True
         # Event Handling
         for checkbox in self.all_checkboxes:
             self.conceal(checkbox, True) 
