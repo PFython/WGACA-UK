@@ -20,7 +20,9 @@ class StatusView(StatusViewTemplate):
         self.status_dict = self.match['status_dict'] or {"offer_matched": True,
                                                          "delivery": True,
                                                          "runner_selected": True}
+        self.status_dict2 = self.status_dict.copy()
         print(self.status_dict)
+        print(self.status_dict2)
         self.define_options_by_role()
         self.initial_canvas()
         self.ingest_match_data()
@@ -67,11 +69,9 @@ class StatusView(StatusViewTemplate):
         self.runner.background = dark_blue
         self.requester.background = dark_blue
         self.requester.background = blue
-        # Stickiness and Event Handling
+        # Event Handling
         for checkbox in self.all_checkboxes:
-#             checkbox.set_event_handler("change", self.update_components())
-            checkbox.sticky = True
-            self.conceal(checkbox, True)
+            self.conceal(checkbox, True) 
 
     def ingest_match_data(self):
         """Update labels and colours based on self.match data"""
@@ -130,6 +130,7 @@ class StatusView(StatusViewTemplate):
             self.conceal(checkbox, False) # False means 'reveal'
             checkbox.enabled = True if not checkbox.checked else False
             checkbox.italic = False
+            checkbox.bold = True
             checkbox.foreground = white
         self.delivery.enabled = True if self.is_requester.checked else False
             
@@ -174,8 +175,21 @@ class StatusView(StatusViewTemplate):
                 enabler.checked = True
                 
     def update_predecessors(self):
-        """Allows user to select later values and auto-complete/backfill earlier ones"""
+        """
+        Allows user to select later values and auto-complete/backfill earlier ones.
+        NB one earlier value may already be linked via .update_dependencies
+        so [rules] only needs to include additional values over and above those.
+        """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
+        if self.status_dict == self.status_dict2:
+            pass
+        rules = [(self.pickup_agreed, self.feedback_OFF_on_RUN),
+                 (self.pickup_agreed, self.feedback_RUN_on_OFF),
+                 (self.dropoff_agreed, self.feedback_RUN_on_REQ),
+                 (self.dropoff_agreed, self.feedback_REQ_on_RUN),]
+        for predecessor, target in rules:
+            predecessor.checked = True if target.checked and not predecessor.checked else False
+        
         
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
