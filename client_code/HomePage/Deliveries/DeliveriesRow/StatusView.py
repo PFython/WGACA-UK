@@ -105,26 +105,26 @@ class StatusView(StatusViewTemplate):
     def display_options_by_role(self, **event_args):
         # Single Roles: Offerer
         if self.is_offerer.checked and not self.is_runner.checked:
-            checkboxes = self.offerer_options
+            self.checkboxes = self.offerer_options
         # Single Roles: Runner
         if self.is_runner.checked and not self.is_offerer.checked and not self.is_requester.checked:
-            checkboxes = self.runner_options
+            self.checkboxes = self.runner_options
         # Single Roles: Requester
         if self.is_requester.checked and (not self.is_runner.checked):
-            checkboxes = self.requester_options
+            self.checkboxes = self.requester_options
         # Dual Roles: Offerer=Runner
         if self.is_offerer.checked and self.is_runner.checked:
-            checkboxes = self.offererrunner_options
+            self.checkboxes = self.offererrunner_options
         # Dual Roles: Requester=Runner  
         if self.is_requester.checked and self.is_runner.checked:
-            checkboxes = self.requesterrunner_options            
-        for checkbox in checkboxes:
+            self.checkboxes = self.requesterrunner_options            
+        for checkbox in self.checkboxes:
             self.conceal(checkbox, False) # False means 'reveal'
             checkbox.enabled = True if not checkbox.checked else False
             checkbox.italic = False
             checkbox.bold = True
             checkbox.foreground = white
-        self.delivery.enabled = True if self.is_requester.checked else False
+        self.delivery.enabled = True if self.is_requester.checked else False           
             
     def conceal(self, component, boolean_value):
         """
@@ -165,27 +165,22 @@ class StatusView(StatusViewTemplate):
             if not enabler.checked:
                 target.checked = False
                 
-            
-
-
-                
     def update_predecessors(self):
         """
         Allows user to select later values and auto-complete/backfill earlier ones.
         """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
         if self.status_dict == self.status_dict2:
-            pass
-        rules = [(self.feedback_OFF_on_RUN, [self.pickup_agreed, self.offerer_confirms_pickup]),
-                 (self.feedback_RUN_on_OFF, [self.pickup_agreed, self.runner_confirms_pickup]),
-                 (self.feedback_RUN_on_REQ, self.dropoff_agreed,),
-                 (self.feedback_REQ_on_RUN, self.dropoff_agreed),]
-        for target, predecessors in rules:
-            if type(predecessors) != list:
-                predecessors = [list]
-            for predecessor in predecessors:
-              predecessor.checked = True if target.checked and not predecessor.checked else False
-        self.update_dependencies()
+            print('backfilling')
+            backfill = False
+            for checkbox in self.checkboxes[::-1]:
+                if not checkbox.checked and not backfill:
+                    continue
+                if checkbox.checked and not backfill:
+                    backfill = True # Backfill for remaining iterations
+                if not checkbox.checked and backfill:
+                    checkbox.checked = True
+
         
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
