@@ -51,7 +51,7 @@ components:
     event_bindings: {}
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":30,"JLYSPS":30,"ZFDRYZ":30,"SZCLVN":30,"LEZMMU":30,"INGTLG":30,"OGXJIC":30,"WVSZDL":30}',
+      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{"FZYZUW":30,"JLYSPS":30,"ZFDRYZ":30,"SZCLVN":30,"LEZMMU":30,"INGTLG":30,"OGXJIC":30,"WVSZDL":30,"EJKVXW":45,"OGZSZF":15}',
       spacing_below: small, background: ''}
     name: card_1
     layout_properties: {grid_position: 'YZFYDP,KBWKKA', full_width_row: true}
@@ -312,6 +312,16 @@ components:
       layout_properties:
         col_widths: {}
         grid_position: QFICYX,WVSZDL
+      event_bindings: {}
+    - type: Button
+      properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
+        foreground: '', visible: true, text: Cancel, font_size: null, font: '', spacing_above: small,
+        icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+        underline: false, icon: 'fa:times'}
+      name: cancel
+      layout_properties:
+        col_widths: {}
+        grid_position: ERYXYR,EJKVXW
       event_bindings: {}
     - type: Button
       properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
