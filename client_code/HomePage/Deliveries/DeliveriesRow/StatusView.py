@@ -17,7 +17,9 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-        self.status_dict = self.match['status_dict'] or {}
+        self.status_dict = self.match['status_dict'] or {"offer_matched": True,
+                                                         "delivery": True,
+                                                         "runner_selected": True}
         print(self.status_dict)
         self.define_options_by_role()
         self.initial_canvas()
@@ -28,8 +30,7 @@ class StatusView(StatusViewTemplate):
 
 
         
-        object = getattr(self, pete)
-        setattr(object, "checked", self.status_dict[pete])
+
         
         
     def show_form(self, **event_args):
@@ -46,10 +47,12 @@ class StatusView(StatusViewTemplate):
         for component in self.card_1.get_components():
             component.background = bright_blue
             component.foreground = white
-            component.enabled = False
             component.bold = True
             component.spacing_above = 'none'
             component.spacing_below = 'none'
+        for checkbox, checked in self.status_dict.items():
+            object = getattr(self, checkbox)
+            setattr(object, "checked", checked)
         self.confirm.enabled = True
         self.confirm.background = green
         self.cancel.enabled = True
@@ -67,10 +70,7 @@ class StatusView(StatusViewTemplate):
             self.conceal(checkbox, True)
 
     def ingest_match_data(self):
-        # Checkboxes
-        self.offer_matched.checked = True if self.match else False
-        if self.match['approved_runner']:
-            self.runner_selected.checked = True
+        """Update labels and colours based on self.match data"""
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.offerer.background = blue
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
