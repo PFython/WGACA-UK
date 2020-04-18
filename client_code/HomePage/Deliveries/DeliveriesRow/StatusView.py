@@ -51,8 +51,8 @@ class StatusView(StatusViewTemplate):
         self.toggle_view.background = bright_blue
         self.card_1.background = bright_blue
         self.card_2.background = light_blue
-        for component in (self.offerer, self.runner, self.requester):
-            component.background = blue
+        for component in [self.offerer, self.runner, self.requester]:
+            component.background = bright_blue
             component.italic = False
             component.bold = True
         # Event Handling
@@ -68,9 +68,7 @@ class StatusView(StatusViewTemplate):
             del self.status_dict['sender']
         print(self.status_dict)
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
-        self.offerer.background = blue
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
-        self.runner.background = blue
         self.requester.text = "Requester: " + self.match['request']['user']['display_name']
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
@@ -218,9 +216,9 @@ class StatusView(StatusViewTemplate):
       
     def click_cancel(self, **event_args):
         """This method is called when the Cancel button is clicked"""
-        self.parent.parent.parent.disable_similar_buttons(enabled = True)
-        self.parent.parent.parent.status_view.raise_event('click')
+        self.parent.parent.parent.disable_similar_buttons(enabled = False)
         self.remove_from_parent()
+#         self.parent.parent.parent.status_view.raise_event('click')        
         self.clear()
 
     def click_toggle_view(self, **event_args):
@@ -229,17 +227,19 @@ class StatusView(StatusViewTemplate):
         if sender.icon == 'fa:search-plus':
             sender.icon = 'fa:search-minus'
             sender.text = "  My View"
+            sender.background = blue
             for component in self.card_1.get_components():
                 print(type(component))
                 component.visible = True
 
-        else:
-              event_args['sender'].icon = 'fa:search-plus'
-              sender.text = "  Full View"
-              # Save status, destroy, and recreate
-              self.save_status()
-              print(self.status_dict)
-              self.parent.parent.parent.status_view.raise_event('click')
+        else: 
+            sender.icon = 'fa:search-plus'
+            sender.text = "  Full View"
+            sender.background = bright_blue
+            self.initial_canvas() 
+            self.show_form()
+
+              
               
           
 
