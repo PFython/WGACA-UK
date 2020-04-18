@@ -187,7 +187,15 @@ class StatusView(StatusViewTemplate):
                            self.requester_confirms_dropoff,
                            self.feedback_RUN_on_REQ,
                            self.feedback_REQ_on_RUN,]:
-              option.checked = True
+                option.checked = True
+        # Additional "backfill" Offerer+Runner
+        if self.is_offerer.checked and self.is_runner.checked:
+            for option in [self.pickup_agreed,
+                           self.runner_confirms_pickup,
+                           self.offerer_confirms_pickup,
+                           self.feedback_RUN_on_OFF,
+                           self.feedback_OFF_on_RUN,]:
+                option.checked = True
                 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
