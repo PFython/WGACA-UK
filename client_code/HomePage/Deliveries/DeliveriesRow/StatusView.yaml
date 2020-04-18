@@ -314,9 +314,9 @@ components:
       event_bindings: {click: click_cancel}
     - type: Button
       properties: {role: null, align: right, tooltip: '', border: '', enabled: true,
-        foreground: '', visible: true, text: ' Confirm', font_size: null, font: '',
+        foreground: '', visible: true, text: ' Submit', font_size: null, font: '',
         spacing_above: medium, icon_align: left, spacing_below: none, italic: false,
-        background: '', bold: false, underline: false, icon: 'fa:caret-up'}
+        background: '', bold: false, underline: false, icon: 'fa:chevron-right'}
       name: confirm
       layout_properties: {grid_position: 'ERYXYR,OGZSZF', full_width_row: false}
       event_bindings: {click: click_confirm}
