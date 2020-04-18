@@ -12,7 +12,6 @@ class StatusView(StatusViewTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.match = match        
         self.user = anvil.users.get_user()
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
@@ -20,11 +19,10 @@ class StatusView(StatusViewTemplate):
         self.status_dict = self.match['status_dict'] or {"offer_matched": True,
                                                          "runner_selected": True}
         self.status_dict2 = self.status_dict.copy()
-        print(self.status_dict)
-        print(self.status_dict2)
-        self.define_options_by_role()
         self.initial_canvas()
+        self.match = match
         self.ingest_match_data()
+        self.define_options_by_role()        
         self.show_form()
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.update_components)    
@@ -50,9 +48,6 @@ class StatusView(StatusViewTemplate):
             component.spacing_below = 'none'
             component.enabled = False
             component.italic = True
-        for checkbox, checked in self.status_dict.items():
-            object = getattr(self, checkbox)
-            setattr(object, "checked", checked)
         self.confirm.enabled = True
         self.confirm.background = green
         self.confirm.spacing_above = "medium"
@@ -73,7 +68,7 @@ class StatusView(StatusViewTemplate):
             self.conceal(checkbox, True) 
 
     def ingest_match_data(self):
-        """Update labels and colours based on self.match data"""
+        """Update labels, checkboxes, and colours based on self.match data"""
         self.offerer.text = "Offerer: " + self.match['offer']['user']['display_name']
         self.offerer.background = blue
         self.runner.text = "Runner: " + self.match['approved_runner']['display_name']
@@ -82,6 +77,9 @@ class StatusView(StatusViewTemplate):
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']
+        for checkbox, checked in self.status_dict.items():
+            object = getattr(self, checkbox)
+            setattr(object, "checked", checked)
         
     def define_options_by_role(self):
         """Attributes set with list of visible options, determined by role"""
