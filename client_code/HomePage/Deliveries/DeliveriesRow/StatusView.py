@@ -181,13 +181,20 @@ class StatusView(StatusViewTemplate):
             if not checkbox.checked and backfill:
                 checkbox.checked = True
         # Additional "backfill" Requester+Runner
-        for option in ""
+        if self.is_requester.checked and self.is_runner.checked and self.runner_confirms_pickup.checked:
+            for option in [self.dropoff_agreed,
+                           self.runner_confirms_dropoff,
+                           self.requester_confirms_dropoff,
+                           self.feedback_RUN_on_REQ,
+                           self.feedback_REQ_on_RUN,]:
+              option.checked = True
                 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
                  (self.runner_selected, self.arrow2),
                  (self.pickup_agreed, self.arrow3),
                  (self.dropoff_agreed, [self.arrow4, self.arrow5]),
+                 (self.delivery, self.arrow6)
                 ]
         for component, arrows in rules:
             if type(arrows) != list:
