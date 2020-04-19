@@ -47,6 +47,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
         else:
             self.show_route.foreground = black
             
+    def show_status(self):
+        status = self.item.get('status_dict')
+        if status:
+            if status['delivery'].checked:
+                self.column_panel_1.background = Green
+            
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
@@ -88,6 +94,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_request()
         self.show_runner()
         self.show_myself()
+        self.show_status()
         self.populate_addresses()
         self.combine_messages()
         self.row_id.text = self.item.get_id()
