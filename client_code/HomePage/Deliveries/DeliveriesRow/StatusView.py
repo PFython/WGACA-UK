@@ -164,18 +164,26 @@ class StatusView(StatusViewTemplate):
         if self.sender:
             self.visible = False
             form = KarmaForm()
-            form.user.text = self.user['display_name']
-            form.user_role.text = user_role
-            if self.sender in [self.feedback_REQ_on_RUN,self.feedback_OFF_on_RUN]:
+            if self.sender == self.feedback_REQ_on_RUN:
+                user_role = "Requester"
+                regarding_role = "Runner"
+                regarding = self.match['approved_runner']['display_name']
+            if self.sender == self.feedback_OFF_on_RUN:
+                user_role = "Offerer"
                 regarding_role = "Runner"
                 regarding = self.match['approved_runner']['display_name']
             if self.sender == self.feedback_RUN_on_REQ:
+                user_role = "Runner"
                 regarding_role = "Requester"
-                regarding = self.feedback_RUN_on_OFF:
+                regarding = self.match['request']['user']['display_name']
+            if self.sender == self.feedback_RUN_on_OFF:
+                user_role = "Runner"
                 regarding_role = "Offerer"
                 regarding = self.match['offer']['user']['display_name']
             form.regarding.text = regarding
             form.regarding_role.text = regarding_role
+            form.user.text = self.user['display_name']
+            form.user_role.text = user_role
             self.parent.add_component(form)                          
     
     def update_dependencies(self):
