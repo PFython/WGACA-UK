@@ -15,6 +15,7 @@ from .TermsOfUse import TermsOfUse
 from .AboutThisApp import AboutThisApp
 from .AboutThisApp.News import News
 from ._DeveloperTools import _DeveloperTools
+from .ContactUs import ContactUs
 
 from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -98,7 +99,8 @@ class HomePage(HomePageTemplate):
 #             button.foreground = light_blue
             button.bold = False
             button.font_size = menu_font_size
-        self.title_bar.text = selected.tag.upper()
+        self.title_bar.text = selected.tag.upper() + " > " + anvil.users.get_user()['display_name']
+        self.title_bar.background = selected.background
         self.user_name.text = f"User: {anvil.users.get_user()['display_name']}"
 #         selected.background = bright_blue
 #         selected.foreground = white

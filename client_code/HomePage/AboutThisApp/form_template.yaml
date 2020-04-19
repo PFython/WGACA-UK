@@ -75,14 +75,6 @@ components:
     layout_properties: {grid_position: 'OMXSGE,SVIZUH'}
     event_bindings: {}
   - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: Contact Us, font_size: 18, font: '',
-      spacing_above: large, icon_align: top, spacing_below: small, italic: false,
-      background: '#5eb348', bold: false, underline: false, icon: 'fa:commenting'}
-    name: contact_us
-    layout_properties: {grid_position: 'OMXSGE,GXURPI CAIZBC,JCYKXZ'}
-    event_bindings: {click: contact_us_click}
-  - type: Button
     properties: {role: null, align: center, tooltip: 'Also: Reset Password, Switch
         User', border: '', enabled: true, foreground: '#ffffff', visible: true, text: ' Log
         Out,
@@ -93,7 +85,7 @@ components:
     name: change_password
     layout_properties:
       col_widths: {}
-      grid_position: OMXSGE,GXURPI CAIZBC,OLVQLD
+      grid_position: OMXSGE,GXURPI
     event_bindings: {click: log_out}
   event_bindings: {}
 is_package: true

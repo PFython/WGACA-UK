@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"WEGPTE":45,"FWIEFA":17,"AYJWVN":17}',
+    wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"WEGPTE":45,"AYJWVN":17}',
     spacing_below: none, background: ''}
   event_bindings: {}
 components:
@@ -147,27 +147,27 @@ components:
     event_bindings: {}
     data_bindings: []
 - type: Label
-  properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
-    visible: true, text: '', font_size: 20, font: '', spacing_above: none, icon_align: left,
-    spacing_below: none, italic: false, background: '', bold: false, underline: false,
-    icon: ''}
-  name: title_bar
-  layout_properties: {grid_position: 'IRKGFO,FWIEFA', full_width_row: false}
-  event_bindings: {}
-- type: Label
   properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
-    visible: true, text: '', font_size: 20, font: '', spacing_above: none, icon_align: left,
+    visible: false, text: '', font_size: 20, font: '', spacing_above: none, icon_align: left,
     spacing_below: none, italic: false, background: '', bold: false, underline: false,
     icon: ''}
   name: user_name
-  layout_properties: {grid_position: 'IRKGFO,AYJWVN', full_width_row: false}
+  layout_properties: {grid_position: 'IRKGFO,AYJWVN', full_width_row: true}
   event_bindings: {}
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
-    background: ''}
+    background: '#cae4ff'}
   name: column_panel_1
   layout_properties: {grid_position: 'EHJDUZ,DOROSM'}
   event_bindings: {}
-  components: []
+  components:
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: '', font_size: 20, font: '', spacing_above: medium,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: title_bar
+    layout_properties: {grid_position: 'GOLFHW,UHHFCQ', full_width_row: true}
+    event_bindings: {}
 is_package: true
