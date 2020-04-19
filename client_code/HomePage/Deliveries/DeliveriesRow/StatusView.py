@@ -179,7 +179,8 @@ class StatusView(StatusViewTemplate):
                 user_role = "Runner"
                 regarding_role = "Offerer"
                 regarding = self.match['offer']['user']['display_name']
-            form = KarmaForm(status_dict_key)
+            row_id = self.get_id()
+            form = KarmaForm(row_id,status_dict_key)
             form.regarding.text = regarding
             form.regarding_role.text = regarding_role
             form.user.text = self.user['display_name']

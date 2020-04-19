@@ -9,21 +9,18 @@ import datetime
 from ....Globals import yellow
 
 class KarmaForm(KarmaFormTemplate):
-    def __init__(self, status_dict_key, **properties):
+    def __init__(self, row_id, status_dict_key, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.row_id = row_id
         self.status_dict_key = status_dict_key
         self.date.pick_time = True
         self.date.date = datetime.datetime.today()
         self.date.format = "D %b %Y"
         self.rating = self.label_3.text
         self.feedback.background = yellow
-#         self.regarding.text = "Putney Pete"
-#         self.regarding_role = "Offerer"
-        print(self.regarding.text)
-#         , self.regarding_role, self.user, self.user_role )
-       
+        
     def add_footer(self):
         """Adds details of the person giving feedback and the person who it's about"""
         footer = f"\n[{self.regarding.text} was the {self.regarding_role}\n"
@@ -39,9 +36,13 @@ class KarmaForm(KarmaFormTemplate):
                   'date_time': datetime.datetime.now(),
                   'feedback': self.feedback.text + self.add_footer(),
                   'rating': self.rating,}
-        anvil.server.call("add_karma_row", **kwargs)        
+        anvil.server.call("add_karma_row", **kwargs)
+        match = anvil.server.call("get_match_by_id", self.row_id)
+#         match = self.parent.parent.parent.item
+        match['status_dict'][self.status_dict_key] = True
+        anvil.server.call("save_matches_status_dict", match,  match['status_dict'])
+#         self.parent.parent.parent.item['status_dict'][self.status_dict_key] = True
         self.clear()
-        self.parent.parent.parent.item['status_dict'][self.status_dict_key] = True
         alert("""Thanks for taking the time to keep things going around and coming around!""")
 
     def cancel_button_click(self, **event_args):
