@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ....Globals import green, grey, red, black, dark_green, dark_blue,blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from .KarmaForm import KarmaForm
 
 class StatusView(StatusViewTemplate):
     def __init__(self, match, **properties):
@@ -160,10 +161,22 @@ class StatusView(StatusViewTemplate):
             self.feedback_REQ_on_RUN,
             self.feedback_RUN_on_OFF,
             self.feedback_OFF_on_RUN,]"""
-        if "sender" in event_args:
-            sender = event_args['sender']
-            print(dir(sender))
-        
+        if self.sender:
+            self.visible = False
+            form = KarmaForm()
+            form.user.text = self.user['display_name']
+            form.user_role.text = user_role
+            if self.sender in [self.feedback_REQ_on_RUN,self.feedback_OFF_on_RUN]:
+                regarding_role = "Runner"
+                regarding = self.match['approved_runner']['display_name']
+            if self.sender == self.feedback_RUN_on_REQ:
+                regarding_role = "Requester"
+                regarding = self.feedback_RUN_on_OFF:
+                regarding_role = "Offerer"
+                regarding = self.match['offer']['user']['display_name']
+            form.regarding.text = regarding
+            form.regarding_role.text = regarding_role
+            self.parent.add_component(form)                          
     
     def update_dependencies(self):
         """

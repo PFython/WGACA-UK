@@ -102,15 +102,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.populate_addresses()
         self.row_id.text = self.item.get_id()
         self.status_message.text = anvil.server.call("get_status_message", self.item)
-          
-    def create_karma_form(self, user_role, regarding, regarding_role):
-          form = KarmaForm()
-          form.user.text = self.user['display_name']
-          form.user_role.text = user_role
-          form.regarding.text = regarding
-          form.regarding_role.text = regarding_role
-          self.parent.parent.add_component(form)
-                 
+                          
     def click_show_message(self, **event_args):
         """This method is called when a Message Button is shown on the screen"""
         sender = event_args['sender']
