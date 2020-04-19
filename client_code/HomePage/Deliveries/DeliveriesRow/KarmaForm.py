@@ -9,11 +9,11 @@ import datetime
 from ....Globals import yellow
 
 class KarmaForm(KarmaFormTemplate):
-    def __init__(self, checkbox, **properties):
+    def __init__(self, status_dict_key, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.sender = checkbox
+        self.status_dict_key = status_dict_key
         self.date.pick_time = True
         self.date.date = datetime.datetime.today()
         self.date.format = "D %b %Y"
@@ -41,15 +41,7 @@ class KarmaForm(KarmaFormTemplate):
                   'rating': self.rating,}
         anvil.server.call("add_karma_row", **kwargs)        
         self.clear()
-        if self.sender == self.feedback_REQ_on_RUN:
-            field = "feedback_REQ_on_RUN"
-        if self.sender == self.feedback_OFF_on_RUN:
-            field = "feedback_OFF_on_RUN"
-        if self.sender == self.feedback_RUN_on_REQ:
-            field = "feedback_RUN_on_REQ"
-        if self.sender == self.feedback_RUN_on_OFF:
-            field = "feedback_RUN_OFF"
-        self.parent.parent.parent.item['status_dict'][field] = True
+        self.parent.parent.parent.item['status_dict'][self.status_dict_key] = True
         alert("""Thanks for taking the time to keep things going around and coming around!""")
 
     def cancel_button_click(self, **event_args):
