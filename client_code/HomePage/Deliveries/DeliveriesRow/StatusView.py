@@ -173,13 +173,17 @@ class StatusView(StatusViewTemplate):
         """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
         print('backfilling')
+        feedback [self.feedback_RUN_on_REQ,
+                  self.feedback_REQ_on_RUN,
+                  self.feedback_RUN_on_OFF,
+                  self.feedback_OFF_on_RUN,]
         backfill = False
         for checkbox in self.checkboxes[::-1]:
             if not checkbox.checked and not backfill:
                 continue
             if checkbox.checked and not backfill:
                 backfill = True # Backfill for remaining iterations
-            if not checkbox.checked and backfill:
+            if not checkbox.checked and backfill and checkbox not in feedback:
                 checkbox.checked = True
         # Additional "forward-fill" Requester+Runner
         if self.is_requester.checked and self.is_runner.checked and self.runner_confirms_pickup.checked:
