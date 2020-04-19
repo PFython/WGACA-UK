@@ -91,7 +91,7 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#00a3f0', bold: false, underline: false, icon: 'fa:user'}
+        background: '#001e2d', bold: false, underline: false, icon: 'fa:user'}
       name: menu_my_details
       layout_properties:
         col_widths: {}
@@ -113,7 +113,7 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#a95454', bold: false, underline: false, icon: 'fa:info-circle'}
+        background: '#0080c0', bold: false, underline: false, icon: 'fa:info-circle'}
       name: menu_about
       layout_properties:
         col_widths: {}
