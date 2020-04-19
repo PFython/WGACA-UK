@@ -39,12 +39,14 @@ class KarmaForm(KarmaFormTemplate):
                 'feedback': self.feedback.text + self.add_footer(),
                 'rating': self.rating,}
       anvil.server.call("add_karma_row", **kwargs)
+      print("ppp",self.parent.parent.parent.item['approved_runner']['display_name'])
       self.clear()
 #       self.parent.visible = False
       alert("""Thanks for taking the time to keep things going around and coming around!""")
 
     def cancel_button_click(self, **event_args):
       """This method is called when the button is clicked"""
+
       self.clear()
 #       self.parent.visible = False
 

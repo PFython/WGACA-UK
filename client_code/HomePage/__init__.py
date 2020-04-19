@@ -88,7 +88,6 @@ class HomePage(HomePageTemplate):
 
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
-        self.column_panel_1.background = selected.background
         images = {self.menu_my_offers: self.image_1,
                   self.menu_contact_us: self.image_1,
           self.menu_my_requests: self.image_2,
@@ -112,6 +111,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the Offers menu item is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
@@ -122,6 +122,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the Requests menu item is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
@@ -132,6 +133,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the Matches menu item is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
@@ -142,6 +144,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the Deliveries menu item is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
@@ -152,6 +155,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the Data menu item is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
@@ -162,6 +166,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the About button is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
@@ -172,6 +177,7 @@ class HomePage(HomePageTemplate):
         """This method is called when the Contact Us button is clicked"""
         self.check_permissions()
         sender = event_args['sender']
+        self.column_panel_1.background = sender.background
         self.column_panel_1.clear()
         # Add Page1 to the content panel
         self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
