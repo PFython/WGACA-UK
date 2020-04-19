@@ -42,7 +42,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_runner(self):
         runner = self.item['approved_runner']['display_name']
         self.runner.text = "Approved Runner: " + runner
-
             
     def show_status(self):
         status = self.item['status_dict']
@@ -101,7 +100,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_status()
         self.populate_addresses()
-        self.combine_messages()
         self.row_id.text = self.item.get_id()
         self.status_message.text = anvil.server.call("get_status_message", self.item)
           
@@ -112,44 +110,28 @@ class DeliveriesRow(DeliveriesRowTemplate):
           form.regarding.text = regarding
           form.regarding_role.text = regarding_role
           self.parent.parent.add_component(form)
-              
-    def combine_messages(self):
-        messages = self.item['messages_dict']
-        # Remove unauthorised messages for user
-        keys = 'offerer_to_runner runner_to_offerer runner_to_requester requester_to_runner'.split()
-        if self.user != self.item['offer']['user'] and keys[1] in messages:
-            del messages[keys[1]]
-        if self.user != self.item['request']['user'] and keys[2] in messages:
-            del messages[keys[2]]
-        if self.user != self.item['approved_runner']:
-            for k in (keys[1], keys[2]):
-                if k in messages:
-                    del messages[k]
-        self.textbox.text = ""
-        for address, message in self.item['messages_dict'].items():
-            if message.replace("\n",""):
-                self.textbox.text += address.replace("_"," ").upper() + ":\n"
-                self.textbox.text += message + "\n"
-        if not self.textbox.text:
-            self.show_message.enabled = False
-            self.show_message.background = grey
-    
+                 
     def click_show_message(self, **event_args):
         """This method is called when a Message Button is shown on the screen"""
         sender = event_args['sender']
         self.textbox.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
         self.chat_input.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
-        sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'       
+        sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'
+        if sender.icon == 'fa:caret-up':
+            text = anvil.server.call('get_chat_text', self.item)
+            if  text:
+                self.textbox.text = text
+        
 
     def enter_chat_input(self, **event_args):
         """This method is called when a user press ENTER in chat"""
+        self.textbox.text = anvil.server.call('get_chat_text', self.item)
         message += datetime.datetime.now().strftime("[%d %b %Y@%H:%M]")
         message += f" {self.user['display_name']}:\n"
         message += self.chat_input.text + "\n\n"
         self.chat_input.text = ""        
         self.textbox.text = message  + self.textbox.text
-#         self.refresh_data_bindings()
-        anvil.server.call('save_to_chat', self.textbox.text)
+        anvil.server.call('save_to_chat', self.item, self.textbox.text)
         
         
     def disable_similar_buttons(self, enabled = False):

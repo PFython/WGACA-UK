@@ -53,8 +53,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
         user = anvil.users.get_user()
         runner = anvil.server.call("get_user_from_display_name", self.runner_dropdown.selected_value.replace(" (myself)",""))
         self.update_shared_with_fields(user, runner)
-        messages = self.create_messages_dict(user)
-        self.update_databases(runner, messages)
+        self.update_databases(runner)
         self.parent.parent.parent.show_myself()
         self.parent.parent.visible = False
         self.clear()
@@ -81,32 +80,13 @@ class ConfirmMatch(ConfirmMatchTemplate):
                       'email_shared_with': self.email_to_requester.checked,
                       'postcode_shared_with': self.postcode_to_requester.checked,}
         self.add_remove_sharing(user, requester_dict, requester)
-        
-    def create_messages_dict(self, user):    
-        """ Add messages and Telephone/Email/Postcode if granted"""
-        messages = {}
-        messages['offerer_to_runner'] = self.message_to_runner.text + "\n"
-        if self.telephone_to_runner.checked and user['telephone']:
-            messages['offerer_to_runner'] += f"\nMy telephone number is: {user['telephone']}"
-        if self.email_to_runner.checked:
-            messages['offerer_to_runner'] += f"\nMy Email is: {user['email']}"
-        if self.postcode_to_runner.checked and user['postcode']:
-                  messages['offerer_to_runner'] += f"\nMy Postcode is {user['postcode']}"  
-        messages['offerer_to_requester'] = self.message_to_requester.text + "\n"    
-        if self.telephone_to_requester.checked and user['telephone']:
-            messages['offerer_to_requester'] += f"\nMy telephone number is: {user['telephone']}"
-        if self.email_to_requester.checked:
-            messages['offerer_to_requester'] += f"\nMy Email is: {user['email']}"
-        if self.postcode_to_requester.checked and user['postcode']:
-                  messages['offerer_to_requester'] += f"\nMy Postcode is {user['postcode']}"  
-        return messages
-      
-    def update_databases(self, runner, messages):
+             
+    def update_databases(self, runner):
         """ Sets Approved Runner, updates Matches/Offers/Requests, and refreshes the view """
         status_dict = self.parent.parent.parent.item['status_dict']
         status_dict['runner_selected'] = True
         # TODO: Change parent.parent etc. to passing in match as 
-        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, status_dict)
+        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, status_dict)
         anvil.server.call('update_status_codes', self.parent.parent.parent.item, "Match Confirmed")
         anvil.server.call('generate_matches')
         self.parent.parent.parent.refresh_data_bindings()      

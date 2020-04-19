@@ -258,14 +258,19 @@ def save_to_chat(match, full_text):
     if anvil.users.get_user() is None:
         return
     match.update(chat = full_text)
+    
+@anvil.server.callable
+def get_chat_text(match):
+    return app_tables.match['chat']
+    
 
 # @anvil.tables.in_transaction      
 @anvil.server.callable
-def save_to_matches_database(match, runner, messages, status_dict):
+def save_to_matches_database(match, runner, status_dict):
     """ Returns 'Duplicate' if product_category request already exists"""
     if anvil.users.get_user() is None:
         return
-    match.update(approved_runner = runner, messages_dict = messages, status_dict = status_dict)
+    match.update(approved_runner = runner,status_dict = status_dict)
 
 # @anvil.tables.in_transaction
 @anvil.server.callable

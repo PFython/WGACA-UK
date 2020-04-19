@@ -140,10 +140,6 @@ db_schema:
       name: chat
       type: string
       admin_ui: {order: 7, width: 200}
-    Vioog5yQ47s=:
-      name: messages_dict
-      type: simpleObject
-      admin_ui: {order: 10, width: 214.424}
     YAUMkRJ9AuA=:
       name: route_url
       type: string
