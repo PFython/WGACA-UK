@@ -76,7 +76,8 @@ def get_initial_status_dict():
 
   
 @anvil.server.callable  
-def get_status_message_from_match(status):  
+def get_status_message_from_match(data_row):
+    status = data_row['status_dict']
     if status['delivery']:
         return "Delivery complete!  What goes around comes around..."    
     if status['dropoff_agreed'] and data_row['approved_runner'] != data_row['request']['user']:
@@ -99,7 +100,7 @@ def get_status_message(data_row):
     try:
         status = data_row['status_dict']
         # data_row is a Match
-        return get_status_message_from_match(status)
+        return get_status_message_from_match(data_row)
     except anvil.tables.TableError:
     # data_row is an Offer or Request
         try:
@@ -116,7 +117,7 @@ def get_status_message(data_row):
                     # match is THE Match
                     break
             status = match['status_dict']
-            return get_status_message_from_match(status)
+            return get_status_message_from_match(match)
         # data_row is a Match
         return get_status_message_from_match(status)
         if data_row['status_code'] == "Matches Exist":
