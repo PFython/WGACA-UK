@@ -24,7 +24,7 @@ class KarmaForm(KarmaFormTemplate):
     def add_footer(self):
         """Adds details of the person giving feedback and the person who it's about"""
         footer = f"\n[{self.regarding.text} was the {self.regarding_role.text}\n"
-        footer += f"{self.user} was the {self.user_role.text}]"
+        footer += f"{self.user['display_name']} was the {self.user_role.text}]"
         print(footer)
         return footer
     
