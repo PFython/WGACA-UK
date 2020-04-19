@@ -50,13 +50,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
     def show_status(self):
         status = self.item['status_dict']
-        if status:
-            colour = pale_blue
-            if not status['pickup_agreed'] or not status['dropoff_agreed']:
-                colour = yellow
-            if status['delivery']:
-                colour = light_green
-            self.column_panel_1.background = colour
+        colour = pale_blue
+        if not status['pickup_agreed'] or not status['dropoff_agreed']:
+            colour = yellow
+        if status['delivery']:
+            colour = light_green
+        elif self.item['offer']['expiry_date'] >= datetime.datetime.today():
+            colour = pink
+        self.column_panel_1.background = colour
             
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
