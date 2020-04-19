@@ -13,10 +13,10 @@ from .Deliveries import Deliveries
 from .UserSetup import UserSetup
 from .TermsOfUse import TermsOfUse
 from .AboutThisApp import AboutThisApp
-from .AboutThisApp.News import News
 from ._DeveloperTools import _DeveloperTools
 from .ContactUs import ContactUs
 from .News import News
+from .TitleButton import TitleButton
 
 from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
@@ -29,15 +29,15 @@ class HomePage(HomePageTemplate):
         # Any code you write here will run when the form opens.
         self.background = bright_blue
         self.navigation_bar.background = blue
-        self.title_bar.background = light_blue
-        self.user_name.background = light_blue
         for button, tag in {self.menu_about: 'About',
+                            self.menu_contact_us: 'Contact Us',
                             self.menu_my_offers: 'My Offers',
                             self.menu_my_requests: 'My Requests',
                             self.menu_my_matches: 'My Matches',
                             self.menu_my_deliveries: 'My Deliveries',
                             self.menu_my_details: 'My Details'}.items():
             button.tag = tag
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(AboutThisApp())
         self.check_permissions()
         self.check_updates()
@@ -100,9 +100,6 @@ class HomePage(HomePageTemplate):
 #             button.foreground = light_blue
             button.bold = False
             button.font_size = menu_font_size
-        self.title_bar.text = selected.tag.upper() + " > " + anvil.users.get_user()['display_name']
-        self.title_bar.background = selected.background
-        self.user_name.text = f"User: {anvil.users.get_user()['display_name']}"
 #         selected.background = bright_blue
 #         selected.foreground = white
         selected.bold = True
@@ -116,69 +113,82 @@ class HomePage(HomePageTemplate):
     def menu_my_offers_click(self, **event_args):
         """This method is called when the Offers menu item is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(MyOffers())
         self.highlight_selected_menu(self.menu_my_offers)
         
     def menu_my_requests_click(self, **event_args):
         """This method is called when the Requests menu item is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(MyRequests())
         self.highlight_selected_menu(self.menu_my_requests)
     
     def menu_my_matches_click(self, **event_args):
         """This method is called when the Matches menu item is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(Matches())
         self.highlight_selected_menu(self.menu_my_matches)
         
     def menu_my_deliveries_click(self, **event_args):
         """This method is called when the Deliveries menu item is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(Deliveries())
         self.highlight_selected_menu(self.menu_my_deliveries)        
         
     def menu_my_details_click(self, **event_args):
         """This method is called when the Data menu item is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(UserProfile())
         self.highlight_selected_menu(self.menu_my_details)
 
     def menu_about_click(self, **event_args):
         """This method is called when the About button is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
         
     def menu_contact_us_click(self, **event_args):
         """This method is called when the Contact Us button is clicked"""
         self.check_permissions()
+        sender = event_args['sender']
         self.column_panel_1.clear()
         # Add Page1 to the content panel
+        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
         self.column_panel_1.add_component(ContactUs())
-        self.highlight_selected_menu(self.menu_about)
         self.highlight_selected_menu(self.menu_contact_us)
 
 
     def log_out_click(self, **event_args):
         """This method is called when the Log Out button is clicked"""
-        self.clear()
-        self.remove_from_parent()
+#         self.clear()
+#         self.remove_from_parent()
         anvil.users.logout()
         anvil.users.login_with_form()
-        self.parent.__init__()
-        self.parent.menu_my_offers_click()
+        self.refresh_data_bindings()
+        self.menu_my_details_click()
 
 
 

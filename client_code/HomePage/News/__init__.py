@@ -5,7 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ....Globals import blue, bright_blue
+from ...Globals import blue, bright_blue
 
 class News(NewsTemplate):
   def __init__(self, **properties):
