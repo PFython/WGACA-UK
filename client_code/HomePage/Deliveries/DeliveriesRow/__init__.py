@@ -114,11 +114,12 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def click_show_message(self, **event_args):
         """This method is called when a Message Button is shown on the screen"""
         sender = event_args['sender']
-        self.textbox.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
-        self.chat_input.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
+        self.textbox.visible = True if sender.icon == 'fa:caret-down'else False
+        self.chat_input.visible = True if sender.icon == 'fa:caret-down' else False
         sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'
         if sender.icon == 'fa:caret-up':
             self.textbox.text = anvil.server.call('get_chat_text', self.row_id.text)
+            self.refresh_data_bindings()
 
 
     def enter_chat_input(self, **event_args):
@@ -129,7 +130,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
         message = "> " + self.chat_input.text + message
         self.chat_input.text = ""        
         self.textbox.text = message  + self.textbox.text
-        print(self.row_id)
         anvil.server.call('save_to_chat', self.row_id.text, self.textbox.text)
         
         
