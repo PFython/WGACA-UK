@@ -88,6 +88,7 @@ class HomePage(HomePageTemplate):
 
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
+        self.column_panel_1.background = selected.background
         images = {self.menu_my_offers: self.image_1,
                   self.menu_contact_us: self.image_1,
           self.menu_my_requests: self.image_2,
@@ -96,12 +97,8 @@ class HomePage(HomePageTemplate):
           self.menu_about: self.image_3,
           self.menu_my_deliveries: self.image_4,}   
         for button in images:
-#             button.background = blue
-#             button.foreground = light_blue
             button.bold = False
             button.font_size = menu_font_size
-#         selected.background = bright_blue
-#         selected.foreground = white
         selected.bold = True
         selected.font_size = menu_font_size
         # Hide all images
@@ -109,6 +106,7 @@ class HomePage(HomePageTemplate):
             setattr(image, "visible", False)
         # Unhide selected image
         setattr(images[selected], "visible", True)
+        
         
     def menu_my_offers_click(self, **event_args):
         """This method is called when the Offers menu item is clicked"""

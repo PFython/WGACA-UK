@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYMIYQ":20,"SOVMIY":40}',
+    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"WYMIYQ":20,"SOVMIY":40}',
     spacing_below: small, background: ''}
   name: column_panel_1
   layout_properties: {}

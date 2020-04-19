@@ -1,6 +1,9 @@
 container:
   type: ColumnPanel
   event_bindings: {}
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
+    wrap_on: mobile, col_spacing: medium, spacing_above: medium, col_widths: '', spacing_below: small,
+    background: ''}
 components:
 - type: Button
   properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
