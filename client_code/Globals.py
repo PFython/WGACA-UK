@@ -23,13 +23,3 @@ LOCALE = "United Kingdom"
 ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
 UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
-
-STATUSES = {'1':  "New item(s) created",
-            '2':  "Match found!",
-            '3':  "Need to agree Pickup time",
-            '4':  "Need to agree Dropoff time",
-            '5':  "Urgent - expiry date close", 
-            '6':  "Status Code 6",
-            '7':  "Status Code 7",
-            '8':  "Status Code 9",
-            '9': "Delivery complete"}

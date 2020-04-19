@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-from ....Globals import STATUSES, red
+from ....Globals import red
 
 class MyOffersRow(MyOffersRowTemplate):
   

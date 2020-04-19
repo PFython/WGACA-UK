@@ -6,8 +6,6 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ....Globals import STATUSES
-
 class MyRequestsRow(MyRequestsRowTemplate):
   
     def __init__(self, **properties):
@@ -29,7 +27,7 @@ class MyRequestsRow(MyRequestsRowTemplate):
 
     def show_row(self, **event_args):
         """This method is called when the data row panel is shown on the screen"""
-        self.status.text = STATUSES[self.item['status_code']]
+        self.status.text = anvil.server.call("get_status_message_from_status_dict", self.item)
         self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
         self.urgent.visible = self.item['urgent']
         self.date_posted.text = self.item['date_posted'].strftime('%d %b %Y')

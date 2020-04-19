@@ -114,6 +114,11 @@ components:
       col_widths: {}
       grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF PVEXXL,VJOJYF
     event_bindings: {click: click_status_view}
+  - type: Label
+    properties: {}
+    name: status_message
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF NIUDHS,XNKAPA'}
+    event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Show Messages', font_size: null,

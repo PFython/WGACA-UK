@@ -43,8 +43,6 @@ def generate_matches():
     requests = app_tables.requests.search(tables.order_by("product_category"))
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
-#     print("Generating Matches...")
-#     statuses = anvil.server.call("STATUSES").values()
     for request in (x for x in requests if x['status_code'] in ['1','2']):
         for offer in (x for x in offers if x['status_code'] in ['1','2']):
             if request['product_category'] in offer['product_key']:
@@ -75,8 +73,10 @@ def get_initial_status_dict():
              "feedback_OFF_on_RUN":False,
              "runner_confirms_pickup":False,
              "runner_confirms_dropoff":False}
-  
+
+@anvil.server.callable  
 def get_status_message_from_status_dict(match):
+      print(type(match))
       status = match['status_dict']
       if status['delivery']:
           return "Delivery complete!  What goes around comes around..."    
@@ -90,6 +90,10 @@ def get_status_message_from_status_dict(match):
           return "The Runner (only) has confirmed Pickup is complete."        
       if status['pickup_agreed'] and match['approved_runner'] != match['offer']['user']:
           return "A Pickup time has been agreed between the Offerer and Runner."
+      if status['runner_selected']:
+          return f"The offerer has confirmed {match['approved_runner']['display_name']} as the Runner."
+      if status['offer_matched']:
+          return f"This request has been... "
                         
                             
 def create_route_url(new_match):
@@ -260,21 +264,6 @@ def save_user_setup(field, value):
     """ General purpose save to the User database """
     anvil.users.get_user()[field] = value
   
-@anvil.server.callable
-def STATUSES():
-    """ Returns allowable status descriptions other than 'New' or 'X matches found' """
-    return {'1':  "New",
-            '2':  "Matched with...",
-            '3':  "Runner confirmed; Agree Pickup Time",
-            '4':  "Offerer: Pickup complete",
-            '5':  "Runner: Pickup complete", 
-            '6':  "Pickup complete; Agree Dropoff Time",
-            '7':  "Requester: Dropoff complete",
-            '8':  "Runner: Dropoff complete",
-            '9': "Delivery complete"}
-    # NB If Requester confirms Dropoff complete, this must force: Delivery complete.
-    # If Runner confirms Dropoff complete, this must force Runner: Pickup complete
-
 @anvil.server.callable
 def string_to_datetime(string, format = "%d %b %Y"):
     """Converts a date-like string to a datetime object"""

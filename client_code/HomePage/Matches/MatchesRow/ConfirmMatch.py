@@ -7,7 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import datetime
 
-from ....Globals import LOCALE, ADDRESSES, STATUSES
+from ....Globals import LOCALE, ADDRESSES
 from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 class ConfirmMatch(ConfirmMatchTemplate):

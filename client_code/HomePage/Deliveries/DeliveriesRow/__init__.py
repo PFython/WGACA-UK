@@ -9,7 +9,6 @@ from .KarmaForm import KarmaForm
 import datetime
 
 from ....Globals import green, grey, red, blue, dark_green, light_green, light_blue, pale_blue, bright_blue, white, red, yellow, pink, black
-from ....Globals import STATUSES
 from .StatusView import StatusView
 
 class DeliveriesRow(DeliveriesRowTemplate):
@@ -43,12 +42,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_runner(self):
         runner = self.item['approved_runner']['display_name']
         self.runner.text = "Approved Runner: " + runner
-        if runner == self.user['display_name']:
-            self.runner.foreground = dark_green
-            self.status_label.foreground = dark_green
-            self.show_route.foreground = dark_green
-        else:
-            self.show_route.foreground = black
+
             
     def show_status(self):
         status = self.item['status_dict']
@@ -64,7 +58,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         if self.item['offer']['user'] == self.user:
-#             self.items_picked_up.foreground = dark_green
             self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
             self.label_2.text  = "My Offer"            
             self.label_2.foreground = dark_green
@@ -81,8 +74,14 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.dropoff.foreground = dark_green
             self.dropoff.icon = 'fa:home'
             self.request.foreground = dark_green
-            self.request_notes.foreground = dark_green    
-
+            self.request_notes.foreground = dark_green
+        if self.item['approved_runner'] == self.user:
+            self.runner.foreground = dark_green
+            self.status_label.foreground = dark_green
+            self.show_route.foreground = dark_green
+            self.status_message.foreground = dark_green
+        else:
+            self.show_route.foreground = black
    
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
@@ -104,6 +103,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.populate_addresses()
         self.combine_messages()
         self.row_id.text = self.item.get_id()
+        self.status_message.text = anvil.server.call("get_status_message_from_status_dict", self.item)
           
     def create_karma_form(self, user_role, regarding, regarding_role):
           form = KarmaForm()
