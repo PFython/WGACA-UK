@@ -59,6 +59,7 @@ components:
     properties: {}
     name: user
     layout_properties: {slot: default, grid_position: 'MHHREL,WKSGDS', full_width_row: true}
+    event_bindings: {}
   - type: Label
     properties: {}
     name: user_role
