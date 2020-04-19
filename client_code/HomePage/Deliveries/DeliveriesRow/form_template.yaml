@@ -96,27 +96,35 @@ components:
     event_bindings: {}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Show Route, font_size: null, wrap_on: mobile, font: '',
-      col_spacing: medium, spacing_above: none, icon_align: left, col_widths: '{}',
-      spacing_below: none, italic: false, background: '', bold: true, underline: false,
-      icon: 'fa:map-marker'}
+      visible: true, text: '', font_size: null, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
+      italic: false, background: '', bold: true, underline: false, icon: ''}
     name: show_route
     layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF YKFYQY,LVOGEI'}
     event_bindings: {}
     components:
     - type: Button
       properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-        foreground: '#ffffff', visible: true, text: ' Show Messages', font_size: null,
-        font: '', spacing_above: small, icon_align: left, spacing_below: none, italic: false,
-        background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
-      name: show_message
-      layout_properties: {grid_position: 'BRXOVA,KJOBCV'}
-      event_bindings: {click: click_show_message}
+        foreground: '#ffffff', visible: true, text: ' Show Route
+
+          ', font_size: null, font: '', spacing_above: small, icon_align: left, spacing_below: none,
+        italic: false, background: '#ff8000', bold: false, underline: false, icon: 'fa:map-marker'}
+      name: button_1
+      layout_properties: {grid_position: 'TDWITD,WPMWZO'}
+      event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: true, text: ' Show Messages', font_size: null,
+      font: '', spacing_above: small, icon_align: left, spacing_below: none, italic: false,
+      background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
+    name: show_message
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF FODGZL,QCBPDG'}
+    event_bindings: {click: click_show_message}
   - type: TextArea
     properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: false, text: '', font_size: null,
       auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
+      background: '#ceffce', bold: false, underline: false}
     name: textbox
     layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF KBVDDB,UKXBQK',
       full_width_row: true}
@@ -124,12 +132,12 @@ components:
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Delivery Status', font_size: null,
-      font: '', spacing_above: none, icon_align: left, spacing_below: none, italic: false,
+      font: '', spacing_above: small, icon_align: left, spacing_below: none, italic: false,
       background: '#0080c0', bold: false, underline: false, icon: 'fa:pencil-square-o'}
     name: status_view
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF PVEXXL,VJOJYF
+      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF WOARSF,BADWPT
     event_bindings: {click: click_status_view}
   - type: Label
     properties: {}
