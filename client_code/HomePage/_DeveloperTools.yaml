@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   event_bindings: {}
-  properties: {col_widths: '{"OWXXHZ":25,"WEIXRQ":15}'}
+  properties: {col_widths: '{"OWXXHZ":25}'}
 components:
 - type: Label
   properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
@@ -18,10 +18,5 @@ components:
   name: button_1
   layout_properties: {grid_position: 'CIEPBC,OWXXHZ'}
   event_bindings: {click: backfill_approx_lat_lon}
-- type: TextBox
-  properties: {}
-  name: limit_amount
-  layout_properties: {grid_position: 'CIEPBC,WEIXRQ'}
-  data_bindings: []
 is_package: false
 custom_component: false
