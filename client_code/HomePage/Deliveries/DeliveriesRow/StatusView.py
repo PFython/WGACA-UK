@@ -18,9 +18,9 @@ class StatusView(StatusViewTemplate):
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
         self.feedback = [self.feedback_RUN_on_REQ,
-        self.feedback_REQ_on_RUN,
-        self.feedback_RUN_on_OFF,
-        self.feedback_OFF_on_RUN,]
+                         self.feedback_REQ_on_RUN,
+                         self.feedback_RUN_on_OFF,
+                         self.feedback_OFF_on_RUN,]
         self.initial_canvas()
         self.match = match
         self.ingest_match_data()
@@ -157,7 +157,7 @@ class StatusView(StatusViewTemplate):
     
     def check_for_feedback(self, **event_args):
         """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
-        if self.sender:
+        if self.sender in self.feedback:
             self.visible = False
             if self.sender == self.feedback_REQ_on_RUN:
                 status_dict_key = "feedback_REQ_on_RUN"
