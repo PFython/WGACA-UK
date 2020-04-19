@@ -65,7 +65,6 @@ ADD = ADDRESSES = hierarchy = {'United Kingdom':
                                      'Sidmouth Road',
                                      'Robert Davey Road',
                                      'Clyst Road',
-                                     'Sir Alex Walk',
                                      'Towerfield',
                                      'Grove Hill',
                                      'Nurseries Close',
@@ -406,7 +405,6 @@ ADD = ADDRESSES = hierarchy = {'United Kingdom':
                                     'Pleasance Road',
                                     'Crestway',
                                     'Putney Park Lane',
-                                    'Wandsworth High Street',
                                     'East Hill'],
                          'Wandsworth':
                                    ['Acris Street',
@@ -503,7 +501,8 @@ ADD = ADDRESSES = hierarchy = {'United Kingdom':
                                     'Trefoil Road',
                                     'Trinity Road',
                                     'Wandle Road',
-                                    'Wandsworth Common '
+                                    'Wandsworth Common ',
+                                    'Wandsworth High Street',                                    
                                     'West Side',
                                     'Westover Road',
                                     'Wilde Place',

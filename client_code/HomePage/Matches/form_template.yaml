@@ -33,7 +33,7 @@ components:
       border: ''
       foreground: ''
       rows_per_page: 20
-      visible: true
+      visible: false
       show_page_controls: true
       spacing_above: small
       spacing_below: small

@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYIQKS":12,"UCDZVT":40,"VPDNZX":40,"TAHMHE":40}',
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{"WYIQKS":12,"EYAJDX":25,"DTHLAV":35}',
     spacing_below: small, background: '#cae4ff'}
   name: confirm_match_column_panel
   layout_properties: {slot: default}
@@ -40,74 +40,39 @@ components:
     name: runner_dropdown
     layout_properties: {grid_position: 'RYMEKO,RHBZWB', slot: default}
     event_bindings: {change: dropdown_change, show: dropdown_change}
-  - type: TextArea
-    properties: {role: null, align: left, height: 69.17806396630863, tooltip: '',
-      placeholder: 'MESSAGE TO RUNNER: You can add any final instructions or information
-        such as preferred pick-up times here.', border: '', enabled: true, foreground: '',
-      visible: false, text: '', font_size: 12, auto_expand: false, font: '', spacing_above: small,
-      spacing_below: small, italic: false, background: '#fefdc7', bold: false, underline: false}
-    name: message_to_runner
-    layout_properties: {grid_position: 'SCBIXT,FXXWTX'}
-    event_bindings: {}
-    data_bindings: []
-  - type: TextArea
-    properties: {role: null, align: left, height: 69.17806396630863, tooltip: '',
-      placeholder: 'MESSAGE TO REQUESTER: You can add any final updates or information
-        such as the latest condition of the item, or suggestions for getting the most
-        out of them etc.', border: '', enabled: true, foreground: '', visible: true,
-      text: '', font_size: 12, auto_expand: false, font: '', spacing_above: small,
-      spacing_below: small, italic: false, background: '#fefdc7', bold: false, underline: false}
-    name: message_to_requester
-    layout_properties: {grid_position: 'PMFVPL,WBSJXH'}
-    data_bindings: []
-    event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Share Email with Requester, font_size: null,
+      foreground: '', visible: true, text: Share your Email as a message, font_size: null,
       font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
       bold: false, checked: false, underline: false}
-    name: telephone_to_requester
-    layout_properties: {grid_position: 'SAYRKK,EYAJDX'}
+    name: email
+    layout_properties: {grid_position: 'SAYRKK,EYAJDX YFICWZ,HGIJKZ'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: false, text: Share Email with Runner, font_size: null,
+      foreground: '', visible: true, text: Share your Telephone as a message, font_size: null,
       font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
       bold: false, checked: false, underline: false}
-    name: telephone_to_runner
-    layout_properties: {grid_position: 'SAYRKK,UCDZVT'}
+    name: telephone
+    layout_properties: {grid_position: 'SAYRKK,EYAJDX ZNVCSA,WJOJKA'}
     event_bindings: {}
   - type: CheckBox
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Share Telephone with Requester, font_size: null,
+      foreground: '', visible: true, text: Share your Postcode on Delivery view, font_size: null,
       font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
       bold: false, checked: false, underline: false}
-    name: email_to_requester
-    layout_properties: {grid_position: 'DWEAEU,GNBXIV'}
+    name: postcode
+    layout_properties: {grid_position: 'SAYRKK,EYAJDX LXIYXT,WTGXSB'}
     event_bindings: {}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: false, text: Share Telephone with Runner, font_size: null,
-      font: '', spacing_above: none, spacing_below: none, italic: false, background: '',
-      bold: false, checked: false, underline: false}
-    name: email_to_runner
-    layout_properties: {grid_position: 'DWEAEU,VPDNZX'}
-    event_bindings: {}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: true, text: Share your Postcode with Requester, font_size: null,
-      font: '', spacing_above: none, spacing_below: small, italic: false, background: '',
-      bold: false, checked: false, underline: false}
-    name: postcode_to_requester
-    layout_properties: {grid_position: 'HMOPGT,JBDYRX'}
-    event_bindings: {}
-  - type: CheckBox
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '', visible: false, text: Share your Postcode with Runner, font_size: null,
-      font: '', spacing_above: none, spacing_below: small, italic: false, background: '',
-      bold: false, checked: false, underline: false}
-    name: postcode_to_runner
-    layout_properties: {grid_position: 'HMOPGT,TAHMHE'}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'You can choose to share these extra details with trusted
+        Requesters and Runners to make their life easier... or not!  If the checkboxes
+        are disabled, you''ll need to add your information in the My Details menu.',
+      font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
+      italic: true, background: '', bold: true, underline: false, icon: ''}
+    name: label_1
+    layout_properties: {grid_position: 'SAYRKK,DTHLAV'}
     event_bindings: {}
   - type: Button
     properties: {role: null, align: right, tooltip: '', border: '', enabled: true,

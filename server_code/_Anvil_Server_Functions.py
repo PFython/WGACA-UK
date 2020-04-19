@@ -5,6 +5,7 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.http
 import datetime
+import time
 
 # Change imports for other countries' data:
 from .Product_Data_UK import products
@@ -42,38 +43,109 @@ def generate_matches():
     requests = app_tables.requests.search(tables.order_by("product_category"))
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
-#     print("Generating Matches...")
-#     statuses = anvil.server.call("STATUSES").values()
-    for request in (x for x in requests if x['status_code'] in ['1','2']):
-        for offer in (x for x in offers if x['status_code'] in ['1','2']):
+    for request in (x for x in requests if x['status_code'] in ['New','Matches Exist']):
+        for offer in (x for x in offers if x['status_code'] in ['New','Matches Exist']):
             if request['product_category'] in offer['product_key']:
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
-                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
-                        request.update(status_code = "2")
-                        offer.update(status_code = "2")
-                        new_match['route_url'] = generate_route_url(new_match)
+                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_dict=get_initial_status_dict())
+                        request.update(status_code = "Matches Exist")
+                        offer.update(status_code = "Matches Exist")
+                        new_match['route_url'] = create_route_url(new_match)
                         # 'or []' added to address possible database corruption i.e. value = None rather than value = []
                         if new_match not in (offer['matches'] or []):
                             offer['matches'] = (offer['matches'] or []) + [new_match]
                         if new_match not in (request['matches'] or []):
-                            request['matches'] = (request['matches'] or []) + [new_match]
+                            request['matches'] = (request['matches'] or []) + [new_match]                    
+                            
+def get_initial_status_dict():
+    return  {"offer_matched":True,
+             "runner_selected":True,
+             "pickup_agreed":False,
+             "offerer_confirms_pickup":False,
+             "dropoff_agreed":False,
+             "feedback_REQ_on_RUN":False,
+             "feedback_RUN_on_OFF":False,
+             "delivery":False,
+             "requester_confirms_dropoff":False,
+             "feedback_RUN_on_REQ":False,
+             "feedback_OFF_on_RUN":False,
+             "runner_confirms_pickup":False,
+             "runner_confirms_dropoff":False}
 
-def generate_route_url(new_match):
+  
+@anvil.server.callable  
+def get_status_message_from_match(data_row):
+    status = data_row['status_dict']
+    if status['delivery']:
+        return "Delivery complete!  What goes around comes around..."    
+    if status['dropoff_agreed'] and data_row['approved_runner'] != data_row['request']['user']:
+        return "A Dropoff time has been agreed between the Requester and Runner."
+    if status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+        return "Both the Offerer and Runner have confirmed Pickup is complete."
+    if status['offerer_confirms_pickup'] and not status['runner_confirms_pickup']:
+        return "The Offerer (only) has confirmed Pickup is complete."
+    if not status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+        return "The Runner (only) has confirmed Pickup is complete."        
+    if status['pickup_agreed'] and data_row['approved_runner'] != data_row['offer']['user']:
+        return "A Pickup time has been agreed between the Offerer and Runner."
+    if status['runner_selected']:
+        return f"The offerer has confirmed {data_row['approved_runner']['display_name']} as the Runner."
+    if status['offer_matched']:
+        return f"This request has been... "
+      
+@anvil.server.callable  
+def get_status_message(data_row):
+    try:
+        status = data_row['status_dict']
+        # data_row is a Match
+        return get_status_message_from_match(data_row)
+    except anvil.tables.TableError:
+    # data_row is an Offer or Request
+        try:
+            x = data_row['product_category']
+            row_type = "Request"
+            alt_row_type = "Offer(s)"
+        except anvil.tables.TableError:
+            row_type = "Offer"
+            alt_row_type = "Request(s)"
+        match_count = len(data_row['matches'])
+        if data_row['matches']:
+            for match in data_row['matches']:
+                if match['approved_runner'] != None:
+                    # match is THE Match
+                    break
+            if match['approved_runner'] != None:
+                status = match['status_dict']
+                return get_status_message_from_match(match)
+        if data_row['status_code'] == "Matches Exist":
+            return f"This {row_type} has been matched with {match_count} {alt_row_type}. Click on the Matches menu for more information."
+        if data_row['status_code'] == "New":
+            return f"This {row_type} currently has no matched {alt_row_type}.  Check back regularly!"                        
+                            
+def create_route_url(new_match):
     """Creates an Open Street Map url for pickup to dropoff route"""
-    user = new_match['offer']['user']
-    pickup = [user['street'], user['town'], user['county']]
-    user = new_match['request']['user']
-    dropoff = [user['street'], user['town'], user['county']]
-    pickup = nominatim_scrape(pickup)[0]
-    pickup = pickup['lat'] + "%2C" + pickup['lon']
-    dropoff = nominatim_scrape(dropoff)[0]
-    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
+    pickup_lon_lat = new_match['offer']['user']['approx_lon_lat']
+    dropoff_lon_lat = new_match['request']['user']['approx_lon_lat']
     osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
-    osm += pickup + "%3B" + dropoff
-#     print(osm)
+    osm += pickup_lon_lat + "%3B" + dropoff_lon_lat
+    print(osm)
     return osm
+
+@anvil.server.callable
+def save_approx_lon_lat(user="default"):
+    "Fetches and saves approximate Longitude and Latitude for a given user's address"
+    if user == "default":
+        user = anvil.users.get_user()
+    if user != None:
+        address = [user['street'], user['town'], user['county']]
+        try:
+            address_data = nominatim_scrape(address)[0]
+            user['approx_lon_lat'] = address_data['lat'] + "%2C" + address_data['lon']
+        except IndexError:
+            print(f"Problem getting Nominatim data for {address}")
+
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
@@ -104,19 +176,19 @@ def get_match_by_id(row_id):
 def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
     if anvil.users.get_user() is not None:
-        return [x for x in app_tables.matches.search(tables.order_by("status_code")) if x['approved_runner'] != None]
+        return [x for x in app_tables.matches.search() if x['approved_runner'] != None]
 
 @anvil.server.callable
 def get_my_matches():
     """ Returns rows from the Matches database """
     if anvil.users.get_user() is not None:
-        return app_tables.matches.search(tables.order_by("status_code"),approved_runner=None)
+        return app_tables.matches.search(approved_runner=None)
         # When approved_runner != None, the Match effectively becomes a Delivery
         # TODO: Filter results by proximity
 
 @anvil.server.callable
 def _get_all_matches():
-    return app_tables.matches.search(tables.order_by("status_code"))
+    return app_tables.matches.search()
   
 @anvil.server.callable
 def _get_test_match():
@@ -155,10 +227,10 @@ def get_user_from_display_name(display_name):
 
 # @anvil.tables.in_transaction
 def nominatim_scrape(address_list):
-    """Returns location & address data for supplied address list"""
+    """Returns location & address dictionary for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
-    return  anvil.http.request(nominatim, json=True)
+    return anvil.http.request(nominatim, json=True)
   
 # @anvil.tables.in_transaction  
 @anvil.server.callable
@@ -178,14 +250,28 @@ def remove_orphan_matches(request_or_offer):
             offer = app_tables.matches.search()
     except anvil.tables.TableError:
         pass
+      
+# @anvil.tables.in_transaction    
+@anvil.server.callable
+def save_to_chat(row_id, full_text):
+    """Saves full chat history to Match"""
+    if anvil.users.get_user() is None:
+        return
+    match = app_tables.matches.get_by_id(row_id)
+    match.update(chat = full_text)
+    
+@anvil.server.callable
+def get_chat_text(row_id):
+    return app_tables.matches.get_by_id(row_id)['chat']
+    
 
 # @anvil.tables.in_transaction      
 @anvil.server.callable
-def save_to_matches_database(match, runner, messages, status_code):
+def save_to_matches_database(match, runner, status_dict):
     """ Returns 'Duplicate' if product_category request already exists"""
     if anvil.users.get_user() is None:
         return
-    match.update(approved_runner = runner, messages_dict = messages, status_code = status_code)
+    match.update(approved_runner = runner,status_dict = status_dict)
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
@@ -193,7 +279,7 @@ def save_matches_status_dict(match, status_dict):
     match.update(status_dict = status_dict)
     
 @anvil.server.callable
-def save_to_offers_database(product_key, units, expiry_date, notes, status_code="1"):
+def save_to_offers_database(product_key, units, expiry_date, notes, status_code="New"):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
     user = anvil.users.get_user()
@@ -205,7 +291,7 @@ def save_to_offers_database(product_key, units, expiry_date, notes, status_code=
     app_tables.offers.add_row(product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date(), matches = [], status_code = status_code)
  
 @anvil.server.callable
-def save_to_requests_database(product_category, urgent, notes, status_code="1"):
+def save_to_requests_database(product_category, urgent, notes, status_code="New"):
     """ Returns 'Duplicate' if product_category request already exists"""
     user = anvil.users.get_user()
     if user is None:
@@ -221,21 +307,6 @@ def save_user_setup(field, value):
     anvil.users.get_user()[field] = value
   
 @anvil.server.callable
-def STATUSES():
-    """ Returns allowable status descriptions other than 'New' or 'X matches found' """
-    return {'1':  "New",
-            '2':  "Matched with...",
-            '3':  "Runner confirmed; Agree Pickup Time",
-            '4':  "Offerer: Pickup complete",
-            '5':  "Runner: Pickup complete", 
-            '6':  "Pickup complete; Agree Dropoff Time",
-            '7':  "Requester: Dropoff complete",
-            '8':  "Runner: Dropoff complete",
-            '9': "Delivery complete"}
-    # NB If Requester confirms Dropoff complete, this must force: Delivery complete.
-    # If Runner confirms Dropoff complete, this must force Runner: Pickup complete
-
-@anvil.server.callable
 def string_to_datetime(string, format = "%d %b %Y"):
     """Converts a date-like string to a datetime object"""
     return datetime.datetime.strptime(string, format)
@@ -245,22 +316,21 @@ def terms_accepted(boolean_value):
     """ Records today's date (or None) in the User database for Terms Accepted"""
     anvil.users.get_user()['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
-@anvil.server.callable
-def update_offers_status(offer, status_code):
-    if anvil.users.get_user() is None:
-        return
-    offer.update(status_code = status_code)
+# @anvil.server.callable
+# def update_offers_status(offer, status_code):
+#     if anvil.users.get_user() is None:
+#         return
+#     offer.update(status_code = status_code)
     
-@anvil.server.callable
-def update_requests_status(request, status_code):
-    if anvil.users.get_user() is None:
-        return
-    request.update(status_code = status_code)
+# @anvil.server.callable
+# def update_requests_status(request, status_code):
+#     if anvil.users.get_user() is None:
+#         return
+#     request.update(status_code = status_code)
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
 def update_status_codes(match, new_status_code):
-    match['status_code'] = new_status_code
     match['request']['status_code'] = new_status_code
     match['offer']['status_code'] = new_status_code
 
@@ -273,3 +343,12 @@ def volunteer_as_runner(match, boolean_value):
         match['available_runners'] += [user]
     else:
         match["available_runners"] = [x for x in match["available_runners"] if x != user]
+        
+@anvil.server.callable
+def _backfill_approx_lon_lat():
+    for user in app_tables.users.search():
+        if not user['approx_lon_lat']:
+            print(f"Updating approx location for user {user['display_name']}")
+            save_approx_lon_lat(user)
+            time.sleep(1.5)
+  

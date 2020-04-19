@@ -6,6 +6,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ....Globals import green, grey, red, black, dark_green, dark_blue,blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from .KarmaForm import KarmaForm
 
 class StatusView(StatusViewTemplate):
     def __init__(self, match, **properties):
@@ -16,6 +17,10 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
+        self.feedback = [self.feedback_RUN_on_REQ,
+                         self.feedback_REQ_on_RUN,
+                         self.feedback_RUN_on_OFF,
+                         self.feedback_OFF_on_RUN,]
         self.initial_canvas()
         self.match = match
         self.ingest_match_data()
@@ -24,8 +29,8 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.update_components)    
 
+
     def show_form(self, **event_args):
-        print("show_form")
         self.display_options_by_role()
         self.update_components()
         
@@ -70,13 +75,7 @@ class StatusView(StatusViewTemplate):
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']        
-        # BUG For some reason 'sender' is detected as a CheckBox...
-        # Remove false identities to avoid multi-user problems!
-        removals = "sender is_offerer is_runner is_requester".split()
-        for removal in removals:
-            if removal in self.status_dict:
-                del self.status_dict[removal]
-        print(self.status_dict)        
+        # BUG For some reason 'sender' is detected as a CheckBox...    
         for checkbox, checked in self.status_dict.items():
             object = getattr(self, checkbox)
             setattr(object, "checked", checked)
@@ -146,12 +145,45 @@ class StatusView(StatusViewTemplate):
 
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
-        print("Updating components.\nSender:", self.sender)
+        self.check_for_feedback()
         self.update_dependencies()
         self.update_predecessors()
+        self.update_forwards()
         self.update_arrows()
         self.update_text_colour()
         self.lock_history()
+    
+    def check_for_feedback(self, **event_args):
+        """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
+        if self.sender in self.feedback:
+            self.visible = False
+            if self.sender == self.feedback_REQ_on_RUN:
+                status_dict_key = "feedback_REQ_on_RUN"
+                user_role = "Requester"
+                regarding_role = "Runner"
+                regarding = self.match['approved_runner']['display_name']
+            if self.sender == self.feedback_OFF_on_RUN:
+                status_dict_key = "feedback_OFF_on_RUN"
+                user_role = "Offerer"
+                regarding_role = "Runner"
+                regarding = self.match['approved_runner']['display_name']
+            if self.sender == self.feedback_RUN_on_REQ:
+                status_dict_key = "feedback_RUN_on_REQ"
+                user_role = "Runner"
+                regarding_role = "Requester"
+                regarding = self.match['request']['user']['display_name']
+            if self.sender == self.feedback_RUN_on_OFF:
+                status_dict_key = "feedback_RUN_OFF"
+                user_role = "Runner"
+                regarding_role = "Offerer"
+                regarding = self.match['offer']['user']['display_name']
+            row_id = self.match.get_id()
+            form = KarmaForm(row_id,status_dict_key)
+            form.regarding.text = regarding
+            form.regarding_role.text = regarding_role
+            form.user.text = self.user['display_name']
+            form.user_role.text = user_role
+            self.parent.add_component(form)                          
     
     def update_dependencies(self):
         """
@@ -172,15 +204,25 @@ class StatusView(StatusViewTemplate):
         Allows user to select later values and auto-complete/backfill earlier ones.
         """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
-        print('backfilling')
         backfill = False
         for checkbox in self.checkboxes[::-1]:
             if not checkbox.checked and not backfill:
                 continue
             if checkbox.checked and not backfill:
                 backfill = True # Backfill for remaining iterations
-            if not checkbox.checked and backfill:
+            if not checkbox.checked and backfill and checkbox not in self.feedback:
                 checkbox.checked = True
+        # Additional "backfill" for Delivery Complete
+        if self.delivery.checked:
+            for option in [self.pickup_agreed,
+                           self.runner_confirms_pickup,
+                           self.offerer_confirms_pickup,
+                           self.dropoff_agreed,
+                           self.runner_confirms_dropoff,
+                           self.requester_confirms_dropoff,]:
+                option.checked = True
+                
+    def update_forwards(self):
         # Additional "forward-fill" Requester+Runner
         if self.is_requester.checked and self.is_runner.checked and self.runner_confirms_pickup.checked:
             for option in [self.dropoff_agreed,
@@ -197,15 +239,10 @@ class StatusView(StatusViewTemplate):
                            self.feedback_RUN_on_OFF,
                            self.feedback_OFF_on_RUN,]:
                 option.checked = True
-        # Additional "backfill" for Delivery Complete
-        if self.delivery.checked:
-            for option in [self.pickup_agreed,
-                           self.runner_confirms_pickup,
-                           self.offerer_confirms_pickup,
-                           self.dropoff_agreed,
-                           self.runner_confirms_dropoff,
-                           self.requester_confirms_dropoff,]:
-                option.checked = True
+        # Additional "forward-fill" Requester Confirms Dropoff
+        if self.is_requester and self.requester_confirms_dropoff.checked:
+            self.delivery.checked = True
+
                 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
@@ -240,6 +277,11 @@ class StatusView(StatusViewTemplate):
         for checkbox_name in checkbox_names:
             checkbox_object = getattr(self, checkbox_name)
             self.status_dict[checkbox_name] = getattr(checkbox_object, "checked")
+        # Remove false identities to avoid multi-user problems!
+        removals = "sender is_offerer is_runner is_requester".split()
+        for removal in removals:
+            if removal in self.status_dict:
+                del self.status_dict[removal]  
         anvil.server.call("save_matches_status_dict", self.match, self.status_dict)
         pass
      
@@ -250,10 +292,12 @@ class StatusView(StatusViewTemplate):
       
     def click_cancel(self, **event_args):
         """This method is called when the Cancel button is clicked"""
+        self.parent.parent.parent.show_status()
+        self.parent.parent.parent.show_deliveries_row()
         self.parent.parent.parent.disable_similar_buttons(enabled = False)
         self.remove_from_parent()
 #         self.parent.parent.parent.status_view.raise_event('click')        
-        self.clear()
+        self.clear()        
 
     def click_toggle_view(self, **event_args):
         """This method is called when the Toggle View button is clicked"""
@@ -263,7 +307,6 @@ class StatusView(StatusViewTemplate):
             sender.text = "  My View"
             sender.background = blue
             for component in self.card_1.get_components():
-                print(type(component))
                 component.visible = True
 
         else: 

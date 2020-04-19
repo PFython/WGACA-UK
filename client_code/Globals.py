@@ -6,6 +6,7 @@ from anvil.tables import app_tables
 
 green = '#5eb348'
 dark_green = '#3d732f'
+light_green = '#bbdfb3'
 grey = '#d8d8d8'
 red = '#ff8080'
 blue = '#0080c0'
@@ -23,12 +24,4 @@ ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
 UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
 
-STATUSES = {'1':  "New",
-            '2':  "Match found!",
-            '3':  "Runner confirmed; Agree Pickup Time",
-            '4':  "Offerer: Pickup complete",
-            '5':  "Runner: Pickup complete", 
-            '6':  "Pickup complete; Agree Dropoff Time",
-            '7':  "Requester: Dropoff complete",
-            '8':  "Runner: Dropoff complete",
-            '9': "Delivery complete"}
+CHAT_BLURB = "These messages are not encrypted and are visible to the Offerer, Runner, and Requester and staff or volunteers maintaining this instance of the app.  Keep them concise and respectful please."

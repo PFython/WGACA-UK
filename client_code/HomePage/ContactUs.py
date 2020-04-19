@@ -8,7 +8,6 @@ from anvil.tables import app_tables
 import datetime
 
 class ContactUs(ContactUsTemplate):
-
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
