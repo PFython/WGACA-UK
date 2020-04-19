@@ -76,24 +76,38 @@ def get_initial_status_dict():
 
 @anvil.server.callable  
 def get_status_message_from_status_dict(match):
-      print(type(match))
-      status = match['status_dict']
-      if status['delivery']:
-          return "Delivery complete!  What goes around comes around..."    
-      if status['dropoff_agreed'] and match['approved_runner'] != match['request']['user']:
-          return "A Dropoff time has been agreed between the Requester and Runner."
-      if status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
-          return "Both the Offerer and Runner have confirmed Pickup is complete."
-      if status['offerer_confirms_pickup'] and not status['runner_confirms_pickup']:
-          return "The Offerer (only) has confirmed Pickup is complete."
-      if not status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
-          return "The Runner (only) has confirmed Pickup is complete."        
-      if status['pickup_agreed'] and match['approved_runner'] != match['offer']['user']:
-          return "A Pickup time has been agreed between the Offerer and Runner."
-      if status['runner_selected']:
-          return f"The offerer has confirmed {match['approved_runner']['display_name']} as the Runner."
-      if status['offer_matched']:
-          return f"This request has been... "
+      try:
+          status = match['status_dict']
+          if status['delivery']:
+              return "Delivery complete!  What goes around comes around..."    
+          if status['dropoff_agreed'] and match['approved_runner'] != match['request']['user']:
+              return "A Dropoff time has been agreed between the Requester and Runner."
+          if status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+              return "Both the Offerer and Runner have confirmed Pickup is complete."
+          if status['offerer_confirms_pickup'] and not status['runner_confirms_pickup']:
+              return "The Offerer (only) has confirmed Pickup is complete."
+          if not status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+              return "The Runner (only) has confirmed Pickup is complete."        
+          if status['pickup_agreed'] and match['approved_runner'] != match['offer']['user']:
+              return "A Pickup time has been agreed between the Offerer and Runner."
+          if status['runner_selected']:
+              return f"The offerer has confirmed {match['approved_runner']['display_name']} as the Runner."
+          if status['offer_matched']:
+              return f"This request has been... "
+      except anvil.tables.TableError:
+      # Match hasn't been created yet and isn't a match at all but an offer or request.
+          try:
+              x = match['product_category']
+              row_type = "Request"
+              alt_row_type = "Offer(s)"
+          except KeyError:
+              row_type = "Offer"
+              alt_row_type = "Request(s)"
+          if match['status_code'] == "Matched":
+              return f"This {row_type} has been matched with one or more {alt_row_type}. Click on the Matches menu for more information."
+          if match['status_code'] == "New":
+              return f"This {row_type} currently has no matched {alt_row_type}."
+          
                         
                             
 def create_route_url(new_match):
@@ -169,14 +183,16 @@ def _get_test_match():
 @anvil.server.callable
 def get_my_offers():
     """ Returns rows from the Offers database for a given user """
+    user = anvil.users.get_user()
     if user is not None:
-        return app_tables.offers.search(tables.order_by("product_key"), user = anvil.users.get_user())
+        return app_tables.offers.search(tables.order_by("product_key"), user = user)
   
 @anvil.server.callable
 def get_my_requests():
     """ Returns rows from the Requests database for a given user """
+    user = anvil.users.get_user()
     if user is not None:
-        return app_tables.requests.search(tables.order_by("product_category"), user = anvil.users.get_user())
+        return app_tables.requests.search(tables.order_by("product_category"), user = user)
        
 @anvil.server.callable
 def get_product_hierarchy():

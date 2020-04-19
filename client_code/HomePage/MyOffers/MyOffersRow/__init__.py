@@ -30,7 +30,7 @@ class MyOffersRow(MyOffersRowTemplate):
 
     def show_row(self, **event_args):
       """This method is called when the data row panel is shown on the screen"""
-      self.status.text = self.item['status_code']
+      self.status.text = anvil.server.call("get_status_message_from_status_dict", self.item)
       self.status.foreground = '#0080c0' if self.status.text.startswith("New") else '#5eb348'
       self.info.visible = self.item['notes'] != "(No notes attached)"
       expiry = self.item['expiry_date']

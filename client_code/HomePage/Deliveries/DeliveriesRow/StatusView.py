@@ -209,7 +209,7 @@ class StatusView(StatusViewTemplate):
                 option.checked = True
         # Additional "forward-fill" Requester Confirms Dropoff
         if self.is_requester and self.requester_confirms_dropoff.checked:
-            delivery.checked = True
+            self.delivery.checked = True
 
                 
     def update_arrows(self):
