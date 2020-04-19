@@ -40,8 +40,14 @@ class KarmaForm(KarmaFormTemplate):
         match = anvil.server.call("get_match_by_id", self.row_id)
         status_dict = match['status_dict']
         status_dict[self.status_dict_key] = True
-#         anvil.server.call("save_matches_status_dict", match,  status_dict)
-        self.parent.parent.status_view.enabled = True
+        anvil.server.call("save_matches_status_dict", match,  status_dict)
+        buttons = [x for x in self.parent.parent.get_components() if type(x) == Button]
+        print(buttons)
+        for button in buttons:
+            button.enabled = True
+#         self.parent.parent.refresh_data_bindings()
+#         print("ppp",type(self.parent.parent.parent))
+#         self.parent.parent.item.status_view.enabled = True
         print("remember to unhash the server call!")
         self.clear()
         alert("""Thanks for taking the time to keep things going around and coming around!""")
