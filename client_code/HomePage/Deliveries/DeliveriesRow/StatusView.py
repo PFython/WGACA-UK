@@ -70,13 +70,7 @@ class StatusView(StatusViewTemplate):
         self.is_offerer.checked = self.user == self.match['offer']['user']
         self.is_runner.checked = self.user == self.match['approved_runner']
         self.is_requester.checked = self.user == self.match['request']['user']        
-        # BUG For some reason 'sender' is detected as a CheckBox...
-        # Remove false identities to avoid multi-user problems!
-        removals = "sender is_offerer is_runner is_requester".split()
-        for removal in removals:
-            if removal in self.status_dict:
-                del self.status_dict[removal]
-        print(self.status_dict)        
+        # BUG For some reason 'sender' is detected as a CheckBox...    
         for checkbox, checked in self.status_dict.items():
             object = getattr(self, checkbox)
             setattr(object, "checked", checked)
@@ -173,10 +167,10 @@ class StatusView(StatusViewTemplate):
         """
         # TODO use dictionary/old dictionary to revert state otherwise back will remain checked
         print('backfilling')
-        feedback [self.feedback_RUN_on_REQ,
-                  self.feedback_REQ_on_RUN,
-                  self.feedback_RUN_on_OFF,
-                  self.feedback_OFF_on_RUN,]
+        feedback = [self.feedback_RUN_on_REQ,
+                    self.feedback_REQ_on_RUN,
+                    self.feedback_RUN_on_OFF,
+                    self.feedback_OFF_on_RUN,]
         backfill = False
         for checkbox in self.checkboxes[::-1]:
             if not checkbox.checked and not backfill:
@@ -244,6 +238,11 @@ class StatusView(StatusViewTemplate):
         for checkbox_name in checkbox_names:
             checkbox_object = getattr(self, checkbox_name)
             self.status_dict[checkbox_name] = getattr(checkbox_object, "checked")
+        # Remove false identities to avoid multi-user problems!
+        removals = "sender is_offerer is_runner is_requester".split()
+        for removal in removals:
+            if removal in self.status_dict:
+                del self.status_dict[removal]  
         anvil.server.call("save_matches_status_dict", self.match, self.status_dict)
         pass
      
@@ -258,8 +257,7 @@ class StatusView(StatusViewTemplate):
         self.parent.parent.parent.disable_similar_buttons(enabled = False)
         self.remove_from_parent()
 #         self.parent.parent.parent.status_view.raise_event('click')        
-        self.clear()
-        
+        self.clear()        
 
     def click_toggle_view(self, **event_args):
         """This method is called when the Toggle View button is clicked"""

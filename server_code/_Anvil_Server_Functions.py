@@ -62,19 +62,19 @@ def generate_matches():
                             request['matches'] = (request['matches'] or []) + [new_match]
 
 def get_initial_status_dict():
-    return  {"offer_matched":true,
-             "runner_selected":true,
+    return  {"offer_matched":True,
+             "runner_selected":True,
              "pickup_agreed":false,
-             "offerer_confirms_pickup":false,
-             "dropoff_agreed":false,
-             "feedback_REQ_on_RUN":false,
-             "feedback_RUN_on_OFF":false,
-             "delivery":false,
-             "requester_confirms_dropoff":false,
-             "feedback_RUN_on_REQ":false,
-             "feedback_OFF_on_RUN":false,
-             "runner_confirms_pickup":false,
-             "runner_confirms_dropoff":false}
+             "offerer_confirms_pickup":False,
+             "dropoff_agreed":False,
+             "feedback_REQ_on_RUN":False,
+             "feedback_RUN_on_OFF":False,
+             "delivery":False,
+             "requester_confirms_dropoff":False,
+             "feedback_RUN_on_REQ":False,
+             "feedback_OFF_on_RUN":False,
+             "runner_confirms_pickup":False,
+             "runner_confirms_dropoff":False}
     
                         
                             
