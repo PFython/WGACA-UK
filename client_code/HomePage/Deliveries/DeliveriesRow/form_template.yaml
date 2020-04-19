@@ -145,7 +145,7 @@ components:
     name: status_view
     layout_properties:
       col_widths: {}
-      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF WOARSF,BADWPT
+      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF GQPFSJ,LHVGWD
     event_bindings: {click: click_status_view}
   - type: Label
     properties: {}

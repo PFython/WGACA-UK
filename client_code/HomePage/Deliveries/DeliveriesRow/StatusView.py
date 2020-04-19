@@ -31,7 +31,6 @@ class StatusView(StatusViewTemplate):
 
 
     def show_form(self, **event_args):
-        print("show_form")
         self.display_options_by_role()
         self.update_components()
         
@@ -146,7 +145,6 @@ class StatusView(StatusViewTemplate):
 
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
-        print("Updating components.\nSender:", self.sender)
         self.check_for_feedback()
         self.update_dependencies()
         self.update_predecessors()
@@ -309,7 +307,6 @@ class StatusView(StatusViewTemplate):
             sender.text = "  My View"
             sender.background = blue
             for component in self.card_1.get_components():
-                print(type(component))
                 component.visible = True
 
         else: 

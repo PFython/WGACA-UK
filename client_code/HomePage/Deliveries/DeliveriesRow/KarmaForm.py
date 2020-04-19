@@ -25,7 +25,6 @@ class KarmaForm(KarmaFormTemplate):
         """Adds details of the person giving feedback and the person who it's about"""
         footer = f"\n[{self.regarding.text} was the {self.regarding_role.text},"
         footer += f"{self.user.text} was the {self.user_role.text}]"
-        print(footer)
         return footer
     
     def submit_form(self, **event_args):
@@ -41,8 +40,9 @@ class KarmaForm(KarmaFormTemplate):
         match = anvil.server.call("get_match_by_id", self.row_id)
         status_dict = match['status_dict']
         status_dict[self.status_dict_key] = True
-        anvil.server.call("save_matches_status_dict", match,  status_dict)
-        print([type(x) for x in self.parent.parent.parent.get_components()])
+#         anvil.server.call("save_matches_status_dict", match,  status_dict)
+        self.parent.parent.status_view.enabled = True
+        print("remember to unhash the server call!")
         self.clear()
         alert("""Thanks for taking the time to keep things going around and coming around!""")
 
