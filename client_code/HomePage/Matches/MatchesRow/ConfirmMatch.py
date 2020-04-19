@@ -12,9 +12,11 @@ from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_bl
 
 class ConfirmMatch(ConfirmMatchTemplate):
 
-    def __init__(self, **properties):
+    def __init__(self, requester, runners, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
+        self.requester = requester
+        self.runner_dropdown.items = runners
         # Any code you write here will run when the form opens.
 
     def dropdown_change(self, **event_args):
@@ -26,16 +28,9 @@ class ConfirmMatch(ConfirmMatchTemplate):
             event_args['sender'].background = white
             user = anvil.users.get_user()
             if runner.replace(" (myself)","") != user['display_name']:
-                self.telephone_to_runner.checked = runner in [x['display_name'] for x in (user['telephone_shared_with'] or [])]
-                self.telephone_to_runner.text = runner + " (Runner)"
-                self.email_to_runner.checked = runner in [x['display_name'] for x in (user['email_shared_with'] or [])]
-                self.email_to_runner.text = runner + " (Runner)"
-                self.postcode_to_runner.checked = runner in [x['display_name'] for x in (user['postcode_shared_with'] or [])]
-                self.postcode_to_runner.text = runner + " (Runner)"
-                self.message_to_runner.visible = True
-                self.telephone_to_runner.visible = True
-                self.email_to_runner.visible = True
-                self.postcode_to_runner.visible = True
+                self.telephone.checked = runner in [x['display_name'] for x in (user['telephone_shared_with'] or [])]
+                self.email.checked = runner in [x['display_name'] for x in (user['email_shared_with'] or [])]
+                self.postcode.checked = runner in [x['display_name'] for x in (user['postcode_shared_with'] or [])]
         self.confirm_match_button.enabled = self.runner_dropdown.selected_value in self.runner_dropdown.items
         self.refresh_data_bindings()
 
@@ -67,17 +62,12 @@ class ConfirmMatch(ConfirmMatchTemplate):
             
     def update_shared_with_fields(self, user, runner):
         """ Update 'shared_with' for Runner """
-        # Update 'shared_with' for Runner
-        runner_dict = {'telephone_shared_with': self.telephone_to_runner.checked,
-                      'email_shared_with': self.email_to_runner.checked,
-                      'postcode_shared_with': self.postcode_to_runner.checked,}
-        self.add_remove_sharing(user, runner_dict, runner)
-        # Update 'shared_with' for Requester
-        requester = self.parent.parent.parent.item['request']['user'] #['display_name']
-        requester_dict = {'telephone_shared_with': self.telephone_to_requester.checked,
-                      'email_shared_with': self.email_to_requester.checked,
-                      'postcode_shared_with': self.postcode_to_requester.checked,}
-        self.add_remove_sharing(user, requester_dict, requester)
+        # Update 'shared_with' for Runner and Requester
+        sharing_dict = {'telephone_shared_with': self.telephone.checked,
+                      'email_shared_with': self.email.checked,
+                      'postcode_shared_with': self.postcode.checked,}
+        self.add_remove_sharing(user, sharing_dict, runner)
+        self.add_remove_sharing(user, sharing_dict, requester)
              
     def update_databases(self, runner):
         """ Sets Approved Runner, updates Matches/Offers/Requests, and refreshes the view """

@@ -83,18 +83,13 @@ class MatchesRow(MatchesRowTemplate):
     def confirm_match_click(self, **event_args):
         """This method is called when the Select Volunteer button is clicked"""
         self.confirm_match.visible = False
-        new_form = ConfirmMatch()
+        requester = self.item['request']['user']['display_name']
+        runners = [f"{self.user['display_name']} (myself)"] + [x['display_name'] for x in self.item['available_runners']]
+        new_form = ConfirmMatch(requester, runners)
         self.flow_panel_1.add_component(new_form, column=None)
         self.flow_panel_1.visible = True
         user = anvil.users.get_user()
-        requester = self.item['request']['user']
-        new_form.telephone_to_requester.checked = requester in (user['telephone_shared_with'] or [])
-        new_form.telephone_to_requester.text = requester['display_name'] + " (Requester)"
-        new_form.email_to_requester.checked = requester in (user['email_shared_with'] or [])
-        new_form.email_to_requester.text = requester['display_name'] + " (Requester)"
-        new_form.postcode_to_requester.checked = requester in (user['postcode_shared_with'] or [])
-        new_form.postcode_to_requester.text = requester['display_name'] + " (Requester)"
-        new_form.runner_dropdown.items = [f"{user['display_name']} (myself)"] + [x['display_name'] for x in self.item['available_runners']]
+
 
 
 
