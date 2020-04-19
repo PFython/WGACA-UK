@@ -501,7 +501,7 @@ ADD = ADDRESSES = hierarchy = {'United Kingdom':
                                     'Trefoil Road',
                                     'Trinity Road',
                                     'Wandle Road',
-                                    'Wandsworth Common '
+                                    'Wandsworth Common ',
                                     'Wandsworth High Street',                                    
                                     'West Side',
                                     'Westover Road',
