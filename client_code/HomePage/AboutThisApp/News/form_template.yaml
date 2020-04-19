@@ -40,7 +40,7 @@ components:
           feedback and calling out scammers or other selfish/dishonest behaviour.  Address
           data currently limited to Topsham (Exeter) and Wandsworth.', font_size: null,
         font: '', spacing_above: none, icon_align: left, spacing_below: small, italic: false,
-        background: '#00a3f0', bold: false, underline: false, icon: ''}
+        background: '#0080c0', bold: false, underline: false, icon: ''}
       name: description
       layout_properties:
         col_widths: {}
@@ -75,7 +75,9 @@ components:
           col_widths: {}
           grid_position: MIBBMR,RMRRKZ
       - type: ColumnPanel
-        properties: {role: card, col_widths: '{}'}
+        properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+          wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+          spacing_below: small, background: '#0080c0'}
         name: card_2_copy
         layout_properties:
           col_widths: {}
@@ -90,7 +92,7 @@ components:
               accounts for Requests and Offers), volunteer as a Runner and confirm
               Matches, then update progress in the Deliveries menu.  Enjoy!', font_size: null,
             font: '', spacing_above: none, icon_align: left, spacing_below: small,
-            italic: false, background: '#00a3f0', bold: false, underline: false, icon: ''}
+            italic: false, background: '#0080c0', bold: false, underline: false, icon: ''}
           name: description_copy
           layout_properties:
             col_widths: {}
