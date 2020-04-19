@@ -12,12 +12,14 @@ from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_bl
 
 class ConfirmMatch(ConfirmMatchTemplate):
 
-    def __init__(self, requester, runners, **properties):
+    def __init__(self, requester, runners, row_id, CHAT_BLURB, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         self.requester = requester
         self.runner_dropdown.items = runners
         self.user = anvil.users.get_user()
+        self.row_id = row_id
+        self.chat_blurb = CHAT_BLURB
         # Any code you write here will run when the form opens.
 
     def dropdown_change(self, **event_args):
@@ -62,7 +64,18 @@ class ConfirmMatch(ConfirmMatchTemplate):
                       'email_shared_with': self.email.checked,
                       'postcode_shared_with': self.postcode.checked,}
         self.add_remove_sharing(self.user, sharing_dict, runner)
-        self.add_remove_sharing(self.user, sharing_dict, requester)
+        self.add_remove_sharing(self.user, sharing_dict, self.requester)
+        
+    def create_message(self):
+        message = ""
+        message += "\n> " + self.telephone.text if self.telephone.checked else ""
+        message += "\n> " + self.email.text if self.email.checked else ""
+        message += "> You can contact me on:" + message if message != "" else ""
+        message += f"\n({self.user['display_name']} at " if message !="" else ""
+        message += datetime.datetime.now().strftime("%d %b %Y on %H:%M)\n\n") if message !="" else ""      
+        message += self.chat_blurb
+        anvil.server.call('save_to_chat', self.row_id, message)   
+        
              
     def update_databases(self, runner):
         """ Sets Approved Runner, updates Matches/Offers/Requests, and refreshes the view """
@@ -72,7 +85,8 @@ class ConfirmMatch(ConfirmMatchTemplate):
         anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, status_dict)
         anvil.server.call('update_status_codes', self.parent.parent.parent.item, "Match Confirmed")
         anvil.server.call('generate_matches')
-        self.parent.parent.parent.refresh_data_bindings()      
+        self.parent.parent.parent.refresh_data_bindings()     
+
       
 
 

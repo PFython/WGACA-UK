@@ -122,9 +122,7 @@ components:
     event_bindings: {click: click_show_message}
   - type: TextArea
     properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: false, text: 'This chatbox
-        is visible to the Offerer, Runner, and Requester and staff or volunteers maintaining
-        this instance of the app.  Keep it concise and respectful please.', font_size: null,
+      border: '', enabled: false, foreground: '', visible: false, text: '', font_size: null,
       auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
       background: '#ceffce', bold: false, underline: false}
     name: textbox

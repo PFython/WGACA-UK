@@ -118,10 +118,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.chat_input.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
         sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'
         if sender.icon == 'fa:caret-up':
-            text = anvil.server.call('get_chat_text', self.row_id.text)
-            if  text != None and text != "":
-                self.textbox.text = text
-        
+            self.textbox.text = anvil.server.call('get_chat_text', self.row_id.text)
+
 
     def enter_chat_input(self, **event_args):
         """This method is called when a user press ENTER in chat"""
