@@ -51,8 +51,11 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_status(self):
         status = self.item['status_dict']
         if status:
+            if not status['pickup_agreed'] or not status['dropoff_agreed']:
+                colour = yellow
             if status['delivery']:
-                self.column_panel_1.background = light_green
+                colour = light_green
+            self.column_panel_1.background = colour
             
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
@@ -81,7 +84,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
         for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
             address.text = self.item[table]['user']['display_name']+"\n"
-            if self.item['approved_runner'] == self.user or self.item[table]['user'] == self.user:
+            if self.item['approved_runner'] == user or self.item[table]['user'] == self.user:
                 address.text += str(self.item[table]['user']['house_number'])+" "
             address.text += self.item[table]['user']['street']+", "
             address.text += self.item[table]['user']['town']+", "
@@ -112,9 +115,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
         keys = 'offerer_to_runner runner_to_offerer runner_to_requester requester_to_runner'.split()
         if self.user != self.item['offer']['user'] and keys[1] in messages:
             del messages[keys[1]]
-        if self.user != self.item['request']['user'] and keys[2] in messages:
+        if user != self.item['request']['user'] and keys[2] in messages:
             del messages[keys[2]]
-        if self.user != self.item['approved_runner']:
+        if user != self.item['approved_runner']:
             for k in (keys[1], keys[2]):
                 if k in messages:
                     del messages[k]
