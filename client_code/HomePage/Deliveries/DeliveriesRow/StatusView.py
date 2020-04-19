@@ -157,33 +157,31 @@ class StatusView(StatusViewTemplate):
     
     def check_for_feedback(self, **event_args):
         """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
-        """self.feedback = [self.feedback_RUN_on_REQ,
-            self.feedback_REQ_on_RUN,
-            self.feedback_RUN_on_OFF,
-            self.feedback_OFF_on_RUN,]"""
         if self.sender:
             self.visible = False
-            form = KarmaForm()
-            if self.sender == self.feedback_REQ_on_RUN:
-                user_role = "Requester"
-                regarding_role = "Runner"
-                regarding = self.match['approved_runner']['display_name']
-            if self.sender == self.feedback_OFF_on_RUN:
-                user_role = "Offerer"
-                regarding_role = "Runner"
-                regarding = self.match['approved_runner']['display_name']
-            if self.sender == self.feedback_RUN_on_REQ:
-                user_role = "Runner"
-                regarding_role = "Requester"
-                regarding = self.match['request']['user']['display_name']
-            if self.sender == self.feedback_RUN_on_OFF:
-                user_role = "Runner"
-                regarding_role = "Offerer"
-                regarding = self.match['offer']['user']['display_name']
-            form.regarding.text = regarding
-            form.regarding_role.text = regarding_role
-            form.user.text = self.user['display_name']
-            form.user_role.text = user_role
+#             row_id = self.item.get_id()
+#             print(row_id)
+            form = KarmaForm(self.sender)
+#             if self.sender == self.feedback_REQ_on_RUN:
+#                 user_role = "Requester"
+#                 regarding_role = "Runner"
+#                 regarding = self.match['approved_runner']['display_name']
+#             if self.sender == self.feedback_OFF_on_RUN:
+#                 user_role = "Offerer"
+#                 regarding_role = "Runner"
+#                 regarding = self.match['approved_runner']['display_name']
+#             if self.sender == self.feedback_RUN_on_REQ:
+#                 user_role = "Runner"
+#                 regarding_role = "Requester"
+#                 regarding = self.match['request']['user']['display_name']
+#             if self.sender == self.feedback_RUN_on_OFF:
+#                 user_role = "Runner"
+#                 regarding_role = "Offerer"
+#                 regarding = self.match['offer']['user']['display_name']
+#             form.regarding.text = regarding
+#             form.regarding_role.text = regarding_role
+#             form.user.text = self.user['display_name']
+#             form.user_role.text = user_role
             self.parent.add_component(form)                          
     
     def update_dependencies(self):

@@ -9,10 +9,11 @@ import datetime
 from ....Globals import yellow
 
 class KarmaForm(KarmaFormTemplate):
-    def __init__(self, **properties):
+    def __init__(self, checkbox, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.sender = checkbox
         self.date.pick_time = True
         self.date.date = datetime.datetime.today()
         self.date.format = "D %b %Y"
@@ -22,27 +23,34 @@ class KarmaForm(KarmaFormTemplate):
 #         self.regarding_role = "Offerer"
         print(self.regarding.text)
 #         , self.regarding_role, self.user, self.user_role )
-        
+       
     def add_footer(self):
-      """Adds details of the person giving feedback and the person who it's about"""
-      footer = f"\n[{self.regarding.text} was the {self.regarding_role}\n"
-      footer += f"{self.user} was the {self.role}]"
-      return footer
+        """Adds details of the person giving feedback and the person who it's about"""
+        footer = f"\n[{self.regarding.text} was the {self.regarding_role}\n"
+        footer += f"{self.user} was the {self.role}]"
+        return footer
     
     def submit_form(self, **event_args):
-      """This method is called when the button is clicked"""
-      regarding_user = anvil.server.call('get_user_from_display_name', self.regarding.text)
-      user = anvil.server.call('get_user_from_display_name', self.user.text)
-      kwargs = {'from_user': user,
-                'regarding_user': regarding_user,
-                'date_time': datetime.datetime.now(),
-                'feedback': self.feedback.text + self.add_footer(),
-                'rating': self.rating,}
-      anvil.server.call("add_karma_row", **kwargs)
-      print("ppp",self.parent.parent.parent.item['approved_runner']['display_name'])
-      self.clear()
-#       self.parent.visible = False
-      alert("""Thanks for taking the time to keep things going around and coming around!""")
+        """This method is called when the button is clicked"""
+        regarding_user = anvil.server.call('get_user_from_display_name', self.regarding.text)
+        user = anvil.server.call('get_user_from_display_name', self.user.text)
+        kwargs = {'from_user': user,
+                  'regarding_user': regarding_user,
+                  'date_time': datetime.datetime.now(),
+                  'feedback': self.feedback.text + self.add_footer(),
+                  'rating': self.rating,}
+        anvil.server.call("add_karma_row", **kwargs)        
+        self.clear()
+        if self.sender == self.feedback_REQ_on_RUN:
+            field = "feedback_REQ_on_RUN"
+        if self.sender == self.feedback_OFF_on_RUN:
+            field = "feedback_OFF_on_RUN"
+        if self.sender == self.feedback_RUN_on_REQ:
+            field = "feedback_RUN_on_REQ"
+        if self.sender == self.feedback_RUN_on_OFF:
+            field = "feedback_RUN_OFF"
+        self.parent.parent.parent.item['status_dict'][field] = True
+        alert("""Thanks for taking the time to keep things going around and coming around!""")
 
     def cancel_button_click(self, **event_args):
       """This method is called when the button is clicked"""
