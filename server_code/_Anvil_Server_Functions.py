@@ -49,7 +49,7 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
-                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2", status_dict=get_initial_status_dict())
+                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_dict=get_initial_status_dict())
                         request.update(status_code = "2")
                         offer.update(status_code = "2")
                         new_match['route_url'] = create_route_url(new_match)
@@ -148,19 +148,19 @@ def get_match_by_id(row_id):
 def get_my_deliveries():
     """ Returns rows from the Matches database where runner = user """
     if anvil.users.get_user() is not None:
-        return [x for x in app_tables.matches.search(tables.order_by("status_code")) if x['approved_runner'] != None]
+        return [x for x in app_tables.matches.search() if x['approved_runner'] != None]
 
 @anvil.server.callable
 def get_my_matches():
     """ Returns rows from the Matches database """
     if anvil.users.get_user() is not None:
-        return app_tables.matches.search(tables.order_by("status_code"),approved_runner=None)
+        return app_tables.matches.search(approved_runner=None)
         # When approved_runner != None, the Match effectively becomes a Delivery
         # TODO: Filter results by proximity
 
 @anvil.server.callable
 def _get_all_matches():
-    return app_tables.matches.search(tables.order_by("status_code"))
+    return app_tables.matches.search()
   
 @anvil.server.callable
 def _get_test_match():
@@ -169,16 +169,14 @@ def _get_test_match():
 @anvil.server.callable
 def get_my_offers():
     """ Returns rows from the Offers database for a given user """
-    user = anvil.users.get_user()
     if user is not None:
-        return app_tables.offers.search(tables.order_by("product_key"), user = user)
+        return app_tables.offers.search(tables.order_by("product_key"), user = anvil.users.get_user())
   
 @anvil.server.callable
 def get_my_requests():
     """ Returns rows from the Requests database for a given user """
-    user = anvil.users.get_user()
     if user is not None:
-        return app_tables.requests.search(tables.order_by("product_category"), user = user)
+        return app_tables.requests.search(tables.order_by("product_category"), user = anvil.users.get_user())
        
 @anvil.server.callable
 def get_product_hierarchy():
