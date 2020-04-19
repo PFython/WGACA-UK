@@ -8,7 +8,7 @@ from anvil.tables import app_tables
 from .KarmaForm import KarmaForm
 import datetime
 
-from ....Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink, black
+from ....Globals import green, grey, red, blue, dark_green, light_green, light_blue, pale_blue, bright_blue, white, red, yellow, pink, black
 from ....Globals import STATUSES
 from .StatusView import StatusView
 
@@ -18,7 +18,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
-        self.show_route.foreground = green
+        self.show_route.foreground = dark_green
                
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
@@ -41,40 +41,37 @@ class DeliveriesRow(DeliveriesRowTemplate):
         runner = self.item['approved_runner']['display_name']
         self.runner.text = "Approved Runner: " + runner
         if runner == anvil.users.get_user()['display_name']:
-            self.runner.foreground = green
-            self.status_label.foreground = green
-            self.show_route.foreground = green
+            self.runner.foreground = dark_green
+            self.status_label.foreground = dark_green
+            self.show_route.foreground = dark_green
         else:
             self.show_route.foreground = black
             
     def show_status(self):
-        status = self.item.get('status_dict')
-        if status:
-            if status['delivery'].checked:
-                self.column_panel_1.background = Green
+        status = anvil.server.call("")
             
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
         user = anvil.users.get_user()
         if self.item['offer']['user'] == user:
-#             self.items_picked_up.foreground = green
+#             self.items_picked_up.foreground = dark_green
             self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
             self.label_2.text  = "My Offer"            
-            self.label_2.foreground = green
-            self.label_3.foreground = green        
-            self.pickup.foreground = green
+            self.label_2.foreground = dark_green
+            self.label_3.foreground = dark_green        
+            self.pickup.foreground = dark_green
             self.pickup.icon = 'fa:home'
-            self.offer.foreground = green
-            self.offer_notes.foreground = green
-            self.offer_expiry.foreground = green              
+            self.offer.foreground = dark_green
+            self.offer_notes.foreground = dark_green
+            self.offer_expiry.foreground = dark_green              
         if self.item['request']['user'] == user:
             self.label_1.text  = "My Request"
-            self.label_1.foreground = green
-            self.label_4.foreground = green
-            self.dropoff.foreground = green
+            self.label_1.foreground = dark_green
+            self.label_4.foreground = dark_green
+            self.dropoff.foreground = dark_green
             self.dropoff.icon = 'fa:home'
-            self.request.foreground = green
-            self.request_notes.foreground = green    
+            self.request.foreground = dark_green
+            self.request_notes.foreground = dark_green    
 
    
     def populate_addresses(self):

@@ -6,6 +6,7 @@ from anvil.tables import app_tables
 
 green = '#5eb348'
 dark_green = '#3d732f'
+light_green = '#bbdfb3'
 grey = '#d8d8d8'
 red = '#ff8080'
 blue = '#0080c0'
@@ -28,7 +29,7 @@ STATUSES = {'1':  "New",
             '3':  "Runner confirmed; Agree Pickup Time",
             '4':  "Offerer: Pickup complete",
             '5':  "Runner: Pickup complete", 
-            '6':  "Pickup complete; Agree Dropoff Time",
+            '6':  "Dropoff Time Agreed",
             '7':  "Requester: Dropoff complete",
             '8':  "Runner: Dropoff complete",
             '9': "Delivery complete"}

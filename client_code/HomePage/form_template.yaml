@@ -15,7 +15,7 @@ components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
       wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"HFYLGH":10,"TJTUKF":9,"ROCCDH":11,"JVVYKL":10,"FUDVDB":10,"LYVKDC":10,"RBTGMV":9,"JKAVWF":11,"RZWKFG":10,"EWNGMN":10,"JLAVIR":10}',
-      spacing_below: none, background: '#ffe6e6#fefdc7'}
+      spacing_below: none, background: ''}
     name: navigation_bar
     layout_properties: {grid_position: 'PTTQYJ,VHRBGI', full_width_row: true}
     components:

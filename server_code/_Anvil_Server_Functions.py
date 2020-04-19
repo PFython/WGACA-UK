@@ -50,7 +50,7 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
-                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
+                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2", status_dict={})
                         request.update(status_code = "2")
                         offer.update(status_code = "2")
                         new_match['route_url'] = create_route_url(new_match)
@@ -59,21 +59,6 @@ def generate_matches():
                             offer['matches'] = (offer['matches'] or []) + [new_match]
                         if new_match not in (request['matches'] or []):
                             request['matches'] = (request['matches'] or []) + [new_match]
-
-# def generate_route_url(new_match):
-#     """Creates an Open Street Map url for pickup to dropoff route"""
-#     user = new_match['offer']['user']
-#     pickup = [user['street'], user['town'], user['county']]
-#     user = new_match['request']['user']
-#     dropoff = [user['street'], user['town'], user['county']]
-#     pickup = nominatim_scrape(pickup)[0]
-#     pickup = pickup['lat'] + "%2C" + pickup['lon']
-#     dropoff = nominatim_scrape(dropoff)[0]
-#     dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
-#     osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
-#     osm += pickup + "%3B" + dropoff
-# #     print(osm)
-#     return osm
 
 def create_route_url(new_match):
     """Creates an Open Street Map url for pickup to dropoff route"""
@@ -117,6 +102,23 @@ def get_match_by_id(row_id):
     if anvil.users.get_user() is not None:
         return app_tables.matches.get_by_id(row_id)
   
+  
+def update_match_status_for_deliveries():
+    """For Deliveries (status_code '3'++) update based on status_dict"""
+    lookup = {"offerer_confirms_pickup": '4',
+              "runner_confirms_pickup":  '5',
+              "dropoff_agreed": '6',
+              "requester_confirms_dropoff": '7',
+              "runner_confirms_dropoff": '8',
+              "delivery": '9'}
+    for match in _get_all_matches():
+        if match in "1 2 3".split():
+            continue
+        status = match['status_dict']
+        for stage, status_code in lookup:
+            if stage in status:
+                if status[stage]:
+                    update_status_codes(match, status_code)        
   
 @anvil.server.callable
 def get_my_deliveries():
