@@ -66,7 +66,7 @@ class UserProfile(UserProfileTemplate):
             
     def show_help_tag(self, **event_args):
         """This method is called when the link is clicked"""
-        self.help_text.text = event_args['sender'].tag
+        self.help_box.text = event_args['sender'].tag
         self.deselect_all_icons()
         # Set clicked icon to selected
         event_args['sender'].icon = 'fa:question-circle'            
@@ -77,7 +77,7 @@ class UserProfile(UserProfileTemplate):
         value = event_args['sender'].text
         field = {self.postcode: "postcode", self.telephone: 'telephone'}[event_args['sender']]
         anvil.server.call("save_user_setup", field, value)
-        self.help_text.text = f"Your new {field.title()} details are: {value or '<empty>'}"
+        self.help_box.text = f"Your new {field.title()} details are: {value or '<empty>'}"
 
     def expand_privacy_notice(self, **event_args):
       """This method is called when the link is clicked"""
