@@ -289,17 +289,17 @@ def terms_accepted(boolean_value):
     """ Records today's date (or None) in the User database for Terms Accepted"""
     anvil.users.get_user()['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
 
-@anvil.server.callable
-def update_offers_status(offer, status_code):
-    if anvil.users.get_user() is None:
-        return
-    offer.update(status_code = status_code)
+# @anvil.server.callable
+# def update_offers_status(offer, status_code):
+#     if anvil.users.get_user() is None:
+#         return
+#     offer.update(status_code = status_code)
     
-@anvil.server.callable
-def update_requests_status(request, status_code):
-    if anvil.users.get_user() is None:
-        return
-    request.update(status_code = status_code)
+# @anvil.server.callable
+# def update_requests_status(request, status_code):
+#     if anvil.users.get_user() is None:
+#         return
+#     request.update(status_code = status_code)
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
