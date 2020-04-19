@@ -253,15 +253,16 @@ def remove_orphan_matches(request_or_offer):
       
 # @anvil.tables.in_transaction    
 @anvil.server.callable
-def save_to_chat(match, full_text):
+def save_to_chat(row_id, full_text):
     """Saves full chat history to Match"""
     if anvil.users.get_user() is None:
         return
+    match = app_tables.matches.get_by_id(row_id)
     match.update(chat = full_text)
     
 @anvil.server.callable
-def get_chat_text(match):
-    return app_tables.match['chat']
+def get_chat_text(row_id):
+    return app_tables.matches.get_by_id(row_id)['chat']
     
 
 # @anvil.tables.in_transaction      

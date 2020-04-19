@@ -16,8 +16,6 @@ class ConfirmMatch(ConfirmMatchTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.message_to_requester.tag = "Optional"
-        self.message_to_runner.tag = "Optional"
 
     def dropdown_change(self, **event_args):
         """ Colour codes dropdown box """

@@ -118,20 +118,21 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.chat_input.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
         sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'
         if sender.icon == 'fa:caret-up':
-            text = anvil.server.call('get_chat_text', self.item)
-            if  text:
+            text = anvil.server.call('get_chat_text', self.row_id.text)
+            if  text != None and text != "":
                 self.textbox.text = text
         
 
     def enter_chat_input(self, **event_args):
         """This method is called when a user press ENTER in chat"""
-        self.textbox.text = anvil.server.call('get_chat_text', self.item)
-        message += datetime.datetime.now().strftime("[%d %b %Y@%H:%M]")
-        message += f" {self.user['display_name']}:\n"
-        message += self.chat_input.text + "\n\n"
+        self.textbox.text = anvil.server.call('get_chat_text', self.row_id.text) or self.textbox.text
+        message = f"\n({self.user['display_name']} at "
+        message += datetime.datetime.now().strftime("%d %b %Y on %H:%M)\n\n")        
+        message = "> " + self.chat_input.text + message
         self.chat_input.text = ""        
         self.textbox.text = message  + self.textbox.text
-        anvil.server.call('save_to_chat', self.item, self.textbox.text)
+        print(self.row_id)
+        anvil.server.call('save_to_chat', self.row_id.text, self.textbox.text)
         
         
     def disable_similar_buttons(self, enabled = False):
