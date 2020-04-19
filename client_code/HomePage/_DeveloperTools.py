@@ -14,9 +14,9 @@ class _DeveloperTools(_DeveloperToolsTemplate):
 
         # Any code you write here will run when the form opens.
 
-    def click_OSM_route_generator(self, **event_args):
+    def backfill_approx_lat_lon(self, **event_args):
         """This method is called when the button is clicked"""
-        anvil.server.call("_generate_route_url_for_all_matches")
+        anvil.server.call('_backfill_approx_lon_lat')
 
     def click_limit_status_codes(self, **event_args):
         """This method is called when the button is clicked"""

@@ -29,7 +29,7 @@ STATUSES = {'1':  "New",
             '3':  "Runner confirmed; Agree Pickup Time",
             '4':  "Offerer: Pickup complete",
             '5':  "Runner: Pickup complete", 
-            '6':  "Dropoff Time Agreed",
+            '6':  "Dropoff Time to be Agreed",
             '7':  "Requester: Dropoff complete",
             '8':  "Runner: Dropoff complete",
             '9': "Delivery complete"}

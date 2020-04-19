@@ -48,7 +48,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.show_route.foreground = black
             
     def show_status(self):
-        status = anvil.server.call("")
+        status = self.item['status_dict']
+        if status:
+            if status['delivery']:
+                self.column_panel_1.background = light_green
             
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""

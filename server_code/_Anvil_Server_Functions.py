@@ -5,6 +5,7 @@ from anvil.tables import app_tables
 import anvil.server
 import anvil.http
 import datetime
+import time
 
 # Change imports for other countries' data:
 from .Product_Data_UK import products
@@ -70,13 +71,18 @@ def create_route_url(new_match):
     return osm
 
 @anvil.server.callable
-def save_approx_lon_lat():
+def save_approx_lon_lat(user="default"):
     "Fetches and saves approximate Longitude and Latitude for a given user's address"
-    user = anvil.users.get_user()
+    if user == "default":
+        user = anvil.users.get_user()
     if user != None:
         address = [user['street'], user['town'], user['county']]
-        address_data = nominatim_scrape(address)[0]
-        user['approx_lon_lat'] = address_data['lat'] + "%2C" + address_data['lon']
+        try:
+            address_data = nominatim_scrape(address)[0]
+            user['approx_lon_lat'] = address_data['lat'] + "%2C" + address_data['lon']
+        except IndexError:
+            print(f"Problem getting Nominatim data for {address}")
+
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
@@ -102,23 +108,6 @@ def get_match_by_id(row_id):
     if anvil.users.get_user() is not None:
         return app_tables.matches.get_by_id(row_id)
   
-  
-# def update_match_status_for_deliveries():
-#     """For Deliveries (status_code '3'++) update based on status_dict"""
-#     lookup = {"offerer_confirms_pickup": '4',
-#               "runner_confirms_pickup":  '5',
-#               "dropoff_agreed": '6',
-#               "requester_confirms_dropoff": '7',
-#               "runner_confirms_dropoff": '8',
-#               "delivery": '9'}
-#     for match in _get_all_matches():
-#         if match in "1 2 3".split():
-#             continue
-#         status = match['status_dict']
-#         for stage, status_code in lookup:
-#             if stage in status:
-#                 if status[stage]:
-#                     update_status_codes(match, status_code)        
   
 @anvil.server.callable
 def get_my_deliveries():
@@ -177,8 +166,14 @@ def get_user_from_display_name(display_name):
 def nominatim_scrape(address_list):
     """Returns location & address dictionary for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
-    nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
-    return  anvil.http.request(nominatim, json=True)
+    print(address_list)
+    print(type(address_list))
+    address = address_list + [LOCALE, "&format=json"]
+    address = ",".join(address)
+    address = anvil.http.url_encode(address)
+    print(nominatim+address)
+#     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
+#     return  anvil.http.request(nominatim, json=True)
   
 # @anvil.tables.in_transaction  
 @anvil.server.callable
@@ -293,3 +288,12 @@ def volunteer_as_runner(match, boolean_value):
         match['available_runners'] += [user]
     else:
         match["available_runners"] = [x for x in match["available_runners"] if x != user]
+        
+@anvil.server.callable
+def _backfill_approx_lon_lat():
+    for user in app_tables.users.search():
+        if not user['approx_lon_lat']:
+            print(f"Updating approx location for user {user['display_name']}")
+            save_approx_lon_lat(user)
+            time.sleep(1.5)
+  
