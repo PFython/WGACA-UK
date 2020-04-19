@@ -37,7 +37,7 @@ class HomePage(HomePageTemplate):
                             self.menu_my_deliveries: 'My Deliveries',
                             self.menu_my_details: 'My Details'}.items():
             button.tag = tag
-        self.column_panel_1.add_component(TitleButton(sender.tag, sender.background))
+        self.column_panel_1.add_component(TitleButton(self.menu_about.tag, self.menu_about.background))
         self.column_panel_1.add_component(AboutThisApp())
         self.check_permissions()
         self.check_updates()
@@ -188,7 +188,7 @@ class HomePage(HomePageTemplate):
         anvil.users.logout()
         anvil.users.login_with_form()
         self.refresh_data_bindings()
-        self.menu_my_details_click()
+        self.menu_my_details.raise_event("click")
 
 
 
