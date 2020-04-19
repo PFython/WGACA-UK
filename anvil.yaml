@@ -211,7 +211,7 @@ db_schema:
     cALkDfUDNeM=:
       name: street
       type: string
-      admin_ui: {order: 1.75, width: 58.667}
+      admin_ui: {order: 1.75, width: 276.1818}
     mrMfHwkEbHs=:
       name: house_number
       type: string
