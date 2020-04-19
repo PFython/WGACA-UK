@@ -64,7 +64,7 @@ def generate_matches():
 def get_initial_status_dict():
     return  {"offer_matched":True,
              "runner_selected":True,
-             "pickup_agreed":false,
+             "pickup_agreed":False,
              "offerer_confirms_pickup":False,
              "dropoff_agreed":False,
              "feedback_REQ_on_RUN":False,
