@@ -225,11 +225,11 @@ def remove_orphan_matches(request_or_offer):
 
 # @anvil.tables.in_transaction      
 @anvil.server.callable
-def save_to_matches_database(match, runner, messages, status_code):
+def save_to_matches_database(match, runner, messages, status_dict):
     """ Returns 'Duplicate' if product_category request already exists"""
     if anvil.users.get_user() is None:
         return
-    match.update(approved_runner = runner, messages_dict = messages, status_code = status_code)
+    match.update(approved_runner = runner, messages_dict = messages, status_dict = status_dict)
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
@@ -289,7 +289,6 @@ def update_requests_status(request, status_code):
 # @anvil.tables.in_transaction
 @anvil.server.callable
 def update_status_codes(match, new_status_code):
-    match['status_code'] = new_status_code
     match['request']['status_code'] = new_status_code
     match['offer']['status_code'] = new_status_code
 

@@ -103,13 +103,11 @@ class ConfirmMatch(ConfirmMatchTemplate):
       
     def update_databases(self, runner, messages):
         """ Sets Approved Runner, updates Matches/Offers/Requests, and refreshes the view """
-        status_dict = 
+        status_dict = self.parent.parent.parent.item['status_dict']
+        status_dict['runner_selected'] = True
         # TODO: Change parent.parent etc. to passing in match as 
-        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, new_status_code)
-#         anvil.server.call("update_offers_status", self.parent.parent.parent.item['offer'], new_status_code)
-#         anvil.server.call("update_requests_status", self.parent.parent.parent.item['request'], new_status_code)
+        anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, status_dict)
         anvil.server.call('update_status_codes', self.parent.parent.parent.item, new_status_code)
-        # 3 in STATUSES = "Runner confirmed"
         anvil.server.call('generate_matches')
         self.parent.parent.parent.refresh_data_bindings()      
       

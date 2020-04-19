@@ -139,19 +139,15 @@ db_schema:
     Vioog5yQ47s=:
       name: messages_dict
       type: simpleObject
-      admin_ui: {order: 10, width: 142.666666}
+      admin_ui: {order: 10, width: 214.424}
     YAUMkRJ9AuA=:
       name: route_url
       type: string
       admin_ui: {order: 11, width: 962.6669999999999}
-    cN9mqqVsiOo=:
-      name: status_code
-      type: string
-      admin_ui: {order: 3, width: 94.333666}
     lEO1l9y6cns=:
       name: status_dict
       type: simpleObject
-      admin_ui: {order: 7, width: 200}
+      admin_ui: {order: 7, width: 821.011364}
   access: {python_name: matches, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
     table_id: 48778}
 - name: Requests
