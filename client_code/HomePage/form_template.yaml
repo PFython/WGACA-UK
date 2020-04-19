@@ -14,7 +14,7 @@ components:
   components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"HFYLGH":10,"TJTUKF":9,"ROCCDH":11,"JVVYKL":10,"FUDVDB":10,"LYVKDC":10,"RBTGMV":9,"JKAVWF":11,"RZWKFG":10,"EWNGMN":10,"JLAVIR":10}',
+      wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"HFYLGH":10,"TJTUKF":9,"ROCCDH":11,"JVVYKL":10,"FUDVDB":10,"RBTGMV":9,"JKAVWF":11,"RZWKFG":10,"EWNGMN":10,"JLAVIR":10}',
       spacing_below: none, background: ''}
     name: navigation_bar
     layout_properties: {grid_position: 'PTTQYJ,VHRBGI', full_width_row: true}
@@ -45,7 +45,7 @@ components:
       name: image_2
       layout_properties:
         col_widths: {}
-        grid_position: GVWFVE,LYVKDC
+        grid_position: GVWFVE,ODHYVT
       event_bindings: {}
     - type: Image
       properties: {role: null, vertical_align: bottom, height: '60', tooltip: '',
@@ -82,7 +82,7 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#0080c0', bold: false, underline: false, icon: 'fa:align-justify'}
+        background: '#00344d', bold: false, underline: false, icon: 'fa:align-justify'}
       name: menu_about
       layout_properties:
         col_widths: {}
@@ -93,7 +93,7 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#0080c0', bold: false, underline: false, icon: 'fa:heartbeat'}
+        background: '#fe74b9', bold: false, underline: false, icon: 'fa:heartbeat'}
       name: menu_my_offers
       layout_properties: {grid_position: 'PWOBIW,HFYLGH', full_width_row: true}
       event_bindings: {click: menu_my_offers_click}
@@ -101,7 +101,7 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#0080c0', bold: false, underline: false, icon: 'fa:bullhorn'}
+        background: '#ff8040', bold: false, underline: false, icon: 'fa:bullhorn'}
       name: menu_my_requests
       layout_properties:
         col_widths: {}
@@ -112,7 +112,7 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#0080c0', bold: false, underline: false, icon: 'fa:exchange'}
+        background: '#cccc00', bold: false, underline: false, icon: 'fa:balance-scale'}
       name: menu_my_matches
       layout_properties:
         col_widths: {}
@@ -123,18 +123,20 @@ components:
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#0080c0', bold: false, underline: false, icon: 'fa:ambulance'}
+        background: '#00a800', bold: false, underline: false, icon: 'fa:motorcycle'}
       name: menu_my_deliveries
       layout_properties:
         col_widths: {}
         grid_position: PWOBIW,ROCCDH
         full_width_row: true
       event_bindings: {click: menu_my_deliveries_click}
+      data_bindings:
+      - {property: border, code: ''}
     - type: Button
       properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
         foreground: '#ffffff', visible: true, text: '', font_size: null, font: '',
         spacing_above: small, icon_align: left, spacing_below: small, italic: false,
-        background: '#0080c0', bold: false, underline: false, icon: 'fa:user'}
+        background: '#00a3f0', bold: false, underline: false, icon: 'fa:user'}
       name: menu_my_details
       layout_properties:
         col_widths: {}

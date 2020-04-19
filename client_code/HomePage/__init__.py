@@ -93,14 +93,14 @@ class HomePage(HomePageTemplate):
           self.menu_my_deliveries: self.image_4,
           self.menu_my_details: self.image_5}   
         for button in images:
-            button.background = blue
-            button.foreground = light_blue
+#             button.background = blue
+#             button.foreground = light_blue
             button.bold = False
             button.font_size = menu_font_size
         self.title_bar.text = selected.tag.upper()
         self.user_name.text = f"User: {anvil.users.get_user()['display_name']}"
-        selected.background = bright_blue
-        selected.foreground = white
+#         selected.background = bright_blue
+#         selected.foreground = white
         selected.bold = True
         selected.font_size = menu_font_size
         # Hide all images
