@@ -43,15 +43,15 @@ def generate_matches():
     requests = app_tables.requests.search(tables.order_by("product_category"))
     offers = app_tables.offers.search(tables.order_by("product_key"))
     matches = 0
-    for request in (x for x in requests if x['status_code'] in ['1','2']):
-        for offer in (x for x in offers if x['status_code'] in ['1','2']):
+    for request in (x for x in requests if x['status_code'] in ['New','Matches Exist']):
+        for offer in (x for x in offers if x['status_code'] in ['New','Matches Exist']):
             if request['product_category'] in offer['product_key']:
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
                         new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_dict=get_initial_status_dict())
-                        request.update(status_code = "2")
-                        offer.update(status_code = "2")
+                        request.update(status_code = "Matches Exist")
+                        offer.update(status_code = "Matches Exist")
                         new_match['route_url'] = create_route_url(new_match)
                         # 'or []' added to address possible database corruption i.e. value = None rather than value = []
                         if new_match not in (offer['matches'] or []):
@@ -252,7 +252,7 @@ def save_matches_status_dict(match, status_dict):
     match.update(status_dict = status_dict)
     
 @anvil.server.callable
-def save_to_offers_database(product_key, units, expiry_date, notes, status_code="1"):
+def save_to_offers_database(product_key, units, expiry_date, notes, status_code="New"):
     """ Returns 'Duplicate' if product_key/expiry date row already exists"""
     product_key = " … ".join(product_key)
     user = anvil.users.get_user()
@@ -264,7 +264,7 @@ def save_to_offers_database(product_key, units, expiry_date, notes, status_code=
     app_tables.offers.add_row(product_key=product_key, notes = str(notes), expiry_date = expiry_date, units=units, user=user, date_posted=datetime.datetime.today().date(), matches = [], status_code = status_code)
  
 @anvil.server.callable
-def save_to_requests_database(product_category, urgent, notes, status_code="1"):
+def save_to_requests_database(product_category, urgent, notes, status_code="New"):
     """ Returns 'Duplicate' if product_category request already exists"""
     user = anvil.users.get_user()
     if user is None:
