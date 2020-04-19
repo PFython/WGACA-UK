@@ -75,6 +75,28 @@ def generate_route_url(new_match):
 #     print(osm)
     return osm
 
+def create_route_url(new_match):
+    """Creates an Open Street Map url for pickup to dropoff route"""
+    pickup = new_match['offer']['user']
+    dropoff = new_match['request']['user']
+
+
+    dropoff = nominatim_scrape(dropoff)[0]
+    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
+    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
+    osm += pickup + "%3B" + dropoff
+#     print(osm)
+    return osm
+
+@anvil.server.callable
+def save_approx_lon_lat(user):
+    "Fetches an approximate Longitude and Latitude for a given user's address"
+    user = anvil.users.get_user()
+    if user != None:
+        address = [user['street'], user['town'], user['county']]
+        address_data = nominatim_scrape(address)[0]
+        user['approx_lon_lat'] = address_data['lat'] + "%2C" + address_data['lon']
+
 # @anvil.tables.in_transaction
 @anvil.server.callable
 def _generate_route_url_for_all_matches():

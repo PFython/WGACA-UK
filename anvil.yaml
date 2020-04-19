@@ -199,7 +199,7 @@ db_schema:
     dR4WI6XDccA=:
       name: signed_up
       type: datetime
-      admin_ui: {order: 2, width: 96.636}
+      admin_ui: {order: 2, width: 140.36360000000002}
     U5zb8UNnxfs=:
       name: town
       type: string
@@ -228,6 +228,10 @@ db_schema:
       backend: anvil.tables.Row
       admin_ui: {order: 21, width: 75}
       table_id: 48470
+    Q78HdFRfQi8=:
+      name: approx_lon_lat
+      type: string
+      admin_ui: {order: 24, width: 200}
     4dcb9hwysNA=:
       name: Telephone
       type: string
@@ -235,7 +239,7 @@ db_schema:
     WdV+A9PKLHQ=:
       name: last_login
       type: datetime
-      admin_ui: {order: 4, width: 50}
+      admin_ui: {order: 4, width: 200.697}
     OQn7NmkiRLg=:
       name: updates_read
       type: simpleObject

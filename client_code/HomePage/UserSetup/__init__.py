@@ -93,6 +93,7 @@ class UserSetup(UserSetupTemplate):
         for field, _values in input_fields.items():
             component, attribute = _values
             anvil.server.call("save_user_setup", field, getattr(component, attribute))
+        anvil.server.call("save_approx_lon_lat")
 
     def check_for_existing_display_name(self):
         user = anvil.users.get_user()
