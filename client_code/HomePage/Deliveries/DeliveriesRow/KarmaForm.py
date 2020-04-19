@@ -39,10 +39,10 @@ class KarmaForm(KarmaFormTemplate):
                   'rating': self.rating,}
         anvil.server.call("add_karma_row", **kwargs)
         match = anvil.server.call("get_match_by_id", self.row_id)
-#         match = self.parent.parent.parent.item
-        match['status_dict'][self.status_dict_key] = True
-        anvil.server.call("save_matches_status_dict", match,  match['status_dict'])
-#         self.parent.parent.parent.item['status_dict'][self.status_dict_key] = True
+        status_dict = match['status_dict']
+        status_dict[self.status_dict_key] = True
+        anvil.server.call("save_matches_status_dict", match,  status_dict)
+        print([type(x) for x in self.parent.parent.parent.get_components()])
         self.clear()
         alert("""Thanks for taking the time to keep things going around and coming around!""")
 
