@@ -10,8 +10,6 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
-        self.limit_amount.text = 3
-
         # Any code you write here will run when the form opens.
 
     def backfill_approx_lat_lon(self, **event_args):

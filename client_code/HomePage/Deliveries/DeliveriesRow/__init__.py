@@ -103,7 +103,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.populate_addresses()
         self.combine_messages()
         self.row_id.text = self.item.get_id()
-        self.status_message.text = anvil.server.call("get_status_message_from_status_dict", self.item)
+        self.status_message.text = anvil.server.call("get_status_message", self.item)
           
     def create_karma_form(self, user_role, regarding, regarding_role):
           form = KarmaForm()

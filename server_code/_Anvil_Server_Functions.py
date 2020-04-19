@@ -74,42 +74,55 @@ def get_initial_status_dict():
              "runner_confirms_pickup":False,
              "runner_confirms_dropoff":False}
 
+  
 @anvil.server.callable  
-def get_status_message_from_status_dict(match):
-      try:
-          status = match['status_dict']
-          if status['delivery']:
-              return "Delivery complete!  What goes around comes around..."    
-          if status['dropoff_agreed'] and match['approved_runner'] != match['request']['user']:
-              return "A Dropoff time has been agreed between the Requester and Runner."
-          if status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
-              return "Both the Offerer and Runner have confirmed Pickup is complete."
-          if status['offerer_confirms_pickup'] and not status['runner_confirms_pickup']:
-              return "The Offerer (only) has confirmed Pickup is complete."
-          if not status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
-              return "The Runner (only) has confirmed Pickup is complete."        
-          if status['pickup_agreed'] and match['approved_runner'] != match['offer']['user']:
-              return "A Pickup time has been agreed between the Offerer and Runner."
-          if status['runner_selected']:
-              return f"The offerer has confirmed {match['approved_runner']['display_name']} as the Runner."
-          if status['offer_matched']:
-              return f"This request has been... "
-      except anvil.tables.TableError:
-      # Match hasn't been created yet and isn't a match at all but an offer or request.
-          try:
-              x = match['product_category']
-              row_type = "Request"
-              alt_row_type = "Offer(s)"
-          except KeyError:
-              row_type = "Offer"
-              alt_row_type = "Request(s)"
-          match_count = len(self.item['matches'])
-          if match['status_code'] == "Matches Exist":
-              return f"This {row_type} has been matched with {match_count} {alt_row_type}. Click on the Matches menu for more information."
-          if match['status_code'] == "New":
-              return f"This {row_type} currently has no matched {alt_row_type}.  Check back regularly!"
-          
-                        
+def get_status_message_from_match(status):  
+    if status['delivery']:
+        return "Delivery complete!  What goes around comes around..."    
+    if status['dropoff_agreed'] and data_row['approved_runner'] != data_row['request']['user']:
+        return "A Dropoff time has been agreed between the Requester and Runner."
+    if status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+        return "Both the Offerer and Runner have confirmed Pickup is complete."
+    if status['offerer_confirms_pickup'] and not status['runner_confirms_pickup']:
+        return "The Offerer (only) has confirmed Pickup is complete."
+    if not status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+        return "The Runner (only) has confirmed Pickup is complete."        
+    if status['pickup_agreed'] and data_row['approved_runner'] != data_row['offer']['user']:
+        return "A Pickup time has been agreed between the Offerer and Runner."
+    if status['runner_selected']:
+        return f"The offerer has confirmed {data_row['approved_runner']['display_name']} as the Runner."
+    if status['offer_matched']:
+        return f"This request has been... "
+      
+@anvil.server.callable  
+def get_status_message(data_row):
+    try:
+        status = data_row['status_dict']
+        # data_row is a Match
+        return get_status_message_from_match(status)
+    except anvil.tables.TableError:
+    # data_row is an Offer or Request
+        try:
+            x = data_row['product_category']
+            row_type = "Request"
+            alt_row_type = "Offer(s)"
+        except anvil.tables.TableError:
+            row_type = "Offer"
+            alt_row_type = "Request(s)"
+        match_count = len(data_row['matches'])
+        if data_row['matches']:
+            for match in data_row['matches']:
+                if match['approved_runner'] != None:
+                    # match is THE Match
+                    break
+            status = match['status_dict']
+            return get_status_message_from_match(status)
+        # data_row is a Match
+        return get_status_message_from_match(status)
+        if data_row['status_code'] == "Matches Exist":
+            return f"This {row_type} has been matched with {match_count} {alt_row_type}. Click on the Matches menu for more information."
+        if data_row['status_code'] == "New":
+            return f"This {row_type} currently has no matched {alt_row_type}.  Check back regularly!"                        
                             
 def create_route_url(new_match):
     """Creates an Open Street Map url for pickup to dropoff route"""

@@ -20,7 +20,7 @@ class MyRequestsRow(MyRequestsRowTemplate):
         self.remove_from_parent()
 
     def check_request_status(self, **properties):
-        self.status.text = anvil.server.call('get_status_message_from_status_dict', self.item)
+        self.status.text = anvil.server.call('get_status_message', self.item)
         self.refresh_data_bindings()
 
     def show_row(self, **event_args):
