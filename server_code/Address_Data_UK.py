@@ -65,7 +65,6 @@ ADD = ADDRESSES = hierarchy = {'United Kingdom':
                                      'Sidmouth Road',
                                      'Robert Davey Road',
                                      'Clyst Road',
-                                     'Sir Alex Walk',
                                      'Towerfield',
                                      'Grove Hill',
                                      'Nurseries Close',
