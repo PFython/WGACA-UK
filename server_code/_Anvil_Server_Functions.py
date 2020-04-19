@@ -116,10 +116,9 @@ def get_status_message(data_row):
                 if match['approved_runner'] != None:
                     # match is THE Match
                     break
-            status = match['status_dict']
-            return get_status_message_from_match(match)
-        # data_row is a Match
-        return get_status_message_from_match(status)
+            if match['approved_runner'] != None:
+                status = match['status_dict']
+                return get_status_message_from_match(match)
         if data_row['status_code'] == "Matches Exist":
             return f"This {row_type} has been matched with {match_count} {alt_row_type}. Click on the Matches menu for more information."
         if data_row['status_code'] == "New":
