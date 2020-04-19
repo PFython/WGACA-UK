@@ -37,9 +37,10 @@ components:
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
         visible: true, text: 'First Public Release 1.0.  New easy-to-follow Status
           View in the Deliveries Menu, and Karma Forms to encourage giving positive
-          feedback and calling out scammers or other selfish/dishonest behaviour.',
-        font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
-        italic: false, background: '#00a3f0', bold: false, underline: false, icon: ''}
+          feedback and calling out scammers or other selfish/dishonest behaviour.  Address
+          data currently limited to Topsham (Exeter) and Wandsworth.', font_size: null,
+        font: '', spacing_above: none, icon_align: left, spacing_below: small, italic: false,
+        background: '#00a3f0', bold: false, underline: false, icon: ''}
       name: description
       layout_properties:
         col_widths: {}
