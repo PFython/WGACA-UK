@@ -53,44 +53,40 @@ def generate_matches():
                         new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2")
                         request.update(status_code = "2")
                         offer.update(status_code = "2")
-                        new_match['route_url'] = generate_route_url(new_match)
+                        new_match['route_url'] = create_route_url(new_match)
                         # 'or []' added to address possible database corruption i.e. value = None rather than value = []
                         if new_match not in (offer['matches'] or []):
                             offer['matches'] = (offer['matches'] or []) + [new_match]
                         if new_match not in (request['matches'] or []):
                             request['matches'] = (request['matches'] or []) + [new_match]
 
-def generate_route_url(new_match):
-    """Creates an Open Street Map url for pickup to dropoff route"""
-    user = new_match['offer']['user']
-    pickup = [user['street'], user['town'], user['county']]
-    user = new_match['request']['user']
-    dropoff = [user['street'], user['town'], user['county']]
-    pickup = nominatim_scrape(pickup)[0]
-    pickup = pickup['lat'] + "%2C" + pickup['lon']
-    dropoff = nominatim_scrape(dropoff)[0]
-    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
-    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
-    osm += pickup + "%3B" + dropoff
-#     print(osm)
-    return osm
+# def generate_route_url(new_match):
+#     """Creates an Open Street Map url for pickup to dropoff route"""
+#     user = new_match['offer']['user']
+#     pickup = [user['street'], user['town'], user['county']]
+#     user = new_match['request']['user']
+#     dropoff = [user['street'], user['town'], user['county']]
+#     pickup = nominatim_scrape(pickup)[0]
+#     pickup = pickup['lat'] + "%2C" + pickup['lon']
+#     dropoff = nominatim_scrape(dropoff)[0]
+#     dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
+#     osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
+#     osm += pickup + "%3B" + dropoff
+# #     print(osm)
+#     return osm
 
 def create_route_url(new_match):
     """Creates an Open Street Map url for pickup to dropoff route"""
-    pickup = new_match['offer']['user']
-    dropoff = new_match['request']['user']
-
-
-    dropoff = nominatim_scrape(dropoff)[0]
-    dropoff = dropoff['lat'] + "%2C" + dropoff['lon']
+    pickup_lon_lat = new_match['offer']['user']['approx_lon_lat']
+    dropoff_lon_lat = new_match['request']['user']['approx_lon_lat']
     osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
-    osm += pickup + "%3B" + dropoff
-#     print(osm)
+    osm += pickup_lon_lat + "%3B" + dropoff_lon_lat
+    print(osm)
     return osm
 
 @anvil.server.callable
-def save_approx_lon_lat(user):
-    "Fetches an approximate Longitude and Latitude for a given user's address"
+def save_approx_lon_lat():
+    "Fetches and saves approximate Longitude and Latitude for a given user's address"
     user = anvil.users.get_user()
     if user != None:
         address = [user['street'], user['town'], user['county']]
@@ -177,7 +173,7 @@ def get_user_from_display_name(display_name):
 
 # @anvil.tables.in_transaction
 def nominatim_scrape(address_list):
-    """Returns location & address data for supplied address list"""
+    """Returns location & address dictionary for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
     return  anvil.http.request(nominatim, json=True)
