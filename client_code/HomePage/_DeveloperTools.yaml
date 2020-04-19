@@ -3,18 +3,11 @@ container:
   event_bindings: {}
   properties: {col_widths: '{"OWXXHZ":25}'}
 components:
-- type: Label
-  properties: {role: title, align: center, tooltip: '', border: '', foreground: '',
-    visible: true, text: Database Tools, font_size: null, font: '', spacing_above: small,
-    icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-    underline: false, icon: ''}
-  name: label_1
-  layout_properties: {grid_position: 'PLZSQR,GGVUOZ'}
 - type: Button
-  properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: '',
+  properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: '#ffffff',
     visible: true, text: backfill_approx_lat_lon, font_size: null, font: '', spacing_above: small,
-    icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
-    underline: false, icon: ''}
+    icon_align: left, spacing_below: small, italic: false, background: '#ff0000',
+    bold: false, underline: false, icon: ''}
   name: button_1
   layout_properties: {grid_position: 'CIEPBC,OWXXHZ'}
   event_bindings: {click: backfill_approx_lat_lon}

@@ -103,10 +103,11 @@ def get_status_message_from_status_dict(match):
           except KeyError:
               row_type = "Offer"
               alt_row_type = "Request(s)"
-          if match['status_code'] == "Matched":
-              return f"This {row_type} has been matched with one or more {alt_row_type}. Click on the Matches menu for more information."
+          match_count = len(self.item['matches'])
+          if match['status_code'] == "Matches Exist":
+              return f"This {row_type} has been matched with {match_count} {alt_row_type}. Click on the Matches menu for more information."
           if match['status_code'] == "New":
-              return f"This {row_type} currently has no matched {alt_row_type}."
+              return f"This {row_type} currently has no matched {alt_row_type}.  Check back regularly!"
           
                         
                             

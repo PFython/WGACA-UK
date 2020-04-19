@@ -23,9 +23,7 @@ class MyOffersRow(MyOffersRowTemplate):
         self.remove_from_parent()        
 
     def check_offer_status(self, **properties):
-        match_count = len(self.item['matches'])
-        if match_count > 0 and self.item['status_code'] in ['1','2']:                
-            self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
+        self.status.text = anvil.server.call('get_status_message_from_status_dict', self.item)
         self.refresh_data_bindings()
 
     def show_row(self, **event_args):

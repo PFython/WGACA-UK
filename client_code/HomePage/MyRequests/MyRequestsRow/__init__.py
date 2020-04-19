@@ -20,10 +20,8 @@ class MyRequestsRow(MyRequestsRowTemplate):
         self.remove_from_parent()
 
     def check_request_status(self, **properties):
-      match_count = len(self.item['matches'])
-      if match_count > 0 and self.item['status_code'] in ['1','2']:                 
-          self.status.text = f"Matched with {match_count} requests.  Please check My Matches."
-      self.refresh_data_bindings()
+        self.status.text = anvil.server.call('get_status_message_from_status_dict', self.item)
+        self.refresh_data_bindings()
 
     def show_row(self, **event_args):
         """This method is called when the data row panel is shown on the screen"""

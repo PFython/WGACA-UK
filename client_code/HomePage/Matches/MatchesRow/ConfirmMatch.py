@@ -107,7 +107,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
         status_dict['runner_selected'] = True
         # TODO: Change parent.parent etc. to passing in match as 
         anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, messages, status_dict)
-        anvil.server.call('update_status_codes', self.parent.parent.parent.item, new_status_code)
+        anvil.server.call('update_status_codes', self.parent.parent.parent.item, "Match Confirmed")
         anvil.server.call('generate_matches')
         self.parent.parent.parent.refresh_data_bindings()      
       
