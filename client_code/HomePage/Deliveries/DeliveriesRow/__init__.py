@@ -51,6 +51,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_status(self):
         status = self.item['status_dict']
         if status:
+            colour = pale_blue
             if not status['pickup_agreed'] or not status['dropoff_agreed']:
                 colour = yellow
             if status['delivery']:
