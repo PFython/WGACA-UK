@@ -33,6 +33,8 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.offer_expiry.text = expiry.strftime('%d %b %Y')
         if expiry <= datetime.datetime.today():
               self.offer_expiry.foreground = red
+              self.offer_expiry.bold = True
+              self.offer_expiry.italic = False
         
     def show_request(self):
         self.request.text = self.item['request']['product_category']
@@ -55,7 +57,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             colour = yellow
         if status['delivery']:
             colour = light_green
-        elif self.item['offer']['expiry_date'] >= datetime.datetime.today():
+        elif self.item['offer']['expiry_date'] <= datetime.datetime.today():
             colour = pink
         self.column_panel_1.background = colour
             
@@ -94,10 +96,10 @@ class DeliveriesRow(DeliveriesRowTemplate):
           
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
+        self.show_myself()
         self.show_offer()
         self.show_request()
         self.show_runner()
-        self.show_myself()
         self.show_status()
         self.populate_addresses()
         self.combine_messages()
