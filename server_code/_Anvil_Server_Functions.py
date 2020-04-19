@@ -51,7 +51,7 @@ def generate_matches():
                 if request['user']['display_name'] != offer['user']['display_name']:
                     # check if new or existing match
                     if not app_tables.matches.get(request=request, offer=offer):
-                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2", status_dict={})
+                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_code="2", status_dict=get_initial_status_dict())
                         request.update(status_code = "2")
                         offer.update(status_code = "2")
                         new_match['route_url'] = create_route_url(new_match)
@@ -61,6 +61,23 @@ def generate_matches():
                         if new_match not in (request['matches'] or []):
                             request['matches'] = (request['matches'] or []) + [new_match]
 
+def get_initial_status_dict():
+    return  {"offer_matched":true,
+             "runner_selected":true,
+             "pickup_agreed":false,
+             "offerer_confirms_pickup":false,
+             "dropoff_agreed":false,
+             "feedback_REQ_on_RUN":false,
+             "feedback_RUN_on_OFF":false,
+             "delivery":false,
+             "requester_confirms_dropoff":false,
+             "feedback_RUN_on_REQ":false,
+             "feedback_OFF_on_RUN":false,
+             "runner_confirms_pickup":false,
+             "runner_confirms_dropoff":false}
+    
+                        
+                            
 def create_route_url(new_match):
     """Creates an Open Street Map url for pickup to dropoff route"""
     pickup_lon_lat = new_match['offer']['user']['approx_lon_lat']
