@@ -166,15 +166,8 @@ def get_user_from_display_name(display_name):
 def nominatim_scrape(address_list):
     """Returns location & address dictionary for supplied address list"""
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
-    address = address_list + [LOCALE + "&format=json"]
-    nominatim += ",".join(address) 
-    print(nominatim)
-    nominatim = anvil.http.url_encode(nominatim)
-    print(nominatim)
-#     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
-    response = anvil.http.request(nominatim, json=True)
-    print(response)
-    return  response
+    nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
+    return anvil.http.request(nominatim, json=True)
   
 # @anvil.tables.in_transaction  
 @anvil.server.callable
