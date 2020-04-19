@@ -86,12 +86,13 @@ class HomePage(HomePageTemplate):
 
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
-        images = {self.menu_about: self.image_0,
-          self.menu_my_offers: self.image_1,
+        images = {self.menu_my_offers: self.image_1,
+                  self.menu_contact_us: self.image_1,
           self.menu_my_requests: self.image_2,
+          self.menu_my_details: self.image_2,
           self.menu_my_matches: self.image_3,
-          self.menu_my_deliveries: self.image_4,
-          self.menu_my_details: self.image_5}   
+          self.menu_about: self.image_3,
+          self.menu_my_deliveries: self.image_4,}   
         for button in images:
 #             button.background = blue
 #             button.foreground = light_blue
@@ -156,6 +157,25 @@ class HomePage(HomePageTemplate):
         # Add Page1 to the content panel
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
+        
+    def menu_contact_us_click(self, **event_args):
+        """This method is called when the Contact Us button is clicked"""
+        self.check_permissions()
+        self.column_panel_1.clear()
+        # Add Page1 to the content panel
+        self.column_panel_1.add_component(ContactUs())
+        self.highlight_selected_menu(self.menu_about)
+        self.highlight_selected_menu(self.menu_contact_us)
+
+
+    def log_out_click(self, **event_args):
+        """This method is called when the Log Out button is clicked"""
+        self.clear()
+        self.remove_from_parent()
+        anvil.users.logout()
+        anvil.users.login_with_form()
+        self.parent.__init__()
+        self.parent.menu_my_offers_click()
 
 
 
