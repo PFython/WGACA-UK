@@ -168,12 +168,12 @@ def nominatim_scrape(address_list):
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
     print(address_list)
     print(type(address_list))
-    address = address_list + [LOCALE, "&format=json"]
-    address = ",".join(address)
+    address = address_list + [LOCALE]
+    address = ",".join(address) + "&format=json"
     address = anvil.http.url_encode(address)
     print(nominatim+address)
 #     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
-#     return  anvil.http.request(nominatim, json=True)
+    return  anvil.http.request(nominatim, json=True)
   
 # @anvil.tables.in_transaction  
 @anvil.server.callable
