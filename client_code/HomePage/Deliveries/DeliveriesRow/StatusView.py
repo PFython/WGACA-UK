@@ -143,6 +143,7 @@ class StatusView(StatusViewTemplate):
         print("Updating components.\nSender:", self.sender)
         self.update_dependencies()
         self.update_predecessors()
+        self.update_forwards()
         self.update_arrows()
         self.update_text_colour()
         self.lock_history()
@@ -179,6 +180,17 @@ class StatusView(StatusViewTemplate):
                 backfill = True # Backfill for remaining iterations
             if not checkbox.checked and backfill and checkbox not in feedback:
                 checkbox.checked = True
+        # Additional "backfill" for Delivery Complete
+        if self.delivery.checked:
+            for option in [self.pickup_agreed,
+                           self.runner_confirms_pickup,
+                           self.offerer_confirms_pickup,
+                           self.dropoff_agreed,
+                           self.runner_confirms_dropoff,
+                           self.requester_confirms_dropoff,]:
+                option.checked = True
+                
+    def update_forwards(self):
         # Additional "forward-fill" Requester+Runner
         if self.is_requester.checked and self.is_runner.checked and self.runner_confirms_pickup.checked:
             for option in [self.dropoff_agreed,
@@ -195,15 +207,10 @@ class StatusView(StatusViewTemplate):
                            self.feedback_RUN_on_OFF,
                            self.feedback_OFF_on_RUN,]:
                 option.checked = True
-        # Additional "backfill" for Delivery Complete
-        if self.delivery.checked:
-            for option in [self.pickup_agreed,
-                           self.runner_confirms_pickup,
-                           self.offerer_confirms_pickup,
-                           self.dropoff_agreed,
-                           self.runner_confirms_dropoff,
-                           self.requester_confirms_dropoff,]:
-                option.checked = True
+        # Additional "forward-fill" Requester Confirms Dropoff
+        if self.is_requester and self.requester_confirms_dropoff.checked:
+            delivery.checked = True
+
                 
     def update_arrows(self):
         rules = [(self.offer_matched, self.arrow1),
@@ -254,6 +261,7 @@ class StatusView(StatusViewTemplate):
     def click_cancel(self, **event_args):
         """This method is called when the Cancel button is clicked"""
         self.parent.parent.parent.show_status()
+        self.parent.parent.parent.show_deliveries_row()
         self.parent.parent.parent.disable_similar_buttons(enabled = False)
         self.remove_from_parent()
 #         self.parent.parent.parent.status_view.raise_event('click')        
