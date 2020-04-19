@@ -122,13 +122,26 @@ components:
     event_bindings: {click: click_show_message}
   - type: TextArea
     properties: {role: null, align: left, height: 90, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: false, text: '', font_size: null,
-      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '#ceffce', bold: false, underline: false}
+      border: '', enabled: false, foreground: '', visible: false, text: 'This chatbox
+        is visible to the Offerer, Runner, and Requester and will be archived for
+        legal purposes and in case of abuse.
+
+
+        Please keep it respectful, positive, and concise.', font_size: null, auto_expand: false,
+      font: '', spacing_above: small, spacing_below: small, italic: false, background: '#ceffce',
+      bold: false, underline: false}
     name: textbox
     layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF KBVDDB,UKXBQK',
       full_width_row: true}
     event_bindings: {}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
+      border: '', enabled: true, foreground: '', visible: false, text: '', font_size: null,
+      font: '', spacing_above: small, type: text, spacing_below: small, italic: false,
+      background: '#b5ffb5', bold: false, underline: false}
+    name: chat_input
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF XZPDKA,TCVZVU'}
+    event_bindings: {pressed_enter: enter_chat_input}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Delivery Status', font_size: null,

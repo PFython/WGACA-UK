@@ -63,7 +63,9 @@ components:
         viewable, so please DO NOT include any personal information about other registered
         users AT ALL other than Display Name and Street (the default public information)
         and only include details about yourself that you are comfortable sharing with
-        all users.
+        all users.  Anything you write in the Chat Box will be shared with the Offerer,
+        Runner, and Requester of the delivery in question, and will be stored (unencrypted)
+        for legal purposes and in case of disputes or misuse.
 
 
         7) Finally in terms of IT security, we''re using out-of-the-box toolkits provided

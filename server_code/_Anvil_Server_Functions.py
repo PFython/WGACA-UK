@@ -250,6 +250,14 @@ def remove_orphan_matches(request_or_offer):
             offer = app_tables.matches.search()
     except anvil.tables.TableError:
         pass
+      
+# @anvil.tables.in_transaction    
+@anvil.server.callable
+def save_to_chat(match, full_text):
+    """Saves full chat history to Match"""
+    if anvil.users.get_user() is None:
+        return
+    match.update(chat = full_text)
 
 # @anvil.tables.in_transaction      
 @anvil.server.callable

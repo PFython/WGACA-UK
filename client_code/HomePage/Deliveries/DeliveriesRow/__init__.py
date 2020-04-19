@@ -138,8 +138,20 @@ class DeliveriesRow(DeliveriesRowTemplate):
         """This method is called when a Message Button is shown on the screen"""
         sender = event_args['sender']
         self.textbox.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
+        self.chat_input.visible = True if sender.icon == 'fa:caret-down' and self.textbox.text else False
         sender.icon = 'fa:caret-up' if self.textbox.visible else 'fa:caret-down'       
 
+    def enter_chat_input(self, **event_args):
+        """This method is called when a user press ENTER in chat"""
+        message += datetime.datetime.now().strftime("[%d %b %Y@%H:%M]")
+        message += f" {self.user['display_name']}:\n"
+        message += self.chat_input.text + "\n\n"
+        self.chat_input.text = ""        
+        self.textbox.text = message  + self.textbox.text
+#         self.refresh_data_bindings()
+        anvil.server.call('save_to_chat', self.textbox.text)
+        
+        
     def disable_similar_buttons(self, enabled = False):
         for row in [x for x in self.parent.get_components()]:
             columns = row.get_components()
