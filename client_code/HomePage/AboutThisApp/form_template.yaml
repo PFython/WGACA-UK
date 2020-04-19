@@ -21,34 +21,28 @@ components:
     full_width_row: true
   components:
   - type: Label
+    properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'What Goes Around Comes Around ', font_size: null, font: '',
+      spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '',
+      bold: false, underline: false, icon: ''}
+    name: label_2
+    layout_properties: {grid_position: 'KCWQKO,QHCANK'}
+  - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: "This app was developed by the Peter Fison (UK) and Aldo\
-        \ Ercolani (Italy) in response to the Corona Virus 'Lockdowns' in their respective\
-        \ countries in March/April 2020.\n      \nIt\u2019s called What Goes Around\
-        \ Comes Around (WGACA) and it\u2019s a tool for sharing and swapping food\
-        \ and drink, household goods, and over-the-counter medicines with those in\
-        \ need.\n      \n      * You can post a REQUEST to let people know you need\
-        \ urgent help;\n      * You can post OFFERS of surplus items you\u2019re able\
-        \ to share;\n      * The app automatically attempts to match REQUESTS and\
-        \ OFFERS;\n      * You can review MATCHES in your area and volunteer as a\
-        \ RUNNER to deliver items where they\u2019re most needed.\n      * Once accepted\
-        \ as a RUNNER you can view all your DELIVERIES and plan the most efficient\
-        \ route.\n        \nIt\u2019s early days and we\u2019re already working on\
-        \ a load of improvements to the app (mainly to protect against scammers and\
-        \ selfish misuse), but we wanted to start sharing it ASAP so that trusted\
-        \ people in the area can start helping each other.\n      \nIf it proves popular,\
-        \ our intention is to make the app and the data available to other charities\
-        \ (e.g. food banks), community groups, emergency services and other agencies\
-        \ who are better placed to manage logistics/distribution using the tool.\n\
-        \nTo get started, just click on one of the menu buttons above.  If you haven't\
-        \ already registered, you'll be asked to confirm your email address, read\
-        \ and accept our Privacy Notice and Terms of Use, and setup your address and\
-        \ Display Name for the app to use.  That should take less than a minute.\n\
-        \nWe hope you find this tool useful, and wish you all the best for coping\
+      visible: true, text: "Welcome to your one-stop app for sharing and swapping\
+        \ FOOD and DRINK, HOUSEHOLD GOODS and OVER-THE-COUNTER MEDICINES for those\
+        \ in need during the Covid-19 crisis.\n\nHere you can post URGENT REQUESTS\
+        \ and circulate offers of SURPLUS ITEMS you might have to SHARE. The state-of-the-art\
+        \ app will then automatically match any requests to offers. You can also volunteer\
+        \ as a RUNNER to deliver items where they\u2019re most needed. \n\nSouth West\
+        \ London has always prided itself on its fantastic COMMUNITY SPIRIT and this\
+        \ is another great way for us all to come together, stay better connected\
+        \ and lend a hand to those less fortunate during these challenging times.\
+        \ \n\nWe hope you find this tool useful, and wish you all the best for coping\
         \ during these difficult times.\n     \nPS We couldn't have done this without\
         \ the generous support of Anvil.Works.  Thank you! \nPPS If you're interested\
         \ in setting up a local version of this app in your own country, you can find\
-        \ the source code at:", font_size: null, font: '', spacing_above: small, icon_align: left,
+        \ the source code at:", font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
     name: label_1
