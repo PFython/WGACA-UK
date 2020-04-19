@@ -199,3 +199,4 @@ container:
     visible: true, font_size: null, font: '', spacing_above: none, spacing_below: none,
     italic: false, background: '', bold: false, underline: false}
 is_package: true
+custom_component: true

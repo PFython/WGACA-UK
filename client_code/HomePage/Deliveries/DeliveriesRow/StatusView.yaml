@@ -325,3 +325,5 @@ container:
   type: ColumnPanel
   event_bindings: {}
   properties: {col_widths: '{}'}
+custom_component: true
+properties: []

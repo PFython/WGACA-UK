@@ -59,8 +59,8 @@ def generate_matches():
                         if new_match not in (offer['matches'] or []):
                             offer['matches'] = (offer['matches'] or []) + [new_match]
                         if new_match not in (request['matches'] or []):
-                            request['matches'] = (request['matches'] or []) + [new_match]
-
+                            request['matches'] = (request['matches'] or []) + [new_match]                    
+                            
 def get_initial_status_dict():
     return  {"offer_matched":True,
              "runner_selected":True,
@@ -75,7 +75,21 @@ def get_initial_status_dict():
              "feedback_OFF_on_RUN":False,
              "runner_confirms_pickup":False,
              "runner_confirms_dropoff":False}
-    
+  
+def get_status_message_from_status_dict(match):
+      status = match['status_dict']
+      if status['delivery']:
+          return "Delivery complete!  What goes around comes around..."    
+      if status['dropoff_agreed'] and match['approved_runner'] != match['request']['user']:
+          return "A Dropoff time has been agreed between the Requester and Runner."
+      if status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+          return "Both the Offerer and Runner have confirmed Pickup is complete."
+      if status['offerer_confirms_pickup'] and not status['runner_confirms_pickup']:
+          return "The Offerer (only) has confirmed Pickup is complete."
+      if not status['offerer_confirms_pickup'] and status['runner_confirms_pickup']:
+          return "The Runner (only) has confirmed Pickup is complete."        
+      if status['pickup_agreed'] and match['approved_runner'] != match['offer']['user']:
+          return "A Pickup time has been agreed between the Offerer and Runner."
                         
                             
 def create_route_url(new_match):
