@@ -16,6 +16,7 @@ from .AboutThisApp import AboutThisApp
 from .AboutThisApp.News import News
 from ._DeveloperTools import _DeveloperTools
 from .ContactUs import ContactUs
+from .News
 
 from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
