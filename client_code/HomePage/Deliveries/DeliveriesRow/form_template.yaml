@@ -114,8 +114,8 @@ components:
       event_bindings: {}
   - type: Button
     properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: true, text: ' Chat (3-way)', font_size: null,
-      font: '', spacing_above: small, icon_align: left, spacing_below: none, italic: false,
+      foreground: '#ffffff', visible: true, text: '  Messages', font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: none, italic: false,
       background: '#5eb348', bold: false, underline: false, icon: 'fa:caret-down'}
     name: show_message
     layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF FODGZL,QCBPDG'}

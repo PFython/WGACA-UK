@@ -24,4 +24,4 @@ ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
 UNITS_OF_MEASURE = anvil.server.call("get_units_of_measure")
 
-CHAT_BLURB = "This chatbox is visible to the Offerer, Runner, and Requester and staff or volunteers maintaining this instance of the app.  Keep it concise and respectful please."
+CHAT_BLURB = "These messages are not encrypted and are visible to the Offerer, Runner, and Requester and staff or volunteers maintaining this instance of the app.  Keep them concise and respectful please."

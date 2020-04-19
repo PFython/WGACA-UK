@@ -20,7 +20,8 @@ class ConfirmMatch(ConfirmMatchTemplate):
         self.user = anvil.users.get_user()
         self.row_id = row_id
         self.chat_blurb = CHAT_BLURB
-        # Any code you write here will run when the form opens.
+        self.telephone.enabled = True if self.user['telephone'] else False
+        self.postcode.enabled = True if self.user['postcode'] else False
 
     def dropdown_change(self, **event_args):
         """ Colour codes dropdown box """
@@ -56,6 +57,9 @@ class ConfirmMatch(ConfirmMatchTemplate):
             if not checked:
                 users = users.remove(recipient)
             anvil.server.call('save_user_setup', field, users)
+        
+
+      
             
     def update_shared_with_fields(self, user, runner):
         """ Update 'shared_with' for Runner """
@@ -68,12 +72,13 @@ class ConfirmMatch(ConfirmMatchTemplate):
         
     def create_message(self):
         message = ""
-        message += "\n> " + self.telephone.text if self.telephone.checked else ""
-        message += "\n> " + self.email.text if self.email.checked else ""
+        message += "\n> " + self.user['telephone'] if self.telephone.checked else ""
+        message += "\n> " + self.user['email'] if self.email.checked else ""
         message += "> You can contact me on:" + message if message != "" else ""
         message += f"\n({self.user['display_name']} at " if message !="" else ""
         message += datetime.datetime.now().strftime("%d %b %Y on %H:%M)\n\n") if message !="" else ""      
         message += self.chat_blurb
+        print(message)
         anvil.server.call('save_to_chat', self.row_id, message)   
         
              
@@ -85,6 +90,7 @@ class ConfirmMatch(ConfirmMatchTemplate):
         anvil.server.call("save_to_matches_database", self.parent.parent.parent.item, runner, status_dict)
         anvil.server.call('update_status_codes', self.parent.parent.parent.item, "Match Confirmed")
         anvil.server.call('generate_matches')
+        self.create_message()
         self.parent.parent.parent.refresh_data_bindings()     
 
       
