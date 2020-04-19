@@ -11,6 +11,8 @@ class TitleButton(TitleButtonTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.title_button.background = background
-    self.title_button.text = title + " > " + anvil.users.get_user()['display_name']
+    user = anvil.users.get_user()
+    username = user['display_name'] if user else ""
+    self.title_button.text = title + " > " + username
 
     # Any code you write here will run when the form opens.
