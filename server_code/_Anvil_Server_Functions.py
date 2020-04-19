@@ -103,22 +103,22 @@ def get_match_by_id(row_id):
         return app_tables.matches.get_by_id(row_id)
   
   
-def update_match_status_for_deliveries():
-    """For Deliveries (status_code '3'++) update based on status_dict"""
-    lookup = {"offerer_confirms_pickup": '4',
-              "runner_confirms_pickup":  '5',
-              "dropoff_agreed": '6',
-              "requester_confirms_dropoff": '7',
-              "runner_confirms_dropoff": '8',
-              "delivery": '9'}
-    for match in _get_all_matches():
-        if match in "1 2 3".split():
-            continue
-        status = match['status_dict']
-        for stage, status_code in lookup:
-            if stage in status:
-                if status[stage]:
-                    update_status_codes(match, status_code)        
+# def update_match_status_for_deliveries():
+#     """For Deliveries (status_code '3'++) update based on status_dict"""
+#     lookup = {"offerer_confirms_pickup": '4',
+#               "runner_confirms_pickup":  '5',
+#               "dropoff_agreed": '6',
+#               "requester_confirms_dropoff": '7',
+#               "runner_confirms_dropoff": '8',
+#               "delivery": '9'}
+#     for match in _get_all_matches():
+#         if match in "1 2 3".split():
+#             continue
+#         status = match['status_dict']
+#         for stage, status_code in lookup:
+#             if stage in status:
+#                 if status[stage]:
+#                     update_status_codes(match, status_code)        
   
 @anvil.server.callable
 def get_my_deliveries():
