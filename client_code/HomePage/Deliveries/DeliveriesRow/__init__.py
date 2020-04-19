@@ -19,6 +19,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         # Any code you write here will run when the form opens.
         self.show_route.url = self.item['route_url']
         self.show_route.foreground = dark_green
+        self.user = anvil.users.get_user()
                
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
@@ -40,7 +41,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def show_runner(self):
         runner = self.item['approved_runner']['display_name']
         self.runner.text = "Approved Runner: " + runner
-        if runner == anvil.users.get_user()['display_name']:
+        if runner == self.user['display_name']:
             self.runner.foreground = dark_green
             self.status_label.foreground = dark_green
             self.show_route.foreground = dark_green
@@ -55,8 +56,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
     def show_myself(self, **event_args):
         """Colour codes display to highlight user's own data"""
-        user = anvil.users.get_user()
-        if self.item['offer']['user'] == user:
+        if self.item['offer']['user'] == self.user:
 #             self.items_picked_up.foreground = dark_green
             self.label_1.text = f"Request by: {self.item['request']['user']['display_name']}"
             self.label_2.text  = "My Offer"            
@@ -67,7 +67,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.offer.foreground = dark_green
             self.offer_notes.foreground = dark_green
             self.offer_expiry.foreground = dark_green              
-        if self.item['request']['user'] == user:
+        if self.item['request']['user'] == self.user:
             self.label_1.text  = "My Request"
             self.label_1.foreground = dark_green
             self.label_4.foreground = dark_green
@@ -79,10 +79,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
    
     def populate_addresses(self):
         """ Fills in address details for Pickup and Dropoff, adding postcode if authorised"""
-        user=anvil.users.get_user()
         for address, table in {self.pickup: 'offer', self.dropoff: 'request'}.items():
             address.text = self.item[table]['user']['display_name']+"\n"
-            if self.item['approved_runner'] == user or self.item[table]['user'] == user:
+            if self.item['approved_runner'] == user or self.item[table]['user'] == self.user:
                 address.text += str(self.item[table]['user']['house_number'])+" "
             address.text += self.item[table]['user']['street']+", "
             address.text += self.item[table]['user']['town']+", "
@@ -101,18 +100,17 @@ class DeliveriesRow(DeliveriesRowTemplate):
           
     def create_karma_form(self, user_role, regarding, regarding_role):
           form = KarmaForm()
-          form.user.text = anvil.users.get_user()['display_name']
+          form.user.text = self.user['display_name']
           form.user_role.text = user_role
           form.regarding.text = regarding
           form.regarding_role.text = regarding_role
           self.parent.parent.add_component(form)
               
     def combine_messages(self):
-        user = anvil.users.get_user()
         messages = self.item['messages_dict']
         # Remove unauthorised messages for user
         keys = 'offerer_to_runner runner_to_offerer runner_to_requester requester_to_runner'.split()
-        if user != self.item['offer']['user'] and keys[1] in messages:
+        if self.user != self.item['offer']['user'] and keys[1] in messages:
             del messages[keys[1]]
         if user != self.item['request']['user'] and keys[2] in messages:
             del messages[keys[2]]
