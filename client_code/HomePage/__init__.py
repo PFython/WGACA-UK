@@ -47,7 +47,7 @@ class HomePage(HomePageTemplate):
     def check_for_boss(self):
 #         if anvil.users.get_user():
         if anvil.users.get_user()['admin']:
-            print("A very good day to you, Mr Administrator...")
+            print("Good day to you, Boss...")
             self.navigation_bar.add_component(_DeveloperTools())
         
     def check_updates(self):

@@ -78,7 +78,6 @@ class ConfirmMatch(ConfirmMatchTemplate):
         message += f"\n({self.user['display_name']} at " if message !="" else ""
         message += datetime.datetime.now().strftime("%d %b %Y on %H:%M)\n\n") if message !="" else ""      
         message += self.chat_blurb
-        print(message)
         anvil.server.call('save_to_chat', self.row_id, message)   
         
              

@@ -130,6 +130,7 @@ def create_route_url(new_match):
     dropoff_lon_lat = new_match['request']['user']['approx_lon_lat']
     osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
     osm += pickup_lon_lat + "%3B" + dropoff_lon_lat
+    print("Request sent to OpenStreetView:")
     print(osm)
     return osm
 
@@ -154,8 +155,6 @@ def _generate_route_url_for_all_matches():
   matches = app_tables.matches.search(tables.order_by("request"))
   count = 0
   for match in matches:
-#     if match['route_url'] == None:
-    match['route_url'] = generate_route_url(match)
     count += 1
   print(f"Populated {count} Matches with a route_url")
   return
