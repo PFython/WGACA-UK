@@ -342,37 +342,4 @@ db_schema:
       admin_ui: {order: 3.5, width: 200}
   access: {python_name: offers, app_id: P33PVE5OAIUCIJY3, server: full, client: full,
     table_id: 48190}
-dependency_order: [OKAB7WUCDJLOUFDW]
-dependency_code:
-  OKAB7WUCDJLOUFDW:
-    modules: []
-    branch: master
-    forms:
-    - container:
-        type: HtmlTemplate
-        properties: {tooltip: '', html: "<iframe style=\"width:100%; height: 80vh;\
-            \ border: none\" src=\"\"></iframe>\n\n<script>\n  function setURL(url)\
-            \ {\n    $(this).find(\"iframe\").attr(\"src\", url);\n  }\n</script>\n"}
-        event_bindings: {show: form_show}
-      components: []
-      custom_component: true
-      properties:
-      - {name: url, type: string, default_value: '', default_binding_prop: true}
-      class_name: IFrame
-      code: "from anvil import *\n\nclass IFrame(IFrameTemplate):\n  def __init__(self,\
-        \ **properties):\n    self.shown = False\n    self._url = None\n    \n   \
-        \ # You must call self.init_components() before doing anything else in this\
-        \ function\n    self.init_components(**properties)\n\n    # Any code you write\
-        \ here will run when the form opens.\n    \n  @property\n  def url(self):\n\
-        \    return self._url\n  \n  @url.setter\n  def url(self, u):\n    self._url\
-        \ = u\n    if self.shown:\n      self.form_show()\n\n  def form_show(self,\
-        \ **event_args):\n    \"\"\"This method is called when the HTML panel is shown\
-        \ on the screen\"\"\"\n    self.shown = True\n    if self._url is not None\
-        \ and self._url != \"\":\n      self.call_js('setURL', self._url)\n\n"
-    package_name: IFrames
-    name: Clone of IFrame component
-    runtime_options: {server_version: python2-sandbox}
-    version: e4bb9d47968917f1d271c0846e943e41cba27206
-    depending_app: P33PVE5OAIUCIJY3
-    server_modules: []
 renamed: true

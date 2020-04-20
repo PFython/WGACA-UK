@@ -41,10 +41,12 @@ class KarmaForm(KarmaFormTemplate):
         status_dict = match['status_dict']
         status_dict[self.status_dict_key] = True
         anvil.server.call("save_matches_status_dict", match,  status_dict)
+        self.parent.parent.parent.status_dict = status_dict
         buttons = [x for x in self.parent.parent.get_components() if type(x) == Button]
 #         print(buttons)
         for button in buttons:
             button.enabled = True
+        self.parent.parent.parent.click_show_message()
 #         self.parent.parent.refresh_data_bindings()
 #         print("ppp",type(self.parent.parent.parent))
 #         self.parent.parent.item.status_view.enabled = True
