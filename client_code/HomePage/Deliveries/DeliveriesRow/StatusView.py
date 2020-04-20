@@ -77,6 +77,7 @@ class StatusView(StatusViewTemplate):
         self.is_requester.checked = self.user == self.match['request']['user']        
         # BUG For some reason 'sender' is detected as a CheckBox...    
         for checkbox, checked in self.status_dict.items():
+            print(self.status_dict)
             object = getattr(self, checkbox)
             setattr(object, "checked", checked)
         # TODO: Make general purpose/DRY method combined with lock_history()        
