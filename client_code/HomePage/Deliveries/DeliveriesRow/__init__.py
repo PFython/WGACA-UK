@@ -91,6 +91,13 @@ class DeliveriesRow(DeliveriesRowTemplate):
             address.text += self.item[table]['user']['street']+", "
             address.text += self.item[table]['user']['town']+", "
             address.text += self.item[table]['user']['county']+"\n"
+            if self.item['approved_runner'] == self.user or self.item[table]['user'] == self.user:
+                address.text += str(self.item[table]['user']['postcode']) or ""
+            else:
+                if table == 'offer' and self.user in self.item[table]['user']['postcode_shared_with']:
+                    address.text += self.item[table]['user']['postcode']
+                
+               
           
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
