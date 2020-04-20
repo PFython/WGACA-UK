@@ -65,16 +65,19 @@ def get_initial_status_dict():
              "pickup_agreed":False,
              "offerer_confirms_pickup":False,
              "dropoff_agreed":False,
-             "feedback_REQ_on_RUN":False,
-             "feedback_RUN_on_OFF":False,
+
              "delivery":False,
              "requester_confirms_dropoff":False,
-             "feedback_RUN_on_REQ":False,
-             "feedback_OFF_on_RUN":False,
+
              "runner_confirms_pickup":False,
              "runner_confirms_dropoff":False}
-
   
+#              "feedback_REQ_on_RUN":False,
+#              "feedback_RUN_on_OFF":False,
+#              "feedback_RUN_on_REQ":False,
+#              "feedback_OFF_on_RUN":False,
+  
+              
 @anvil.server.callable  
 def get_status_message_from_match(data_row):
     status = data_row['status_dict']
