@@ -17,10 +17,10 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-        self.feedback = [self.feedback_RUN_on_REQ,
-                         self.feedback_REQ_on_RUN,
-                         self.feedback_RUN_on_OFF,
-                         self.feedback_OFF_on_RUN,]
+#         self.feedback = [self.feedback_RUN_on_REQ,
+#                          self.feedback_REQ_on_RUN,
+#                          self.feedback_RUN_on_OFF,
+#                          self.feedback_OFF_on_RUN,]
         self.initial_canvas()
         self.match = match
         self.ingest_match_data()
@@ -86,26 +86,20 @@ class StatusView(StatusViewTemplate):
         """Attributes set with list of visible options, determined by role"""
         self.offerer_options = [self.pickup_agreed,
                                 self.offerer_confirms_pickup,
-                                self.feedback_OFF_on_RUN,
                                 self.delivery]
         self.runner_options = [self.pickup_agreed,
                                self.runner_confirms_pickup,
-                               self.feedback_RUN_on_OFF,
                                self.dropoff_agreed,
                                self.runner_confirms_dropoff,
-                               self.feedback_RUN_on_REQ,
                                self.delivery]
         self.requester_options = [self.dropoff_agreed,
                                   self.requester_confirms_dropoff,
-                                  self.feedback_REQ_on_RUN,
                                   self.delivery]
         self.offererrunner_options = [self.dropoff_agreed,
                                       self.runner_confirms_dropoff,
-                                      self.feedback_RUN_on_REQ,
                                       self.delivery]
         self.requesterrunner_options = [self.pickup_agreed,
                                         self.runner_confirms_pickup,
-                                        self.feedback_RUN_on_OFF,
                                         self.delivery]
         
     def display_options_by_role(self, **event_args):
@@ -146,59 +140,59 @@ class StatusView(StatusViewTemplate):
 
     def update_components(self, **event_args):
         self.sender = event_args.get('sender')
-        self.check_for_feedback()
-        self.update_dependencies()
+#         self.check_for_feedback()
+#         self.update_dependencies()
         self.update_predecessors()
         self.update_forwards()
         self.update_arrows()
         self.update_text_colour()
         self.lock_history()
     
-    def check_for_feedback(self, **event_args):
-        """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
-        if self.sender in self.feedback:
-            self.visible = False
-            if self.sender == self.feedback_REQ_on_RUN:
-                status_dict_key = "feedback_REQ_on_RUN"
-                user_role = "Requester"
-                regarding_role = "Runner"
-                regarding = self.match['approved_runner']['display_name']
-            if self.sender == self.feedback_OFF_on_RUN:
-                status_dict_key = "feedback_OFF_on_RUN"
-                user_role = "Offerer"
-                regarding_role = "Runner"
-                regarding = self.match['approved_runner']['display_name']
-            if self.sender == self.feedback_RUN_on_REQ:
-                status_dict_key = "feedback_RUN_on_REQ"
-                user_role = "Runner"
-                regarding_role = "Requester"
-                regarding = self.match['request']['user']['display_name']
-            if self.sender == self.feedback_RUN_on_OFF:
-                status_dict_key = "feedback_RUN_OFF"
-                user_role = "Runner"
-                regarding_role = "Offerer"
-                regarding = self.match['offer']['user']['display_name']
-            row_id = self.match.get_id()
-            form = KarmaForm(row_id,status_dict_key)
-            form.regarding.text = regarding
-            form.regarding_role.text = regarding_role
-            form.user.text = self.user['display_name']
-            form.user_role.text = user_role
-            self.parent.add_component(form)                          
+#     def check_for_feedback(self, **event_args):
+#         """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
+#         if self.sender in self.feedback:
+#             self.visible = False
+#             if self.sender == self.feedback_REQ_on_RUN:
+#                 status_dict_key = "feedback_REQ_on_RUN"
+#                 user_role = "Requester"
+#                 regarding_role = "Runner"
+#                 regarding = self.match['approved_runner']['display_name']
+#             if self.sender == self.feedback_OFF_on_RUN:
+#                 status_dict_key = "feedback_OFF_on_RUN"
+#                 user_role = "Offerer"
+#                 regarding_role = "Runner"
+#                 regarding = self.match['approved_runner']['display_name']
+#             if self.sender == self.feedback_RUN_on_REQ:
+#                 status_dict_key = "feedback_RUN_on_REQ"
+#                 user_role = "Runner"
+#                 regarding_role = "Requester"
+#                 regarding = self.match['request']['user']['display_name']
+#             if self.sender == self.feedback_RUN_on_OFF:
+#                 status_dict_key = "feedback_RUN_OFF"
+#                 user_role = "Runner"
+#                 regarding_role = "Offerer"
+#                 regarding = self.match['offer']['user']['display_name']
+#             row_id = self.match.get_id()
+#             form = KarmaForm(row_id,status_dict_key)
+#             form.regarding.text = regarding
+#             form.regarding_role.text = regarding_role
+#             form.user.text = self.user['display_name']
+#             form.user_role.text = user_role
+#             self.parent.add_component(form)                          
     
-    def update_dependencies(self):
-        """
-        These are 1...1 dependencies.  Multiple predecessors
-        i.e. 'backfill' are handled by update_predecessors
-        """
-        rules = [(self.offerer_confirms_pickup, self.feedback_OFF_on_RUN),
-                 (self.runner_confirms_pickup, self.feedback_RUN_on_OFF),
-                 (self.runner_confirms_dropoff, self.feedback_RUN_on_REQ),
-                 (self.requester_confirms_dropoff, self.feedback_REQ_on_RUN),]
-        for enabler, target in rules:
-            target.enabled = True if enabler.checked else False
-            if not enabler.checked:
-                target.checked = False
+#     def update_dependencies(self):
+#         """
+#         These are 1...1 dependencies.  Multiple predecessors
+#         i.e. 'backfill' are handled by update_predecessors
+#         """
+#         rules = [(self.offerer_confirms_pickup, self.feedback_OFF_on_RUN),
+#                  (self.runner_confirms_pickup, self.feedback_RUN_on_OFF),
+#                  (self.runner_confirms_dropoff, self.feedback_RUN_on_REQ),
+#                  (self.requester_confirms_dropoff, self.feedback_REQ_on_RUN),]
+#         for enabler, target in rules:
+#             target.enabled = True if enabler.checked else False
+#             if not enabler.checked:
+#                 target.checked = False
                 
     def update_predecessors(self):
         """
@@ -211,8 +205,8 @@ class StatusView(StatusViewTemplate):
                 continue
             if checkbox.checked and not backfill:
                 backfill = True # Backfill for remaining iterations
-            if not checkbox.checked and backfill and checkbox not in self.feedback:
-                checkbox.checked = True
+#             if not checkbox.checked and backfill and checkbox not in self.feedback:
+#                 checkbox.checked = True
         # Additional "backfill" for Delivery Complete
         if self.delivery.checked:
             for option in [self.pickup_agreed,
@@ -228,17 +222,17 @@ class StatusView(StatusViewTemplate):
         if self.is_requester.checked and self.is_runner.checked and self.runner_confirms_pickup.checked:
             for option in [self.dropoff_agreed,
                            self.runner_confirms_dropoff,
-                           self.requester_confirms_dropoff,
-                           self.feedback_RUN_on_REQ,
-                           self.feedback_REQ_on_RUN,]:
+                           self.requester_confirms_dropoff,]:
+#                            self.feedback_RUN_on_REQ,
+#                            self.feedback_REQ_on_RUN,]:
                 option.checked = True
         # Additional "forward-fill" Offerer+Runner
         if self.is_offerer.checked and self.is_runner.checked:
             for option in [self.pickup_agreed,
                            self.runner_confirms_pickup,
-                           self.offerer_confirms_pickup,
-                           self.feedback_RUN_on_OFF,
-                           self.feedback_OFF_on_RUN,]:
+                           self.offerer_confirms_pickup,]:
+#                            self.feedback_RUN_on_OFF,
+#                            self.feedback_OFF_on_RUN,]:
                 option.checked = True
         # Additional "forward-fill" Requester Confirms Dropoff
         if self.is_requester and self.requester_confirms_dropoff.checked:

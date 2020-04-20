@@ -46,7 +46,7 @@ class KarmaForm(KarmaFormTemplate):
 #         print(buttons)
         for button in buttons:
             button.enabled = True
-        self.parent.parent.parent.click_show_message()
+        self.parent.parent.parent.click_show_message(sender=buttons[1])
 #         self.parent.parent.refresh_data_bindings()
 #         print("ppp",type(self.parent.parent.parent))
 #         self.parent.parent.item.status_view.enabled = True
