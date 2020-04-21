@@ -5,11 +5,12 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from .KarmaForm import KarmaForm
+
 import datetime
 
 from ....Globals import green, grey, red, blue, dark_green, light_green, light_blue, pale_blue, bright_blue, white, red, yellow, pink, black
 from .StatusView import StatusView
+from .KarmaForm import KarmaForm
 
 class DeliveriesRow(DeliveriesRowTemplate):
     def __init__(self, **properties):
@@ -44,7 +45,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
        
     def show_runner(self):
         runner = self.item['approved_runner']['display_name']
-        self.runner.text = "Approved Runner: " + runner
+        self.runner.text = "Runner: " + runner
             
     def show_status(self):
         status = self.item['status_dict']
@@ -79,7 +80,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.request_notes.foreground = dark_green
         if self.item['approved_runner'] == self.user:
             self.runner.foreground = dark_green
-            self.status_label.foreground = dark_green
             self.show_route.foreground = dark_green
             self.status_message.foreground = dark_green
         else:
@@ -154,19 +154,35 @@ class DeliveriesRow(DeliveriesRowTemplate):
         """Checks status_dict and reveals feedback buttons as appropriate"""
         if self.user == self.item['offer']['user'] and self.user != self.item['approved_runner']:
             options = [self.feedback_on_runner]
+            self.user_role = "Offerer"
         if self.user == self.item['request']['user']:
             options = [self.feedback_on_runner, self.feedback_on_offerer]
+            self.user_role = "Requester"
             if self.user == self.item['approved_runner']:
                 options.remove(self.feedback_on_runner)
+                self.user_role = "Runner"
         if self.user == self.item['approved_runner']:
+            self.user_role = "Runner"
             options = [self.feedback_on_offerer, self.feedback_on_requester]
             if self.user == self.item['offer']['user']:
                 options.remove(self.feedback_on_offerer)
             if self.user == self.item['request']['user']:
-                options.remove(self.feedback_on_requester)
+                options.remove(self.feedback_on_requester)        
         for option in options:
             option.visible = True
-            
+            option.enabled =  not self.check_for_previous_feedback(option)
+                
+                
+    def check_for_previous_feedback(self, option):
+        """ Returns True if exisiting feedback foun"""
+        karma_forms = anvil.server.call("get_karma_forms_from_user", self.item) # self.item = match?
+        regarding = {self.feedback_on_runner: self.item['approved_runner'],
+                     self.feedback_on_offerer: self.item['offer']['user'],
+                     self.feedback_on_requester: self.item['request']['user'],}
+        for form in karma_forms:
+            if form['regarding_user'] == regarding[option]:
+                print("Found existing feedback regarding", form['regarding_user']['display_name'])
+                return True
             
     def click_feedback_button(self, **event_args):
         """Check for tick in one of the Feedback buttons and launch KarmaForm"""
@@ -174,34 +190,23 @@ class DeliveriesRow(DeliveriesRowTemplate):
         if self.sender in self.feedback:
             self.visible = False
             if self.sender == self.feedback_on_runner:
-                status_dict_key = "feedback_REQ_on_RUN"
-                user_role = "Requester"
-                regarding_role = "Runner"
-                
-                
-                regarding = self.match['approved_runner']['display_name']
-            if self.sender == self.feedback_OFF_on_RUN:
-                status_dict_key = "feedback_OFF_on_RUN"
-                user_role = "Offerer"
-                regarding_role = "Runner"
-                regarding = self.match['approved_runner']['display_name']
-            if self.sender == self.feedback_RUN_on_REQ:
-                status_dict_key = "feedback_RUN_on_REQ"
-                user_role = "Runner"
-                regarding_role = "Requester"
-                regarding = self.match['request']['user']['display_name']
-            if self.sender == self.feedback_RUN_on_OFF:
-                status_dict_key = "feedback_RUN_OFF"
-                user_role = "Runner"
+                regarding_role = "Runner"               
+                regarding = self.item['approved_runner']
+            if self.sender == self.feedback_on_requester:
+                regarding = "Requester"
+                regarding = self.item['request']['user']
+            if self.sender == self.feedback_on_offerer:
                 regarding_role = "Offerer"
-                regarding = self.match['offer']['user']['display_name']
-            row_id = self.match.get_id()
-            form = KarmaForm(row_id,status_dict_key)
-            form.regarding.text = regarding
-            form.regarding_role.text = regarding_role
-            form.user.text = self.user['display_name']
-            form.user_role.text = user_role
-            self.parent.add_component(form)             
+                regarding = self.item['offer']['user']
+            row_id = self.item.get_id()
+            form = KarmaForm(row_id, regarding, regarding_role, self.user_role)
+#             form.regarding.text = regarding_name
+#             form.regarding_role.text = regarding_role
+#             form.user.text = self.user['display_name']
+#             form.user_role.text = user_role
+            self.card_1.add_component(form)
+            self.card_1.visible = True
+            form.visible = True
 
 
 

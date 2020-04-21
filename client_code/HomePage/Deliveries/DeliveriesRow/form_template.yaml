@@ -24,6 +24,16 @@ components:
       col_widths: {}
       grid_position: LQZTGU,WYMIYQ OWDTFT,XJCHKD
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: 'Give Feedback
+
+        on Offer/Offerer', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: none, italic: false, background: '#8080c0', bold: false, underline: false,
+      icon: ''}
+    name: feedback_on_offerer
+    layout_properties: {grid_position: 'LQZTGU,WYMIYQ ACFZSV,RWZRTV'}
+    event_bindings: {click: click_feedback_button}
   - type: Label
     properties: {role: green, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
@@ -74,19 +84,8 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: Status, font_size: null, font: '', spacing_above: small,
-      icon_align: left, spacing_below: small, italic: false, background: '', bold: true,
-      underline: true, icon: 'fa:check-square-o'}
-    name: status_label
-    layout_properties:
-      col_widths: {}
-      grid_position: LQZTGU,SOVMIY KXLMZD,FJWTGF LYGZTT,LFQKZH
-    data_bindings: []
-    event_bindings: {}
-  - type: Label
-    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: true, underline: false,
+      visible: true, text: '', font_size: 14, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '', bold: true, underline: true,
       icon: 'fa:ambulance'}
     name: runner
     layout_properties: {column: BSTNFJ, grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF
@@ -94,6 +93,16 @@ components:
     data_bindings:
     - {property: text, code: ''}
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: 'Give Feedback
+
+        on Runner', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: none, italic: false, background: '#8080c0', bold: false, underline: false,
+      icon: ''}
+    name: feedback_on_runner
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,FJWTGF UATDME,ZOUQVR'}
+    event_bindings: {click: click_feedback_button}
   - type: Link
     properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, wrap_on: mobile, font: '', col_spacing: medium,
@@ -161,6 +170,16 @@ components:
     layout_properties:
       col_widths: {}
       grid_position: LQZTGU,SOVMIY KXLMZD,VSRSWF XKHAPO,JJGQEU
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: 'Give Feedback
+
+        on Requester', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: none, italic: false, background: '#8080c0', bold: false, underline: false,
+      icon: ''}
+    name: feedback_on_requester
+    layout_properties: {grid_position: 'LQZTGU,SOVMIY KXLMZD,VSRSWF NNJJVP,PKTPOI'}
+    event_bindings: {click: click_feedback_button}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left_edge,
@@ -206,36 +225,6 @@ components:
       grid_position: LQZTGU,SOVMIY HDOQAH,UIHVPB
     data_bindings: []
     event_bindings: {}
-  - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: false, text: 'Give Feedback
-
-        on Offer/Offerer', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '#ff80ff', bold: false, underline: false,
-      icon: ''}
-    name: feedback_on_offerer
-    layout_properties: {grid_position: 'PVBLFN,YBKXOA'}
-    event_bindings: {click: click_feedback_button}
-  - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: false, text: 'Give Feedback
-
-        on Runner', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '#ff80ff', bold: false, underline: false,
-      icon: ''}
-    name: feedback_on_runner
-    layout_properties: {grid_position: 'PVBLFN,ONKMZB'}
-    event_bindings: {click: click_feedback_button}
-  - type: Button
-    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
-      foreground: '#ffffff', visible: false, text: 'Give Feedback
-
-        on Requester', font_size: null, font: '', spacing_above: small, icon_align: left,
-      spacing_below: small, italic: false, background: '#ff80ff', bold: false, underline: false,
-      icon: ''}
-    name: feedback_on_requester
-    layout_properties: {grid_position: 'PVBLFN,XDFMYO'}
-    event_bindings: {click: click_feedback_button}
   - type: FlowPanel
     properties: {role: null, spacing: none, align: center, tooltip: '', border: '',
       foreground: '', visible: false, spacing_above: small, spacing_below: small,

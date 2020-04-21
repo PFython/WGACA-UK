@@ -22,7 +22,7 @@ LOCALE = "United Kingdom"
 
 @anvil.server.callable
 def add_karma_row(**kwargs):
-    app_tables.karma.add_row(**kwargs)
+    return app_tables.karma.add_row(**kwargs)
 
 @anvil.server.callable
 def check_for_display_name(display_name):
@@ -188,6 +188,10 @@ def get_my_matches():
         # When approved_runner != None, the Match effectively becomes a Delivery
         # TODO: Filter results by proximity
 
+@anvil.server.callable        
+def get_karma_forms_from_user(match):
+    return app_tables.karma.search(regarding_match=match, from_user = anvil.users.get_user())
+        
 @anvil.server.callable
 def _get_all_matches():
     return app_tables.matches.search()
@@ -307,6 +311,13 @@ def save_to_requests_database(product_category, urgent, notes, status_code="New"
 def save_user_setup(field, value):
     """ General purpose save to the User database """
     anvil.users.get_user()[field] = value
+    
+@anvil.server.callable
+def save_karma_form_to_match(row_id,karma_form):
+    match = app_tables.matches.get_by_id(row_id)
+    forms = match['karma_forms'] or []
+    forms += karma_form
+    match['karma_forms'] = list(set(forms))
   
 @anvil.server.callable
 def string_to_datetime(string, format = "%d %b %Y"):

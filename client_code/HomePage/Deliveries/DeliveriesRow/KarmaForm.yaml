@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: none, spacing_above: small, col_widths: '{"ODOHLD":15,"WKSGDS":20,"UKPDIS":25,"PMGEFG":15,"JONMDS":20,"GPYVDT":25,"CYIJSS":20,"EXODKX":40,"NMNWZX":20}',
+    wrap_on: never, col_spacing: none, spacing_above: small, col_widths: '{"WKSGDS":20,"UKPDIS":25,"PMGEFG":15,"JONMDS":20,"GPYVDT":25,"CYIJSS":20,"EXODKX":40,"NMNWZX":20}',
     spacing_below: small, background: '#cae4ff'}
   name: karma_form
   layout_properties: {slot: default}
@@ -37,7 +37,7 @@ components:
       visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
       spacing_below: none, italic: false, background: '', bold: false, underline: false,
       icon: ''}
-    name: regarding
+    name: regarding_name
     layout_properties: {grid_position: 'BPOSXT,JONMDS', full_width_row: true}
     event_bindings: {}
   - type: Label
@@ -54,10 +54,10 @@ components:
       icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
       underline: false, icon: ''}
     name: label_6_copy
-    layout_properties: {grid_position: 'MHHREL,ODOHLD', full_width_row: true}
+    layout_properties: {grid_position: 'MHHREL,FXQRTA', full_width_row: true}
   - type: Label
     properties: {}
-    name: user
+    name: user_name
     layout_properties: {slot: default, grid_position: 'MHHREL,WKSGDS', full_width_row: true}
     event_bindings: {}
   - type: Label
@@ -215,7 +215,7 @@ components:
     name: button_1
     layout_properties: {grid_position: 'AQWRIE,BAKZIZ'}
     event_bindings: {click: submit_form}
-  event_bindings: {hide: save_input}
+  event_bindings: {}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
