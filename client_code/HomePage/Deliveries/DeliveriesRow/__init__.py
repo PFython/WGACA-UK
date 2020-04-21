@@ -170,8 +170,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
                 options.remove(self.feedback_on_requester)        
         for option in options:
             option.visible = True
-            option.enabled =  not self.check_for_previous_feedback(option)
-                
+            option.enabled =  not self.check_for_previous_feedback(option)                
                 
     def check_for_previous_feedback(self, option):
         """ Returns True if exisiting feedback foun"""
@@ -187,26 +186,20 @@ class DeliveriesRow(DeliveriesRowTemplate):
     def click_feedback_button(self, **event_args):
         """Check for tick in one of the Feedback buttons and launch KarmaForm"""
         self.sender = event_args.get('sender')
-        if self.sender in self.feedback:
-            self.visible = False
-            if self.sender == self.feedback_on_runner:
-                regarding_role = "Runner"               
-                regarding = self.item['approved_runner']
-            if self.sender == self.feedback_on_requester:
-                regarding = "Requester"
-                regarding = self.item['request']['user']
-            if self.sender == self.feedback_on_offerer:
-                regarding_role = "Offerer"
-                regarding = self.item['offer']['user']
-            row_id = self.item.get_id()
-            form = KarmaForm(row_id, regarding, regarding_role, self.user_role)
-#             form.regarding.text = regarding_name
-#             form.regarding_role.text = regarding_role
-#             form.user.text = self.user['display_name']
-#             form.user_role.text = user_role
-            self.card_1.add_component(form)
-            self.card_1.visible = True
-            form.visible = True
+        if self.sender == self.feedback_on_runner:
+            regarding_role = "Runner"               
+            regarding = self.item['approved_runner']
+        if self.sender == self.feedback_on_requester:
+            regarding = "Requester"
+            regarding = self.item['request']['user']
+        if self.sender == self.feedback_on_offerer:
+            regarding_role = "Offerer"
+            regarding = self.item['offer']['user']
+        row_id = self.item.get_id()
+        form = KarmaForm(row_id, regarding, regarding_role, self.user_role)
+        self.status_view_panel.add_component(form)
+        self.status_view_panel.visible = True
+        form.visible = True
 
 
 

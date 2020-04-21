@@ -316,7 +316,7 @@ def save_user_setup(field, value):
 def save_karma_form_to_match(row_id,karma_form):
     match = app_tables.matches.get_by_id(row_id)
     forms = match['karma_forms'] or []
-    forms += karma_form
+    forms += [karma_form]
     match['karma_forms'] = list(set(forms))
   
 @anvil.server.callable
