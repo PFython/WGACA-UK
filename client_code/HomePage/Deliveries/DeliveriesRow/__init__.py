@@ -106,6 +106,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_runner()
         self.show_status()
         self.populate_addresses()
+        self.show_feedback_buttons()
         self.row_id.text = self.item.get_id()
         self.status_message.text = anvil.server.call("get_status_message", self.item)
                           
@@ -149,7 +150,51 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.disable_similar_buttons(sender)
         self.status_view_panel.add_component(status_view)
         self.status_view_panel.visible = True
+        
+    def show_feedback_buttons(self):
+        """Checks status_dict and reveals feedback buttons as appropriate"""
+        {"pickup_agreed":False,
+             "offerer_confirms_pickup":False,
+             "dropoff_agreed":False,
+
+             "delivery":False,
+             "requester_confirms_dropoff":False,
+
+             "runner_confirms_pickup":False,
+             "runner_confirms_dropoff":False}
+        active
             
+    def click_feedback_button(self, **event_args):
+        """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
+        if self.sender in self.feedback:
+            self.visible = False
+            if self.sender == self.feedback_REQ_on_RUN:
+                status_dict_key = "feedback_REQ_on_RUN"
+                user_role = "Requester"
+                regarding_role = "Runner"
+                regarding = self.match['approved_runner']['display_name']
+            if self.sender == self.feedback_OFF_on_RUN:
+                status_dict_key = "feedback_OFF_on_RUN"
+                user_role = "Offerer"
+                regarding_role = "Runner"
+                regarding = self.match['approved_runner']['display_name']
+            if self.sender == self.feedback_RUN_on_REQ:
+                status_dict_key = "feedback_RUN_on_REQ"
+                user_role = "Runner"
+                regarding_role = "Requester"
+                regarding = self.match['request']['user']['display_name']
+            if self.sender == self.feedback_RUN_on_OFF:
+                status_dict_key = "feedback_RUN_OFF"
+                user_role = "Runner"
+                regarding_role = "Offerer"
+                regarding = self.match['offer']['user']['display_name']
+            row_id = self.match.get_id()
+            form = KarmaForm(row_id,status_dict_key)
+            form.regarding.text = regarding
+            form.regarding_role.text = regarding_role
+            form.user.text = self.user['display_name']
+            form.user_role.text = user_role
+            self.parent.add_component(form)             
 
 
 

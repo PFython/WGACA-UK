@@ -206,6 +206,36 @@ components:
       grid_position: LQZTGU,SOVMIY HDOQAH,UIHVPB
     data_bindings: []
     event_bindings: {}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: 'Give Feedback
+
+        on Offer/Offerer', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '#ff80ff', bold: false, underline: false,
+      icon: ''}
+    name: feedback_on_offerer
+    layout_properties: {grid_position: 'PVBLFN,YBKXOA'}
+    event_bindings: {click: click_feedback_button}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: 'Give Feedback
+
+        on Runner', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '#ff80ff', bold: false, underline: false,
+      icon: ''}
+    name: feedback_on_runner
+    layout_properties: {grid_position: 'PVBLFN,ONKMZB'}
+    event_bindings: {click: click_feedback_button}
+  - type: Button
+    properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '#ffffff', visible: false, text: 'Give Feedback
+
+        on Requester', font_size: null, font: '', spacing_above: small, icon_align: left,
+      spacing_below: small, italic: false, background: '#ff80ff', bold: false, underline: false,
+      icon: ''}
+    name: feedback_on_requester
+    layout_properties: {grid_position: 'PVBLFN,XDFMYO'}
+    event_bindings: {click: click_feedback_button}
   - type: FlowPanel
     properties: {role: null, spacing: none, align: center, tooltip: '', border: '',
       foreground: '', visible: false, spacing_above: small, spacing_below: small,

@@ -46,6 +46,12 @@ db_schema:
       backend: anvil.tables.Row
       admin_ui: {order: 0, width: 200}
       table_id: 48470
+    Prz6HJ+nyck=:
+      name: regarding_match
+      type: liveObject
+      backend: anvil.tables.Row
+      admin_ui: {order: 1.5, width: 200}
+      table_id: 48778
     Y_7XmIuqKx8=:
       name: regarding_user
       type: liveObject
@@ -144,6 +150,12 @@ db_schema:
       name: route_url
       type: string
       admin_ui: {order: 11, width: 962.6669999999999}
+    bBzRbtSpmQY=:
+      name: karma_forms
+      type: liveObjectArray
+      backend: anvil.tables.Row
+      admin_ui: {order: 7, width: 200}
+      table_id: 50478
     lEO1l9y6cns=:
       name: status_dict
       type: simpleObject
@@ -216,13 +228,13 @@ db_schema:
       name: email_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 20, width: 92}
+      admin_ui: {order: 20, width: 213.51510000000002}
       table_id: 48470
     _5XUmSuPCIY=:
       name: postcode_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 21, width: 75}
+      admin_ui: {order: 21, width: 221.5454}
       table_id: 48470
     Q78HdFRfQi8=:
       name: approx_lon_lat
@@ -256,7 +268,7 @@ db_schema:
       name: telephone_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 19, width: 50}
+      admin_ui: {order: 19, width: 237.697}
       table_id: 48470
     17CKzaAMkQE=:
       name: telephone

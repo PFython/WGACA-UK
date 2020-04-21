@@ -147,51 +147,8 @@ class StatusView(StatusViewTemplate):
         self.update_text_colour()
         self.lock_history()
     
-#     def check_for_feedback(self, **event_args):
-#         """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
-#         if self.sender in self.feedback:
-#             self.visible = False
-#             if self.sender == self.feedback_REQ_on_RUN:
-#                 status_dict_key = "feedback_REQ_on_RUN"
-#                 user_role = "Requester"
-#                 regarding_role = "Runner"
-#                 regarding = self.match['approved_runner']['display_name']
-#             if self.sender == self.feedback_OFF_on_RUN:
-#                 status_dict_key = "feedback_OFF_on_RUN"
-#                 user_role = "Offerer"
-#                 regarding_role = "Runner"
-#                 regarding = self.match['approved_runner']['display_name']
-#             if self.sender == self.feedback_RUN_on_REQ:
-#                 status_dict_key = "feedback_RUN_on_REQ"
-#                 user_role = "Runner"
-#                 regarding_role = "Requester"
-#                 regarding = self.match['request']['user']['display_name']
-#             if self.sender == self.feedback_RUN_on_OFF:
-#                 status_dict_key = "feedback_RUN_OFF"
-#                 user_role = "Runner"
-#                 regarding_role = "Offerer"
-#                 regarding = self.match['offer']['user']['display_name']
-#             row_id = self.match.get_id()
-#             form = KarmaForm(row_id,status_dict_key)
-#             form.regarding.text = regarding
-#             form.regarding_role.text = regarding_role
-#             form.user.text = self.user['display_name']
-#             form.user_role.text = user_role
-#             self.parent.add_component(form)                          
-    
-#     def update_dependencies(self):
-#         """
-#         These are 1...1 dependencies.  Multiple predecessors
-#         i.e. 'backfill' are handled by update_predecessors
-#         """
-#         rules = [(self.offerer_confirms_pickup, self.feedback_OFF_on_RUN),
-#                  (self.runner_confirms_pickup, self.feedback_RUN_on_OFF),
-#                  (self.runner_confirms_dropoff, self.feedback_RUN_on_REQ),
-#                  (self.requester_confirms_dropoff, self.feedback_REQ_on_RUN),]
-#         for enabler, target in rules:
-#             target.enabled = True if enabler.checked else False
-#             if not enabler.checked:
-#                 target.checked = False
+                       
+   
                 
     def update_predecessors(self):
         """
