@@ -17,10 +17,6 @@ class StatusView(StatusViewTemplate):
         self.test_mode = False
         self.all_checkboxes = [x for x in self.card_1.get_components() if type(x) == CheckBox]
         self.all_arrows = [x for x in [x for x in self.card_1.get_components() if type(x) == Label] if x.icon == 'fa:arrow-down']
-#         self.feedback = [self.feedback_RUN_on_REQ,
-#                          self.feedback_REQ_on_RUN,
-#                          self.feedback_RUN_on_OFF,
-#                          self.feedback_OFF_on_RUN,]
         self.initial_canvas()
         self.match = match
         self.ingest_match_data()
@@ -138,18 +134,11 @@ class StatusView(StatusViewTemplate):
             component.visible = not boolean_value
 
     def update_components(self, **event_args):
-        self.sender = event_args.get('sender')
-#         self.check_for_feedback()
-#         self.update_dependencies()
         self.update_predecessors()
         self.update_forwards()
         self.update_arrows()
         self.update_text_colour()
         self.lock_history()
-    
-                       
-   
-                
     def update_predecessors(self):
         """
         Allows user to select later values and auto-complete/backfill earlier ones.
@@ -161,9 +150,6 @@ class StatusView(StatusViewTemplate):
                 continue
             if checkbox.checked and not backfill:
                 backfill = True # Backfill for remaining iterations
-#             if not checkbox.checked and backfill and checkbox not in self.feedback:
-#                 checkbox.checked = True
-        # Additional "backfill" for Delivery Complete
         if self.delivery.checked:
             for option in [self.pickup_agreed,
                            self.runner_confirms_pickup,
@@ -179,16 +165,12 @@ class StatusView(StatusViewTemplate):
             for option in [self.dropoff_agreed,
                            self.runner_confirms_dropoff,
                            self.requester_confirms_dropoff,]:
-#                            self.feedback_RUN_on_REQ,
-#                            self.feedback_REQ_on_RUN,]:
                 option.checked = True
         # Additional "forward-fill" Offerer+Runner
         if self.is_offerer.checked and self.is_runner.checked:
             for option in [self.pickup_agreed,
                            self.runner_confirms_pickup,
                            self.offerer_confirms_pickup,]:
-#                            self.feedback_RUN_on_OFF,
-#                            self.feedback_OFF_on_RUN,]:
                 option.checked = True
         # Additional "forward-fill" Requester Confirms Dropoff
         if self.is_requester and self.requester_confirms_dropoff.checked:

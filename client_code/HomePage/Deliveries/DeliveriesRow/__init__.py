@@ -19,6 +19,9 @@ class DeliveriesRow(DeliveriesRowTemplate):
         self.show_route.url = self.item['route_url']
         self.show_route.foreground = dark_green
         self.user = anvil.users.get_user()
+        self.feedback = [self.feedback_on_offerer,
+                 self.feedback_on_runner,
+                 self.feedback_on_requester,]
                
     def show_offer(self):
         self.offer.text = self.item['offer']['product_key'] + " … "
@@ -95,8 +98,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             shared =  self.item[table]['user']['postcode_shared_with']
             if shared != None:
                 address.text += self.item[table]['user']['postcode'] if self.user in shared else ""
-                
-               
           
     def show_deliveries_row(self, **event_args):
         """This method is called when the DeliveriesRow is shown on the screen"""
@@ -120,7 +121,6 @@ class DeliveriesRow(DeliveriesRowTemplate):
             self.textbox.text = anvil.server.call('get_chat_text', self.row_id.text)
             self.refresh_data_bindings()
 
-
     def enter_chat_input(self, **event_args):
         """This method is called when a user press ENTER in chat"""
         self.textbox.text = anvil.server.call('get_chat_text', self.row_id.text) or self.textbox.text
@@ -129,8 +129,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
         message = "> " + self.chat_input.text + message
         self.chat_input.text = ""        
         self.textbox.text = message  + self.textbox.text
-        anvil.server.call('save_to_chat', self.row_id.text, self.textbox.text)
-        
+        anvil.server.call('save_to_chat', self.row_id.text, self.textbox.text)        
         
     def disable_similar_buttons(self, enabled = False):
         for row in [x for x in self.parent.get_components()]:
@@ -153,25 +152,33 @@ class DeliveriesRow(DeliveriesRowTemplate):
         
     def show_feedback_buttons(self):
         """Checks status_dict and reveals feedback buttons as appropriate"""
-        {"pickup_agreed":False,
-             "offerer_confirms_pickup":False,
-             "dropoff_agreed":False,
-
-             "delivery":False,
-             "requester_confirms_dropoff":False,
-
-             "runner_confirms_pickup":False,
-             "runner_confirms_dropoff":False}
-        active
+        if self.user == self.item['offer']['user'] and self.user != self.item['approved_runner']:
+            options = [self.feedback_on_runner]
+        if self.user == self.item['request']['user']:
+            options = [self.feedback_on_runner, self.feedback_on_offerer]
+            if self.user == self.item['approved_runner']:
+                options.remove(self.feedback_on_runner)
+        if self.user == self.item['approved_runner']:
+            options = [self.feedback_on_offerer, self.feedback_on_requester]
+            if self.user == self.item['offer']['user']:
+                options.remove(self.feedback_on_offerer)
+            if self.user == self.item['request']['user']:
+                options.remove(self.feedback_on_requester)
+        for option in options:
+            option.visible = True
+            
             
     def click_feedback_button(self, **event_args):
-        """Check for tick in one of the Feedback checkboxes and launch KarmaForm"""
+        """Check for tick in one of the Feedback buttons and launch KarmaForm"""
+        self.sender = event_args.get('sender')
         if self.sender in self.feedback:
             self.visible = False
-            if self.sender == self.feedback_REQ_on_RUN:
+            if self.sender == self.feedback_on_runner:
                 status_dict_key = "feedback_REQ_on_RUN"
                 user_role = "Requester"
                 regarding_role = "Runner"
+                
+                
                 regarding = self.match['approved_runner']['display_name']
             if self.sender == self.feedback_OFF_on_RUN:
                 status_dict_key = "feedback_OFF_on_RUN"
