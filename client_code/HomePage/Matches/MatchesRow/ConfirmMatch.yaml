@@ -66,11 +66,11 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: 'You can choose to share these extra details with trusted
-        Requesters and Runners to make their life easier... or not!  If the checkboxes
-        are disabled, you''ll need to add your information in the My Details menu.',
-      font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: none,
-      italic: true, background: '', bold: true, underline: false, icon: ''}
+      visible: true, text: 'Ticking any box box will attach a message to the Delivery
+        details seen by the Requester AND Runners.  If a box is disabled, go to My
+        Details first and fill in the details there.', font_size: null, font: '',
+      spacing_above: none, icon_align: left, spacing_below: none, italic: true, background: '',
+      bold: true, underline: false, icon: ''}
     name: label_1
     layout_properties: {grid_position: 'SAYRKK,DTHLAV'}
     event_bindings: {}
