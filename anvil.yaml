@@ -153,7 +153,7 @@ db_schema:
       name: karma_forms
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 7, width: 200}
+      admin_ui: {order: 4.5, width: 200}
       table_id: 50478
     lEO1l9y6cns=:
       name: status_dict
