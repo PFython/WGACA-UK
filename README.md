@@ -8,6 +8,7 @@ During ‘Lock-down’ the team at South West London TV created a free web app y
 
 It’s called **What Goes Around Comes Around (WGACA)** and it’s a tool for sharing and swapping food and drink, household goods, and over-the-counter medicines with those in need.
 
+![About](https://github.com/PFython/WGACA-UK/blob/master/project%20management/About.jpg)
 
 **You can post Offers of surplus items you’re able to share:**
 ![Offers](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Offers.jpg)
@@ -18,12 +19,19 @@ It’s called **What Goes Around Comes Around (WGACA)** and it’s a tool for sh
 **You can review Matches (which are detected automatically) and volunteer as a Runner to pick up nearby Offers:**
 ![Matches](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Matches.jpg)
 
-**You can review your Deliveries and plan the best route:**
+**You can review your Deliveries and plan your route on OpenStreetMap:**
 ![Deliveries](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Deliveries.jpg)
+
+**You can see your Delivery status in an easy to follow graphic:**
+![Status](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Status.jpg)
+
+**You can post Feedback on other users to encourage Good Karma:**
+![KarmaForm](https://github.com/PFython/WGACA-UK/blob/master/project%20management/Feedback.jpg)
 
 It’s early days and we’re already working on a load of improvements to the app (mainly to protect against scammers and selfish misuse), but we wanted to start sharing it ASAP so that trusted people in the area can start helping each other.
 
 If it proves popular, my intention is to make the app and the data available to other charities (e.g. food banks), community groups, emergency services and other agencies who are better placed to manage logistics/distribution using the tool.
+
 
 ### Technology Stack
 
