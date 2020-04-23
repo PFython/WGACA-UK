@@ -18,7 +18,8 @@ class MyOffers(MyOffersTemplate):
         # Any code you write here will run when the form opens.
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")
         self.unit_of_measure.items = UNITS_OF_MEASURE
-        self.product_description.items = ITEM_HEIRARCHY
+        self.radio_button_1.selected = True
+        self.product_description.items = self.get_product_list("all")
         self.user = anvil.users.get_user()
         self.radio_buttons = {self.radio_button_1: "all",
                               self.radio_button_2: self.user['street'],
@@ -30,6 +31,13 @@ class MyOffers(MyOffersTemplate):
         if self.user['county_view']:
             self.radio_button_4.visible = True
         anvil.server.call('generate_matches')
+        
+    def get_product_list(self, filter):
+        """
+        Filters the list of product descriptions and returns a list for dropdown menu
+        Filter can be 'all', 'street', 'town' or 'county'
+        """
+        return anvil.server.call("get_product_list", filter)
         
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):

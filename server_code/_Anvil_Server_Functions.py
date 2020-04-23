@@ -21,9 +21,28 @@ LOCALE = "United Kingdom"
 # them with @anvil.server.callable.
 
 @anvil.server.callable
-def get_global_value_from_cache(object_name):
-    """Returns a global/cached value such as ALL_REQUEST_ITEMS from the Cache table"""
-    return app_tables.cache.search(object=object_name)
+def get_product_list(filter):
+    """
+    Filters the list of product descriptions and returns a list for dropdown menu
+    Filter can be 'all', 'street', 'town' or 'county'
+    """
+    requests = app_tables.requests.search()
+    print(len(requests),"requests found.")
+    if filter != "all":
+      requests = [x for x in requests if x['user'][filter] == self.user[filter]]
+    print(len(requests), "requests when filtered by", filter)  
+    product_categories = {x['product_category'] for x in requests}
+    product_list = []
+    for product in products:
+        print(product)
+        for product_category in product_categories:
+          
+            if product_category in product:
+                print("Match!")
+                product_list += [product]
+    
+    print(product_list)
+    return sorted(list(product_list))
 
 @anvil.server.callable
 def add_karma_row(**kwargs):
