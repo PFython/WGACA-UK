@@ -73,7 +73,7 @@ class MyOffers(MyOffersTemplate):
       sender = event_args['sender']
       for button in self.radio_buttons:
           button.bold = True if button.selected else False
-      self.product_description.items = ITEM_HEIRARCHY if filter == "all" else self.get_product_list(self.radio_buttons[sender])
+      self.product_description.items = ITEM_HEIRARCHY if sender == self.radio_button_1 else self.get_product_list(self.radio_buttons[sender])
 
 
 
