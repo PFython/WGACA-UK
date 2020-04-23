@@ -9,7 +9,7 @@ import datetime
 
 from ...Globals import ITEM_HEIRARCHY, UNITS_OF_MEASURE
 
-class MyOffers(MyOffersTemplate):
+class MyOffers(MyOffersTemplate): # Git Test
 
     def __init__(self, **properties):
         anvil.users.login_with_form()
@@ -32,15 +32,15 @@ class MyOffers(MyOffersTemplate):
         self.radio_button_1.bold = True
         self.product_description.items = ITEM_HEIRARCHY
         anvil.server.call('generate_matches')
-        
+
     def get_product_list(self, filter):
         """
         Filters the list of product descriptions and returns a list for dropdown menu
         Filter can be 'all', 'street', 'town' or 'county'
         """
         return anvil.server.call("get_product_list", filter)
-        
-    
+
+
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
         """ Add item to Offers database """
         result = anvil.server.call("save_to_offers_database", product_key, units, expiry_date, notes)
@@ -51,7 +51,7 @@ class MyOffers(MyOffersTemplate):
               anvil.server.call('generate_matches')
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")
 
-   
+
     def add_item_click(self, **event_args):
         """This method is called when the Add Item button is clicked"""
         unit_of_measure = self.unit_of_measure.selected_value or self.unit_of_measure.placeholder
