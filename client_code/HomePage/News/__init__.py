@@ -11,17 +11,20 @@ class News(NewsTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.title.background = bright_blue
-    self.card_2.background = bright_blue
-    # Any code you write here will run when the form opens.
+    self.previous = [x for x in self.previous_updates.get_components() if type(x) != Link]
+    for label in self.previous:
+          label.visible = False
     
 
   def click_previous_updates(self, **event_args):
       """This method is called when the link is clicked"""
       if event_args['sender'].icon == 'fa:caret-down':
-          self.previous_updates.visible = True
+          for label in self.previous:
+              label.visible = True
           event_args['sender'].icon = 'fa:caret-up'
       else:
-          self.previous_updates.visible = False
+          for label in self.previous:
+              label.visible = False
           event_args['sender'].icon = 'fa:caret-down'
+
 
