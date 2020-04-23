@@ -19,7 +19,18 @@ class MyOffers(MyOffersTemplate):
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")
         self.unit_of_measure.items = UNITS_OF_MEASURE
         self.product_description.items = ITEM_HEIRARCHY
+        self.user = anvil.users.get_user()
+        self.radio_buttons = {self.radio_button_1: "all",
+                              self.radio_button_2: self.user['street'],
+                              self.radio_button_3: self.user['town'],
+                              self.radio_button_4: self.user['county'],}
+        self.radio_button_2.value = f"Items in {self.user.get('street') or 'my Street'}"
+        self.radio_button_3.value = f"Items in {self.user.get('town') or 'my Town'}"
+        self.radio_button_4.value = f"Items in {self.user.get('county') or 'my County'}"
+        if self.user['county_view']:
+            self.radio_button_4.visible = True
         anvil.server.call('generate_matches')
+        
     
     def add_to_my_offers(self,product_key, units, expiry_date, notes):
         """ Add item to Offers database """
@@ -47,5 +58,13 @@ class MyOffers(MyOffersTemplate):
     def drop_down_change(self, **event_args):
         """Clears old Notes when a Drop Down list is selected"""
         self.notes.text = ""
+
+    def radio_button_clicked(self, **event_args):
+      """This method is called when this radio button is selected"""
+      sender = event_args['sender']
+      for button in self.radio_buttons:
+          button.bold = True if button == sender else False
+      self.refresh_data_bindings()
+
 
 
