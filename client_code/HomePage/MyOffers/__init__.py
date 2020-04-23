@@ -18,18 +18,19 @@ class MyOffers(MyOffersTemplate):
         # Any code you write here will run when the form opens.
         self.repeating_panel_1.items = anvil.server.call("get_my_offers")
         self.unit_of_measure.items = UNITS_OF_MEASURE
-        self.radio_button_1.selected = True
-        self.product_description.items = self.get_product_list("all")
         self.user = anvil.users.get_user()
         self.radio_buttons = {self.radio_button_1: "all",
-                              self.radio_button_2: self.user['street'],
-                              self.radio_button_3: self.user['town'],
-                              self.radio_button_4: self.user['county'],}
-        self.radio_button_2.text = f"Items in {self.user['street'] or 'my Street'}"
-        self.radio_button_3.text = f"Items in {self.user['town'] or 'my Town'}"
-        self.radio_button_4.text = f"Items in {self.user['county'] or 'my County'}"
+                              self.radio_button_2: 'street',
+                              self.radio_button_3: 'town',
+                              self.radio_button_4: 'county',}
+        self.radio_button_2.text = f"Items needed urgently in {self.user['street'] or 'my Street'}"
+        self.radio_button_3.text = f"Items needed urgently in {self.user['town'] or 'my Town'}"
+        self.radio_button_4.text = f"Items needed urgently in {self.user['county'] or 'my County'}"
         if self.user['county_view']:
             self.radio_button_4.visible = True
+        self.radio_button_1.selected = True
+        self.radio_button_1.bold = True
+        self.product_description.items = ITEM_HEIRARCHY
         anvil.server.call('generate_matches')
         
     def get_product_list(self, filter):
@@ -72,6 +73,7 @@ class MyOffers(MyOffersTemplate):
       sender = event_args['sender']
       for button in self.radio_buttons:
           button.bold = True if button.selected else False
+      self.product_description.items = ITEM_HEIRARCHY if filter == "all" else self.get_product_list(self.radio_buttons[sender])
 
 
 

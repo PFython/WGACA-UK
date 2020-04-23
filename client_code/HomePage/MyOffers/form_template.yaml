@@ -47,7 +47,7 @@ components:
       layout_properties: {grid_position: 'ASNLLN,TRQZPH'}
       event_bindings: {clicked: radio_button_clicked}
     - type: RadioButton
-      properties: {role: null, selected: true, align: left, tooltip: '', border: '',
+      properties: {role: null, selected: false, align: left, tooltip: '', border: '',
         enabled: true, foreground: '', value: '', visible: true, text: Requests in My Town,
         font_size: null, font: '', spacing_above: small, spacing_below: small, italic: false,
         background: '', bold: false, group_name: radioGroup1, underline: false}

@@ -27,19 +27,16 @@ def get_product_list(filter):
     Filter can be 'all', 'street', 'town' or 'county'
     """
     ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
-    if filter == "all":
-        return ITEM_HEIRARCHY
     requests = app_tables.requests.search()
     print(len(requests),"requests found.")
-    requests = [x for x in requests if x['user'][filter] == self.user[filter]]
+    requests = [x for x in requests if x['user'][filter] == anvil.users.get_user()[filter]]
     print(len(requests), "requests when filtered by", filter)  
     product_categories = {x['product_category'] for x in requests}
     print(product_categories)
     product_list = []
     ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
     for product_category in product_categories:
-        product_list += [x for x in ITEM_HEIRARCHY if product_category in x]
-    
+        product_list += [x for x in ITEM_HEIRARCHY if product_category in x]    
     return sorted(list(product_list))
 
 @anvil.server.callable
