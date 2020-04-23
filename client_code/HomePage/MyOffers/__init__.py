@@ -9,7 +9,7 @@ import datetime
 
 from ...Globals import ITEM_HEIRARCHY, UNITS_OF_MEASURE
 
-class MyOffers(MyOffersTemplate): # Git Test
+class MyOffers(MyOffersTemplate):
 
     def __init__(self, **properties):
         anvil.users.login_with_form()
