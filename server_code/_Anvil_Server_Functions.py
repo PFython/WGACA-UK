@@ -26,22 +26,20 @@ def get_product_list(filter):
     Filters the list of product descriptions and returns a list for dropdown menu
     Filter can be 'all', 'street', 'town' or 'county'
     """
+    ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
+    if filter == "all":
+        return ITEM_HEIRARCHY
     requests = app_tables.requests.search()
     print(len(requests),"requests found.")
-    if filter != "all":
-      requests = [x for x in requests if x['user'][filter] == self.user[filter]]
+    requests = [x for x in requests if x['user'][filter] == self.user[filter]]
     print(len(requests), "requests when filtered by", filter)  
     product_categories = {x['product_category'] for x in requests}
+    print(product_categories)
     product_list = []
-    for product in products:
-        print(product)
-        for product_category in product_categories:
-          
-            if product_category in product:
-                print("Match!")
-                product_list += [product]
+    ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
+    for product_category in product_categories:
+        product_list += [x for x in ITEM_HEIRARCHY if product_category in x]
     
-    print(product_list)
     return sorted(list(product_list))
 
 @anvil.server.callable
