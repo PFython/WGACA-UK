@@ -21,6 +21,11 @@ LOCALE = "United Kingdom"
 # them with @anvil.server.callable.
 
 @anvil.server.callable
+def get_global_value_from_cache(object_name):
+    """Returns a global/cached value such as ALL_REQUEST_ITEMS from the Cache table"""
+    return app_tables.cache.search(object=object_name)
+
+@anvil.server.callable
 def add_karma_row(**kwargs):
     return app_tables.karma.add_row(**kwargs)
 
