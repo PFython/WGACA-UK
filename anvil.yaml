@@ -31,6 +31,10 @@ db_schema:
       name: object
       type: string
       admin_ui: {order: 0, width: 200}
+    ktT+7q7k8Yk=:
+      name: media
+      type: media
+      admin_ui: {order: 2, width: 200}
     slv_p641WPg=:
       name: value
       type: simpleObject
