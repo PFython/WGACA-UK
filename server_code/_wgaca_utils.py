@@ -113,5 +113,8 @@ class Address(AutoHistory):
         for county in self.data[country]:
             for town in self.data[country][county]:
                 self.data[country][county][town] = list(set(self.data[country][county][town]))
+                
+    def save_all_as_dict(self):
+        blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
 
 uk = Address()
