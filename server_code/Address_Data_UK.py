@@ -102,10 +102,11 @@ ADD = ADDRESSES = hierarchy = {'United Kingdom':
                                                    'Hammersmith '
                                                    'Road']},
                               'Kingston-upon-Thames, London':
-                                 {'':
+                                 {'Kingston-upon-Thames':
                                       ['Richmond Road',
                                       'London Road',
-                                      'Kingston Hill'],
+                                      'Kingston Hill',
+                                      'Rydal Gardens',],
                                   'New Malden':
                                       ['Salisbury '
                                        'Road',
