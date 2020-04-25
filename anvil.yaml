@@ -10,7 +10,7 @@ services:
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
     remember_me_days: 7, use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
-startup: {type: form, module: HomePage}
+startup: {type: form, module: HomePage._DeveloperTools}
 package_name: WGACA_UK_DEV_TEST
 allow_embedding: true
 name: WGACA_UK_DEV_TEST
@@ -23,24 +23,24 @@ metadata: {logo_img: '', title: What Goes Around Comes Around, description: 'Thi
     support groups to help move items around to where they''ve most needed.'}
 native_deps: {head_html: ''}
 db_schema:
-- name: Cache
-  id: 51751
+- name: cache
+  id: 52115
   python_name: cache
   columns:
-    fK6G8y3pr_0=:
-      name: object
+    +4erNkhUtEg=:
+      name: description
       type: string
       admin_ui: {order: 0, width: 200}
-    ktT+7q7k8Yk=:
+    8nK+_1UQIfc=:
       name: media
       type: media
-      admin_ui: {order: 2, width: 200}
-    slv_p641WPg=:
-      name: value
-      type: simpleObject
       admin_ui: {order: 1, width: 200}
+    eAriCtPCabQ=:
+      name: object
+      type: simpleObject
+      admin_ui: {order: 2, width: 200}
   access: {python_name: cache, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
-    table_id: 51751}
+    table_id: 52115}
 - name: Karma
   id: 50478
   python_name: karma

@@ -21,6 +21,13 @@ LOCALE = "United Kingdom"
 # them with @anvil.server.callable.
 
 @anvil.server.callable
+def store_uploaded_media(media):
+    media_uploads = app_tables.cache.get(description='media_uploads')
+    print(app_tables.cache)
+    app_tables.cache.update(media_uploads = media_uploads + media)
+    print(f"Added {media.name} to the Cache Table under media_uploads['media']")
+    
+@anvil.server.callable
 def get_product_list(filter):
     """
     Filters the list of product descriptions and returns a list for dropdown menu
