@@ -2,6 +2,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+import anvil.media
 
 # Version 0.1 created 2020-04-09
 #
@@ -115,6 +116,6 @@ class Address(AutoHistory):
                 self.data[country][county][town] = list(set(self.data[country][county][town]))
                 
     def save_all_as_dict(self):
-        blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
+        blob = anvil.BlobMedia("text/plain",self.__str__().encode('utf-8'), "addresses.txt")
 
 uk = Address()
