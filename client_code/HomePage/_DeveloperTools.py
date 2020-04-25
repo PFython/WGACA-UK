@@ -17,7 +17,16 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         anvil.server.call('_backfill_approx_lon_lat')
 
     def upload_media(self, file, **event_args):
-      """This method is called when a new file is loaded into this FileLoader"""
-      pass
+        """This method is called when a new file is loaded into this FileLoader"""
+        file = self.file_loader_1.file
+        print("Uploaded:",self.file_loader_1.file)
+        self.new_srt2 = anvil.server.call('amend_srt2', self.text_area_2.text, self.text_area_1.text)
+        self.file_loader_1.clear()
+        
+        
+    def download_media(self):
+        blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
+        anvil.download(blob, "D:")
+
 
 
