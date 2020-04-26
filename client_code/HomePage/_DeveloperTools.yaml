@@ -38,6 +38,6 @@ components:
     icon: fa:upload
   name: file_loader_1
   layout_properties: {grid_position: 'ITDPZM,RRMUZF'}
-  event_bindings: {change: upload_media}
+  event_bindings: {change: upload_address_lines}
 is_package: false
 custom_component: false

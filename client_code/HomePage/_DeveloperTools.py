@@ -16,7 +16,7 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         """This method is called when the button is clicked"""
         anvil.server.call('_backfill_approx_lon_lat')
 
-    def upload_media(self, file, **event_args):
+    def upload_address_lines(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         file = self.file_loader_1.file
         file = anvil.server.call('store_uploaded_media', file, "Address_Data_UK")
