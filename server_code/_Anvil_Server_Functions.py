@@ -249,11 +249,11 @@ def get_address_hierarchy2(country = LOCALE):
     """ Returns an address hierarchy for the given Country """
     address = Address(LOCALE)
     if country == "United Kingdom":
-        address_lines = [x for x in app_tables.uploads.search(name="Address_Data_UK" if x['media'].name = "ad")
+        address_lines = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'addresses_lines' in x['media'].name]
     print(len(address_lines))
-    address_lines = min(address_lines['datetime'])
-    print("Latest file is", address_lines)
-    with open(address_lines, 'r') as file:
+    address_lines = address_lines[0]
+    print(address_lines['media'].name,address_lines['datetime'])
+    address_lines = addre
         address_list = file.open()
         address.data.add_addresses(address_list)
     return address.data 
