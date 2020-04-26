@@ -39,16 +39,14 @@ class HomePage(HomePageTemplate):
             button.tag = tag
         self.column_panel_1.add_component(TitleButton(self.menu_about.tag, self.menu_about.background))
         self.column_panel_1.add_component(AboutThisApp())
-        self.check_permissions()
-        self.check_updates()
         self.highlight_selected_menu(self.menu_about)
-        self.check_for_boss()
+
         
     def check_for_boss(self):
 #         if anvil.users.get_user():
         if anvil.users.get_user()['admin']:
-            print("Good day to you, Boss...")
-            self.navigation_bar.add_component(_DeveloperTools())
+              print("Good day to you, Boss...")
+              self.navigation_bar.add_component(_DeveloperTools())
         
     def check_updates(self):
         """Checks if user has seen latest update and creates an alert if not"""
@@ -68,6 +66,8 @@ class HomePage(HomePageTemplate):
         anvil.users.login_with_form(allow_remembered=True)
         # 2nd step of registration process requires contact data and read/accept Terms of Use
         self.force_user_setup()
+        self.check_updates()
+        self.check_for_boss()
     
     def required_fields_are_populated(self):
         """ Checks that all required fields are completed """
@@ -81,10 +81,11 @@ class HomePage(HomePageTemplate):
     
     def force_user_setup(self):
         """ Blocks until i) Terms of Use accepted; ii) Required contact data supplied """
+        addresses = self.addresses = anvil.server.call("get_address_hierarchy", LOCALE)
         while not anvil.users.get_user()['terms_accepted']:
             alert(content=TermsOfUse(), title = "Please read and accept the following Privacy Statement & Terms of Use:", large=True,)
         while not self.required_fields_are_populated():
-            alert(content=UserSetup(), title = "Please confirm your personal details:", large=True,)
+            alert(content=UserSetup(addresses), title = "Please confirm your personal details:", large=True,)
 
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """

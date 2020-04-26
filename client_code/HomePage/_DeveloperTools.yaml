@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   event_bindings: {}
-  properties: {col_widths: '{"OWXXHZ":25}'}
+  properties: {col_widths: '{"OWXXHZ":25,"RRMUZF":10}'}
 components:
 - type: Button
   properties: {role: null, align: left, tooltip: '', border: '', enabled: true, foreground: '#ffffff',
@@ -11,5 +11,33 @@ components:
   name: button_1
   layout_properties: {grid_position: 'CIEPBC,OWXXHZ'}
   event_bindings: {click: backfill_approx_lat_lon}
+- type: FileLoader
+  properties:
+    role: null
+    show_state: true
+    align: left
+    tooltip: ''
+    border: ''
+    file_types: null
+    enabled: true
+    files: []
+    foreground: '#ffffff'
+    visible: true
+    text: '  Upload Addresses'
+    font_size: null
+    font: ''
+    spacing_above: small
+    icon_align: left
+    spacing_below: small
+    italic: false
+    file: null
+    background: '#008040'
+    bold: false
+    underline: false
+    multiple: false
+    icon: fa:upload
+  name: file_loader_1
+  layout_properties: {grid_position: 'ITDPZM,RRMUZF'}
+  event_bindings: {change: upload_media}
 is_package: false
 custom_component: false
