@@ -11,15 +11,13 @@ from ...Globals import LOCALE, pink, yellow, white
 
 class UserSetup(UserSetupTemplate):
 #     addresses = ADDRESSES
-    def __init__(self, **properties):
+    def __init__(self, addresses, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        if not hasattr(self, 'addresses'):
-            self.addresses = anvil.server.call("get_address_hierarchy", LOCALE)
-            print(self.addresses.keys())
         user = anvil.users.get_user()
         self.id.text = user.get_id()
+        self.addresses = addresses
         self.display_name.text = user['display_name']
         self.email.text = user['email']
         if user['house_number']:
