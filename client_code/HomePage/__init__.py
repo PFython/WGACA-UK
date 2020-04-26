@@ -39,8 +39,6 @@ class HomePage(HomePageTemplate):
             button.tag = tag
         self.column_panel_1.add_component(TitleButton(self.menu_about.tag, self.menu_about.background))
         self.column_panel_1.add_component(AboutThisApp())
-        self.check_permissions()
-        self.check_updates()
         self.highlight_selected_menu(self.menu_about)
         self.check_for_boss()
         
@@ -68,6 +66,7 @@ class HomePage(HomePageTemplate):
         anvil.users.login_with_form(allow_remembered=True)
         # 2nd step of registration process requires contact data and read/accept Terms of Use
         self.force_user_setup()
+        self.check_updates()
     
     def required_fields_are_populated(self):
         """ Checks that all required fields are completed """
