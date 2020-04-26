@@ -256,8 +256,8 @@ def get_address_hierarchy(country = LOCALE):
     print(len(address_lines),"files called 'address_lines' found.")
     address_lines = address_lines[-1]['media']
     address.add_addresses(address_lines.get_bytes().decode('utf-8'))
-    print("FINIS!")
-    return address.data 
+    print("Address lines retrieved and converted to address dictionary.")
+    return address.data[LOCALE]
   
 class Address(dict):
     def __init__(self,locale):

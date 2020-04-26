@@ -15,7 +15,9 @@ class UserSetup(UserSetupTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.addresses = anvil.server.call("get_address_hierarchy", LOCALE)
+        if not hasattr(self, 'addresses'):
+            self.addresses = anvil.server.call("get_address_hierarchy", LOCALE)
+            print(self.addresses.keys())
         user = anvil.users.get_user()
         self.id.text = user.get_id()
         self.display_name.text = user['display_name']
@@ -50,6 +52,7 @@ class UserSetup(UserSetupTemplate):
         
     def get_streets_from_county(self):
         """ Returns a list of streets derived from County selection """
+        print(self.county.selected_value)
         towns = self.addresses[self.county.selected_value]
         streets = []
         for town in towns:
