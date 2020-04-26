@@ -13,6 +13,6 @@ class TitleButton(TitleButtonTemplate):
     self.title_button.background = background
     user = anvil.users.get_user()
     username = user['display_name'] if user else ""
-    self.title_button.text = title + " > " + username
+    self.title_button.text = title + " > " + (username or "")
 
     # Any code you write here will run when the form opens.

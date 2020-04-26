@@ -10,7 +10,6 @@ import time
 # Change imports for other countries' data:
 from .Product_Data_UK import products
 from .Unit_Data_UK import units
-from .Address_Data_UK import hierarchy
 
 LOCALE = "United Kingdom"
 
@@ -239,23 +238,25 @@ def get_product_hierarchy():
     return sorted(products.split("\n"))
 
   
-@anvil.server.callable
-def get_address_hierarchy(country = LOCALE):
-    """ Returns an address hierarchy for the given Country """
-    return hierarchy[LOCALE]
+# @anvil.server.callable
+# def get_address_hierarchyOLD(country = LOCALE):
+#     """ Returns an address hierarchy for the given Country """
+#     return hierarchy[LOCALE]
   
 @anvil.server.callable
-def get_address_hierarchy2(country = LOCALE):
-    """ Returns an address hierarchy for the given Country """
+def get_address_hierarchy(country = LOCALE):
+    """
+    Returns an address hierarchy for the given Country
+    Loads the most recent media file 'addresses_lines' from Uploads Table
+    and converts it to dictionary with keys County, Town, and Stree
+    """
     address = Address(LOCALE)
     if country == "United Kingdom":
         address_lines = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'addresses_lines' in x['media'].name]
-    print(len(address_lines))
-    address_lines = address_lines[0]
-    print(address_lines['media'].name,address_lines['datetime'])
-    address_lines = addre
-        address_list = file.open()
-        address.data.add_addresses(address_list)
+    print(len(address_lines),"files called 'address_lines' found.")
+    address_lines = address_lines[-1]['media']
+    address.add_addresses(address_lines.get_bytes().decode('utf-8'))
+    print("FINIS!")
     return address.data 
   
 class Address(dict):
@@ -272,22 +273,22 @@ class Address(dict):
         try:
             county, town, street = address_string.replace("\r","").split(" | ")
         except ValueError:
-            print(f"! badly formatted line: {address_string}")
+            if address_string != "":
+              print(f"! badly formatted line: {address_string}")
             return
         if not self.data.get(country).get(county):
             self.data[country][county] = {}
-            print(f"Added {county} to counties in {country}.  ")
+#             print(f"Added {county} to counties in {country}.  ")
         if not self.data.get(country).get(county).get(town):
             self.data[country][county][town]= []
-            print(f"Added {town} to towns in {county}.  ")
+#             print(f"Added {town} to towns in {county}.  ")
         if street not in self.data[country][county][town]:
             self.data[country][county][town] += [street]
-            print(f"Added {street} to streets in {town}.  ")
+#             print(f"Added {street} to streets in {town}.  ")
 
     def add_addresses(self, new_address_list):
             """
-            Loops through a plain text list of addresses and adds to them to the
-            global ADDRESSES dictionary.
+            Loops through a plain text list of addresses and adds to them to self.data.
 
             Format of each input line is e.g. 'Exeter, Devon | Topsham | Altamira'
             """

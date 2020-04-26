@@ -6,14 +6,16 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ...Globals import LOCALE, ADDRESSES, pink, yellow, white
+from ...Globals import LOCALE, pink, yellow, white
+# ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 
 class UserSetup(UserSetupTemplate):
-    addresses = ADDRESSES
+#     addresses = ADDRESSES
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.addresses = anvil.server.call("get_address_hierarchy", LOCALE)
         user = anvil.users.get_user()
         self.id.text = user.get_id()
         self.display_name.text = user['display_name']
@@ -48,16 +50,16 @@ class UserSetup(UserSetupTemplate):
         
     def get_streets_from_county(self):
         """ Returns a list of streets derived from County selection """
-        towns = UserSetup.addresses[self.county.selected_value]
+        towns = self.addresses[self.county.selected_value]
         streets = []
         for town in towns:
-            streets.extend(UserSetup.addresses[self.county.selected_value][town])
+            streets.extend(self.addresses[self.county.selected_value][town])
         streets.sort()
         return streets
     
     def get_towns_from_county(self):
         """ Returns a dictionary of towns (key) and a list of streets (value)"""
-        return UserSetup.addresses[self.county.selected_value]
+        return self.addresses[self.county.selected_value]
   
     def county_change(self, **event_args):
         """This method is called when the County drop-down is changed """
