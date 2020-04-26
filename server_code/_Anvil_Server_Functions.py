@@ -21,11 +21,11 @@ LOCALE = "United Kingdom"
 # them with @anvil.server.callable.
 
 @anvil.server.callable
-def store_uploaded_media(media):
-    media_uploads = app_tables.cache.get(description='media_uploads')
-    print(app_tables.cache)
-    app_tables.cache.update(media_uploads = media_uploads + media)
-    print(f"Added {media.name} to the Cache Table under media_uploads['media']")
+def store_uploaded_media(media, custom_name):
+    media_upload = app_tables.uploads.add_row(name=custom_name, media = media, datetime = datetime.datetime.now())
+    print(f"{media.name} saved to uploads databases as {custom_name}.")
+    get_address_hierarchy2(LOCALE)
+    return media_upload
     
 @anvil.server.callable
 def get_product_list(filter):
@@ -33,7 +33,6 @@ def get_product_list(filter):
     Filters the list of product descriptions and returns a list for dropdown menu
     Filter can be 'all', 'street', 'town' or 'county'
     """
-    ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
     requests = app_tables.requests.search()
     print(len(requests),"requests found.")
     requests = [x for x in requests if x['user'][filter] == anvil.users.get_user()[filter]]
@@ -41,7 +40,7 @@ def get_product_list(filter):
     product_categories = {x['product_category'] for x in requests}
     print(product_categories)
     product_list = []
-    ITEM_HEIRARCHY = anvil.server.call("get_product_hierarchy")
+    ITEM_HEIRARCHY = get_product_hierarchy()
     for product_category in product_categories:
         product_list += [x for x in ITEM_HEIRARCHY if product_category in x]    
     return sorted(list(product_list))
@@ -188,12 +187,6 @@ def _generate_route_url_for_all_matches():
   print(f"Populated {count} Matches with a route_url")
   return
 
-@anvil.server.callable
-def get_address_hierarchy(country = "United Kingdom"):
-    """ Returns an address hierarchy for the given Country """
-    global hierarchy
-    return hierarchy[country]    
-  
 @anvil.server.callable  
 def get_match_by_id(row_id):
     if anvil.users.get_user() is not None:
@@ -243,8 +236,68 @@ def get_my_requests():
 @anvil.server.callable
 def get_product_hierarchy():
     """ Returns a product hierarchy """
-    global products
     return sorted(products.split("\n"))
+
+  
+@anvil.server.callable
+def get_address_hierarchy(country = LOCALE):
+    """ Returns an address hierarchy for the given Country """
+    return hierarchy[LOCALE]
+  
+@anvil.server.callable
+def get_address_hierarchy2(country = LOCALE):
+    """ Returns an address hierarchy for the given Country """
+    address = Address(LOCALE)
+    if country == "United Kingdom":
+        address_lines = [x for x in app_tables.uploads.search(name="Address_Data_UK" if x['media'].name = "ad")
+    print(len(address_lines))
+    address_lines = min(address_lines['datetime'])
+    print("Latest file is", address_lines)
+    with open(address_lines, 'r') as file:
+        address_list = file.open()
+        address.data.add_addresses(address_list)
+    return address.data 
+  
+class Address(dict):
+    def __init__(self,locale):
+        self.data = {LOCALE: {}}
+        
+    def add_street(self, address_string, country = LOCALE):
+        """
+        If required, creates a street list under Town key under County key.
+        e.g. {'Exeter, Devon': {'Topsham': []}
+
+        Input string separated by pipes e.g. 'Exeter, Devon | Topsham | Altamira'
+        """
+        try:
+            county, town, street = address_string.replace("\r","").split(" | ")
+        except ValueError:
+            print(f"! badly formatted line: {address_string}")
+            return
+        if not self.data.get(country).get(county):
+            self.data[country][county] = {}
+            print(f"Added {county} to counties in {country}.  ")
+        if not self.data.get(country).get(county).get(town):
+            self.data[country][county][town]= []
+            print(f"Added {town} to towns in {county}.  ")
+        if street not in self.data[country][county][town]:
+            self.data[country][county][town] += [street]
+            print(f"Added {street} to streets in {town}.  ")
+
+    def add_addresses(self, new_address_list):
+            """
+            Loops through a plain text list of addresses and adds to them to the
+            global ADDRESSES dictionary.
+
+            Format of each input line is e.g. 'Exeter, Devon | Topsham | Altamira'
+            """
+            for line in new_address_list.split("\n"):
+                self.add_street(line, country = LOCALE)
+
+    def remove_duplicate_streets(self, country = LOCALE):
+        for county in self.data[country]:
+            for town in self.data[country][county]:
+                self.data[country][county][town] = list(set(self.data[country][county][town]))
 
 @anvil.server.callable
 def get_units_of_measure():

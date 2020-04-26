@@ -23,7 +23,7 @@ components:
     files: []
     foreground: '#ffffff'
     visible: true
-    text: '  Upload Media'
+    text: '  Upload Addresses'
     font_size: null
     font: ''
     spacing_above: small

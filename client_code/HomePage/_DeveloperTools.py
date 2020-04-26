@@ -19,7 +19,7 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def upload_media(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         file = self.file_loader_1.file
-        self.new_srt2 = anvil.server.call('store_uploaded_media', file)
+        file = anvil.server.call('store_uploaded_media', file, "Address_Data_UK")
         self.file_loader_1.clear()
         
         
