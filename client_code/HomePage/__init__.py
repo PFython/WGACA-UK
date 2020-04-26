@@ -18,7 +18,7 @@ from .ContactUs import ContactUs
 from .News import News
 from .TitleButton import TitleButton
 
-from ..Globals import green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
+from ..Globals import LOCALE, green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 menu_font_size = 16
 
