@@ -19,7 +19,7 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def upload_address_lines(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         file = self.file_loader_1.file
-        file = anvil.server.call('store_uploaded_media', file, "Address_Data_UK")
+        file = anvil.server.call('_store_uploaded_media', file, "Address_Data_UK")
         self.file_loader_1.clear()
         
         
