@@ -257,18 +257,7 @@ def get_product_hierarchy():
 #     """ Returns an address hierarchy for the given Country """
 #     return hierarchy[LOCALE]
 
-@anvil.server.callable
-def autofill_address(user_input):
-    matches = []
-#     user_input = user_input.title()
-    address_lines = get_address_hierarchy()
-    address_lines = address_lines.get_bytes().decode('utf-8').split("\n")
-    for line in address_lines:
-        if user_input in line:
-            matches += [line]
-            if len(matches) == 5:
-                  break
-    return matches
+
     
     
     

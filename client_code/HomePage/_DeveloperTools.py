@@ -6,12 +6,14 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from ..OS import address_list
+from ..Globals import LOCALE
 
 class _DeveloperTools(_DeveloperToolsTemplate):
     def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
+        self.address_lines = address_list.split("\n")
 
     def backfill_approx_lat_lon(self, **event_args):
         """This method is called when the button is clicked"""
@@ -34,6 +36,15 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         if text.endswith(" ") or len(text) > 8:
             self.text_area_1.text = anvil.server.call("autofill_address", text)
 
-
+            
+    def autofill_address(self, user_input):
+        matches = []
+        for line in self.address_lines:
+            if user_input in line:
+                matches += [line]
+                if len(matches) > 5:
+                      break
+        return matches
+      
 
 
