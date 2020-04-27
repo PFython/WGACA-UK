@@ -49,8 +49,10 @@ class HomePage(HomePageTemplate):
     def check_for_boss(self):
 #         if anvil.users.get_user():
         if anvil.users.get_user()['admin']:
-              print("Good day to you, Boss...")
-              self.navigation_bar.add_component(_DeveloperTools())
+              if self.admin_panel.visible == False:
+                  print("Good day to you, Boss...")
+                  self.admin_panel.add_component(_DeveloperTools())
+                  self.admin_panel.visible = True
         
     def check_updates(self):
         """Checks if user has seen latest update and creates an alert if not"""

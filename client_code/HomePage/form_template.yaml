@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"WEGPTE":45}',
+    wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"WEGPTE":45,"ZKRDNY":45,"SFKCZL":15}',
     spacing_below: none, background: ''}
   event_bindings: {}
 components:
@@ -11,14 +11,14 @@ components:
     spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '',
     bold: true, underline: false, icon: ''}
   name: test_version
-  layout_properties: {grid_position: 'JOMHHY,GMDTRX'}
+  layout_properties: {grid_position: 'RMUFKM,ZKRDNY JOMHHY,GMDTRX'}
   event_bindings: {}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel
   layout_properties:
     col_widths: {}
-    grid_position: EFNVRV,WEGPTE
+    grid_position: RMUFKM,ZKRDNY EFNVRV,WEGPTE
   components:
   - type: ColumnPanel
     properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
@@ -159,7 +159,19 @@ components:
     wrap_on: mobile, col_spacing: medium, spacing_above: none, col_widths: '{}', spacing_below: none,
     background: '#cae4ff'}
   name: column_panel_1
-  layout_properties: {grid_position: 'EHJDUZ,DOROSM'}
+  layout_properties: {grid_position: 'RMUFKM,ZKRDNY EHJDUZ,DOROSM'}
   event_bindings: {}
   components: []
+- type: ColumnPanel
+  properties: {role: null, tooltip: '', border: '', foreground: '', visible: false,
+    wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+    spacing_below: small, background: ''}
+  name: admin_panel
+  layout_properties: {grid_position: 'RMUFKM,SFKCZL'}
+  event_bindings: {}
+  components:
+  - type: Spacer
+    properties: {height: 80}
+    name: spacer_1
+    layout_properties: {grid_position: 'LAEACN,CBKDCB'}
 is_package: true

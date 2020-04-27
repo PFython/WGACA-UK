@@ -21,7 +21,6 @@ metadata: {logo_img: '', title: What Goes Around Comes Around, description: 'Thi
     by hand or vehicle is an easy option.  When complete, it will attempt to auto-match
     offers and requests and assign to delivery volunteers and other 3rd sector/governement
     support groups to help move items around to where they''ve most needed.'}
-startup_form: HomePage
 native_deps: {head_html: ''}
 db_schema:
 - name: uploads
