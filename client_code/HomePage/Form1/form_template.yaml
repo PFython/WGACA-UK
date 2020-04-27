@@ -8,4 +8,8 @@ components:
   name: text_box_1
   layout_properties: {grid_position: 'VFHMDA,HBEBRY'}
   event_bindings: {change: text_box_1_change}
+- type: TextArea
+  properties: {}
+  name: text_area_1
+  layout_properties: {grid_position: 'LCRFIB,OEGJIJ'}
 is_package: true

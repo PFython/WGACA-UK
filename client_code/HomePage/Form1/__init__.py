@@ -15,5 +15,7 @@ class Form1(Form1Template):
 
   def text_box_1_change(self, **event_args):
     """This method is called when the text in this text box is edited"""
-   autofill_address
+    text = self.text_box_1.text
+    if text.endswith(" ") or len(text) > 8:
+        self.text_area_1 = anvil.server.call("autofill_address", text)
 
