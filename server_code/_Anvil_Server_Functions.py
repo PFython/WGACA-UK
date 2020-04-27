@@ -22,7 +22,6 @@ LOCALE = "United Kingdom"
 def admin(func):
       """ Function only available to admin users """
       def wrapper(*args, **kwargs):
-          print(anvil.users.get_user()['display_name'])
           if not anvil.users.get_user()['admin']:
               print("⚠ Sorry, you do not have permission to run this function.")
               return False
@@ -257,22 +256,40 @@ def get_product_hierarchy():
 # def get_address_hierarchyOLD(country = LOCALE):
 #     """ Returns an address hierarchy for the given Country """
 #     return hierarchy[LOCALE]
+
+@anvil.server.callable
+def autofill_address(user_input):
+    matches = []
+#     user_input = user_input.title()
+    address_lines = get_address_hierarchy()
+    address_lines = address_lines.get_bytes().decode('utf-8').split("\n")
+    for line in address_lines:
+        if user_input in line:
+            matches += [line]
+            if len(matches) == 5:
+                  break
+    return matches
+    
+    
+    
+      
+    
   
 @anvil.server.callable
 def get_address_hierarchy(country = LOCALE):
     """
     Returns an address hierarchy for the given Country
     Loads the most recent media file 'addresses_lines' from Uploads Table
-    and converts it to dictionary with keys County, Town, and Stree
+    and converts it to dictionary with keys County, Town, and Street
     """
-    address = Address(LOCALE)
+#     address = Address(LOCALE)
     if country == "United Kingdom":
         address_lines = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
     print(len(address_lines),"files called 'address_lines' found.")
-    address_lines = address_lines[-1]['media']
-    address.add_addresses(address_lines.get_bytes().decode('utf-8'))
-    print("Address lines retrieved and converted to address dictionary.")
-    return address.data[LOCALE]
+    return address_lines[-1]['media']
+#     address.add_addresses(address_lines.get_bytes().decode('utf-8'))
+#     print("Address lines retrieved and converted to address dictionary.")
+#     return address.data[LOCALE]
   
 class Address(dict):
     def __init__(self,locale):
