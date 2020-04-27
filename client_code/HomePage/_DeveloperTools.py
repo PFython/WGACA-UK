@@ -26,6 +26,13 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def download_media(self):
         blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
         anvil.download(blob, "D:")
+        
+    def text_box_1_change(self, **event_args):
+        """This method is called when the text in this text box is edited"""
+        text = self.text_box_1.text
+        if text.endswith(" ") or len(text) > 8:
+            self.text_area_1 = anvil.server.call("autofill_address", text)
+
 
 
 
