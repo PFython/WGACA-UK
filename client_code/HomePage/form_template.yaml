@@ -5,6 +5,14 @@ container:
     spacing_below: none, background: ''}
   event_bindings: {}
 components:
+- type: Label
+  properties: {role: null, align: center, tooltip: '', border: '', foreground: '',
+    visible: true, text: This is the Test version of WGACA., font_size: null, font: '',
+    spacing_above: small, icon_align: left, spacing_below: small, italic: false, background: '',
+    bold: true, underline: false, icon: ''}
+  name: test_version
+  layout_properties: {grid_position: 'JOMHHY,GMDTRX'}
+  event_bindings: {}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: content_panel

@@ -40,6 +40,10 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(TitleButton(self.menu_about.tag, self.menu_about.background))
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
+        version = anvil.server.get_app_origin()
+        if "test" in version:
+            self.test_version.visible = True
+            self.test_version.text = version
 
         
     def check_for_boss(self):
