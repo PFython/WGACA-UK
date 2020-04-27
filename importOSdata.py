@@ -6,14 +6,15 @@ import json
 import pyperclip
 
 # Shortcuts and aliases
-parent = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST\OS data""")
+data_path = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST\OS data""")
+root_path = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST""")
 server_code = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST\server_code""")
-header_path = parent / "OS_Open_Names_Header.csv"
+header_path = data_path / "OS_Open_Names_Header.csv"
 header = pd.read_csv(header_path)
 fields = "NAME1 TYPE LOCAL_TYPE POSTCODE_DISTRICT POPULATED_PLACE DISTRICT_BOROUGH COUNTY_UNITARY".split()
-sheet_options = {'1': ("Single spreadsheet TQ00.csv",[parent /(x+".csv") for x in "TQ00".split()]),
-              '2': ("Two spreadsheets TQ00.csv and SU20.csv", [parent /(x+".csv") for x in "TQ00 SU20".split()]),
-              '3': ("All 800+ Ordnance Survey Spreadsheets", [x for x in parent.glob('*.csv') if x != header_path]),}
+sheet_options = {'1': ("Single spreadsheet TQ00.csv",[data_path /(x+".csv") for x in "TQ00".split()]),
+              '2': ("Two spreadsheets TQ00.csv and SU20.csv", [data_path /(x+".csv") for x in "TQ00 SU20".split()]),
+              '3': ("All 800+ Ordnance Survey Spreadsheets", [x for x in data_path.glob('*.csv') if x != header_path]),}
 
 def safe_filepath(filepath):
     """
@@ -35,26 +36,19 @@ def load_OS():
     with open("OS.json","r") as file:
         OS = json.loads(file.read())
 
-def save(sheet, filename):
-    filepath = safe_filepath(parent / f"{filename}")
+def save(sheet, filepath):
+    filepath = safe_filepath(filepath)
     with open(filepath,"a",encoding='utf-8') as file:
         file.writelines(sheet)
     print("Saved as:",filepath.absolute())
 
 
-def save_OS_as_py():
-    mega_sheet = ['address_lines="""',]
+def save_all():
+    mega_sheet = []
     for sheet, lines in OS.items():
         mega_sheet.extend(lines)
-    mega_sheet += ['"""']
-    save(mega_sheet, "OS.py")
-    # Deal with error:
-    # 'utf-8' codec can't decode byte 0xe8 in position 8095968
-    # with open(parent / "OS.py","r") as file:
-    #     pyperclip.copy(file.read())
-    # mega_sheet = pyperclip.paste()
-    # save(mega_sheet, "OS.py")
-    os.rename(parent / "OS.py", safe_filepath(server_code / "OS.py"))
+    save(mega_sheet, root_path / "OS.txt")
+    # os.rename(root_path / "OS.py", safe_filepath(server_code / "OS.py"))
 
 def sheet(search):
         """
@@ -101,7 +95,7 @@ def search(string):
 
 def cleanup():
     """Deletes ALL .txt files in parent"""
-    all_text = list(parent.glob('*.txt'))
+    all_text = list(data_path.glob('*.txt'))
     print(len(all_text),".txt files identified for deletion...")
     if len(all_text) > 10:
         print("\n".join([x.name for x in all_text[:5]]))
@@ -164,15 +158,18 @@ def importOS(import_option=""):
         # counties(data, sheet.stem)
         # i = input("Press ENTER to cancel, or (S) to Save: ")
         # if i.lower() == 's':
-        save(data, sheet.name)
+        save(data, data_path / sheet.name)
     return {sheet:lines for sheet,lines in data_dict.items() if lines !=[]}
 
 OS = importOS()
 with open("OS.json","w") as file:
     file.write(json.dumps(OS, indent=4, sort_keys=True))
 
-
-
+try:
+    if xyz:
+        print("goodW")
+except NameError:
+    print("blah")
 # tq, su = [pd.read_csv(x) for x in all_sheets]
 # tq.columns = su.columns = header.columns
 
