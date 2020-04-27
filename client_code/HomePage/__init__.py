@@ -43,7 +43,7 @@ class HomePage(HomePageTemplate):
         version = anvil.server.get_app_origin()
         if "test" in version:
             self.test_version.visible = True
-            self.test_version.text = version
+            self.test_version.text = str("TEST VERSION - " + version)
 
         
     def check_for_boss(self):
