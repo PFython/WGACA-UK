@@ -19,8 +19,22 @@ LOCALE = "United Kingdom"
 # To allow anvil.server.call() to call functions here, we mark
 # them with @anvil.server.callable.
 
-@anvil.server.callable
-def store_uploaded_media(media, custom_name):
+def admin(func):
+      """ Function only available to admin users """
+      def wrapper(*args, **kwargs):
+          print(anvil.users.get_user()['display_name'])
+          if not anvil.users.get_user()['admin']:
+              print("⚠ Sorry, you do not have permission to run this function.")
+              return False
+          else:
+            data = func(*args, **kwargs)
+            return (data)
+      return wrapper
+
+
+@anvil.server.callable("_store_uploaded_media")
+@admin
+def _store_uploaded_media(media, custom_name):
     media_upload = app_tables.uploads.add_row(name=custom_name, media = media, datetime = datetime.datetime.now())
     print(f"{media.name} saved to uploads databases as {custom_name}.")
     get_address_hierarchy(LOCALE)
@@ -176,6 +190,7 @@ def save_approx_lon_lat(user="default"):
 
 
 # @anvil.tables.in_transaction
+@admin
 @anvil.server.callable
 def _generate_route_url_for_all_matches():
   """This is a developer function to create OSM route urls for all Matches"""
@@ -252,7 +267,7 @@ def get_address_hierarchy(country = LOCALE):
     """
     address = Address(LOCALE)
     if country == "United Kingdom":
-        address_lines = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'addresses_lines' in x['media'].name]
+        address_lines = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
     print(len(address_lines),"files called 'address_lines' found.")
     address_lines = address_lines[-1]['media']
     address.add_addresses(address_lines.get_bytes().decode('utf-8'))

@@ -40,13 +40,19 @@ class HomePage(HomePageTemplate):
         self.column_panel_1.add_component(TitleButton(self.menu_about.tag, self.menu_about.background))
         self.column_panel_1.add_component(AboutThisApp())
         self.highlight_selected_menu(self.menu_about)
+        version = anvil.server.get_app_origin()
+        if "test" in version:
+            self.test_version.visible = True
+            self.test_version.text = str("TEST VERSION - " + version)
 
         
     def check_for_boss(self):
 #         if anvil.users.get_user():
         if anvil.users.get_user()['admin']:
-              print("Good day to you, Boss...")
-              self.navigation_bar.add_component(_DeveloperTools())
+              if self.admin_panel.visible == False:
+                  print("Good day to you, Boss...")
+                  self.admin_panel.add_component(_DeveloperTools())
+                  self.admin_panel.visible = True
         
     def check_updates(self):
         """Checks if user has seen latest update and creates an alert if not"""
