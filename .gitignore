@@ -2,4 +2,4 @@
 *.pyo
 __pycache__
 OS data
-./OS.json
+/OS.json
