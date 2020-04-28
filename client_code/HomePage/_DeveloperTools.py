@@ -5,7 +5,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-from ..OS import address_list
+# from ..OS import address_list
 from ..Globals import LOCALE
 
 class _DeveloperTools(_DeveloperToolsTemplate):
