@@ -11,5 +11,6 @@ components:
     grid_position: UJZTBG,QGFNEN
   data_bindings:
   - {property: text, code: 'self.item[''text'']'}
-is_package: true
+  event_bindings: {click: link_1_click}
+is_package: false
 item_type: {table_id: null}
