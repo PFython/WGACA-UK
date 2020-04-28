@@ -8,7 +8,7 @@ import pyperclip
 # Shortcuts and aliases
 data_path = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST\OS data""")
 root_path = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST""")
-server_code = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST\server_code""")
+client_code = Path("""D:\Pete's Data\OneDrive\Python Scripts\WGACA_UK_DEV_TEST\client_code""")
 header_path = data_path / "OS_Open_Names_Header.csv"
 header = pd.read_csv(header_path)
 fields = "NAME1 TYPE LOCAL_TYPE POSTCODE_DISTRICT POPULATED_PLACE DISTRICT_BOROUGH COUNTY_UNITARY".split()
@@ -33,7 +33,8 @@ def safe_filepath(filepath):
 
 def load_OS():
     global OS
-    with open("OS.json","r") as file:
+    path = data_path / "OS.json"
+    with open(path,"r", encoding='utf-8') as file:
         OS = json.loads(file.read())
 
 def save(sheet, filepath):
@@ -43,11 +44,12 @@ def save(sheet, filepath):
     print("Saved as:",filepath.absolute())
 
 
-def save_all():
-    mega_sheet = []
+def save_py():
+    mega_sheet = ['address_list="""']
     for sheet, lines in OS.items():
         mega_sheet.extend(lines)
-    save(mega_sheet, root_path / "OS.txt")
+    mega_sheet += ['"""']
+    save(mega_sheet, client_code / "OS.py")
     # os.rename(root_path / "OS.py", safe_filepath(server_code / "OS.py"))
 
 def sheet(search):
@@ -123,6 +125,27 @@ def adjust_london(data):
         new_data += [line]
     return new_data
 
+def select_sheets(import_option=""):
+    global sheet_options
+    if import_option == "":
+        for key, value in sheet_options.items():
+            print(key, ":", value[0])
+        import_option = input("Please select an input source from the list above: ")
+    if import_option not in sheet_options.keys():
+        return
+    else:
+        return sheet_options[import_option][1]
+
+def count_rows():
+    all_sheets = select_sheets()
+    if not all_sheets:
+        return
+    row_count = 0
+    for sheet in all_sheets:
+        data = pd.read_csv(sheet)
+        row_count += len(data)
+    return row_count
+
 
 # Main Loop
 def importOS(import_option=""):
@@ -133,15 +156,9 @@ def importOS(import_option=""):
     Returns a dictionary with sheet names as keys and
     Street | Town | County lines as values.
     """
-    global sheet_options
-    if import_option == "":
-        for key, value in sheet_options.items():
-            print(key, ":", value[0])
-        import_option = input("Please select an input source from the list above: ")
-    if import_option not in sheet_options.keys():
+    all_sheets = select_sheets(import_option)
+    if not all_sheets:
         return
-    else:
-        all_sheets = sheet_options[import_option][1]
     data_dict = {}
     for sheet in all_sheets:
         data = pd.read_csv(sheet)
