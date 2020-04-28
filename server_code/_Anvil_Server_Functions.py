@@ -260,7 +260,20 @@ def get_product_hierarchy():
 
     
     
-    
+@anvil.server.callable
+def get_address_matches(user_input, country = LOCALE):
+    """
+    Returns an address hierarchy for the given Country
+    Loads the most recent media file 'addresses_lines' from Uploads Table
+    and converts it to dictionary with keys County, Town, and Street
+    """
+    if country == "United Kingdom":
+        address_lines = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
+#     print(len(address_lines),"files called 'address_lines' found.")
+    address_media = address_lines[-1]['media']
+#     address.add_addresses(address_lines.get_bytes().decode('utf-8'))
+#     print("Address lines retrieved and converted to address dictionary.")
+#     return address.data[LOCALE]    
       
     
   

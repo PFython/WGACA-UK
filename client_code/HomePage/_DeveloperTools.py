@@ -14,10 +14,11 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
 #         self.address_lines = address_list.split("\n")
-        address_media = anvil.server.call("get_address_hierarchy")['media']
-        print(address_media.name)
-        self.address_lines = address_media.get_bytes()
-        self.text_area_1.text = self.address_lines[:10]
+#         address_media = anvil.server.call("get_address_hierarchy")['media']
+#         print(address_media.name)
+#         self.address_lines = address_media.get_bytes()
+#         self.text_area_1.text = self.address_lines[:10]
+        self.previous_entry = ""
 
     def backfill_approx_lat_lon(self, **event_args):
         """This method is called when the button is clicked"""
@@ -37,12 +38,13 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def text_box_1_change(self, **event_args):
         """This method is called when the text in this text box is edited"""
         text = self.text_box_1.text
-        if text.endswith(" ") or len(text) > 8:
+        if text.endswith(" ") or len(text) > 8 or len(text) > len(self.previous_entry):
             self.text_area_1.text = self.autofill_address(text)
+        self.previous_entry = text
 
             
     def autofill_address(self, user_input):
-        matches = []
+        matches = anvil.server.call('get_address_matches', user_input)
         for line in self.address_lines:
             if user_input in line:
                 matches += [line]
