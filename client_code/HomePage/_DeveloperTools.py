@@ -34,7 +34,7 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         """This method is called when the text in this text box is edited"""
         text = self.text_box_1.text
         if text.endswith(" ") or len(text) > 8:
-            self.text_area_1.text = anvil.server.call("autofill_address", text)
+            self.text_area_1.text = self.autofill_address(text)
 
             
     def autofill_address(self, user_input):
