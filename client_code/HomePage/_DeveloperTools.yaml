@@ -46,11 +46,9 @@ components:
     col_widths: {}
     grid_position: EPZTID,LYKIUR
   event_bindings: {change: text_box_1_change}
-- type: TextArea
-  properties: {height: 197}
-  name: text_area_1
-  layout_properties:
-    col_widths: {}
-    grid_position: ZVSFBL,JAOUBH
+- type: RepeatingPanel
+  properties: {item_template: ItemTemplate1}
+  name: repeating_panel_1
+  layout_properties: {grid_position: 'WDJPRC,AESITI'}
 is_package: false
 custom_component: false
