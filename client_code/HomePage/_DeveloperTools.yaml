@@ -47,7 +47,7 @@ components:
     grid_position: EPZTID,LYKIUR
   event_bindings: {change: text_box_1_change}
 - type: RepeatingPanel
-  properties: {item_template: ItemTemplate1}
+  properties: {item_template: AutoCompOption}
   name: repeating_panel_1
   layout_properties: {grid_position: 'WDJPRC,AESITI'}
 is_package: false
