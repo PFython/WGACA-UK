@@ -13,7 +13,11 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.address_lines = address_list.split("\n")
+#         self.address_lines = address_list.split("\n")
+        address_media = anvil.server.call("get_address_hierarchy")['media']
+        print(address_media.name)
+        self.address_lines = address_media.get_bytes()
+        self.text_area_1.text = self.address_lines[:10]
 
     def backfill_approx_lat_lon(self, **event_args):
         """This method is called when the button is clicked"""

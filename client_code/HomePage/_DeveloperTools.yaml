@@ -47,7 +47,7 @@ components:
     grid_position: EPZTID,LYKIUR
   event_bindings: {change: text_box_1_change}
 - type: TextArea
-  properties: {}
+  properties: {height: 197}
   name: text_area_1
   layout_properties:
     col_widths: {}
