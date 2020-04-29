@@ -20,27 +20,6 @@ class _DeveloperTools(_DeveloperToolsTemplate):
 
     # Any code you write here will run when the form opens.
 
-    def text_box_1_change(self, **event_args):
-        """This method is called when the text in this text box is edited"""
-        new_options = []
-        text = self.text_box_1.text.lower()
-        for option in self.options:
-          if text in option.lower():
-            new_options.append({'text':option})
-        max_options = 10
-        new_options = new_options[:max_options]
-        # ensure a full max_options options
-        if len(new_options) < max_options:
-          new_options+=( [{'text':' '}] * (max_options-len(new_options)))
-        self.repeating_panel_1.items = new_options
-        pass
-
-    def option_clicked(self,option,**event_args):
-        if option == ' ':
-          return
-        self.text_box_1.text = option
-        self.repeating_panel_1.items = []
-
     def backfill_approx_lat_lon(self, **event_args):
         """This method is called when the button is clicked"""
         anvil.server.call('_backfill_approx_lon_lat')
@@ -50,28 +29,11 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         file = self.file_loader_1.file
         file = anvil.server.call('_store_uploaded_media', file, "Address_Data_UK")
         self.file_loader_1.clear()
-        
+      
         
     def download_media(self):
         blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
         anvil.download(blob, "D:")
         
-#     def text_box_1_change(self, **event_args):
-#         """This method is called when the text in this text box is edited"""
-#         text = self.text_box_1.text
-#         if text.endswith(" ") or len(text) > 8 or len(text) > len(self.previous_entry):
-#             self.text_area_1.text = self.autofill_address(text)
-#         self.previous_entry = text
-
-            
-    def autofill_address(self, user_input):
-        matches = anvil.server.call('get_address_matches', user_input)
-        for line in self.address_lines:
-            if user_input in line:
-                matches += [line]
-                if len(matches) > 5:
-                      break
-        return matches
-      
 
 
