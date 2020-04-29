@@ -71,7 +71,7 @@ class HomePage(HomePageTemplate):
         # 1st step of registration process requires email and password
         anvil.users.login_with_form(allow_remembered=True)
         # 2nd step of registration process requires contact data and read/accept Terms of Use
-        self.force_user_setup()
+#         self.force_user_setup()
         self.check_updates()
         self.check_for_boss()
     

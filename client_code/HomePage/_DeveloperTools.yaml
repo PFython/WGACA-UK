@@ -39,18 +39,5 @@ components:
   name: file_loader_1
   layout_properties: {grid_position: 'ITDPZM,RRMUZF'}
   event_bindings: {change: upload_address_lines}
-- type: TextBox
-  properties: {}
-  name: text_box_1
-  layout_properties:
-    col_widths: {}
-    grid_position: EPZTID,LYKIUR
-  event_bindings: {change: text_box_1_change}
-- type: TextArea
-  properties: {}
-  name: text_area_1
-  layout_properties:
-    col_widths: {}
-    grid_position: ZVSFBL,JAOUBH
 is_package: false
 custom_component: false
