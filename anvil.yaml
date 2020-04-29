@@ -1,6 +1,4 @@
 dependencies:
-- app_id: OKAB7WUCDJLOUFDW
-  version: {dev: false}
 - app_id: HDGAOQTY7NEOKGLG
   version: {dev: false}
 services:
