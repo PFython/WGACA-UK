@@ -1,4 +1,4 @@
-from ._anvil_designer import UserSetupTemplate
+from ._anvil_designer import UserSetup_copyTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -11,7 +11,7 @@ from ...Globals import LOCALE, pink, yellow, white
 
 import demoAutocomplete # .Autocomplete .AutocompleteOption
 
-class UserSetup(UserSetupTemplate):
+class UserSetup_copy(UserSetup_copyTemplate):
 #     addresses = ADDRESSES
     def __init__(self, addresses, **properties):
         # Set Form properties and Data Bindings.
