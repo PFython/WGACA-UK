@@ -45,12 +45,13 @@ def save(sheet, filepath):
 
 
 def save_py():
-    mega_sheet = ['address_list="""']
+    mega_set = set()
     for sheet, lines in OS.items():
-        mega_sheet.extend(lines)
-    mega_sheet += ['"""']
-    save(mega_sheet, client_code / "OS.py")
-    # os.rename(root_path / "OS.py", safe_filepath(server_code / "OS.py"))
+        for line in lines:
+            mega_set.add(line)
+    mega_set_py = f"address_list = {repr(mega_set)}"
+    with open(client_code / "OS.py", "w", encoding = 'utf-8') as file:
+        file.write(mega_set_py)
 
 def sheet(search):
         """
