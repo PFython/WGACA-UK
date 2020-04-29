@@ -9,6 +9,8 @@ from anvil.tables import app_tables
 from ...Globals import LOCALE, pink, yellow, white
 # ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 
+from .demoAutocomplete import Autocomplete, AutocompleteOption
+
 class UserSetup(UserSetupTemplate):
 #     addresses = ADDRESSES
     def __init__(self, addresses, **properties):
