@@ -23,6 +23,14 @@ print("_Anvil_Server_Functions")
 
 # DEVELOPER TOOLS
 
+@anvil.server.callable
+def _backfill_approx_lon_lat():
+    for user in app_tables.users.search():
+        if not user['approx_lon_lat']:
+            print(f"Updating approx location for user {user['display_name']}")
+            save_approx_lon_lat(user)
+            time.sleep(1.5)
+
 def admin(func):
       """ Function only available to admin users """
       def wrapper(*args, **kwargs):
@@ -67,6 +75,11 @@ def _get_test_match():
     return app_tables.matches.get()
     
 # GET DATA    
+
+@anvil.server.callable
+def string_to_datetime(string, format = "%d %b %Y"):
+    """Converts a date-like string to a datetime object"""
+    return datetime.datetime.strptime(string, format)
 
 @anvil.server.callable
 def get_initial_address_matches(text, max_options):
@@ -233,88 +246,17 @@ def nominatim_scrape(address_list):
     nominatim = 'https://nominatim.openstreetmap.org/search?q='
     nominatim += f"{','.join(address_list).replace(', ',',').replace('&','%26')},{LOCALE},&format=json".replace(" ","%20")
     return anvil.http.request(nominatim, json=True)
-            
+
+@anvil.server.callable
+def get_chat_text(row_id):
+    return app_tables.matches.get_by_id(row_id)['chat']  
           
 # POST DATA
 
 @anvil.server.callable
 def add_karma_row(**kwargs):
     return app_tables.karma.add_row(**kwargs)
-
-
-# PROCESS DATA
-
-# @anvil.tables.in_transaction
-@anvil.server.callable
-def generate_matches():
-    """
-    Compares Offers and Requests and saves matches (by product and area) to Matches database.
-    Current version matches by Town.  TODO: Match by actual distance,
-    as for some addresses the other side of the road is a different Town!
-    """
-    requests = app_tables.requests.search(tables.order_by("product_category"))
-    offers = app_tables.offers.search(tables.order_by("product_key"))
-    matches = 0
-    for request in (x for x in requests if x['status_code'] in ['New','Matches Exist']):
-        for offer in (x for x in offers if x['status_code'] in ['New','Matches Exist']):
-            if request['product_category'] in offer['product_key']:
-                if request['user']['display_name'] != offer['user']['display_name']:
-                    # check if new or existing match
-                    if not app_tables.matches.get(request=request, offer=offer):
-                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_dict=get_initial_status_dict())
-                        request.update(status_code = "Matches Exist")
-                        offer.update(status_code = "Matches Exist")
-                        new_match['route_url'] = create_route_url(new_match)
-                        # 'or []' added to address possible database corruption i.e. value = None rather than value = []
-                        if new_match not in (offer['matches'] or []):
-                            offer['matches'] = (offer['matches'] or []) + [new_match]
-                        if new_match not in (request['matches'] or []):
-                            request['matches'] = (request['matches'] or []) + [new_match]                    
-                     
-                            
-def create_route_url(new_match):
-    """Creates an Open Street Map url for pickup to dropoff route"""
-    pickup_lon_lat = new_match['offer']['user']['approx_lon_lat']
-    dropoff_lon_lat = new_match['request']['user']['approx_lon_lat']
-    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
-    osm += pickup_lon_lat + "%3B" + dropoff_lon_lat
-    print("Request sent to OpenStreetView:")
-    print(osm)
-    return osm
-
-@anvil.server.callable
-def save_approx_lon_lat(user="default"):
-    "Fetches and saves approximate Longitude and Latitude for a given user's address"
-    if user == "default":
-        user = anvil.users.get_user()
-    if user != None:
-        address = user['address'].split("; ")
-        try:
-            address_data = nominatim_scrape(address)[0]
-            user['approx_lon_lat'] = address_data['lat'] + "%2C" + address_data['lon']
-        except IndexError:
-            print(f"Problem getting Nominatim data for {address}")
-
-
-# @anvil.tables.in_transaction  
-@anvil.server.callable
-def remove_orphan_matches(request_or_offer):
-    """
-    Deletes a Match where the child Request or Offer has just been deleted
-    and deletes the Match from the corresponding Request or Offer
-    """
-    try:
-        for match in app_tables.matches.search(request=request_or_offer):
-            match.delete()
-    except anvil.tables.TableError:
-        pass
-    try:
-        for match in app_tables.matches.search(offer=request_or_offer):
-            match.delete()
-            offer = app_tables.matches.search()
-    except anvil.tables.TableError:
-        pass
-      
+  
 # @anvil.tables.in_transaction    
 @anvil.server.callable
 def save_to_chat(row_id, full_text):
@@ -322,12 +264,7 @@ def save_to_chat(row_id, full_text):
     if anvil.users.get_user() is None:
         return
     match = app_tables.matches.get_by_id(row_id)
-    match.update(chat = full_text)
-    
-@anvil.server.callable
-def get_chat_text(row_id):
-    return app_tables.matches.get_by_id(row_id)['chat']
-    
+    match.update(chat = full_text)   
 
 # @anvil.tables.in_transaction      
 @anvil.server.callable
@@ -375,12 +312,7 @@ def save_karma_form_to_match(row_id,karma_form):
     match = app_tables.matches.get_by_id(row_id)
     forms = match['karma_forms'] or []
     forms += [karma_form]
-    match['karma_forms'] = list(set(forms))
-  
-@anvil.server.callable
-def string_to_datetime(string, format = "%d %b %Y"):
-    """Converts a date-like string to a datetime object"""
-    return datetime.datetime.strptime(string, format)
+    match['karma_forms'] = list(set(forms))  
   
 @anvil.server.callable
 def terms_accepted(boolean_value):
@@ -402,12 +334,77 @@ def volunteer_as_runner(match, boolean_value):
         match['available_runners'] += [user]
     else:
         match["available_runners"] = [x for x in match["available_runners"] if x != user]
-        
+    
+
+
+# PROCESS DATA
+
+# @anvil.tables.in_transaction
 @anvil.server.callable
-def _backfill_approx_lon_lat():
-    for user in app_tables.users.search():
-        if not user['approx_lon_lat']:
-            print(f"Updating approx location for user {user['display_name']}")
-            save_approx_lon_lat(user)
-            time.sleep(1.5)
-  
+def generate_matches():
+    """
+    Compares Offers and Requests and saves matches (by product and area) to Matches database.
+    Current version matches by Town.  TODO: Match by actual distance,
+    as for some addresses the other side of the road is a different Town!
+    """
+    requests = app_tables.requests.search(tables.order_by("product_category"))
+    offers = app_tables.offers.search(tables.order_by("product_key"))
+    matches = 0
+    for request in (x for x in requests if x['status_code'] in ['New','Matches Exist']):
+        for offer in (x for x in offers if x['status_code'] in ['New','Matches Exist']):
+            if request['product_category'] in offer['product_key']:
+                if request['user']['display_name'] != offer['user']['display_name']:
+                    # check if new or existing match
+                    if not app_tables.matches.get(request=request, offer=offer):
+                        new_match =  app_tables.matches.add_row(available_runners = [], request = request, offer=offer, status_dict=get_initial_status_dict())
+                        request.update(status_code = "Matches Exist")
+                        offer.update(status_code = "Matches Exist")
+                        new_match['route_url'] = create_route_url(new_match)
+                        # 'or []' added to address possible database corruption i.e. value = None rather than value = []
+                        if new_match not in (offer['matches'] or []):
+                            offer['matches'] = (offer['matches'] or []) + [new_match]
+                        if new_match not in (request['matches'] or []):
+                            request['matches'] = (request['matches'] or []) + [new_match]             
+                            
+def create_route_url(new_match):
+    """Creates an Open Street Map url for pickup to dropoff route"""
+    pickup_lon_lat = new_match['offer']['user']['approx_lon_lat']
+    dropoff_lon_lat = new_match['request']['user']['approx_lon_lat']
+    osm = "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route="
+    osm += pickup_lon_lat + "%3B" + dropoff_lon_lat
+    print("Request sent to OpenStreetView:")
+    print(osm)
+    return osm
+
+@anvil.server.callable
+def save_approx_lon_lat(user="default"):
+    "Fetches and saves approximate Longitude and Latitude for a given user's address"
+    if user == "default":
+        user = anvil.users.get_user()
+    if user != None:
+        address = user['address'].split("; ")
+        try:
+            address_data = nominatim_scrape(address)[0]
+            user['approx_lon_lat'] = address_data['lat'] + "%2C" + address_data['lon']
+        except IndexError:
+            print(f"Problem getting Nominatim data for {address}")
+
+# @anvil.tables.in_transaction  
+@anvil.server.callable
+def remove_orphan_matches(request_or_offer):
+    """
+    Deletes a Match where the child Request or Offer has just been deleted
+    and deletes the Match from the corresponding Request or Offer
+    """
+    try:
+        for match in app_tables.matches.search(request=request_or_offer):
+            match.delete()
+    except anvil.tables.TableError:
+        pass
+    try:
+        for match in app_tables.matches.search(offer=request_or_offer):
+            match.delete()
+            offer = app_tables.matches.search()
+    except anvil.tables.TableError:
+        pass
+     
