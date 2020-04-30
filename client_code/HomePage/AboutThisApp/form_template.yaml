@@ -29,22 +29,23 @@ components:
     layout_properties: {grid_position: 'KCWQKO,QHCANK'}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-      visible: true, text: "Welcome to your one-stop app for sharing and swapping\
-        \ FOOD and DRINK, HOUSEHOLD GOODS and OVER-THE-COUNTER MEDICINES for those\
-        \ in need during the Covid-19 crisis.\n\nHere you can post URGENT REQUESTS\
-        \ and circulate offers of SURPLUS ITEMS you might have to SHARE. The state-of-the-art\
-        \ app will then automatically match any requests to offers. You can also volunteer\
-        \ as a RUNNER to deliver items where they\u2019re most needed. \n\nSouth West\
-        \ London has always prided itself on its fantastic COMMUNITY SPIRIT and this\
-        \ is another great way for us all to come together, stay better connected\
-        \ and lend a hand to those less fortunate during these challenging times.\
-        \ \n\nWe hope you find this tool useful, and wish you all the best for coping\
-        \ during these difficult times.\n     \nPS We couldn't have done this without\
-        \ the generous support of Anvil.Works.  Thank you! \nPPS If you're interested\
-        \ in setting up a local version of this app in your own country, you can find\
-        \ the source code at:", font_size: null, font: '', spacing_above: none, icon_align: left,
-      spacing_below: none, italic: false, background: '', bold: false, underline: false,
-      icon: ''}
+      visible: true, text: "(Please click on one of the square icons at the top to\
+        \ register and jump straight in!).\n\nWelcome to your one-stop app for sharing\
+        \ and swapping FOOD and DRINK, HOUSEHOLD GOODS and OVER-THE-COUNTER MEDICINES\
+        \ for those in need during the Covid-19 crisis.\n\nHere you can post URGENT\
+        \ REQUESTS and circulate offers of SURPLUS ITEMS you might have to SHARE.\
+        \ The state-of-the-art app will then automatically match any requests to offers.\
+        \ You can also volunteer as a RUNNER to deliver items where they\u2019re most\
+        \ needed. \n\nSouth West London has always prided itself on its fantastic\
+        \ COMMUNITY SPIRIT and this is another great way for us all to come together,\
+        \ stay better connected and lend a hand to those less fortunate during these\
+        \ challenging times. \n\nWe hope you find this tool useful, and wish you all\
+        \ the best for coping during these difficult times.\n     \nPS We couldn't\
+        \ have done this without the generous support of Anvil.Works.  Thank you!\
+        \ \nPPS If you're interested in setting up a local version of this app in\
+        \ your own country, you can find the source code at:", font_size: null, font: '',
+      spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '',
+      bold: false, underline: false, icon: ''}
     name: label_1
     layout_properties: {grid_position: 'ZJCZRI,GBGWRT'}
     event_bindings: {}

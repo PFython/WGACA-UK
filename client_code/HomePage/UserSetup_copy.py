@@ -1,4 +1,4 @@
-from ._anvil_designer import UserSetupTemplate
+from ._anvil_designer import UserSetup_copyTemplate
 from anvil import *
 import anvil.server
 import anvil.users
@@ -7,31 +7,86 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 from ...Globals import LOCALE, pink, yellow, white
-from ..Autocomplete import Autocomplete
+# ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 
-class UserSetup(UserSetupTemplate):
-    def __init__(self, **properties):
+import demoAutocomplete # .Autocomplete .AutocompleteOption
+
+class UserSetup_copy(UserSetup_copyTemplate):
+#     addresses = ADDRESSES
+    def __init__(self, addresses, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         user = anvil.users.get_user()
+        self.id.text = user.get_id()
+        self.addresses = addresses
         self.display_name.text = user['display_name']
+        self.email.text = user['email']
         if user['house_number']:
             self.house_number.text = user['house_number']
+        # Create list of valid counties
+        self.county.items = sorted(self.addresses.keys())
+        if user['county']:
+            self.county.selected_value = user['county']
+        else:
+            self.county.selected_value = sorted(list(self.addresses.keys()))[-1]
+            self.county_change()
+        # Create list of valid streets
+        self.street.items = self.get_streets_from_county()
+        if user['street']:           
+            self.street.selected_value = sorted(list(self.addresses.keys()))[-1]
+            self.street.selected_value = user['street']
+        else:
+            self.street_change()
+        # Create list of valid towns
+        towns = list(self.get_towns_from_county().keys())
+        self.town.items = towns
+        if user['town']:
+           self.town.selected_value = user['town']
         self.country.text = LOCALE
         self.postcode.text = user['postcode']
         self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
         self.telephone.tag = "Optional"
-        self.autocomplete = Autocomplete()
-        self.flow_panel_1.add_component(self.autocomplete)
-        self.autocomplete.text_box_1.tag = "Optional"        
-      
+        self.help_box.text = self.help0.tag
+        
+    def get_streets_from_county(self):
+        """ Returns a list of streets derived from County selection """
+        towns = self.addresses[self.county.selected_value]
+        streets = []
+        for town in towns:
+            streets.extend(self.addresses[self.county.selected_value][town])
+        streets.sort()
+        return streets
+    
+    def get_towns_from_county(self):
+        """ Returns a dictionary of towns (key) and a list of streets (value)"""
+        return self.addresses[self.county.selected_value]
+  
+    def county_change(self, **event_args):
+        """This method is called when the County drop-down is changed """
+        streets = self.get_streets_from_county()
+        self.street.items = streets
+        self.street.selected_value = streets[0]
+        self.street_change()
+
+    def street_change(self, **event_args):
+        """This method is called when the Street drop-down is changed"""
+        towns = self.get_towns_from_county()
+        for town, street_list in towns.items():
+            if self.street.selected_value in street_list:
+                break
+        # Create single item list of valid towns        
+        self.town.items = [town]
+        self.town.selected_value = town
+        
     def get_input_fields(self):
         """ Returns a dictionary of database column headings and corresponding components/attributes """
         return {'display_name' : (self.display_name, 'text'),
                'house_number' : (self.house_number, 'text'),
-               'address' : (self.address, 'selected_value'),
+               'street' : (self.street, 'selected_value'),
+               'town' : (self.town, 'selected_value'),
+               'county' : (self.county, 'selected_value'),
                'country' : (self.country, 'text'),
                'postcode' : (self.postcode, 'text'),
                'telephone' : (self.telephone, 'text'),}
@@ -66,6 +121,7 @@ class UserSetup(UserSetupTemplate):
                 event_args['sender'].background = pink
         else:
             event_args['sender'].background = white
+
                 
     def deselect_all_icons(self):
         """ Set all icons to unselected """
