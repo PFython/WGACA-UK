@@ -2,13 +2,13 @@ dependencies: []
 services:
 - source: /runtime/services/tables.yml
   client_config: {}
-  server_config: {auto_create_missing_columns: false}
+  server_config: {auto_create_missing_columns: true}
 - source: /runtime/services/anvil/users.yml
   client_config: {use_microsoft: false, require_secure_passwords: false, use_email: true,
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
     remember_me_days: 7, use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
-startup: {type: form, module: HomePage}
+startup: {type: form, module: HomePage._DeveloperTools}
 package_name: WGACA_UK_DEV_TEST
 allow_embedding: true
 name: WGACA_UK_DEV_TEST
@@ -19,7 +19,6 @@ metadata: {logo_img: '', title: What Goes Around Comes Around, description: 'Thi
     by hand or vehicle is an easy option.  When complete, it will attempt to auto-match
     offers and requests and assign to delivery volunteers and other 3rd sector/governement
     support groups to help move items around to where they''ve most needed.'}
-startup_form: HomePage
 native_deps: {head_html: ''}
 db_schema:
 - name: uploads
@@ -224,18 +223,14 @@ db_schema:
       name: signed_up
       type: datetime
       admin_ui: {order: 2, width: 140.36360000000002}
-    U5zb8UNnxfs=:
-      name: town
+    9QOYIBU0Tg4=:
+      name: address
       type: string
-      admin_ui: {order: 1.8125, width: 100.4545}
+      admin_ui: {order: 18.5, width: 200}
     9Fj5yIyDofI=:
       name: terms_accepted
       type: date
-      admin_ui: {order: 16, width: 82.01136400000001}
-    cALkDfUDNeM=:
-      name: street
-      type: string
-      admin_ui: {order: 1.75, width: 276.1818}
+      admin_ui: {order: 24.5, width: 108}
     mrMfHwkEbHs=:
       name: house_number
       type: string
@@ -250,20 +245,24 @@ db_schema:
       name: postcode_shared_with
       type: liveObjectArray
       backend: anvil.tables.Row
-      admin_ui: {order: 21, width: 221.5454}
+      admin_ui: {order: 21, width: 157.333}
       table_id: 48470
     NBW_4uSntQY=:
       name: county_view
       type: bool
-      admin_ui: {order: 25, width: 200}
+      admin_ui: {order: 25, width: 108}
+    LK97tEojYs4=:
+      name: valid_address
+      type: bool
+      admin_ui: {order: 26, width: 73}
     Q78HdFRfQi8=:
       name: approx_lon_lat
       type: string
-      admin_ui: {order: 24, width: 200}
+      admin_ui: {order: 21.5, width: 133}
     4dcb9hwysNA=:
       name: Telephone
       type: string
-      admin_ui: {order: 18, width: 50}
+      admin_ui: {order: 18, width: 123}
     WdV+A9PKLHQ=:
       name: last_login
       type: datetime
@@ -275,7 +274,7 @@ db_schema:
     9y2JHkm27SU=:
       name: enabled
       type: bool
-      admin_ui: {order: -1, width: 95.011364}
+      admin_ui: {order: -1, width: 50}
     BTP+qTA9o2Q=:
       name: admin
       type: bool
@@ -293,7 +292,7 @@ db_schema:
     17CKzaAMkQE=:
       name: telephone
       type: string
-      admin_ui: {order: 0.25, width: 80.00378}
+      admin_ui: {order: 0.25, width: 130}
     R9tRvHQZREA=:
       name: display_name
       type: string
@@ -306,10 +305,6 @@ db_schema:
       name: remembered_logins
       type: simpleObject
       admin_ui: {order: 3, width: 50}
-    02qUcB+MIeE=:
-      name: county
-      type: string
-      admin_ui: {order: 1.84375, width: 55.15199999999999}
     dYtS+PIcOHk=:
       name: password_hash
       type: string
@@ -321,15 +316,11 @@ db_schema:
     FV4yw9gzoSw=:
       name: email
       type: string
-      admin_ui: {order: 0, width: 195.667}
-    +yeRpzKf8BA=:
-      name: details_complete
-      type: bool
-      admin_ui: {order: 15, width: 61.9394}
+      admin_ui: {order: 0, width: 214.333}
     Tes1p+vcF6I=:
       name: email_confirmation_key
       type: string
-      admin_ui: {order: 14, width: 50}
+      admin_ui: {order: 24.75, width: 72}
   access: {python_name: users, app_id: P33PVE5OAIUCIJY3, server: full, client: none,
     table_id: 48470}
 - name: Offers

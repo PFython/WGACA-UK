@@ -78,10 +78,9 @@ class HomePage(HomePageTemplate):
         """ Checks that all required fields are completed """
         user = anvil.users.get_user()
         checks = [user['house_number']]
-        checks += [user['street']]
-        checks += [user['town']]
-        checks += [user['county']]
         checks += [user['display_name']]
+        checks += [user['valid_address']]
+        print(checks)
         return all(checks)
     
     def force_user_setup(self):

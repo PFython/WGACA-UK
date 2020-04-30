@@ -35,4 +35,20 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         anvil.download(blob, "D:")
         
 
+    def button_1_copy_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      anvil.server.call("_convert_old_addresses")
+      
+      
+
+    def button_1_copy_2_click(self, **event_args):
+      """This method is called when the button is clicked"""
+      input("Are you sure")
+      anvil.server.call("_scratch_offers_matches_requests")
+
+
+
+
+
+
 

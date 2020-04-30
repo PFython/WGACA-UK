@@ -33,10 +33,9 @@ class UserSetup(UserSetupTemplate):
         """ Returns a dictionary of database column headings and corresponding components/attributes """
         return {'display_name' : (self.display_name, 'text'),
                'house_number' : (self.house_number, 'text'),
-               'address' : (self.address, 'selected_value'),
-               'country' : (self.country, 'text'),
-               'postcode' : (self.postcode, 'text'),
-               'telephone' : (self.telephone, 'text'),}
+               'address' : (self.autocomplete.text_box_1, 'text'),
+               'telephone' : (self.telephone, 'text'),
+               'postcode': (self.postcode, 'text'),}
       
     def save_input(self, **event_args):
         """This method is called when the .my_details container is finally closed (after clicking OK) """
@@ -45,7 +44,11 @@ class UserSetup(UserSetupTemplate):
         for field, _values in input_fields.items():
             component, attribute = _values
             anvil.server.call("save_user_setup", field, getattr(component, attribute))
+        valid_address = True if "1 out of 1 result" in self.autocomplete.link_1.text else False
+        print(valid_address)
+        anvil.server.call("save_user_setup", "valid_address", valid_address)
         anvil.server.call('save_approx_lon_lat')
+        
         
     def check_for_existing_display_name(self):
         user = anvil.users.get_user()

@@ -172,7 +172,7 @@ components:
     components:
     - type: Label
       properties: {role: title, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'Street:', font_size: 14, font: '', spacing_above: none,
+        visible: true, text: 'Address:', font_size: 14, font: '', spacing_above: none,
         icon_align: left, spacing_below: none, italic: false, background: '', bold: false,
         underline: false, icon: 'fa:map-signs'}
       name: label_street
@@ -180,7 +180,7 @@ components:
       event_bindings: {}
     - type: Label
       properties: {}
-      name: street
+      name: address
       layout_properties: {grid_position: 'WJRJVD,TEJYEH'}
       event_bindings: {}
     - type: Link
@@ -191,72 +191,8 @@ components:
       name: help4
       layout_properties: {slot: default, grid_position: 'WJRJVD,MVOEKQ'}
       data_bindings:
-      - {property: tag, code: '"""The Street name you chose when you registered."""'}
-      event_bindings: {click: show_help_tag}
-      components: []
-    event_bindings: {}
-  - type: ColumnPanel
-    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"QWBZST":30,"CARTWD":10,"OHJKBB":40}',
-      spacing_below: small, background: '#eaf4ff'}
-    name: card_7
-    layout_properties: {grid_position: 'SAQBXJ,KSVRDX'}
-    components:
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'Town/City:', font_size: 14, font: '', spacing_above: none,
-        icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-        underline: false, icon: 'fa:map-marker'}
-      name: label_town
-      layout_properties: {grid_position: 'ZFVMEZ,QWBZST'}
-      event_bindings: {}
-    - type: Label
-      properties: {}
-      name: town
-      layout_properties: {grid_position: 'ZFVMEZ,OHJKBB'}
-      event_bindings: {}
-    - type: Link
-      properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-        visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-        spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-        italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-      name: help5
-      layout_properties: {slot: default, grid_position: 'ZFVMEZ,CARTWD'}
-      data_bindings:
-      - {property: tag, code: '"""This Town or City was automatically selected when
-          you chose a Street and County/Borough during registration."""'}
-      event_bindings: {click: show_help_tag}
-      components: []
-    event_bindings: {}
-  - type: ColumnPanel
-    properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"QOREIJ":30,"JHRAVJ":10,"WVZZAT":40}',
-      spacing_below: small, background: '#eaf4ff'}
-    name: card_8
-    layout_properties: {grid_position: 'XLSYMF,CKYHYX'}
-    components:
-    - type: Label
-      properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
-        visible: true, text: 'County/Borough:', font_size: 14, font: '', spacing_above: none,
-        icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-        underline: false, icon: 'fa:map'}
-      name: label_county
-      layout_properties: {grid_position: 'BKRFFW,QOREIJ'}
-      event_bindings: {}
-    - type: Label
-      properties: {}
-      name: county
-      layout_properties: {grid_position: 'BKRFFW,WVZZAT'}
-      event_bindings: {}
-    - type: Link
-      properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#0080c0',
-        visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-        spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-        italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-      name: help6
-      layout_properties: {slot: default, grid_position: 'BKRFFW,JHRAVJ'}
-      data_bindings:
-      - {property: tag, code: '"""The County or Borough you selected when you registered."""'}
+      - {property: tag, code: '"""The Street, Town, and County you chose when you
+          registered."""'}
       event_bindings: {click: show_help_tag}
       components: []
     event_bindings: {}
