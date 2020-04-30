@@ -48,7 +48,6 @@ class HomePage(HomePageTemplate):
 
         
     def check_for_boss(self):
-#         if anvil.users.get_user():
         if anvil.users.get_user()['admin']:
               if self.admin_panel.visible == False:
                   print("Good day to you, Boss...")
