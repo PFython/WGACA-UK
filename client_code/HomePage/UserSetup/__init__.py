@@ -24,7 +24,7 @@ class UserSetup(UserSetupTemplate):
         self.telephone.text = user['telephone']
         self.telephone.tag = "Optional"
         self.autocomplete = Autocomplete()
-        self.flow_panel_1.add_component(self.autocomplete)
+        self.column_panel_1.add_component(self.autocomplete)
         self.autocomplete.text_box_1.tag = "Optional"        
       
     def get_input_fields(self):

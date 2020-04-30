@@ -17,8 +17,8 @@ class Autocomplete(AutocompleteTemplate):
     
   def initial_fetch(self, text):
     """Initial server call to get results matching the first word or N characters"""
-    # max_options argument = 9999 to fetch all (realistically) possible matches
-    self.options = anvil.server.call("get_initial_address_matches", text, 9999)
+    # max_options argument = 99999 to fetch all (realistically) possible matches
+    self.options = anvil.server.call("get_initial_address_matches", text, 99999)
     self.match_count = len(self.options)
     return [{'text':option.title()} for option in self.options]
   
