@@ -168,7 +168,7 @@ def importOS(import_option=""):
         data_nr = data[data['LOCAL_TYPE'].isin(["Named Road"])]
         data_snr = data[data['LOCAL_TYPE'].isin(["Section Of Named Road"])]
         data = pd.concat([data_nr,data_snr])
-        data['address_line'] = data['NAME1']+" | "+data['POPULATED_PLACE']+" | "+data['DISTRICT_BOROUGH']+", "+data['COUNTY_UNITARY']+"\n"
+        data['address_line'] = data['NAME1']+"; "+data['POPULATED_PLACE']+"; "+data['DISTRICT_BOROUGH']+", "+data['COUNTY_UNITARY']+"\n"
         data = pd.unique(data['address_line']).tolist()
         data = [x for x in data if type(x) != float]
         data = adjust_london(data)
