@@ -1,43 +1,48 @@
 container:
   type: ColumnPanel
   event_bindings: {}
-  properties: {col_widths: '{"ZZCKKU":45,"DSICUW":15}'}
-components:
-- type: TextBox
-  properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: e.g. West Street,
-    border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
-    font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
-    background: '', bold: false, underline: false}
-  name: text_box_1
-  layout_properties: {grid_position: 'LSMKZN,ZZCKKU VRNTWE,CJEBNH'}
-  event_bindings: {change: text_box_1_change, pressed_enter: button_1_click, show: text_box_1_show}
-- type: Link
-  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
-    visible: true, text: '', font_size: 12, wrap_on: mobile, font: '', col_spacing: medium,
-    spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-    italic: false, background: '', bold: true, underline: false, icon: ''}
-  name: link_1
-  layout_properties: {grid_position: 'LSMKZN,ZZCKKU LCBPQZ,RRHGKA'}
-  event_bindings: {click: link_1_click}
-  components: []
-- type: Button
-  properties: {role: null, align: left, tooltip: '', border: '', enabled: false, foreground: '#ffffff',
-    visible: true, text: ' Submit', font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '#4ac870', bold: false,
-    underline: false, icon: 'fa:chevron-right'}
-  name: button_1
-  layout_properties: {grid_position: 'LSMKZN,DSICUW'}
-  event_bindings: {click: button_1_click}
-- type: ColumnPanel
   properties: {col_widths: '{}'}
-  name: column_panel_1
-  layout_properties: {grid_position: 'HRUGOT,ZPOLSG'}
+components:
+- type: ColumnPanel
+  properties: {col_widths: '{"DHTADA":45,"TCHYIL":15}'}
+  name: column_panel_2
+  layout_properties: {grid_position: 'FEIDYJ,NADCKF'}
   components:
-  - type: RepeatingPanel
-    properties: {role: null, tooltip: '', border: '', foreground: '', items: null,
-      visible: true, spacing_above: none, spacing_below: none, item_template: HomePage.AutocompleteOption,
-      background: ''}
-    name: repeating_panel_1
-    layout_properties: {grid_position: 'FMWEUL,XSQBKE'}
-    event_bindings: {}
+  - type: TextBox
+    properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: e.g. West Street,
+      border: '', enabled: true, foreground: '', visible: true, text: '', font_size: null,
+      font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
+      background: '', bold: false, underline: false}
+    name: text_box_1
+    layout_properties: {grid_position: 'KPFXWF,DHTADA HQLBEK,HFMIBE'}
+    event_bindings: {change: text_box_1_change, pressed_enter: button_1_click, show: text_box_1_show}
+  - type: Link
+    properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: '', font_size: 12, wrap_on: mobile, font: '', col_spacing: medium,
+      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
+      italic: false, background: '', bold: true, underline: false, icon: ''}
+    name: link_1
+    layout_properties: {grid_position: 'KPFXWF,DHTADA BZQORD,AGUDEN'}
+    event_bindings: {click: link_1_click}
+    components:
+    - type: ColumnPanel
+      properties: {col_widths: '{}'}
+      name: column_panel_1
+      layout_properties: {grid_position: 'EUMGRC,TGKBEM'}
+      components:
+      - type: RepeatingPanel
+        properties: {role: null, tooltip: '', border: '', foreground: '', items: null,
+          visible: true, spacing_above: none, spacing_below: none, item_template: HomePage.AutocompleteOption,
+          background: ''}
+        name: repeating_panel_1
+        layout_properties: {grid_position: 'FMWEUL,XSQBKE'}
+        event_bindings: {}
+  - type: Button
+    properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
+      foreground: '#ffffff', visible: true, text: ' Submit', font_size: null, font: '',
+      spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '#4ac870',
+      bold: false, underline: false, icon: 'fa:chevron-right'}
+    name: button_1
+    layout_properties: {grid_position: 'KPFXWF,TCHYIL'}
+    event_bindings: {click: button_1_click}
 is_package: true
