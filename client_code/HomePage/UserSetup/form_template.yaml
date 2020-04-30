@@ -14,23 +14,6 @@ components:
     name: label_display_name
     layout_properties: {grid_position: 'ROEXUN,JNLESK'}
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help1
-    layout_properties: {slot: default, grid_position: 'ROEXUN,POLUYC'}
-    event_bindings: {click: show_help_tag}
-    data_bindings:
-    - {property: tag, code: '"""This is the public Display Name (or ''nickname'')
-        other users will know you by.  We suggest you choose one or two words then
-        your First Name (or a made up name you prefer to use online).  For example:
-        ''Ginger Pete'', ''Mild Mannered Madonna'', Crazy Hair Jane'', ''Dog Lover
-        Dave'' etc.  Once you submit this form, you won''t be able to change your
-        Display Name again and your reputation ''score'' and transaction history will
-        be linked to it.  So please choose carefully, and keep it clean and inoffensive!"""'}
-    components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -48,18 +31,6 @@ components:
     name: label_house_number
     layout_properties: {grid_position: 'EFWMDE,XTFHRG'}
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help3
-    layout_properties: {slot: default, grid_position: 'EFWMDE,ZQDJCM'}
-    data_bindings:
-    - {property: tag, code: '"""A unique house name (e.g. ''Rose Cottage'') or number
-        (e.g. ''221B'') within your Street."""'}
-    event_bindings: {click: show_help_tag}
-    components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -83,6 +54,7 @@ components:
       spacing_below: small, background: ''}
     name: column_panel_1
     layout_properties: {grid_position: 'WKBRSK,CNXTLO', full_width_row: false}
+    event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
       visible: true, text: 'Country:', font_size: 14, font: '', spacing_above: none,
@@ -91,19 +63,6 @@ components:
     name: label_country
     layout_properties: {grid_position: 'PRHIUX,HBXSLG'}
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help7
-    layout_properties: {slot: default, grid_position: 'PRHIUX,ENXUOI'}
-    data_bindings:
-    - {property: tag, code: '"""Your Country is set automatically by the server.  We''ll
-        probably have at least one server running the app locally for every country
-        it''s published in.  You don''t have to worry about changing this."""'}
-    event_bindings: {click: show_help_tag}
-    components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 14,
@@ -121,23 +80,6 @@ components:
     name: label_post_code
     layout_properties: {grid_position: 'RXWPXJ,YEVDFZ'}
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help8
-    layout_properties: {slot: default, grid_position: 'RXWPXJ,XZFEYL'}
-    data_bindings:
-    - {property: tag, code: '"""Your Postcode is optional as the app doesn''t need
-        it to work.  If you choose to add your Postcode now however, you''ll have
-        the option to explicitly share it with Runners you approve to pick up or drop
-        off deliveries - they''ll probably find it useful for SatNav but since we''re
-        trying to encourage local people to help each other out, you might take the
-        view that genuine neighbours should be able to find you easily enough without
-        this."""'}
-    event_bindings: {click: show_help_tag}
-    components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -155,21 +97,6 @@ components:
     name: label_telephone
     layout_properties: {grid_position: 'FAURAI,UNTNIW'}
     event_bindings: {}
-  - type: Link
-    properties: {role: null, url: '', align: right, tooltip: '', border: '', foreground: '#0080c0',
-      visible: true, text: '', font_size: 20, wrap_on: mobile, font: '', col_spacing: medium,
-      spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
-      italic: false, background: '', bold: false, underline: false, icon: 'fa:question'}
-    name: help9
-    layout_properties: {slot: default, grid_position: 'FAURAI,BJVEGZ'}
-    data_bindings:
-    - {property: tag, code: '"""Your Telephone number is optional as the app doesn''t
-        need it.  If you choose to add your Telephone number now however, you''ll
-        have the option to explicitly share it with Runners you approve to pick up
-        or drop off deliveries.  But then again you might prefer to wait until you''ve
-        met them once in person, and then swap numbers directly."""'}
-    event_bindings: {click: show_help_tag}
-    components: []
   - type: TextBox
     properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: '',
       border: '', enabled: true, foreground: '', visible: true, text: '', font_size: 14,
@@ -179,26 +106,6 @@ components:
     layout_properties: {grid_position: 'ELPKCW,JJBLFN'}
     data_bindings: []
     event_bindings: {change: field_change, show: field_change}
-- type: ColumnPanel
-  properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: medium, spacing_above: small, col_widths: '{"NUAPNC":55}',
-    spacing_below: small, background: '#cae4ff'}
-  name: my_details_copy
-  layout_properties:
-    col_widths: {}
-    grid_position: MQEQGC,ACEIOO
-    slot: default
-  components:
-  - type: TextArea
-    properties: {role: null, align: left, height: 121.905336, tooltip: '', placeholder: '',
-      border: '', enabled: false, foreground: '', visible: true, text: '', font_size: 12,
-      auto_expand: false, font: '', spacing_above: small, spacing_below: small, italic: false,
-      background: '', bold: false, underline: false}
-    name: help_box
-    layout_properties: {grid_position: 'GFYZTP,NUAPNC'}
-    event_bindings: {}
-    data_bindings: []
-  event_bindings: {}
 container:
   type: HtmlTemplate
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,

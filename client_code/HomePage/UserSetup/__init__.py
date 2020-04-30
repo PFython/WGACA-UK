@@ -25,7 +25,9 @@ class UserSetup(UserSetupTemplate):
         self.telephone.tag = "Optional"
         self.autocomplete = Autocomplete()
         self.column_panel_1.add_component(self.autocomplete)
-        self.autocomplete.text_box_1.tag = "Optional"        
+        self.autocomplete.text_box_1.tag = "Optional"
+        self.autocomplete.text_box_1.set_event_handler("show", self.field_change)
+
       
     def get_input_fields(self):
         """ Returns a dictionary of database column headings and corresponding components/attributes """
@@ -66,21 +68,7 @@ class UserSetup(UserSetupTemplate):
                 event_args['sender'].background = pink
         else:
             event_args['sender'].background = white
-                
-    def deselect_all_icons(self):
-        """ Set all icons to unselected """
-        components = [self.help0, self.help1, self.help2, self.help3,
-                      self.help4, self.help5, self.help6,
-                      self.help7, self.help8, self.help9]
-        for component in components:
-            setattr(component, 'icon', 'fa:question')
-            
-    def show_help_tag(self, **event_args):
-        """This method is called when the link is clicked"""
-        self.help_box.text = event_args['sender'].tag
-        self.deselect_all_icons()
-        # Set clicked icon to selected
-        event_args['sender'].icon = 'fa:question-circle'        
+                   
 
 
 

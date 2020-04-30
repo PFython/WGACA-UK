@@ -1,6 +1,7 @@
 from ._anvil_designer import AutocompleteTemplate
 from anvil import *
 import anvil.server
+from ...Globals import white
 
 class Autocomplete(AutocompleteTemplate):
   def __init__(self, **properties):
@@ -66,8 +67,6 @@ class Autocomplete(AutocompleteTemplate):
   def show_only_valid_components(self):
       for row in self.repeating_panel_1.get_components():
           row.visible = False if row.item['text'] == " " else True
-      if self.match_count == 1:
-        self.button_1.enabled = True
     
   def results_summary(self):
     if self.match_count <= self.max_options:
@@ -78,18 +77,13 @@ class Autocomplete(AutocompleteTemplate):
       options = self.match_count if self.show_all else self.max_options
     self.link_1.text = f"{options} out of {self.match_count} result"
     self.link_1.text += "s" if self.match_count != 1 else ""
+    if self.match_count == 1:
+        self.text_box_1.background = white
     
   def option_clicked(self,option,**event_args):
     self.text_box_1.text = option
     self.text_box_1_change()
     self.text_box_1.focus()
-
-  def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    if self.button_1.enabled:
-        last_option = self.repeating_panel_1.get_components()[0].item['text']
-        self.text_box_1.text = last_option
-        alert(f"Your final selection was:\n\n{self.text_box_1.text}")
 
   def link_1_click(self, **event_args):
       """This method is called when the link is clicked"""
