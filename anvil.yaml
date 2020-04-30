@@ -222,11 +222,11 @@ db_schema:
     dR4WI6XDccA=:
       name: signed_up
       type: datetime
-      admin_ui: {order: 2, width: 140.36360000000002}
+      admin_ui: {order: 18.5, width: 140.36360000000002}
     9QOYIBU0Tg4=:
       name: address
       type: string
-      admin_ui: {order: 18.5, width: 200}
+      admin_ui: {order: 1.8671875, width: 368}
     9Fj5yIyDofI=:
       name: terms_accepted
       type: date
@@ -234,7 +234,7 @@ db_schema:
     mrMfHwkEbHs=:
       name: house_number
       type: string
-      admin_ui: {order: 1.5, width: 63.181799999999996}
+      admin_ui: {order: 1.5, width: 50}
     yv725zZeSfo=:
       name: email_shared_with
       type: liveObjectArray
@@ -266,7 +266,7 @@ db_schema:
     WdV+A9PKLHQ=:
       name: last_login
       type: datetime
-      admin_ui: {order: 4, width: 200.697}
+      admin_ui: {order: 18.875, width: 200.697}
     OQn7NmkiRLg=:
       name: updates_read
       type: simpleObject
@@ -282,7 +282,7 @@ db_schema:
     DDzn0uu7b3w=:
       name: postcode
       type: string
-      admin_ui: {order: 1.875, width: 71.818}
+      admin_ui: {order: 1.869140625, width: 96.3333}
     K9ENRwu_2sE=:
       name: telephone_shared_with
       type: liveObjectArray
@@ -300,19 +300,19 @@ db_schema:
     xY0jk3aLFhQ=:
       name: confirmed_email
       type: bool
-      admin_ui: {order: 6, width: 82.5151}
+      admin_ui: {order: 18.84375, width: 138}
     4BZlDs8p6Zo=:
       name: remembered_logins
       type: simpleObject
-      admin_ui: {order: 3, width: 50}
+      admin_ui: {order: 18.75, width: 218}
     dYtS+PIcOHk=:
       name: password_hash
       type: string
-      admin_ui: {order: 5, width: 52.5758}
+      admin_ui: {order: 18.8125, width: 185}
     MZeSREyoX0M=:
       name: country
       type: string
-      admin_ui: {order: 1.859375, width: 80.00378}
+      admin_ui: {order: 1.87109375, width: 141}
     FV4yw9gzoSw=:
       name: email
       type: string
