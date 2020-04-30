@@ -23,14 +23,6 @@ print("_Anvil_Server_Functions")
 
 # DEVELOPER TOOLS
 
-@anvil.server.callable
-def _backfill_approx_lon_lat():
-    for user in app_tables.users.search():
-        if not user['approx_lon_lat']:
-            print(f"Updating approx location for user {user['display_name']}")
-            save_approx_lon_lat(user)
-            time.sleep(1.5)
-
 def admin(func):
       """ Function only available to admin users """
       def wrapper(*args, **kwargs):
@@ -41,6 +33,16 @@ def admin(func):
             data = func(*args, **kwargs)
             return (data)
       return wrapper
+    
+@anvil.server.callable("_backfill_approx_lon_lat")
+@admin
+def _backfill_approx_lon_lat():
+    for user in app_tables.users.search():
+        if not user['approx_lon_lat']:
+            print(f"Updating approx location for user {user['display_name']}")
+            save_approx_lon_lat(user)
+            time.sleep(1.5)    
+            
 
 @anvil.server.callable("_store_uploaded_media")
 @admin
@@ -81,6 +83,7 @@ def string_to_datetime(string, format = "%d %b %Y"):
     """Converts a date-like string to a datetime object"""
     return datetime.datetime.strptime(string, format)
 
+# @anvil.tables.in_transaction  
 @anvil.server.callable
 def get_initial_address_matches(text, max_options):
     print("get_initial_address_matches")
@@ -121,8 +124,7 @@ def check_for_display_name(display_name):
     if display_name.startswith(" "):
       return True
     if display_name != None and display_name != "":
-      return True if app_tables.users.get(display_name = display_name) else False
-    
+      return True if app_tables.users.get(display_name = display_name) else False    
                             
 def get_initial_status_dict():
     return  {"offer_matched":True,
@@ -182,14 +184,12 @@ def get_status_message(data_row):
         if data_row['status_code'] == "Matches Exist":
             return f"This {row_type} has been matched with {match_count} {alt_row_type}. Click on the Matches menu for more information."
         if data_row['status_code'] == "New":
-            return f"This {row_type} currently has no matched {alt_row_type}.  Check back regularly!"   
-
-
+            return f"This {row_type} currently has no matched {alt_row_type}.  Check back regularly!"  
+          
 @anvil.server.callable  
 def get_match_by_id(row_id):
     if anvil.users.get_user() is not None:
         return app_tables.matches.get_by_id(row_id)
-  
   
 @anvil.server.callable
 def get_my_deliveries():
@@ -334,9 +334,7 @@ def volunteer_as_runner(match, boolean_value):
         match['available_runners'] += [user]
     else:
         match["available_runners"] = [x for x in match["available_runners"] if x != user]
-    
-
-
+        
 # PROCESS DATA
 
 # @anvil.tables.in_transaction
