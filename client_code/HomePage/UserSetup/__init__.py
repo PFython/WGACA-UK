@@ -7,9 +7,8 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 from ...Globals import LOCALE, pink, yellow, white
+from ..Autocomplete import Autocomplete
 # ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
-
-import demoAutocomplete # .Autocomplete .AutocompleteOption
 
 class UserSetup(UserSetupTemplate):
 #     addresses = ADDRESSES
@@ -49,10 +48,10 @@ class UserSetup(UserSetupTemplate):
         self.telephone.text = user['telephone']
         self.telephone.tag = "Optional"
         self.help_box.text = self.help0.tag
+        self.my_details.add_component(Autocomplete())
         
     def get_streets_from_county(self):
         """ Returns a list of streets derived from County selection """
-        print(self.county.selected_value)
         towns = self.addresses[self.county.selected_value]
         streets = []
         for town in towns:

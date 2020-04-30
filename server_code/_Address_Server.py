@@ -1,4 +1,11 @@
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 import anvil.server
+import anvil.http
+import datetime
+import time
 
 # This is a server module. It runs on the Anvil server,
 # rather than in the user's browser.
@@ -10,7 +17,7 @@ import anvil.server
 address_media = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
 address_lines = address_media[0]['media'].get_bytes().decode('utf-8')
 data = address_lines.split()
-print(len(data))
+print("address_lines",len(data))
 
 @anvil.server.callable
 def get_initial_address_matches(text, max_options):

@@ -52,7 +52,6 @@ class UserSetup_copy(UserSetup_copyTemplate):
         
     def get_streets_from_county(self):
         """ Returns a list of streets derived from County selection """
-        print(self.county.selected_value)
         towns = self.addresses[self.county.selected_value]
         streets = []
         for town in towns:

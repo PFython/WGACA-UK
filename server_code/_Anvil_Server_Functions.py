@@ -29,6 +29,17 @@ def admin(func):
             data = func(*args, **kwargs)
             return (data)
       return wrapper
+    
+@anvil.server.callable
+def get_matches(text, max_options):
+    new_options = []
+    text = text.lower()
+    for option in data:
+      if option.lower().startswith(text):
+          new_options.append(option)
+          if len(new_options) == max_options:
+              break
+    return sorted(new_options)
 
 
 @anvil.server.callable("_store_uploaded_media")

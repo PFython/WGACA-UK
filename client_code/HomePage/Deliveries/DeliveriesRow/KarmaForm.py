@@ -26,7 +26,6 @@ class KarmaForm(KarmaFormTemplate):
         self.date.format = "D %b %Y"
         self.rating = self.label_3.text
         self.feedback.background = yellow
-        print("Karma!")
         
     def add_footer(self):
         """Adds details of the person giving feedback and the person who it's about"""

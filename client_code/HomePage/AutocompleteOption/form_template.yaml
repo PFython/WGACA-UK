@@ -1,0 +1,16 @@
+container:
+  type: ColumnPanel
+  event_bindings: {}
+components:
+- type: Link
+  properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '#000000',
+    visible: true, text: link_1, font_size: 12, wrap_on: mobile, font: '', col_spacing: none,
+    spacing_above: none, icon_align: left, col_widths: '', spacing_below: none, italic: false,
+    background: '', bold: false, underline: false, icon: 'fa:angle-right'}
+  name: link_1
+  layout_properties:
+    col_widths: {}
+    grid_position: SYGFJA,JTLFJI
+  data_bindings:
+  - {property: text, code: 'self.item[''text'']'}
+is_package: true
