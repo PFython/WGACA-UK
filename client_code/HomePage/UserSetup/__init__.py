@@ -8,40 +8,18 @@ from anvil.tables import app_tables
 
 from ...Globals import LOCALE, pink, yellow, white
 from ..Autocomplete import Autocomplete
-# ADDRESSES = anvil.server.call("get_address_hierarchy", LOCALE)
 
 class UserSetup(UserSetupTemplate):
-#     addresses = ADDRESSES
-    def __init__(self, addresses, **properties):
+    def __init__(self, **properties):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         user = anvil.users.get_user()
         self.id.text = user.get_id()
-        self.addresses = addresses
         self.display_name.text = user['display_name']
         self.email.text = user['email']
         if user['house_number']:
             self.house_number.text = user['house_number']
-        # Create list of valid counties
-        self.county.items = sorted(self.addresses.keys())
-        if user['county']:
-            self.county.selected_value = user['county']
-        else:
-            self.county.selected_value = sorted(list(self.addresses.keys()))[-1]
-            self.county_change()
-        # Create list of valid streets
-        self.street.items = self.get_streets_from_county()
-        if user['street']:           
-            self.street.selected_value = sorted(list(self.addresses.keys()))[-1]
-            self.street.selected_value = user['street']
-        else:
-            self.street_change()
-        # Create list of valid towns
-        towns = list(self.get_towns_from_county().keys())
-        self.town.items = towns
-        if user['town']:
-           self.town.selected_value = user['town']
         self.country.text = LOCALE
         self.postcode.text = user['postcode']
         self.postcode.tag = "Optional"
@@ -50,43 +28,12 @@ class UserSetup(UserSetupTemplate):
         self.help_box.text = self.help0.tag
         self.my_details.add_component(Autocomplete())
         
-    def get_streets_from_county(self):
-        """ Returns a list of streets derived from County selection """
-        towns = self.addresses[self.county.selected_value]
-        streets = []
-        for town in towns:
-            streets.extend(self.addresses[self.county.selected_value][town])
-        streets.sort()
-        return streets
-    
-    def get_towns_from_county(self):
-        """ Returns a dictionary of towns (key) and a list of streets (value)"""
-        return self.addresses[self.county.selected_value]
-  
-    def county_change(self, **event_args):
-        """This method is called when the County drop-down is changed """
-        streets = self.get_streets_from_county()
-        self.street.items = streets
-        self.street.selected_value = streets[0]
-        self.street_change()
-
-    def street_change(self, **event_args):
-        """This method is called when the Street drop-down is changed"""
-        towns = self.get_towns_from_county()
-        for town, street_list in towns.items():
-            if self.street.selected_value in street_list:
-                break
-        # Create single item list of valid towns        
-        self.town.items = [town]
-        self.town.selected_value = town
-        
+      
     def get_input_fields(self):
         """ Returns a dictionary of database column headings and corresponding components/attributes """
         return {'display_name' : (self.display_name, 'text'),
                'house_number' : (self.house_number, 'text'),
-               'street' : (self.street, 'selected_value'),
-               'town' : (self.town, 'selected_value'),
-               'county' : (self.county, 'selected_value'),
+               'address' : (self.address, 'selected_value'),
                'country' : (self.country, 'text'),
                'postcode' : (self.postcode, 'text'),
                'telephone' : (self.telephone, 'text'),}

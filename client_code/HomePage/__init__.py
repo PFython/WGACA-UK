@@ -88,11 +88,10 @@ class HomePage(HomePageTemplate):
     
     def force_user_setup(self):
         """ Blocks until i) Terms of Use accepted; ii) Required contact data supplied """
-        addresses = self.addresses = anvil.server.call("get_address_hierarchy", LOCALE)
         while not anvil.users.get_user()['terms_accepted']:
             alert(content=TermsOfUse(), title = "Please read and accept the following Privacy Statement & Terms of Use:", large=True,)
         while not self.required_fields_are_populated():
-            alert(content=UserSetup(addresses), title = "Please confirm your personal details:", large=True,)
+            alert(content=UserSetup(), title = "Please confirm your personal details:", large=True,)
 
     def highlight_selected_menu(self, selected):
         """ Visual confirmation of currently selected Menu item """
