@@ -8,11 +8,11 @@ services:
     allow_remember_me: true, allow_signup: true, enable_automatically: true, confirm_email: false,
     remember_me_days: 7, use_google: false, use_facebook: false}
   server_config: {user_table: 48470}
-startup: {type: form, module: HomePage._DeveloperTools}
+startup: {type: form, module: HomePage.UserSetup}
 package_name: WGACA_UK_DEV_TEST
 allow_embedding: true
 name: WGACA_UK_DEV_TEST
-runtime_options: {version: 2, client_version: '3', server_version: python3-full}
+runtime_options: {version: 2, client_version: '3', server_version: python3-full, server_persist: false}
 metadata: {logo_img: '', title: What Goes Around Comes Around, description: 'This
     app is intended to link good neighbours who might have provisions or medicine
     they can spare, with people who may be more in need and close enough that delivering

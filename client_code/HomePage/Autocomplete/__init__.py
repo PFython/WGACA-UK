@@ -12,7 +12,7 @@ class Autocomplete(AutocompleteTemplate):
     # Initial number of autocomplete suggestions to show
     self.max_options = 10
     # Number of characters required before initial Server call
-    self.min_length = 5    
+    self.min_length = 5
     
 # MODEL (Data)
     
@@ -38,7 +38,10 @@ class Autocomplete(AutocompleteTemplate):
         self.options = []
     elif not self.options:
         # Initial fetch hasn't happened yet
+        self.text_box_1.enabled = False
         matching_rows = self.initial_fetch(text)
+        self.text_box_1.enabled = True
+        self.text_box_1.focus()
         self.match_count = len(matching_rows)
         # This will also set self.options to all (realistically) possible matches
         self.show_all = False
@@ -57,6 +60,7 @@ class Autocomplete(AutocompleteTemplate):
       self.repeating_panel_1.items = matching_rows[:self.max_options]
     self.results_summary()
     self.show_only_valid_components()
+
     
   # VIEW (Front End and Navigation)
   

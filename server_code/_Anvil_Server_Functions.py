@@ -78,12 +78,16 @@ def _get_test_match():
     
 # GET DATA    
 
+# address_media = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
+# address_lines = address_media[0]['media'].get_bytes().decode('utf-8')
+# data = address_lines.split("\n")
+
 @anvil.server.callable
 def string_to_datetime(string, format = "%d %b %Y"):
     """Converts a date-like string to a datetime object"""
     return datetime.datetime.strptime(string, format)
 
-# @anvil.tables.in_transaction  
+@anvil.tables.in_transaction  
 @anvil.server.callable
 def get_initial_address_matches(text, max_options):
     print("get_initial_address_matches")
