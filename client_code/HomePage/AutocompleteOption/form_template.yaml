@@ -14,3 +14,4 @@ components:
   data_bindings:
   - {property: text, code: 'self.item[''text'']'}
 is_package: true
+item_type: {table_id: null}
