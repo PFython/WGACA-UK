@@ -21,6 +21,7 @@ from .TitleButton import TitleButton
 from ..Globals import LOCALE, green, grey, red, blue, light_blue, pale_blue, bright_blue, white, red, yellow, pink
 
 menu_font_size = 16
+print("HomePage")
 
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):

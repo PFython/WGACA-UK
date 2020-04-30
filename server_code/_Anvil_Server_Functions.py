@@ -18,6 +18,7 @@ LOCALE = "United Kingdom"
 #
 # To allow anvil.server.call() to call functions here, we mark
 # them with @anvil.server.callable.
+print("_Anvil_Server_Functions")
 
 def admin(func):
       """ Function only available to admin users """
@@ -30,18 +31,6 @@ def admin(func):
             return (data)
       return wrapper
     
-@anvil.server.callable
-def get_matches(text, max_options):
-    new_options = []
-    text = text.lower()
-    for option in data:
-      if option.lower().startswith(text):
-          new_options.append(option)
-          if len(new_options) == max_options:
-              break
-    return sorted(new_options)
-
-
 @anvil.server.callable("_store_uploaded_media")
 @admin
 def _store_uploaded_media(media, custom_name):
@@ -113,18 +102,10 @@ def get_initial_status_dict():
              "pickup_agreed":False,
              "offerer_confirms_pickup":False,
              "dropoff_agreed":False,
-
              "delivery":False,
              "requester_confirms_dropoff":False,
-
              "runner_confirms_pickup":False,
              "runner_confirms_dropoff":False}
-  
-#              "feedback_REQ_on_RUN":False,
-#              "feedback_RUN_on_OFF":False,
-#              "feedback_RUN_on_REQ":False,
-#              "feedback_OFF_on_RUN":False,
-  
               
 @anvil.server.callable  
 def get_status_message_from_match(data_row):
@@ -261,72 +242,7 @@ def get_my_requests():
 def get_product_hierarchy():
     """ Returns a product hierarchy """
     return sorted(products.split("\n"))
-
   
-# @anvil.server.callable
-# def get_address_hierarchyOLD(country = LOCALE):
-#     """ Returns an address hierarchy for the given Country """
-#     return hierarchy[LOCALE]
-
-
-  
-@anvil.server.callable
-def get_address_hierarchy(country = LOCALE):
-    """
-    Returns an address hierarchy for the given Country
-    Loads the most recent media file 'addresses_lines' from Uploads Table
-    and converts it to dictionary with keys County, Town, and Street
-    """
-#     address = Address(LOCALE)
-    if country == "United Kingdom":
-        address_lines = (x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name)
-#     print(len(address_lines),"files called 'address_lines' found.")
-    return next(address_lines)#[-1]['media']
-#     address.add_addresses(address_lines.get_bytes().decode('utf-8'))
-#     print("Address lines retrieved and converted to address dictionary.")
-#     return address.data[LOCALE]
-  
-class Address(dict):
-    def __init__(self,locale):
-        self.data = {LOCALE: {}}
-        
-    def add_street(self, address_string, country = LOCALE):
-        """
-        If required, creates a street list under Town key under County key.
-        e.g. {'Exeter, Devon': {'Topsham': []}
-
-        Input string separated by pipes e.g. 'Exeter, Devon | Topsham | Altamira'
-        """
-        try:
-            county, town, street = address_string.replace("\r","").split(" | ")
-        except ValueError:
-            if address_string != "":
-              print(f"! badly formatted line: {address_string}")
-            return
-        if not self.data.get(country).get(county):
-            self.data[country][county] = {}
-#             print(f"Added {county} to counties in {country}.  ")
-        if not self.data.get(country).get(county).get(town):
-            self.data[country][county][town]= []
-#             print(f"Added {town} to towns in {county}.  ")
-        if street not in self.data[country][county][town]:
-            self.data[country][county][town] += [street]
-#             print(f"Added {street} to streets in {town}.  ")
-
-    def add_addresses(self, new_address_list):
-            """
-            Loops through a plain text list of addresses and adds to them to self.data.
-
-            Format of each input line is e.g. 'Exeter, Devon | Topsham | Altamira'
-            """
-            for line in new_address_list.split("\n"):
-                self.add_street(line, country = LOCALE)
-
-    def remove_duplicate_streets(self, country = LOCALE):
-        for county in self.data[country]:
-            for town in self.data[country][county]:
-                self.data[country][county][town] = list(set(self.data[country][county][town]))
-
 @anvil.server.callable
 def get_units_of_measure():
     """ Returns a list of valid units of measure """
@@ -435,18 +351,6 @@ def string_to_datetime(string, format = "%d %b %Y"):
 def terms_accepted(boolean_value):
     """ Records today's date (or None) in the User database for Terms Accepted"""
     anvil.users.get_user()['terms_accepted'] = datetime.datetime.today().date() if boolean_value else None
-
-# @anvil.server.callable
-# def update_offers_status(offer, status_code):
-#     if anvil.users.get_user() is None:
-#         return
-#     offer.update(status_code = status_code)
-    
-# @anvil.server.callable
-# def update_requests_status(request, status_code):
-#     if anvil.users.get_user() is None:
-#         return
-#     request.update(status_code = status_code)
 
 # @anvil.tables.in_transaction
 @anvil.server.callable
