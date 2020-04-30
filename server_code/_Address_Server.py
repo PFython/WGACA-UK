@@ -17,6 +17,7 @@ print("_Address_Server")
 
 @anvil.server.callable
 def get_initial_address_matches(text, max_options):
+    print("get_initial_address_matches")
     new_options = []
     text = text.lower()
     address_media = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
@@ -30,14 +31,4 @@ def get_initial_address_matches(text, max_options):
           if len(new_options) == max_options:
               break
     return sorted(new_options)
-  
-@anvil.server.callable
-def get_street_matches(text, max_options):
-    new_options = []
-    text = text.lower()
-    for option in data:
-      if option.lower().startswith(text):
-          new_options.append(option)
-          if len(new_options) == max_options:
-              break
-    return sorted(new_options)
+ 
