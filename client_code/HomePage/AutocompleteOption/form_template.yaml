@@ -13,5 +13,6 @@ components:
     grid_position: SYGFJA,JTLFJI
   data_bindings:
   - {property: text, code: 'self.item[''text'']'}
+  event_bindings: {click: link_1_click}
 is_package: true
 item_type: {table_id: null}
