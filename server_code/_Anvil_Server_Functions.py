@@ -53,7 +53,6 @@ def get_initial_address_matches(text, max_options):
 def _store_uploaded_media(media, custom_name):
     media_upload = app_tables.uploads.add_row(name=custom_name, media = media, datetime = datetime.datetime.now())
     print(f"{media.name} saved to uploads databases as {custom_name}.")
-    get_address_hierarchy(LOCALE)
     return media_upload
     
 @anvil.server.callable
