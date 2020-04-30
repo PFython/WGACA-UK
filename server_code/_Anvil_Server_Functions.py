@@ -31,6 +31,23 @@ def admin(func):
             return (data)
       return wrapper
     
+@anvil.server.callable
+def get_initial_address_matches(text, max_options):
+    print("get_initial_address_matches")
+    new_options = []
+    text = text.lower()
+    address_media = [x for x in app_tables.uploads.search(tables.order_by("datetime"), name="Address_Data_UK") if 'OS' in x['media'].name]
+    address_lines = address_media[0]['media'].get_bytes().decode('utf-8')
+    data = address_lines.split("\n")
+    print("address_lines",len(data))
+    print(data[0])
+    for option in data:
+      if option.lower().startswith(text):
+          new_options.append(option)
+          if len(new_options) == max_options:
+              break
+    return sorted(new_options)
+    
 @anvil.server.callable("_store_uploaded_media")
 @admin
 def _store_uploaded_media(media, custom_name):
