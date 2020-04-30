@@ -15,9 +15,7 @@ class UserSetup(UserSetupTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         user = anvil.users.get_user()
-        self.id.text = user.get_id()
         self.display_name.text = user['display_name']
-        self.email.text = user['email']
         if user['house_number']:
             self.house_number.text = user['house_number']
         self.country.text = LOCALE
@@ -25,9 +23,7 @@ class UserSetup(UserSetupTemplate):
         self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
         self.telephone.tag = "Optional"
-        self.help_box.text = self.help0.tag
-        self.my_details.add_component(Autocomplete())
-        
+        self.my_details.add_component(Autocomplete())        
       
     def get_input_fields(self):
         """ Returns a dictionary of database column headings and corresponding components/attributes """
@@ -68,7 +64,6 @@ class UserSetup(UserSetupTemplate):
                 event_args['sender'].background = pink
         else:
             event_args['sender'].background = white
-
                 
     def deselect_all_icons(self):
         """ Set all icons to unselected """
