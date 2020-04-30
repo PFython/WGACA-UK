@@ -23,7 +23,9 @@ class UserSetup(UserSetupTemplate):
         self.postcode.tag = "Optional"
         self.telephone.text = user['telephone']
         self.telephone.tag = "Optional"
-        self.label_street.add_component(Autocomplete())        
+        self.autocomplete = Autocomplete()
+        self.flow_panel_1.add_component(self.autocomplete)
+        self.autocomplete.text_box_1.tag = "Optional"        
       
     def get_input_fields(self):
         """ Returns a dictionary of database column headings and corresponding components/attributes """
