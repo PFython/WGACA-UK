@@ -1,7 +1,7 @@
 container:
   type: ColumnPanel
   event_bindings: {}
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"ZZCKKU":45,"DSICUW":15}'}
 components:
 - type: TextBox
   properties: {role: null, align: left, hide_text: false, tooltip: '', placeholder: e.g. West Street,
@@ -9,7 +9,7 @@ components:
     font: '', spacing_above: none, type: text, spacing_below: none, italic: false,
     background: '', bold: false, underline: false}
   name: text_box_1
-  layout_properties: {grid_position: 'PUZWCY,FCXRVZ'}
+  layout_properties: {grid_position: 'LSMKZN,ZZCKKU VRNTWE,CJEBNH'}
   event_bindings: {change: text_box_1_change, pressed_enter: button_1_click, show: text_box_1_show}
 - type: Link
   properties: {role: null, url: '', align: left, tooltip: '', border: '', foreground: '',
@@ -17,32 +17,22 @@ components:
     spacing_above: none, icon_align: left, col_widths: '{}', spacing_below: none,
     italic: false, background: '', bold: true, underline: false, icon: ''}
   name: link_1
-  layout_properties: {grid_position: 'PUZWCY,GPRUUQ NFCCDP,NIGIRE'}
+  layout_properties: {grid_position: 'LSMKZN,ZZCKKU LCBPQZ,RRHGKA'}
   event_bindings: {click: link_1_click}
-  components:
-  - type: ColumnPanel
-    properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
-      wrap_on: mobile, col_spacing: none, spacing_above: small, col_widths: '{}',
-      spacing_below: small, background: '#cae4ff'}
-    name: card_1
-    layout_properties:
-      col_widths: {}
-      grid_position: RYYYWG,DXMFTM
-    components: []
-    event_bindings: {}
+  components: []
+- type: Button
+  properties: {role: null, align: left, tooltip: '', border: '', enabled: false, foreground: '#ffffff',
+    visible: true, text: ' Submit', font_size: null, font: '', spacing_above: none,
+    icon_align: left, spacing_below: none, italic: false, background: '#4ac870', bold: false,
+    underline: false, icon: 'fa:chevron-right'}
+  name: button_1
+  layout_properties: {grid_position: 'LSMKZN,DSICUW'}
+  event_bindings: {click: button_1_click}
 - type: ColumnPanel
   properties: {col_widths: '{}'}
   name: column_panel_1
-  layout_properties: {grid_position: 'PUZWCY,GPRUUQ ROZRXL,GHMVFN'}
+  layout_properties: {grid_position: 'HRUGOT,ZPOLSG'}
   components:
-  - type: Button
-    properties: {role: null, align: left, tooltip: '', border: '', enabled: false,
-      foreground: '#ffffff', visible: true, text: ' Submit', font_size: null, font: '',
-      spacing_above: none, icon_align: left, spacing_below: none, italic: false, background: '#4ac870',
-      bold: false, underline: false, icon: 'fa:chevron-right'}
-    name: button_1
-    layout_properties: {grid_position: 'VWZRFE,GFQWIG'}
-    event_bindings: {click: button_1_click}
   - type: RepeatingPanel
     properties: {role: null, tooltip: '', border: '', foreground: '', items: null,
       visible: true, spacing_above: none, spacing_below: none, item_template: HomePage.AutocompleteOption,
