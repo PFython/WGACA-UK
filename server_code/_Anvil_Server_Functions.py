@@ -206,15 +206,18 @@ def get_my_deliveries(filters_dict):
     Filters can be 'all', 'needs_action', 'expiring' or 'complete'
     """
     user = anvil.users.get_user()
-    if user != None:
-        deliveries = [x for x in app_tables.matches.search() if x['approved_runner'] == user]
-        if filters_dict['all']:
-            return deliveries
-        if not filters_dict['needs_action']:
-            deliveries = [x for x in deliveries if not x['status_dict']['pickup_agreed'] and not x['status_dict']['dropoff_agreed']]
-        if not filters_dict["complete"]:
-            deliveries = [x for x in deliveries if not x['status_dict']['delivery']]
-    return deliveries
+    all_deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] == user or x['offer']['user'] == user or x['request']['user'] == user}
+    if filters_dict['all']:
+        return list(all_deliveries)
+    if not filters_dict["complete"]:
+        deliveries = {x for x in deliveries if not x['status_dict']['delivery']}
+    else:
+        deliveries = all_deliveries      
+    if not filters_dict['needs_action']:
+        deliveries = {x for x in deliveries if not x['status_dict']['pickup_agreed']}
+        deliveries = {x for x in deliveries if not x['status_dict']['dropoff_agreed']}
+    
+    return list(deliveries)
   
 #         elif self.item['offer']['expiry_date'] <= datetime.datetime.today():
   
