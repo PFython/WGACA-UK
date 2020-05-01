@@ -206,16 +206,16 @@ def get_my_deliveries(filter):
     Filter can be 'all', 'needs_action', 'expiring' or 'complete'
     """
     user = anvil.users.get_user()
-    all_deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] != None}
-    all_deliveries = {x for x in all_deliveries if x['approved_runner'] == user or  x['offer']['user'] == user or x['request']['user'] == user}
+    deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] != None}
+    deliveries = {x for x in deliveries if x['approved_runner'] == user or  x['offer']['user'] == user or x['request']['user'] == user}
     if filter == 'all':
-        return list(all_deliveries)
+        return list(deliveries)
     if filter == "complete":
-        return [x for x in all_deliveries if x['status_dict']['delivery']]
+        return [x for x in deliveries if x['status_dict']['delivery']]
     if filter == 'needs_action':
-        return [x for x in deliveries if x['status_dict']['dropoff_agreed'] or x['status_dict']['pickup_agreed']]
-    if not filters['expiring']:
-        return [x for x in deliveries if x['offer']['expiry_date'] <= datetime.datetime.today().date()]
+        return [x for x in deliveries if not x['status_dict']['dropoff_agreed'] or not x['status_dict']['pickup_agreed']]
+    if filter == 'expiring':
+        return [x for x in deliveries if x['offer']['expiry_date'] <= datetime.datetime.today().date() and not x['status_dict']['delivery']]
 
 @anvil.server.callable
 def get_my_matches(filter):
