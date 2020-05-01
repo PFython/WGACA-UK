@@ -206,7 +206,7 @@ def get_my_deliveries(filters_dict):
     Filters can be 'all', 'needs_action', 'expiring' or 'complete'
     """
     user = anvil.users.get_user()
-    all_deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] == user and (x['offer']['user'] == user or x['request']['user'] == user)}
+    all_deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] != None and (x['approved_runner'] == user or  x['offer']['user'] == user or x['request']['user'] == user)}
     if filters_dict['all']:
         return list(all_deliveries)
     if not filters_dict["complete"]:
@@ -225,7 +225,7 @@ def get_my_matches(filter):
     """ Returns rows from the Matches database """
     user = anvil.users.get_user()
     if user is not None:
-        matches = app_tables.matches.search()
+        matches = [x for x in app_tables.matches.search() if x['approved_runner'] == None]
         initial_matches = len(matches)
         if filter == "all":
             print("Returning all",initial_matches,"matches.")
