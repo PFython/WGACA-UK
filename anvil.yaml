@@ -254,7 +254,7 @@ db_schema:
     LK97tEojYs4=:
       name: valid_address
       type: bool
-      admin_ui: {order: 26, width: 73}
+      admin_ui: {order: 26, width: 105.6667}
     Q78HdFRfQi8=:
       name: approx_lon_lat
       type: string

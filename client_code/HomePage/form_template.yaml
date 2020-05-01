@@ -3,7 +3,7 @@ container:
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: true,
     wrap_on: never, col_spacing: none, spacing_above: none, col_widths: '{"WEGPTE":45,"ZKRDNY":45}',
     spacing_below: none, background: ''}
-  event_bindings: {}
+  event_bindings: {refreshing_data_bindings: click_user_emails}
 components:
 - type: ColumnPanel
   properties: {role: null, tooltip: '', border: '', foreground: '', visible: false,
