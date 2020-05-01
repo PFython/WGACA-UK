@@ -13,7 +13,6 @@ class KarmaForm(KarmaFormTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        print(row_id, regarding, regarding_role, user_role)
         self.row_id = row_id
         self.regarding = regarding
         self.regarding_role.text = regarding_role

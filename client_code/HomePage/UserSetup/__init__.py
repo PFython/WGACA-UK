@@ -41,7 +41,6 @@ class UserSetup(UserSetupTemplate):
       
     def save_input(self, **event_args):
         """This method is called when the .my_details container is finally closed (after clicking OK) """
-        print("saving input")
         input_fields = self.get_input_fields()
         for field, _values in input_fields.items():
             component, attribute = _values

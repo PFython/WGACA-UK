@@ -80,7 +80,6 @@ class HomePage(HomePageTemplate):
         checks = [user['house_number']]
         checks += [user['display_name']]
         checks += [user['valid_address']]
-        print(checks)
         return all(checks)
     
     def force_user_setup(self):
