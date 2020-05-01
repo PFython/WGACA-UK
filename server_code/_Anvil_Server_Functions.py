@@ -107,17 +107,21 @@ def get_initial_address_matches(text, max_options):
 def get_product_list(filter):
     """
     Filters the list of product descriptions and returns a list for dropdown menu
-    Filter can be 'all', 'street', 'town' or 'county'
+    Filter can be 'all' street', 'town' or 'county'
     """
+    ITEM_HEIRARCHY = get_product_hierarchy()
+    if filter == "all":
+        return sorted(list(ITEM_HEIRARCHY))
+    user = anvil.users.get_user()
     position = {'street': 0, 'town': 1, 'county': 2}[filter]
     requests = app_tables.requests.search()
+    requests = [x for x in requests if x['user'] != user]
     print(len(requests),"requests found.")    
-    requests = [x for x in requests if x['user']['address'].split("; ")[position] == anvil.users.get_user()['address'].split("; ")[position]]
+    requests = [x for x in requests if x['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
     print(len(requests), "requests when filtered by", filter)  
     product_categories = {x['product_category'] for x in requests}
     print(product_categories)
-    product_list = []
-    ITEM_HEIRARCHY = get_product_hierarchy()
+    product_list = []    
     for product_category in product_categories:
         product_list += [x for x in ITEM_HEIRARCHY if product_category in x]    
     return sorted(list(product_list))
