@@ -178,13 +178,11 @@ class DeliveriesRow(DeliveriesRowTemplate):
                      self.feedback_on_requester: self.item['request']['user'],}
         for form in karma_forms:
             if form['regarding_user'] == regarding[option]:
-                print("Found existing feedback regarding", form['regarding_user']['display_name'])
                 return True
             
     def click_feedback_button(self, **event_args):
         """Check for tick in one of the Feedback buttons and launch KarmaForm"""
         self.sender = event_args['sender']
-        print(self.sender == self.feedback_on_requester)
         if self.sender == self.feedback_on_runner:
             regarding_role = "Runner"               
             regarding = self.item['approved_runner']
