@@ -192,6 +192,8 @@ class HomePage(HomePageTemplate):
         """This method is called when the Log Out button is clicked"""
 #         self.clear()
 #         self.remove_from_parent()
+        self.admin_panel.visible = False
+        self.column_panel_1.clear()
         anvil.users.logout()
         anvil.users.login_with_form()
         self.refresh_data_bindings()
