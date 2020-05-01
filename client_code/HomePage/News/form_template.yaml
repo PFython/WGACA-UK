@@ -37,9 +37,11 @@ components:
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-        visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
-        spacing_below: small, italic: false, background: '#00a3f0', bold: false, underline: false,
-        icon: ''}
+        visible: true, text: 'FILTERS added to Matches and Deliveries.  376,412 streets
+          added to the address database - thank you Ordnance Survey!  User Setup form
+          is now much slimmer and has AUTOCOMPLETE.', font_size: null, font: '', spacing_above: none,
+        icon_align: left, spacing_below: small, italic: false, background: '#00a3f0',
+        bold: false, underline: false, icon: ''}
       name: description
       layout_properties:
         col_widths: {}
