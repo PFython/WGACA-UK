@@ -208,13 +208,15 @@ def get_my_deliveries():
 @anvil.server.callable
 def get_my_matches(filter):
     """ Returns rows from the Matches database """
-    if anvil.users.get_user() is not None:
+    user = anvil.users.get_user()
+    if user is not None:
         position = {'street': 0, 'town': 1, 'county': 2}[filter]
         matches = app_tables.matches.search()
         print(len(matches),"matches found.")    
-        requests = [x for x in matches if x['user']['address'].split("; ")[position] == anvil.users.get_user()['address'].split("; ")[position]]
-        print(len(requests), "matches when filtered by", filter)  
-        return matches
+        matches = [x for x in matches if x['request']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
+        matches += [x for x in matches if x['offer']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
+        print(len(matches), "matches when filtered by", filter)  
+        return list(set(matches))
         # When approved_runner != None, the Match effectively becomes a Delivery
 
 
