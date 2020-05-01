@@ -71,8 +71,8 @@ class ConfirmMatch(ConfirmMatchTemplate):
         message += "\n> " + self.user['telephone'] if self.telephone.checked else ""
         message += "\n> " + self.user['email'] if self.email.checked else ""
         message = "> You can contact me on:" + message if message != "" else ""
-        message += f"\n({self.user['display_name']} at " if message !="" else ""
         message += "\n> My Postcode is: " + self.user['postcode'] if self.postcode.checked else ""
+        message += f"\n({self.user['display_name']} at " if message !="" else ""       
         message += datetime.datetime.now().strftime("%d %b %Y on %H:%M)\n\n") if message !="" else ""      
         message += self.chat_blurb
         anvil.server.call('save_to_chat', self.row_id, message)   

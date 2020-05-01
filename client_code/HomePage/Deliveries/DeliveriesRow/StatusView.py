@@ -25,7 +25,6 @@ class StatusView(StatusViewTemplate):
         for checkbox in self.all_checkboxes:
             checkbox.set_event_handler("change", self.update_components)    
 
-
     def show_form(self, **event_args):
         self.display_options_by_role()
         self.update_components()
