@@ -210,19 +210,15 @@ def get_my_deliveries(filters_dict):
     if filters_dict['all']:
         return list(all_deliveries)
     if not filters_dict["complete"]:
-        deliveries = {x for x in deliveries if not x['status_dict']['delivery']}
+        deliveries = {x for x in all_deliveries if not x['status_dict']['delivery']}
     else:
         deliveries = all_deliveries      
     if not filters_dict['needs_action']:
-        deliveries = {x for x in deliveries if not x['status_dict']['pickup_agreed']}
-        deliveries = {x for x in deliveries if not x['status_dict']['dropoff_agreed']}
-    
+        deliveries = {x for x in deliveries if not x['status_dict']['pickup_agreed'] or x['status_dict']['delivery']}
+        deliveries = {x for x in deliveries if not x['status_dict']['dropoff_agreed'] or x['status_dict']['delivery']}
+    if not filters_dict['expiring']:
+        deliveries = {x for x in deliveries if not x['offer']['expiry_date'] <= datetime.datetime.today().date() or x['status_dict']['delivery']}
     return list(deliveries)
-  
-#         elif self.item['offer']['expiry_date'] <= datetime.datetime.today():
-  
-            
-            
 
 @anvil.server.callable
 def get_my_matches(filter):
