@@ -66,6 +66,34 @@ components:
       components: []
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
+        visible: true, text: 23 Apr 2020, font_size: null, font: '', spacing_above: none,
+        icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:calendar-check-o'}
+      name: date_copy
+      layout_properties:
+        col_widths: {}
+        grid_position: QNTDKK,AKRPGA
+    - type: ColumnPanel
+      properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+        wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+        spacing_below: small, background: '#00a3f0'}
+      name: card_2_copy_4
+      layout_properties:
+        col_widths: {}
+        grid_position: GQCBSU,OOQFDG
+      components:
+      - type: Label
+        properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
+          visible: true, text: From the Offers menu you can now quickly view what items are needed in your Street or Town.  Charities and other agencies can also request to see requested items across the whole County/Borough.,
+          font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
+          italic: false, background: '#00a3f0', bold: false, underline: false, icon: ''}
+        name: description_copy_4
+        layout_properties:
+          col_widths: {}
+          grid_position: XXSZCY,GINBBW
+        event_bindings: {}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
         visible: true, text: 20 Apr 2020, font_size: null, font: '', spacing_above: none,
         icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:calendar-check-o'}
@@ -174,15 +202,6 @@ components:
     visible: true, text: 15 Apr 2020, font_size: null, font: '', spacing_above: none,
     icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
     underline: false, icon: 'fa:calendar-check-o'}
-  name: date_copy
-  layout_properties:
-    col_widths: {}
-    grid_position: ANZLBI,TYRWYB
-- type: Label
-  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-    visible: true, text: 15 Apr 2020, font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-    underline: false, icon: 'fa:calendar-check-o'}
   name: date_copy_2
   layout_properties:
     col_widths: {}
@@ -214,4 +233,13 @@ components:
   layout_properties:
     col_widths: {}
     grid_position: CTUVCC,LNVYUY
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
+    visible: true, text: 23 Apr 2020, font_size: null, font: '', spacing_above: none,
+    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
+    underline: false, icon: 'fa:calendar-check-o'}
+  name: date_copy_9
+  layout_properties:
+    col_widths: {}
+    grid_position: SEJATR,VOECXB
 is_package: true
