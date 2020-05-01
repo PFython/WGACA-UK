@@ -212,14 +212,16 @@ def get_my_matches(filter):
     if user is not None:
         position = {'street': 0, 'town': 1, 'county': 2}[filter]
         matches = app_tables.matches.search()
-        print(len(matches),"matches found.")    
+        if filter == "all":
+            return matches
+        initial_matches = len(matches)
         matches = [x for x in matches if x['request']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
         matches += [x for x in matches if x['offer']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
-        print(len(matches), "matches when filtered by", filter)  
-        return list(set(matches))
+        matches = list(set(matches))
+        print(len(matches),"out of", initial_matches,"matches, filtered by", filter)  
+        return matches
         # When approved_runner != None, the Match effectively becomes a Delivery
-
-
+        
 @anvil.server.callable        
 def get_karma_forms_from_user(match):
     return app_tables.karma.search(regarding_match=match, from_user = anvil.users.get_user())
