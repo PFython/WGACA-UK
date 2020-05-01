@@ -202,12 +202,17 @@ def get_my_deliveries():
         return [x for x in app_tables.matches.search() if x['approved_runner'] != None]
 
 @anvil.server.callable
-def get_my_matches():
+def get_my_matches(filter):
     """ Returns rows from the Matches database """
     if anvil.users.get_user() is not None:
-        return app_tables.matches.search(approved_runner=None)
+        position = {'street': 0, 'town': 1, 'county': 2}[filter]
+        matches = app_tables.matches.search()
+        print(len(matches),"matches found.")    
+        requests = [x for x in matches if x['user']['address'].split("; ")[position] == anvil.users.get_user()['address'].split("; ")[position]]
+        print(len(requests), "matches when filtered by", filter)  
+        return matches
         # When approved_runner != None, the Match effectively becomes a Delivery
-        # TODO: Filter results by proximity
+
 
 @anvil.server.callable        
 def get_karma_forms_from_user(match):

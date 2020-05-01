@@ -248,7 +248,7 @@ db_schema:
       admin_ui: {order: 21, width: 157.333}
       table_id: 48470
     NBW_4uSntQY=:
-      name: county_view
+      name: view_all
       type: bool
       admin_ui: {order: 25, width: 108}
     LK97tEojYs4=:
