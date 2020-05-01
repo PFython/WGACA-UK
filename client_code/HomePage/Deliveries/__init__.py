@@ -23,6 +23,7 @@ class Deliveries(DeliveriesTemplate):
         filters_dict = {k: v for d in self.filters.values() for k, v in d.items()}
         print(filters_dict)        
         deliveries = anvil.server.call("get_my_deliveries", filters_dict)
+        print(len(deliveries))
         if deliveries:
             self.repeating_panel_1.items = deliveries
         else:
@@ -32,17 +33,13 @@ class Deliveries(DeliveriesTemplate):
       """This method is called when this checkbox is checked or unchecked"""
       sender = event_args['sender']
       if sender == self.all:
-          print("if")
           for checkbox in self.filters:
              checkbox.checked = True if self.all.checked else False
       elif self.all.checked:
-          print("elif")
           self.all.checked = False
       for checkbox in self.filters:
           name = self.filters[checkbox].keys()[0]
           self.filters[checkbox][name] = True if checkbox.checked else False
-      
-      print(self.filters.values())
       self.get_deliveries()
               
                 
