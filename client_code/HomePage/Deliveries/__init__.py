@@ -27,6 +27,7 @@ class Deliveries(DeliveriesTemplate):
         if deliveries:
             self.repeating_panel_1.items = deliveries
         else:
+            self.repeating_panel_1.items = []
             self.input_description_1.text = "There are no current deliveries where you're the Requester, Runner, or person making an Offer."
 
     def checkbox_change(self, **event_args):

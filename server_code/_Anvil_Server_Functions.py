@@ -200,25 +200,22 @@ def get_match_by_id(row_id):
         return app_tables.matches.get_by_id(row_id)
   
 @anvil.server.callable
-def get_my_deliveries(filters_dict):
+def get_my_deliveries(filter):
     """
     Returns rows from the Matches database where runner = user
-    Filters can be 'all', 'needs_action', 'expiring' or 'complete'
+    Filter can be 'all', 'needs_action', 'expiring' or 'complete'
     """
     user = anvil.users.get_user()
-    all_deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] != None and (x['approved_runner'] == user or  x['offer']['user'] == user or x['request']['user'] == user)}
-    if filters_dict['all']:
+    all_deliveries = {x for x in app_tables.matches.search() if x['approved_runner'] != None}
+    all_deliveries = {x for x in all_deliveries if x['approved_runner'] == user or  x['offer']['user'] == user or x['request']['user'] == user}
+    if filter == 'all':
         return list(all_deliveries)
-    if not filters_dict["complete"]:
-        deliveries = {x for x in all_deliveries if not x['status_dict']['delivery']}
-    else:
-        deliveries = all_deliveries      
-    if not filters_dict['needs_action']:
-        deliveries = {x for x in deliveries if not x['status_dict']['pickup_agreed'] or x['status_dict']['delivery']}
-        deliveries = {x for x in deliveries if not x['status_dict']['dropoff_agreed'] or x['status_dict']['delivery']}
-    if not filters_dict['expiring']:
-        deliveries = {x for x in deliveries if not x['offer']['expiry_date'] <= datetime.datetime.today().date() or x['status_dict']['delivery']}
-    return list(deliveries)
+    if filter == "complete":
+        return [x for x in all_deliveries if x['status_dict']['delivery']]
+    if filter == 'needs_action':
+        return [x for x in deliveries if x['status_dict']['dropoff_agreed'] or x['status_dict']['pickup_agreed']]
+    if not filters['expiring']:
+        return [x for x in deliveries if x['offer']['expiry_date'] <= datetime.datetime.today().date()]
 
 @anvil.server.callable
 def get_my_matches(filter):
