@@ -24,7 +24,7 @@ class Matches(MatchesTemplate):
         self.radio_button_4.text = f"Matches in {county or 'my County'}"
         if self.user['view_all']:
             self.radio_button_1.visible = True
-        self.radio_button_clicked(self.radio_button_3)
+        self.radio_button_clicked(sender=self.radio_button_3)
         
     
     def request_data_access_click(self, **event_args):
