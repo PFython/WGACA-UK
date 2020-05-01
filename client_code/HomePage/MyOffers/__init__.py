@@ -31,7 +31,7 @@ class MyOffers(MyOffersTemplate):
             self.radio_button_1.visible = True
 #         self.radio_button_3.selected = True
 #         self.radio_button_3.bold = True
-        self.radio_button_clicked(radio_button_3)
+        self.radio_button_clicked(self.radio_button_3)
         self.product_description.items = ITEM_HEIRARCHY
         anvil.server.call('generate_matches')
 
