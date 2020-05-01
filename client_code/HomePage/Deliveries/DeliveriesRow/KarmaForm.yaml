@@ -1,7 +1,7 @@
 components:
 - type: ColumnPanel
   properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
-    wrap_on: never, col_spacing: none, spacing_above: small, col_widths: '{"PMGEFG":20,"CYIJSS":20,"EXODKX":40,"NMNWZX":20,"FXQRTA":18,"MAJZGQ":25,"HJNTYF":35,"GZUFCT":25,"NXVBGS":35}',
+    wrap_on: never, col_spacing: none, spacing_above: small, col_widths: '{"PMGEFG":20,"CYIJSS":20,"EXODKX":40,"NMNWZX":20,"FXQRTA":18,"MAJZGQ":35,"HJNTYF":25,"GZUFCT":35,"NXVBGS":25}',
     spacing_below: small, background: '#cae4ff'}
   name: karma_form
   layout_properties: {slot: default}
