@@ -19,6 +19,7 @@ class Matches(MatchesTemplate):
                       self.radio_button_2: 'street',
                       self.radio_button_3: 'town',
                       self.radio_button_4: 'county',}
+        street, town, county = self.user['address'].split("; ")
         self.radio_button_2.text = f"Matches in {street or 'my Street'}"
         self.radio_button_3.text = f"Matches in {town or 'my Town'}"
         self.radio_button_4.text = f"Matches in {county or 'my County'}"
