@@ -210,10 +210,10 @@ def get_my_matches(filter):
     """ Returns rows from the Matches database """
     user = anvil.users.get_user()
     if user is not None:
-        position = {'street': 0, 'town': 1, 'county': 2}[filter]
         matches = app_tables.matches.search()
         if filter == "all":
             return matches
+        position = {'street': 0, 'town': 1, 'county': 2}[filter]
         initial_matches = len(matches)
         matches = [x for x in matches if x['request']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
         matches += [x for x in matches if x['offer']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
