@@ -19,8 +19,8 @@ class MatchesRow(MatchesRowTemplate):
       self.show_route.url = self.item['route_url']
       self.show_route.foreground = green
       self.volunteers.bold = True
-      self.dropoff.text = self.item['request']['user']['street']+"\n"+self.item['request']['user']['town']
-      self.pickup.text = self.item['offer']['user']['street']+"\n"+self.item['offer']['user']['town']
+      self.dropoff.text = self.item['request']['user']['address']
+      self.pickup.text = self.item['offer']['address']
       self.offer_notes.text = self.item['offer']['notes']
       expiry = self.item['offer']['expiry_date']
       self.offer_expiry.text = expiry.strftime('%d %b %Y')
