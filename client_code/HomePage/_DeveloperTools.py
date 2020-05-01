@@ -46,7 +46,7 @@ class _DeveloperTools(_DeveloperToolsTemplate):
       """This method is called when the button is clicked"""
       areas = [x for x in self.get_components() if type(x) == TextArea]
       for area in areas:
-          area.clear()
+          area.remove_from_parent()
       textarea = TextArea()
       self.add_component(textarea)
       textarea.text = anvil.server.call("_get_user_emails")
