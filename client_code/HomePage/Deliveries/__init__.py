@@ -13,17 +13,18 @@ class Deliveries(DeliveriesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.filters = {self.all: "all",
-           self.needs_action: "needs_action",
-           self.expiring: "expiring",
-           self.complete: "complete"}
+        self.filters = {self.all: ("all",True),
+           self.needs_action: ("needs_action",True),
+           self.expiring: ("expiring",True),
+           self.complete: ("complete",True),}
 
     def form_loaded(self, **event_args):
         self.checkbox_change(sender=self.all)
         
     def get_deliveries(self):
-
-            self.repeating_panel_1.items = anvil.server.call("get_my_deliveries", self.filters.values())
+        deliveries = anvil.server.call("get_my_deliveries", self.filters.values())
+        if deliveries:
+            self.repeating_panel_1.items = deliveries
         else:
             self.input_description_1.text = "There are no current deliveries where you're the Requester, Runner, or person making an Offer."
 
