@@ -183,12 +183,13 @@ class DeliveriesRow(DeliveriesRowTemplate):
             
     def click_feedback_button(self, **event_args):
         """Check for tick in one of the Feedback buttons and launch KarmaForm"""
-        self.sender = event_args.get('sender')
+        self.sender = event_args['sender']
+        print(self.sender == self.feedback_on_requester)
         if self.sender == self.feedback_on_runner:
             regarding_role = "Runner"               
             regarding = self.item['approved_runner']
         if self.sender == self.feedback_on_requester:
-            regarding = "Requester"
+            regarding_role = "Requester"
             regarding = self.item['request']['user']
         if self.sender == self.feedback_on_offerer:
             regarding_role = "Offerer"
