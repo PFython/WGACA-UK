@@ -22,7 +22,7 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-      visible: true, text: 23 Apr 2020, font_size: null, font: '', spacing_above: none,
+      visible: true, text: 1 May 2020, font_size: null, font: '', spacing_above: none,
       icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:calendar-check-o'}
     name: date
@@ -37,9 +37,9 @@ components:
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-        visible: true, text: From the Offers menu you can now quickly view what items are needed in your Street or Town.  Charities and other agencies can also request to see requested items across the whole County/Borough.,
-        font_size: null, font: '', spacing_above: none, icon_align: left, spacing_below: small,
-        italic: false, background: '#00a3f0', bold: false, underline: false, icon: ''}
+        visible: true, text: '', font_size: null, font: '', spacing_above: none, icon_align: left,
+        spacing_below: small, italic: false, background: '#00a3f0', bold: false, underline: false,
+        icon: ''}
       name: description
       layout_properties:
         col_widths: {}
