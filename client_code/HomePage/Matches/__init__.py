@@ -15,6 +15,7 @@ class Matches(MatchesTemplate):
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
         anvil.server.call('generate_matches')
+        self.user = anvil.users.get_user()
         self.radio_buttons = {self.radio_button_1: "all",
                       self.radio_button_2: 'street',
                       self.radio_button_3: 'town',
