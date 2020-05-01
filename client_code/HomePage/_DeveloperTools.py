@@ -28,23 +28,30 @@ class _DeveloperTools(_DeveloperToolsTemplate):
         file = self.file_loader_1.file
         file = anvil.server.call('_store_uploaded_media', file, "Address_Data_UK")
         self.file_loader_1.clear()
-      
-        
+              
     def download_media(self):
         blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
-        anvil.download(blob, "D:")
-        
+        anvil.download(blob, "D:")        
 
     def button_1_copy_click(self, **event_args):
       """This method is called when the button is clicked"""
-      anvil.server.call("_convert_old_addresses")
-      
-      
+      anvil.server.call("_convert_old_addresses")      
 
     def button_1_copy_2_click(self, **event_args):
       """This method is called when the button is clicked"""
       input("Are you sure")
       anvil.server.call("_scratch_offers_matches_requests")
+
+    def click_user_emails(self, **event_args):
+      """This method is called when the button is clicked"""
+      areas = [x for x in self.get_components() if type(x) == TextArea]
+      for area in areas:
+          area.clear()
+      textarea = TextArea()
+      self.add_component(textarea)
+      textarea.text = anvil.server.call("_get_user_emails")
+      textarea.select()
+
 
 
 

@@ -75,6 +75,11 @@ def _scratch_offers_matches_requests():
 @anvil.server.callable
 def _get_test_match():
     return app_tables.matches.get()
+  
+@anvil.server.callable("_get_user_emails")
+@admin
+def _get_user_emails():
+    return [x['email']+";" for x in app_tables.users.search()]
     
 # GET DATA    
 
