@@ -138,6 +138,7 @@ class StatusView(StatusViewTemplate):
         self.update_arrows()
         self.update_text_colour()
         self.lock_history()
+        
     def update_predecessors(self):
         """
         Allows user to select later values and auto-complete/backfill earlier ones.
@@ -149,6 +150,10 @@ class StatusView(StatusViewTemplate):
                 continue
             if checkbox.checked and not backfill:
                 backfill = True # Backfill for remaining iterations
+        if self.offerer_confirms_pickup and self.runner_confirms_pickup:
+            self.pickup_agreed.checked = True
+        if self.requester_confirms_dropoff and self.runner_confirms_dropoff:
+            self.dropoff_agreed.checked = True
         if self.delivery.checked:
             for option in [self.pickup_agreed,
                            self.runner_confirms_pickup,
