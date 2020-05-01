@@ -34,8 +34,10 @@ class UserSetup(UserSetupTemplate):
         return {'display_name' : (self.display_name, 'text'),
                'house_number' : (self.house_number, 'text'),
                'address' : (self.autocomplete.text_box_1, 'text'),
+               'country': (self.country, 'text'),
                'telephone' : (self.telephone, 'text'),
-               'postcode': (self.postcode, 'text'),}
+               'postcode': (self.postcode, 'text'),
+               }
       
     def save_input(self, **event_args):
         """This method is called when the .my_details container is finally closed (after clicking OK) """

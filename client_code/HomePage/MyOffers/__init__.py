@@ -23,9 +23,10 @@ class MyOffers(MyOffersTemplate):
                               self.radio_button_2: 'street',
                               self.radio_button_3: 'town',
                               self.radio_button_4: 'county',}
-        self.radio_button_2.text = f"Items needed urgently in {self.user['street'] or 'my Street'}"
-        self.radio_button_3.text = f"Items needed urgently in {self.user['town'] or 'my Town'}"
-        self.radio_button_4.text = f"Items needed urgently in {self.user['county'] or 'my County'}"
+        street, town, county = self.user['address'].split("; ")
+        self.radio_button_2.text = f"Items needed urgently in {street or 'my Street'}"
+        self.radio_button_3.text = f"Items needed urgently in {town or 'my Town'}"
+        self.radio_button_4.text = f"Items needed urgently in {county or 'my County'}"
         if self.user['county_view']:
             self.radio_button_4.visible = True
         self.radio_button_1.selected = True
