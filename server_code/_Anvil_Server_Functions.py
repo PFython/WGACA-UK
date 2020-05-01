@@ -216,7 +216,6 @@ def get_my_matches(filter):
             print("Returning all",initial_matches,"matches.")
             return matches
         position = {'street': 0, 'town': 1, 'county': 2}[filter]
-
         matches = [x for x in matches if x['request']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
         matches += [x for x in matches if x['offer']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
         matches = list(set(matches))
