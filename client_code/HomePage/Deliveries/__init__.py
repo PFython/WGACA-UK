@@ -13,14 +13,16 @@ class Deliveries(DeliveriesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.filters = {self.all: ["all",False],
-           self.needs_action: ["needs_action",False],
-           self.expiring: ["expiring",False],
-           self.complete: ["complete",False],}
+        self.filters = {self.all: {"all": False},
+           self.needs_action: {"needs_action": False},
+           self.expiring: {"expiring": False},
+           self.complete: {"complete": False},}
         self.checkbox_change(sender=self.all)
         
     def get_deliveries(self):
-        deliveries = anvil.server.call("get_my_deliveries", self.filters.values())
+        filters_dict = {k: v for d in self.filters.values() for k, v in d.items()}
+        print(filters_dict)        
+        deliveries = anvil.server.call("get_my_deliveries", filters_dict)
         if deliveries:
             self.repeating_panel_1.items = deliveries
         else:
@@ -37,10 +39,11 @@ class Deliveries(DeliveriesTemplate):
           print("elif")
           self.all.checked = False
       for checkbox in self.filters:
-          self.filters[checkbox] = [self.filters[checkbox][0], True if checkbox.checked else False]
+          name = self.filters[checkbox].keys()[0]
+          self.filters[checkbox][name] = True if checkbox.checked else False
       
-      print(self.filters)
-#       self.get_deliveries()
+      print(self.filters.values())
+      self.get_deliveries()
               
                 
 

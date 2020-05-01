@@ -200,25 +200,26 @@ def get_match_by_id(row_id):
         return app_tables.matches.get_by_id(row_id)
   
 @anvil.server.callable
-def get_my_deliveries(filters: tuple):
+def get_my_deliveries(filters_dict):
     """
     Returns rows from the Matches database where runner = user
     Filters can be 'all', 'needs_action', 'expiring' or 'complete'
     """
     user = anvil.users.get_user()
     if user != None:
-        deliveries = [x for x in app_tables.matches.search() if x['approved_runner'] != None]
-        for delivery in deliveries:
-            for filter, value in filters:
-                if delivery['approved_runner'] == user:
-                    deliveries += [delivery]
-                    continue
-                if delivery['offer']['user'] == user:
-                    deliveries += [delivery]
-                    continue
-                if delivery['request']['user'] == user:
-                    deliveries += [delivery]
-                    continue
+        deliveries = [x for x in app_tables.matches.search() if x['approved_runner'] == user]
+        if filters_dict['all']:
+            return deliveries
+        if not filters_dict['needs_action']:
+            deliveries = [x for x in deliveries if not x['status_dict']['pickup_agreed'] and not x['status_dict']['dropoff_agreed']]
+        if not filters_dict["complete"]:
+            deliveries = [x for x in deliveries if not x['status_dict']['delivery']]
+    return deliveries
+  
+#         elif self.item['offer']['expiry_date'] <= datetime.datetime.today():
+  
+            
+            
 
 @anvil.server.callable
 def get_my_matches(filter):
