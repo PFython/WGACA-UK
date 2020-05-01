@@ -91,9 +91,7 @@ class DeliveriesRow(DeliveriesRowTemplate):
             address.text = self.item[table]['user']['display_name']+"\n"
             if self.item['approved_runner'] == self.user or self.item[table]['user'] == self.user:
                 address.text += str(self.item[table]['user']['house_number'])+" "
-            address.text += self.item[table]['user']['street']+", "
-            address.text += self.item[table]['user']['town']+", "
-            address.text += self.item[table]['user']['county']+"\n"
+            address.text += self.item[table]['user']['address']
             address.text += self.item[table]['user']['postcode'] if self.item[table]['user'] == self.user else ""
             shared =  self.item[table]['user']['postcode_shared_with']
             if shared != None:
