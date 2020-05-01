@@ -13,21 +13,30 @@ class Deliveries(DeliveriesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        deliveries = []
-        user = anvil.users.get_user()
-        for delivery in anvil.server.call("get_my_deliveries"):
-            if delivery['approved_runner'] == user:
-                deliveries += [delivery]
-                continue
-            if delivery['offer']['user'] == user:
-                deliveries += [delivery]
-                continue
-            if delivery['request']['user'] == user:
-                deliveries += [delivery]
-                continue
-        if deliveries:
-            self.repeating_panel_1.items = deliveries
+        self.filters = {self.all: "all",
+           self.needs_action: "needs_action",
+           self.expiring: "expiring",
+           self.complete: "complete"}
+
+    def form_loaded(self, **event_args):
+        self.checkbox_change(sender=self.all)
+        
+    def get_deliveries(self):
+
+            self.repeating_panel_1.items = anvil.server.call("get_my_deliveries", self.filters.values())
         else:
             self.input_description_1.text = "There are no current deliveries where you're the Requester, Runner, or person making an Offer."
-        
+
+    def checkbox_change(self, **event_args):
+      """This method is called when this checkbox is checked or unchecked"""
+      sender = event_args['sender']
+      if sender == self.all:
+          for checkbox in self.filters:
+             checkbox.checked = True if self.all.checked else False
+      elif self.all.checked:
+          self.all.checked = False
+      self.get_deliveries()
+              
+                
+
     

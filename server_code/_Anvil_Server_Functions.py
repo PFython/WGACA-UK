@@ -200,10 +200,24 @@ def get_match_by_id(row_id):
         return app_tables.matches.get_by_id(row_id)
   
 @anvil.server.callable
-def get_my_deliveries():
-    """ Returns rows from the Matches database where runner = user """
-    if anvil.users.get_user() is not None:
-        return [x for x in app_tables.matches.search() if x['approved_runner'] != None]
+def get_my_deliveries(filters: tuple):
+    """
+    Returns rows from the Matches database where runner = user
+    Filters can be 'all', 'needs_action', 'expiring' or 'complete'
+    """
+    user = anvil.users.get_user()
+    if user != None:
+        deliveries = [x for x in app_tables.matches.search() if x['approved_runner'] != None]
+        for filter, value in filters:
+            if delivery['approved_runner'] == user:
+                deliveries += [delivery]
+                continue
+            if delivery['offer']['user'] == user:
+                deliveries += [delivery]
+                continue
+            if delivery['request']['user'] == user:
+                deliveries += [delivery]
+                continue
 
 @anvil.server.callable
 def get_my_matches(filter):
