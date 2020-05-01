@@ -211,10 +211,12 @@ def get_my_matches(filter):
     user = anvil.users.get_user()
     if user is not None:
         matches = app_tables.matches.search()
+        initial_matches = len(matches)
         if filter == "all":
+            print("Returning all",initial_matches,"matches.")
             return matches
         position = {'street': 0, 'town': 1, 'county': 2}[filter]
-        initial_matches = len(matches)
+
         matches = [x for x in matches if x['request']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
         matches += [x for x in matches if x['offer']['user']['address'].split("; ")[position] == user['address'].split("; ")[position]]
         matches = list(set(matches))
