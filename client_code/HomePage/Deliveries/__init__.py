@@ -13,12 +13,10 @@ class Deliveries(DeliveriesTemplate):
         # Set Form properties and Data Bindings.
         self.init_components(**properties)
         # Any code you write here will run when the form opens.
-        self.filters = {self.all: ("all",True),
-           self.needs_action: ("needs_action",True),
-           self.expiring: ("expiring",True),
-           self.complete: ("complete",True),}
-
-    def form_loaded(self, **event_args):
+        self.filters = {self.all: ["all",False],
+           self.needs_action: ["needs_action",False],
+           self.expiring: ["expiring",False],
+           self.complete: ["complete",False],}
         self.checkbox_change(sender=self.all)
         
     def get_deliveries(self):
@@ -32,11 +30,17 @@ class Deliveries(DeliveriesTemplate):
       """This method is called when this checkbox is checked or unchecked"""
       sender = event_args['sender']
       if sender == self.all:
+          print("if")
           for checkbox in self.filters:
              checkbox.checked = True if self.all.checked else False
       elif self.all.checked:
+          print("elif")
           self.all.checked = False
-      self.get_deliveries()
+      for checkbox in self.filters:
+          self.filters[checkbox] = [self.filters[checkbox][0], True if checkbox.checked else False]
+      
+      print(self.filters)
+#       self.get_deliveries()
               
                 
 

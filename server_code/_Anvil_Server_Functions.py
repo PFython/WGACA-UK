@@ -208,16 +208,17 @@ def get_my_deliveries(filters: tuple):
     user = anvil.users.get_user()
     if user != None:
         deliveries = [x for x in app_tables.matches.search() if x['approved_runner'] != None]
-        for filter, value in filters:
-            if delivery['approved_runner'] == user:
-                deliveries += [delivery]
-                continue
-            if delivery['offer']['user'] == user:
-                deliveries += [delivery]
-                continue
-            if delivery['request']['user'] == user:
-                deliveries += [delivery]
-                continue
+        for delivery in deliveries:
+            for filter, value in filters:
+                if delivery['approved_runner'] == user:
+                    deliveries += [delivery]
+                    continue
+                if delivery['offer']['user'] == user:
+                    deliveries += [delivery]
+                    continue
+                if delivery['request']['user'] == user:
+                    deliveries += [delivery]
+                    continue
 
 @anvil.server.callable
 def get_my_matches(filter):
