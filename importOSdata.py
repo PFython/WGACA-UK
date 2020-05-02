@@ -1,3 +1,6 @@
+# ETL utilitilies (Extract, Transform, Load) for taking Ordnance Survey
+# address spreadsheets and extracting basic Named Street information.
+
 from pathlib import Path
 import pandas as pd
 import datetime
@@ -32,12 +35,14 @@ def safe_filepath(filepath):
         return Path(filepath)
 
 def load_OS():
+    """ Load OS.json from file"""
     global OS
     path = data_path / "OS.json"
     with open(path,"r", encoding='utf-8') as file:
         OS = json.loads(file.read())
 
 def save(sheet, filepath):
+    """ Classic save to file """
     filepath = safe_filepath(filepath)
     with open(filepath,"a",encoding='utf-8') as file:
         file.writelines(sheet)
@@ -45,6 +50,7 @@ def save(sheet, filepath):
 
 
 def save_py():
+    """ Save data as a .py file to import from: from OS import address_list""
     mega_set = set()
     for sheet, lines in OS.items():
         for line in lines:
@@ -54,6 +60,7 @@ def save_py():
         file.write(mega_set_py)
 
 def save_lines():
+    """ Saves a list to file using .writelines """
     mega_set = set()
     for sheet, lines in OS.items():
         for line in lines:
@@ -63,18 +70,18 @@ def save_lines():
         file.writelines(mega_set)
 
 def sheet(search):
-        """
-        Returns any sheet names containing the search string.
-        """
-        results = []
-        search = search.lower()
-        global OS
-        for sheet in OS:
-            for line in OS[sheet]:
-                if search in line.lower():
-                    results += [sheet]
-                    break
-        return results
+    """
+    Returns any sheet names containing the search string.
+    """
+    results = []
+    search = search.lower()
+    global OS
+    for sheet in OS:
+        for line in OS[sheet]:
+            if search in line.lower():
+                results += [sheet]
+                break
+    return results
 
 def index(echo=True):
     """
@@ -94,6 +101,7 @@ def index(echo=True):
     INDEX = sheet_index
 
 def search(string):
+    """ Searches for a keyword within each line of OS """
     matches = {}
     global OS
     for sheet in OS:
@@ -136,6 +144,7 @@ def adjust_london(data):
     return new_data
 
 def select_sheets(import_option=""):
+    """ Uses sheet_options to select between 1, 2, or 817 sheets to process """
     global sheet_options
     if import_option == "":
         for key, value in sheet_options.items():
@@ -147,6 +156,9 @@ def select_sheets(import_option=""):
         return sheet_options[import_option][1]
 
 def count_rows():
+    """
+    Returns the number of rows in in all selected spreadsheets, for interest!
+    """
     all_sheets = select_sheets()
     if not all_sheets:
         return
@@ -155,7 +167,6 @@ def count_rows():
         data = pd.read_csv(sheet)
         row_count += len(data)
     return row_count
-
 
 # Main Loop
 def importOS(import_option=""):
@@ -188,31 +199,25 @@ def importOS(import_option=""):
         save(data, data_path / (str(sheet.stem) + ".txt"))
     return {sheet:lines for sheet,lines in data_dict.items() if lines !=[]}
 
-OS = importOS()
-with open("OS.json","w") as file:
-    file.write(json.dumps(OS, indent=4, sort_keys=True))
 
-try:
-    if xyz:
-        print("goodW")
-except NameError:
-    print("blah")
+if __name__ == "__main__":
+    OS = importOS()
+    with open("OS.json","w") as file:
+        file.write(json.dumps(OS, indent=4, sort_keys=True))
+
+
+# OTHER PANDAS COMMANDS I'VE BEEN PLAYING WITH
+
 # tq, su = [pd.read_csv(x) for x in all_sheets]
 # tq.columns = su.columns = header.columns
-
 # su = su[fields]
-
 #Look for value in column
 # so16 = su[su['POSTCODE_DISTRICT'] == "SO16"]
-
 # sux = su[su['LOCAL_TYPE'].isin(["Named Road"])]
-
 # addr = sux['address_line'].tolist()
-
 # is_NaN = suxx.isnull()
 # row_has_NaN = is_NaN.any(axis=1)
 # suxx[row_has_NaN]
-
 # # Get single row
 # sux.loc[ 2651 , : ]
 # # Get a single value
