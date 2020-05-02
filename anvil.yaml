@@ -258,7 +258,7 @@ db_schema:
     Q78HdFRfQi8=:
       name: approx_lon_lat
       type: string
-      admin_ui: {order: 21.5, width: 133}
+      admin_ui: {order: 21.5, width: 349.66700000000003}
     4dcb9hwysNA=:
       name: Telephone
       type: string
