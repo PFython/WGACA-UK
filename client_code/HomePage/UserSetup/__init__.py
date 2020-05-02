@@ -45,7 +45,9 @@ class UserSetup(UserSetupTemplate):
         for field, _values in input_fields.items():
             component, attribute = _values
             anvil.server.call("save_user_setup", field, getattr(component, attribute))
-        valid_address = True if "1 out of 1 result" in self.autocomplete.link_1.text else False
+        if "1 out of 1 result" in self.autocomplete.link_1.text:
+            self.autocomplete.text_box_1.text = self.autocomplete.repeating_panel_1.items[0]['text']
+            valid_address = True
         anvil.server.call("save_user_setup", "valid_address", valid_address)
         anvil.server.call('save_approx_lon_lat')
         
