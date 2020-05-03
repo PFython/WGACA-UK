@@ -37,7 +37,7 @@ def safe_filepath(filepath):
 def load_OS():
     """ Load OS.json from file"""
     global OS
-    path = data_path / "OS.json"
+    path = root_path / "OS.json"
     with open(path,"r", encoding='utf-8') as file:
         OS = json.loads(file.read())
 
@@ -50,7 +50,7 @@ def save(sheet, filepath):
 
 
 def save_py():
-    """ Save data as a .py file to import from: from OS import address_list""
+    """ Save data as a .py file to import from: from OS import address_list"""
     mega_set = set()
     for sheet, lines in OS.items():
         for line in lines:
@@ -85,11 +85,11 @@ def sheet(search):
 
 def index(echo=True):
     """
-    Creates a global variable OS containing an index of sheet numbers and
+    Creates a global variable INDEX containing an index of sheet numbers and
     counties within each sheet.
     """
     sheet_index = {}
-    for sheet, lines in data_dict.items():
+    for sheet, lines in OS.items():
         counties = set()
         for line in lines:
             *_, county = line.split(separator)
