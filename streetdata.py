@@ -10,7 +10,6 @@ import pyperclip
 
 # Shortcuts and aliases
 data_path = Path("""D:\Pete's Data\OneDrive\Python Scripts\OS data""")
-root_path = Path("""D:\Pete's Data\OneDrive\Python Scripts""")
 header_path = data_path / "OS_Open_Names_Header.csv"
 header = pd.read_csv(header_path)
 fields = "NAME1 TYPE LOCAL_TYPE POSTCODE_DISTRICT POPULATED_PLACE DISTRICT_BOROUGH COUNTY_UNITARY".split()
@@ -38,7 +37,7 @@ def safe_filepath(filepath):
 def load_OS():
     """ Load OS.json from file"""
     global OS
-    path = root_path / "OS.json"
+    path = data_path / "OS.json"
     with open(path,"r", encoding='utf-8') as file:
         OS = json.loads(file.read())
 
@@ -50,7 +49,6 @@ def save(sheet, filepath, echo = True):
     if echo:
         print("Saved as:",filepath.absolute())
 
-
 def save_py():
     """ Save data as a .py file to import from: from OS import address_list"""
     mega_set = set()
@@ -58,17 +56,21 @@ def save_py():
         for line in lines:
             mega_set.add(line)
     mega_set_py = f"address_list = {repr(mega_set)}"
-    with open(root_path / "OS.py", "w", encoding = 'utf-8') as file:
+    with open(data_path / "OS.py", "w", encoding = 'utf-8') as file:
         file.write(mega_set_py)
 
-def save_lines():
+def save_json():
+    with open(data_path / "OS.json","w") as file:
+        file.write(json.dumps(OS, indent=4, sort_keys=True))
+
+def save_txt():
     """ Saves a list to file using .writelines """
     mega_set = set()
     for sheet, lines in OS.items():
         for line in lines:
             mega_set.add(line)
     mega_set = sorted(list(mega_set))
-    with open(root_path / "OS.txt", "a", encoding = 'utf-8') as file:
+    with open(data_path / "OS.txt", "a", encoding = 'utf-8') as file:
         file.writelines(mega_set)
 
 def sheet(search):
@@ -220,9 +222,6 @@ def importOS(import_option=""):
     OS = {spreadsheet:lines for spreadsheet,lines in data_dict.items() if lines !=[]}
 
 importOS()
-with open("OS.json","w") as file:
-    file.write(json.dumps(OS, indent=4, sort_keys=True))
-
 
 # OTHER PANDAS COMMANDS I'VE BEEN PLAYING WITH
 
