@@ -14,7 +14,8 @@ root_path = Path("""D:\Pete's Data\OneDrive\Python Scripts""")
 header_path = data_path / "OS_Open_Names_Header.csv"
 header = pd.read_csv(header_path)
 fields = "NAME1 TYPE LOCAL_TYPE POSTCODE_DISTRICT POPULATED_PLACE DISTRICT_BOROUGH COUNTY_UNITARY".split()
-sheet_options = {'1': ("Single spreadsheet TQ00.csv",[data_path /(x+".csv") for x in "TQ00".split()]),
+final_fields = "NAME1 POPULATED_PLACE COUNTY_UNITARY address_line".split()
+sheet_options = {'1': ("Single spreadsheet HP40.csv",[data_path /(x+".csv") for x in "HP40".split()]),
               '2': ("Two spreadsheets TQ00.csv and SU20.csv", [data_path /(x+".csv") for x in "TQ00 SU20".split()]),
               '3': ("All 800+ Ordnance Survey Spreadsheets", [x for x in data_path.glob('*.csv') if x != header_path]),}
 separator = "; "
@@ -41,12 +42,13 @@ def load_OS():
     with open(path,"r", encoding='utf-8') as file:
         OS = json.loads(file.read())
 
-def save(sheet, filepath):
+def save(sheet, filepath, echo = True):
     """ Classic save to file """
     filepath = safe_filepath(filepath)
     with open(filepath,"a",encoding='utf-8') as file:
         file.writelines(sheet)
-    print("Saved as:",filepath.absolute())
+    if echo:
+        print("Saved as:",filepath.absolute())
 
 
 def save_py():
@@ -168,42 +170,58 @@ def count_rows():
         row_count += len(data)
     return row_count
 
+def handle_data_gaps(address_string):
+    street, town, county = address_string.split(separator)
+    if "london" not in county.lower():
+        county = county.replace(", _","") # missing COUNTY_UNITARY
+        county = county.replace("_, ","") # missing DISTRICT_BOROUGH
+        county = county if county else town # both missing
+        town = town if town != "_" else county.rstrip()
+        # except AttributeError:
+        #         OS_fail.add(sheet)
+        #     except ValueError:
+        #         print ("ValueError:",x)
+        # print("Empty/problem sheets saved to  global variable OS_fail.")
+    return separator.join([street, town, county])
+
 # Main Loop
 def importOS(import_option=""):
     """
     Imports one or more Ordnance Survey spreadsheets
     and converts to Street; Town; County format.
 
-    Returns a dictionary with sheet names as keys and
+    Saves as global variable OS: a dictionary with sheet names as keys and
     Street; Town; County lines as values.
     """
     all_sheets = select_sheets(import_option)
     if not all_sheets:
         return
     data_dict = {}
-    for sheet in all_sheets:
-        data = pd.read_csv(sheet)
+    global OS, OS_fail, OS_empty
+    OS_fail = OS_empty = set()
+    for spreadsheet in all_sheets:
+        data = pd.read_csv(spreadsheet)
         data.columns = header.columns
         data = data[fields]
         data_nr = data[data['LOCAL_TYPE'].isin(["Named Road"])]
         data_snr = data[data['LOCAL_TYPE'].isin(["Section Of Named Road"])]
         data = pd.concat([data_nr,data_snr])
+        data['POPULATED_PLACE'] = data['POPULATED_PLACE'].fillna("_")
+        data['DISTRICT_BOROUGH'] = data['DISTRICT_BOROUGH'].fillna("_")
+        data['COUNTY_UNITARY'] = data['COUNTY_UNITARY'].fillna("_")
         data['address_line'] = data['NAME1']+separator+data['POPULATED_PLACE']+separator+data['DISTRICT_BOROUGH']+", "+data['COUNTY_UNITARY']+"\n"
-        data = pd.unique(data['address_line']).tolist()
-        data = [x for x in data if type(x) != float]
+        data = data[final_fields]
+        data['final_address'] = data['address_line'].apply(handle_data_gaps)
+        data = pd.unique(data['final_address']).tolist()
         data = adjust_london(data)
-        data_dict[sheet.stem] = data
-        # counties(data, sheet.stem)
-        # i = input("Press ENTER to cancel, or (S) to Save: ")
-        # if i.lower() == 's':
-        save(data, data_path / (str(sheet.stem) + ".txt"))
-    return {sheet:lines for sheet,lines in data_dict.items() if lines !=[]}
+        data_dict[spreadsheet.stem] = data
+        save(data, data_path / (str(spreadsheet.stem) + ".txt"), False)
+    OS_empty = {spreadsheet:lines for spreadsheet,lines in data_dict.items() if lines ==[]}
+    OS = {spreadsheet:lines for spreadsheet,lines in data_dict.items() if lines !=[]}
 
-
-if __name__ == "__main__":
-    OS = importOS()
-    with open("OS.json","w") as file:
-        file.write(json.dumps(OS, indent=4, sort_keys=True))
+importOS()
+with open("OS.json","w") as file:
+    file.write(json.dumps(OS, indent=4, sort_keys=True))
 
 
 # OTHER PANDAS COMMANDS I'VE BEEN PLAYING WITH
