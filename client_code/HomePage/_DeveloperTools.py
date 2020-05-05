@@ -7,6 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 # from ..OS import address_list
 from ..Globals import LOCALE
+import datetime
 
 class _DeveloperTools(_DeveloperToolsTemplate):
     def __init__(self, **properties):
@@ -26,8 +27,16 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def upload_address_lines(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         file = self.file_loader_1.file
-        file = anvil.server.call('_store_uploaded_media', file, "Address_Data_UK")
+        print(file, file.name)
+        media_upload = app_tables.uploads.add_row(name=file.name, media = file, datetime = datetime.datetime.now())
+#         print(f"{media.name} saved to uploads databases as {custom_name}.")
         self.file_loader_1.clear()
+        
+#     def upload_address_lines(self, file, **event_args):
+#         """This method is called when a new file is loaded into this FileLoader"""
+#         file = self.file_loader_1.file
+#         file = anvil.server.call('_store_uploaded_media', file, "Address_Data_UK")
+#         self.file_loader_1.clear()
               
     def download_media(self):
         blob = anvil.BlobMedia("text/plain",self.merged_srts.encode('utf-8'), filename)
