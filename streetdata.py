@@ -110,7 +110,7 @@ def search(string):
     global OS
     for sheet in OS:
         for line in OS[sheet]:
-            if string in line:
+            if string in line.lower():
                 if matches.get(sheet):
                     matches[sheet] += [line]
                 else:
