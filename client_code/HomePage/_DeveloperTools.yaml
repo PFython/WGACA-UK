@@ -43,7 +43,7 @@ components:
       icon: fa:upload
     name: file_loader_1
     layout_properties: {grid_position: 'DHOTXY,HZZMOM CIEPBC,AKJOKC'}
-    event_bindings: {change: upload_address_lines}
+    event_bindings: {change: upload_via_returned_row}
   - type: Button
     properties: {role: null, align: center, tooltip: '', border: '', enabled: true,
       foreground: '#ffffff', visible: true, text: ' Convert old Addresses', font_size: null,

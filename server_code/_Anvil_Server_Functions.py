@@ -50,6 +50,18 @@ def _store_uploaded_media(media, custom_name):
     media_upload = app_tables.uploads.add_row(name=custom_name, media = media, datetime = datetime.datetime.now())
     print(f"{media.name} saved to uploads databases as {custom_name}.")
     return media_upload
+  
+@anvil.server.callable("_get_upload_row")
+@admin
+def _get_upload_row(custom_name):
+    media_upload = app_tables.uploads.add_row(name=custom_name)
+    return media_upload, media_upload.get_id()
+  
+@anvil.server.callable("_write_upload_row")
+@admin
+def _write_upload_row(upload_row, row_id):
+    row = app_tables.uploads.get_by_id(row_id)
+    row.update(media = upload_row['media']) 
 
 @anvil.server.callable("_convert_old_addresses")
 @admin
