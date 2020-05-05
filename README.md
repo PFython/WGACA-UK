@@ -8,6 +8,10 @@ During ‘Lock-down’ the team at South West London TV created a free web app y
 
 It’s called **What Goes Around Comes Around (WGACA)** and it’s a tool for sharing and swapping food and drink, household goods, and over-the-counter medicines with those in need.
 
+*"It’s so good to know that I can reach out - if desperate! Thanks once again"*
+
+*"I am 60yrs, single, disabled, with a dependent teenage son but with no living family or friends close by who can help us, so your website/tool will be invaluable to us."*
+
 ![About](https://github.com/PFython/WGACA-UK/blob/master/project%20management/About.jpg)
 
 **You can post Offers of surplus items you’re able to share:**
