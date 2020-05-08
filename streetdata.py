@@ -10,8 +10,9 @@ import pyperclip
 
 import anvil.server
 from anvil.tables import app_tables
-UK_DEV_TEST = 'ZGE2L7OIYMHIRYWDKDK3PT7K-P33PVE5OAIUCIJY3-DEV'
+from streetdata_config import UK_DEV_TEST, UK_PROD
 anvil.server.connect(UK_DEV_TEST)
+# anvil.server.connect(UK_PROD)
 
 # Shortcuts and aliases
 try:
