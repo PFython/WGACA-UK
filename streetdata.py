@@ -11,15 +11,17 @@ import pyperclip
 import anvil.server
 from anvil.tables import app_tables
 from streetdata_config import UK_DEV_TEST, UK_PROD
-anvil.server.connect(UK_DEV_TEST)
-# anvil.server.connect(UK_PROD)
+# anvil.server.connect(UK_DEV_TEST)
+anvil.server.connect(UK_PROD)
 
 # Shortcuts and aliases
-try:
-    root = Path(__file__)
-except NameError:
-    root = Path.cwd()
-data_path = root.parent / "OS data"
+if __name__ == "__main__":
+    try:
+        data_path = Path(__file__).parent / "OS data"
+    except NameError:
+        data_path = Path.cwd().parent / "OS data"
+else:
+    data_path = Path.cwd().parent / "OS data"
 header_path = data_path / "OS_Open_Names_Header.csv"
 header = pd.read_csv(header_path)
 fields = "NAME1 TYPE LOCAL_TYPE POSTCODE_DISTRICT POPULATED_PLACE DISTRICT_BOROUGH COUNTY_UNITARY".split()
@@ -33,6 +35,7 @@ def upload_txt():
     """ Send as file to Anvil for onward emailing"""
     file_path = data_path / "OS.txt"
     with open(file_path,"r", encoding='utf-8') as file:
+        print(F"Uploading: {file_path}")
         blob = anvil.BlobMedia("text/plain",file.read(), file_path.name)
         row = app_tables.uploads.add_row(name = "Address_Data_UK", media = blob, datetime = datetime.datetime.now())
 
