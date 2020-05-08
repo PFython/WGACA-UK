@@ -11,8 +11,8 @@ import pyperclip
 import anvil.server
 from anvil.tables import app_tables
 from streetdata_config import UK_DEV_TEST, UK_PROD
-# anvil.server.connect(UK_DEV_TEST)
-anvil.server.connect(UK_PROD)
+anvil.server.connect(UK_DEV_TEST)
+# anvil.server.connect(UK_PROD)
 
 # Shortcuts and aliases
 if __name__ == "__main__":
