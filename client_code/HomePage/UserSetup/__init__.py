@@ -48,6 +48,8 @@ class UserSetup(UserSetupTemplate):
         if "1 out of 1 result" in self.autocomplete.link_1.text:
             self.autocomplete.text_box_1.text = self.autocomplete.repeating_panel_1.items[0]['text']
             valid_address = True
+        else:
+            valid_address = False
         anvil.server.call("save_user_setup", "valid_address", valid_address)
         anvil.server.call('save_approx_lon_lat')
         

@@ -32,7 +32,7 @@ class Autocomplete(AutocompleteTemplate):
     # I wanted to use .casefold() here but not supported
     if len(text) < self.min_length and not text.endswith(" "):
         # Wait for first full word or N characters to be entered for a good match
-        matching_rows = [{'text': f"Please enter at least {self.min_length} characters or a whole word, then select from the options..."}]
+        matching_rows = [{'text': f"Please enter at least {self.min_length} characters or a whole word, then wait a second to select from the options..."}]
         self.match_count = 0
         self.show_all = True
         self.options = []
