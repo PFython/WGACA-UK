@@ -1,6 +1,3 @@
-import anvil.stripe
-import anvil.google.auth, anvil.google.drive, anvil.google.mail
-from anvil.google.drive import app_files
 units = """grammes
 kilogrammes
 millilitres

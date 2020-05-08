@@ -1,6 +1,3 @@
-import anvil.stripe
-import anvil.google.auth, anvil.google.drive, anvil.google.mail
-from anvil.google.drive import app_files
 products =  """Children's Items | Board Games / Puzzles
 Children's Items | Exercise Books
 Children's Items | Paper, lined
