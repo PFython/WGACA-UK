@@ -2,4 +2,5 @@
 *.pyo
 __pycache__
 OS data
-/OS.json
+OS
+streetdata_config

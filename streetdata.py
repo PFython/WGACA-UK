@@ -8,8 +8,17 @@ import os
 import json
 import pyperclip
 
+import anvil.server
+from anvil.tables import app_tables
+UK_DEV_TEST = 'ZGE2L7OIYMHIRYWDKDK3PT7K-P33PVE5OAIUCIJY3-DEV'
+anvil.server.connect(UK_DEV_TEST)
+
 # Shortcuts and aliases
-data_path = Path("""D:\Pete's Data\OneDrive\Python Scripts\OS data""")
+try:
+    root = Path(__file__)
+except NameError:
+    root = Path.cwd()
+data_path = root.parent / "OS data"
 header_path = data_path / "OS_Open_Names_Header.csv"
 header = pd.read_csv(header_path)
 fields = "NAME1 TYPE LOCAL_TYPE POSTCODE_DISTRICT POPULATED_PLACE DISTRICT_BOROUGH COUNTY_UNITARY".split()
@@ -18,6 +27,13 @@ sheet_options = {'1': ("Single spreadsheet HP40.csv",[data_path /(x+".csv") for 
               '2': ("Two spreadsheets TQ00.csv and SU20.csv", [data_path /(x+".csv") for x in "TQ00 SU20".split()]),
               '3': ("All 800+ Ordnance Survey Spreadsheets", [x for x in data_path.glob('*.csv') if x != header_path]),}
 separator = "; "
+
+def upload_txt():
+    """ Send as file to Anvil for onward emailing"""
+    file_path = data_path / "OS.txt"
+    with open(file_path,"r", encoding='utf-8') as file:
+        blob = anvil.BlobMedia("text/plain",file.read(), file_path.name)
+        row = app_tables.uploads.add_row(name = "Address_Data_UK", media = blob, datetime = datetime.datetime.now())
 
 def safe_filepath(filepath):
     """
@@ -43,7 +59,7 @@ def load_OS():
 
 def save(sheet, filepath, echo = True):
     """ Classic save to file """
-    filepath = safe_filepath(filepath)
+    filepath = safe_filepath(safe_filepath(filepath))
     with open(filepath,"a",encoding='utf-8') as file:
         file.writelines(sheet)
     if echo:
@@ -56,11 +72,11 @@ def save_py():
         for line in lines:
             mega_set.add(line)
     mega_set_py = f"address_list = {repr(mega_set)}"
-    with open(data_path / "OS.py", "w", encoding = 'utf-8') as file:
+    with open(safe_filepath(data_path / "OS.py"), "w", encoding = 'utf-8') as file:
         file.write(mega_set_py)
 
 def save_json():
-    with open(data_path / "OS.json","w") as file:
+    with open(safe_filepath(data_path / "OS.json"),"w") as file:
         file.write(json.dumps(OS, indent=4, sort_keys=True))
 
 def save_txt():
@@ -69,8 +85,8 @@ def save_txt():
     for sheet, lines in OS.items():
         for line in lines:
             mega_set.add(line)
-    mega_set = sorted(list(mega_set))
-    with open(data_path / "OS.txt", "a", encoding = 'utf-8') as file:
+    mega_set = sorted([x for x in list(mega_set) if x != ""])
+    with open(safe_filepath(data_path / "OS.txt"), "a", encoding = 'utf-8') as file:
         file.writelines(mega_set)
 
 def sheet(search):
@@ -82,7 +98,7 @@ def sheet(search):
     global OS
     for sheet in OS:
         for line in OS[sheet]:
-            if search in line.lower():
+            if search.lower() in line.lower():
                 results += [sheet]
                 break
     return results
@@ -110,7 +126,7 @@ def search(string):
     global OS
     for sheet in OS:
         for line in OS[sheet]:
-            if string in line.lower():
+            if string.lower() in line.lower():
                 if matches.get(sheet):
                     matches[sheet] += [line]
                 else:
@@ -130,8 +146,23 @@ def cleanup():
     i = input("Press ENTER to cancel or (X) to delete: ")
     if i.lower() == "x":
         for file in all_text:
-            os.remove(file)
-            print(file.name,"removed.")
+            if file.name != "OS.txt":
+                os.remove(file)
+                print(file.name,"removed.")
+
+def adjust_miscellaneous(data):
+    """ Various corrections/replacements spotten in source data """
+    changes = {"'Tween Woods Lane": "Tween Woods Lane",
+               "'b' Station Road": "Station Road",
+               "(Old) Middlewich": "Old Middlewich",
+               "Àite Bhaile à Bhlàir": "Aite Bhaile a Bhlair",
+               "Queen 'S Arms Yard": "Queen's Arms Yard",}
+    for line in data.copy():
+        for original, new in changes.items():
+            if line.startswith(original):
+                data += [line.replace(original, new)]
+                data.remove(line)
+    return data
 
 def adjust_london(data):
     """
@@ -168,7 +199,8 @@ def count_rows():
         return
     row_count = 0
     for sheet in all_sheets:
-        data = pd.read_csv(sheet)
+        print(sheet)
+        data = pd.read_csv(sheet, low_memory=False)
         row_count += len(data)
     return row_count
 
@@ -187,7 +219,7 @@ def handle_data_gaps(address_string):
     return separator.join([street, town, county])
 
 # Main Loop
-def importOS(import_option=""):
+def importOS(import_option="", echo = False):
     """
     Imports one or more Ordnance Survey spreadsheets
     and converts to Street; Town; County format.
@@ -196,13 +228,19 @@ def importOS(import_option=""):
     Street; Town; County lines as values.
     """
     all_sheets = select_sheets(import_option)
+    total = len(all_sheets)
     if not all_sheets:
         return
     data_dict = {}
     global OS, OS_fail, OS_empty
     OS_fail = OS_empty = set()
-    for spreadsheet in all_sheets:
-        data = pd.read_csv(spreadsheet)
+    for n, spreadsheet in enumerate(all_sheets):
+        if echo:
+            print(spreadsheet.name)
+        else:
+            percent = round((n+1)*100/total)
+            print(F"Progress: {n+1} out of {total} ({percent}%)", end="\r")
+        data = pd.read_csv(spreadsheet, low_memory=False)
         data.columns = header.columns
         data = data[fields]
         data_nr = data[data['LOCAL_TYPE'].isin(["Named Road"])]
@@ -216,8 +254,10 @@ def importOS(import_option=""):
         data['final_address'] = data['address_line'].apply(handle_data_gaps)
         data = pd.unique(data['final_address']).tolist()
         data = adjust_london(data)
+        data = adjust_miscellaneous(data)
         data_dict[spreadsheet.stem] = data
         save(data, data_path / (str(spreadsheet.stem) + ".txt"), False)
+    print(end="\n")
     OS_empty = {spreadsheet:lines for spreadsheet,lines in data_dict.items() if lines ==[]}
     OS = {spreadsheet:lines for spreadsheet,lines in data_dict.items() if lines !=[]}
 
