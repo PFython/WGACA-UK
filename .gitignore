@@ -2,4 +2,4 @@
 *.pyo
 __pycache__
 /OS.txt
-streetdata_config
+/streetdata_config.py
