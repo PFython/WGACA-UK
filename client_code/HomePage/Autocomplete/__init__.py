@@ -21,7 +21,7 @@ class Autocomplete(AutocompleteTemplate):
     # max_options argument = 99999 to fetch all (realistically) possible matches
     self.options = anvil.server.call("get_initial_address_matches", text, 99999)
     self.match_count = len(self.options)
-    return [{'text':option.title()} for option in self.options]
+    return [{'text':option} for option in self.options]
   
 # CONTROL (Main Process Flow)
 
@@ -32,7 +32,7 @@ class Autocomplete(AutocompleteTemplate):
     # I wanted to use .casefold() here but not supported
     if len(text) < self.min_length and not text.endswith(" "):
         # Wait for first full word or N characters to be entered for a good match
-        matching_rows = [{'text': f"Please enter at least {self.min_length} characters or a whole word, then select from the options..."}]
+        matching_rows = [{'text': f"Please enter at least {self.min_length} characters or a whole word, then wait a second to select from the options..."}]
         self.match_count = 0
         self.show_all = True
         self.options = []
@@ -50,7 +50,7 @@ class Autocomplete(AutocompleteTemplate):
         for option in self.options:
           if option.lower().startswith(text):
             # Instead of .startswith() you could use Regex here or 'x in y'.
-            matching_rows.append({'text':option.title()})
+            matching_rows.append({'text':option})
         self.match_count = len(matching_rows)
         if len(matching_rows) < self.max_options:
             matching_rows+=( [{'text':' '}] * (self.max_options-len(matching_rows)))            

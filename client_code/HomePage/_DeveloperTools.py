@@ -7,6 +7,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 # from ..OS import address_list
 from ..Globals import LOCALE
+import datetime
 
 class _DeveloperTools(_DeveloperToolsTemplate):
     def __init__(self, **properties):
@@ -22,7 +23,22 @@ class _DeveloperTools(_DeveloperToolsTemplate):
     def backfill_approx_lat_lon(self, **event_args):
         """This method is called when the button is clicked"""
         anvil.server.call('_backfill_approx_lon_lat')
+        
+    def upload_via_returned_row(self, file, **event_args):
+        upload_row, row_id = anvil.server.call("_get_upload_row", "Address_Data_UK")
+        file = self.file_loader_1.file
+        upload_row['media'] = file
+        anvil.server.call("_write_upload_row", upload_row, row_id)
+        self.file_loader_1.clear()
 
+    def upload_address_lines_client_only(self, file, **event_args):
+        """This method is called when a new file is loaded into this FileLoader"""
+        file = self.file_loader_1.file
+        print(file, file.name)
+        media_upload = app_tables.uploads.add_row(name=file.name, media = file, datetime = datetime.datetime.now())
+        print(f"{file.name} saved to uploads databases.")
+        self.file_loader_1.clear()
+        
     def upload_address_lines(self, file, **event_args):
         """This method is called when a new file is loaded into this FileLoader"""
         file = self.file_loader_1.file

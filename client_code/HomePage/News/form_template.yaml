@@ -22,7 +22,7 @@ components:
     event_bindings: {}
   - type: Label
     properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-      visible: true, text: 1 May 2020, font_size: null, font: '', spacing_above: none,
+      visible: true, text: 8 May 2020, font_size: null, font: '', spacing_above: none,
       icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
       underline: false, icon: 'fa:calendar-check-o'}
     name: date
@@ -37,9 +37,8 @@ components:
     components:
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-        visible: true, text: 'FILTERS added to Matches and Deliveries.  376,412 streets
-          added to the address database - thank you Ordnance Survey!  User Setup form
-          is now much slimmer and has AUTOCOMPLETE.', font_size: null, font: '', spacing_above: none,
+        visible: true, text: 'There are now 864,024 streets in the database...  WGACA
+          is ready to be used across the UK!', font_size: null, font: '', spacing_above: none,
         icon_align: left, spacing_below: small, italic: false, background: '#00a3f0',
         bold: false, underline: false, icon: ''}
       name: description
@@ -68,13 +67,43 @@ components:
       components: []
     - type: Label
       properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
+        visible: true, text: 1 May 2020, font_size: null, font: '', spacing_above: none,
+        icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
+        underline: false, icon: 'fa:calendar-check-o'}
+      name: date_copy_11
+      layout_properties:
+        col_widths: {}
+        grid_position: QNTDKK,OTKWOR
+    - type: ColumnPanel
+      properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
+        wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
+        spacing_below: small, background: '#00a3f0'}
+      name: card_2_copy_5
+      layout_properties:
+        col_widths: {}
+        grid_position: SRPGVH,URYALB
+      components:
+      - type: Label
+        properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
+          visible: true, text: 'FILTERS added to Matches and Deliveries.  376,412
+            streets added to the address database - thank you Ordnance Survey!  User
+            Setup form is now much slimmer and has AUTOCOMPLETE.', font_size: null,
+          font: '', spacing_above: none, icon_align: left, spacing_below: small, italic: false,
+          background: '#00a3f0', bold: false, underline: false, icon: ''}
+        name: description_copy_5
+        layout_properties:
+          col_widths: {}
+          grid_position: XXSZCY,GINBBW
+        event_bindings: {}
+    - type: Label
+      properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
         visible: true, text: 23 Apr 2020, font_size: null, font: '', spacing_above: none,
         icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
         underline: false, icon: 'fa:calendar-check-o'}
       name: date_copy
       layout_properties:
         col_widths: {}
-        grid_position: QNTDKK,AKRPGA
+        grid_position: EGFKXD,VZQLTB
     - type: ColumnPanel
       properties: {role: card, tooltip: '', border: '', foreground: '', visible: true,
         wrap_on: mobile, col_spacing: medium, spacing_above: small, col_widths: '{}',
@@ -199,49 +228,4 @@ components:
         event_bindings: {}
       event_bindings: {}
   event_bindings: {}
-- type: Label
-  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-    visible: true, text: 15 Apr 2020, font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-    underline: false, icon: 'fa:calendar-check-o'}
-  name: date_copy_2
-  layout_properties:
-    col_widths: {}
-    grid_position: EZKIEB,OWNWES
-- type: Label
-  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-    visible: true, text: 20 Apr 2020, font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-    underline: false, icon: 'fa:calendar-check-o'}
-  name: date_copy_5
-  layout_properties:
-    col_widths: {}
-    grid_position: BHURTC,GBCQOZ
-- type: Label
-  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-    visible: true, text: 20 Apr 2020, font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-    underline: false, icon: 'fa:calendar-check-o'}
-  name: date_copy_6
-  layout_properties:
-    col_widths: {}
-    grid_position: BEAWIM,EDLZFQ
-- type: Label
-  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-    visible: true, text: 20 Apr 2020, font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-    underline: false, icon: 'fa:calendar-check-o'}
-  name: date_copy_7
-  layout_properties:
-    col_widths: {}
-    grid_position: CTUVCC,LNVYUY
-- type: Label
-  properties: {role: null, align: left, tooltip: '', border: '', foreground: '#ffffff',
-    visible: true, text: 23 Apr 2020, font_size: null, font: '', spacing_above: none,
-    icon_align: left, spacing_below: none, italic: false, background: '', bold: true,
-    underline: false, icon: 'fa:calendar-check-o'}
-  name: date_copy_9
-  layout_properties:
-    col_widths: {}
-    grid_position: SEJATR,VOECXB
 is_package: true
